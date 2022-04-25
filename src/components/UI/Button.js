@@ -2,7 +2,7 @@ import classes from "./Button.module.css";
 
 const Button = ({ children, type, disabled }) => {
   return (
-    <button className={classes.button} type={type} disabled={disabled}>
+    <button className={classes.button} type={type ? type : 'button'} disabled={disabled}>
       {children}
     </button>
   );
