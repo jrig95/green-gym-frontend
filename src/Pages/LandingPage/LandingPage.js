@@ -10,7 +10,6 @@ const LandingPage = () => {
           <h1>Test Text</h1>
         </Card>
       </div>
-      <Footer />
     </div>
   );
 };
