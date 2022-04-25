@@ -1,0 +1,19 @@
+.container {
+  background-color: var(--green);
+  display: flex;
+  justify-content: center;
+  height: 5.75rem;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.logoContainer svg {
+  padding: 1rem;
+}
