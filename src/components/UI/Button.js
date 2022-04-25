@@ -1,18 +1,26 @@
 import classes from "./Button.module.css";
 
-const Button = ({ children, type, disabled, color }) => {
-  let buttonClasses = classes.button
+const Button = ({ children, type, disabled, color, size }) => {
+  let buttonClasses = `${classes.button}`;
 
-  if (color === 'blue') {
-    buttonClasses = `${classes.button} ${classes.blueButton}`
+  if (size === "small") {
+    buttonClasses += ` ${classes.buttonSmall}`;
   }
 
-  if (color === 'white') {
-    buttonClasses = `${classes.button} ${classes.whiteButton}`
+  if (color === "blue") {
+    buttonClasses += ` ${classes.buttonBlue}`;
+  }
+
+  if (color === "white") {
+    buttonClasses += ` ${classes.buttonWhite}`;
   }
 
   return (
-    <button className={buttonClasses} type={type ? type : 'button'} disabled={disabled}>
+    <button
+      className={buttonClasses}
+      type={type ? type : "button"}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
