@@ -1,17 +1,19 @@
 .button {
   cursor: pointer;
-  height: 3rem;
-  width:  14rem;
-}
-
-.greenButton {
-
+  background-color: var(--green);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius:4px;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .blueButton {
-
+  background-color: var(--blue);
 }
 
 .whiteButton {
-
+  background-color: var(--white);
+  color: var(--black);
 }

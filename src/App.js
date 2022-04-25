@@ -5,7 +5,9 @@ function App() {
   return (
     <div className={classes.App}>
       <h1>Hello, Green Gym!</h1>
-      <Button>This is a button</Button>
+      <Button>This button is green</Button>
+      <Button color="blue">This button is blue</Button>
+      <Button color="white">This button is white</Button>
     </div>
   );
 }
