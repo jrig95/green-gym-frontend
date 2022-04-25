@@ -1,0 +1,44 @@
+.button {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.buttonSmall {
+  padding: 0.5rem 1rem;
+}
+
+.button:hover {
+  background-color: var(--green-hover);
+}
+
+.buttonBlue {
+  background-color: var(--blue);
+}
+
+.buttonBlue:hover {
+  background-color: var(--blue-hover);
+}
+
+.buttonWhite {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.buttonWhite:hover {
+  background-color: var(--white-hover);
+}
