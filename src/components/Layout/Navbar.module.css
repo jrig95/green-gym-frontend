@@ -6,7 +6,8 @@
   height: 4rem;
   width: 100vw;
   padding: 0 1rem 0 1rem;
-  background-color: var(--green);
+  background-color: var(--white);
+  z-index: 10;
 }
 
 .h1 {

@@ -1,0 +1,9 @@
+.container {
+  background-color: var(--green);
+  display: flex;
+  justify-content: center;
+  height: 5.75rem;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+}

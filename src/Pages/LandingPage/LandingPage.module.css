@@ -1,4 +1,4 @@
-.container {
+.background {
   position: relative;
   top: 0;
   left: 0;
@@ -10,4 +10,12 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.container {
+  margin: 4rem 4rem 0 4rem;
+}
+
+.container h1 {
+  margin: 0;
 }
