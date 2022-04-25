@@ -7,3 +7,13 @@
   bottom: 0;
   width: 100vw;
 }
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.logoContainer svg {
+  padding: 1rem;
+}
