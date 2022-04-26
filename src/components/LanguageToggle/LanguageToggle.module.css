@@ -1,6 +1,8 @@
 .button {
   display: flex;
   background-color: #ffffff;
+  color: var(--green);
+  border: 2px solid var(--green);
   align-items: center;
   justify-content: center;
   border-radius: 2.5rem;
@@ -9,6 +11,11 @@
   height: 2rem;
   cursor: pointer;
   transition: all 0.5s;
+}
+
+.buttonGrey {
+  color: var(--grey);
+  border: 2px solid var(--grey);
 }
 
 .button p {
