@@ -13,3 +13,8 @@
 .h1 {
   margin: 0;
 }
+
+.linksContainer {
+  margin-left: auto;
+  margin-right: 1rem;
+}

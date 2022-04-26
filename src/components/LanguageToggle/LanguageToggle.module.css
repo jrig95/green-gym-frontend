@@ -3,17 +3,17 @@
   background-color: #ffffff;
   align-items: center;
   justify-content: center;
-  border-radius: 40px;
+  border-radius: 2.5rem;
   margin-right: 1rem;
-  width: 64px;
-  height: 32px;
+  width: 3.5rem;
+  height: 2rem;
   cursor: pointer;
   transition: all 0.5s;
 }
 
 .button p {
   font-weight: bold;
-  font-size: .9rem;
+  font-size: 1rem;
 }
 
 .circle {
@@ -21,24 +21,23 @@
 }
 
 .circleLeft {
-  transform: translateX(-1rem);
+  transform: translateX(-.7rem);
 }
 
 .circleRight {
-  transform: translateX(1rem);
+  transform: translateX(.7rem);
 }
-
 
 .button svg {
   position: absolute;
 }
 
 .buttonChinese {
-  margin-left: .4rem;
+  margin-left: 0.2rem;
 }
 
 .buttonEnglish {
-  margin-right: .4rem;
+  margin-right: 0.2rem;
 }
 
 .container {
@@ -52,17 +51,17 @@
 	background-color:#ffffff;
 	border-radius:4px;
 	border: none;
-	display:inline-block;
-	cursor:pointer;
-	color:#55ca8a;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
+	display: inline-block;
+	cursor: pointer;
+	color: #55ca8a;
+	font-size: 17px;
+	padding: 16px 31px;
+	text-decoration: none;
 }
 .myButton:hover {
 	background-color:#f3f3f3;
 }
 .myButton:active {
-	position:relative;
-	top:1px;
+	position: relative;
+	top: 1px;
 }
