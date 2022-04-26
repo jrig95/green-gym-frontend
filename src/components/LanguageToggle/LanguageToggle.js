@@ -1,5 +1,6 @@
 import { useState } from "react";
 import i18next from "i18next";
+import jsCookie from "js-cookie";
 
 import classes from "./LanguageToggle.module.css";
 
@@ -7,24 +8,27 @@ const LanguageToggle = () => {
   // Get language code from cookie
   // set is English based on cooked language code
 
-  const [isEnglish, setIsEnglish] = useState(true);
-  
+  // console.log((jsCookie.get('i18next') === 'en'), 'line 11');
+
+  const [isEnglish, setIsEnglish] = useState((jsCookie.get('i18next') === 'en'));
+
+  console.log(isEnglish, "isEnglish")
+
   const changeLanguageHandler = () => {
     setIsEnglish((prevIsEnglish) => !prevIsEnglish);
     const newCode = isEnglish ? "en" : "cn";
     i18next.changeLanguage(newCode);
   };
 
-  const toggleGreen = isEnglish ? "#55CA8A" : "#aeaeae";
+  const buttonClasses = isEnglish ? `${classes.button}` : `${classes.button} ${classes.buttonGrey}`;
+  const toggleGreen = isEnglish ? '#55ca8a' : '#aeaeae';
   const toggleMoveCircle = isEnglish ? `${classes.circle} ${classes.circleLeft}` : `${classes.circle} ${classes.circleRight}`
-
 
   return (
     <button
-        className={classes.button}
+        className={buttonClasses}
         type="button"
         onClick={changeLanguageHandler}
-        style={{ color: toggleGreen, border: `2px solid ${toggleGreen}` }}
       >
         <svg
           className={toggleMoveCircle}
