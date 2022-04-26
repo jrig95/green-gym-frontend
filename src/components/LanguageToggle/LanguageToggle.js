@@ -1,17 +1,22 @@
 import { useState } from "react";
+import i18next from "i18next";
+
 import classes from "./LanguageToggle.module.css";
 
 const LanguageToggle = () => {
-  const [languageCode, setLanguageCode] = useState(true);
+  // Get language code from cookie
+  // set is English based on cooked language code
+
+  const [isEnglish, setIsEnglish] = useState(true);
   
   const changeLanguageHandler = () => {
-    setLanguageCode((prevLanguageCode) => !prevLanguageCode);
-    // const newCode = languageCode ? "en" : "cn";
-    // i18next.changeLanguage(newCode);
+    setIsEnglish((prevIsEnglish) => !prevIsEnglish);
+    const newCode = isEnglish ? "en" : "cn";
+    i18next.changeLanguage(newCode);
   };
 
-  const toggleGreen = languageCode ? "#55CA8A" : "#aeaeae";
-  const toggleMoveCircle = languageCode ? `${classes.circle} ${classes.circleLeft}` : `${classes.circle} ${classes.circleRight}`
+  const toggleGreen = isEnglish ? "#55CA8A" : "#aeaeae";
+  const toggleMoveCircle = isEnglish ? `${classes.circle} ${classes.circleLeft}` : `${classes.circle} ${classes.circleRight}`
 
 
   return (
