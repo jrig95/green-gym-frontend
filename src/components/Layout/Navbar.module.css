@@ -13,3 +13,14 @@
 .h1 {
   margin: 0;
 }
+
+.linksContainer {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.linksContainer h3 {
+  margin-right: 1rem;
+}
