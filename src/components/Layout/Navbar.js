@@ -11,6 +11,12 @@ const Navbar = () => {
       <h1>Green Gym</h1>
       <div className={classes.linksContainer}>
         <h3>{t("welcome_to_green_gym")}</h3>
+        <div className={classes.links}>
+          <h2>Programs</h2>
+          <h2>My Activies</h2>
+          <h2>Rewards</h2>
+          <h2>Profile</h2>
+        </div>
         <LanguageToggle/>
       </div>
     </div>
