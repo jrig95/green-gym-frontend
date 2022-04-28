@@ -15,6 +15,12 @@
   margin: 4rem 4rem 0 4rem;
 }
 
-.container h1 {
-  margin: 0;
+.mainTitle {
+  font-size: 3rem;
+  color: var(--white)
+}
+
+.subTitle {
+  font-style: italic;
+  color: var(--white)
 }
