@@ -1,3 +1,4 @@
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
@@ -14,17 +15,33 @@ const CarouselMain = () => {
     return <i onClick={() => onClick()} className={classes.customRightArrow} />;
   };
 
-  const CustomDot = ({ onClick, active, index, carouselState }) => {
-    const { currentSlide } = carouselState;
+  // const CustomDot = ({ onClick, active, index, carouselState }) => {
+  //   const { currentSlide } = carouselState;
+  //   return (
+  //     <li style={{ background: active ? "grey" : "initial" }}>
+  //       <button
+  //         className={classes.customDot}
+  //         active={classes.customDotActive}
+  //         onClick={() => onClick()}
+  //       />
+  //     </li>
+  //   );
+  // };
+
+  const CustomDot = ({ onClick, ...rest }) => {
+    const {
+      onMove,
+      index,
+      active,
+      carouselState: { currentSlide, deviceType },
+    } = rest;
+    const carouselItems = [];
+
     return (
-      <li style={{ background: active ? "grey" : "initial" }}>
-        <button
-          className={classes.customDot}
-          active={classes.customDotActive}
-          onClick={() => onClick()}
-        />
-      </li>
-    );
+      <button>
+        {React.Children.toArray(carouselItems)[index]}
+      </button>
+    )
   };
 
   const responsive = {
@@ -50,7 +67,7 @@ const CarouselMain = () => {
       <Carousel
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
-        CustomDot={<CustomDot/>}
+        CustomDot={<CustomDot />}
         swipeable={true}
         draggable={true}
         showDots={true}
