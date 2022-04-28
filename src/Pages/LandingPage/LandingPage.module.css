@@ -1,10 +1,11 @@
 .background {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   background: url("https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
     no-repeat center center fixed;
   height: 100vh;
+  width: 100vw;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -16,6 +17,7 @@
 }
 
 .mainTitle {
+  margin: 8rem 0 1rem 0;
   font-size: 3rem;
   color: var(--white)
 }
