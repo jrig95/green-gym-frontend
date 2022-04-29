@@ -1,6 +1,7 @@
 .card {
   width: 40rem;
   padding: 1rem;
+  background-color: var(--haze-white);
 }
 
 .title {
