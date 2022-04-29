@@ -6,11 +6,12 @@ import ForgotPassword from './Pages/UserFormPages/ForgotPassword';
 import Login from './Pages/UserFormPages/Login';
 import ResetPassword from './Pages/UserFormPages/ResetPassword';
 import SignUp from './Pages/UserFormPages/SignUp';
+import UpdateProfile from './Pages/UserFormPages/UpdateProfile';
 
 function App() {
   return (
     <Layout>
-      <ResetPassword />
+      <UpdateProfile />
     </Layout>
   );
 }
