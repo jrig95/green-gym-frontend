@@ -1,9 +1,13 @@
+import { useTranslation } from "react-i18next";
+
 import classes from "./Form.module.css";
 import FormCard from "./FormCard";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
 const SignUpForm = () => {
+  const { t } = useTranslation();
+
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -99,7 +103,7 @@ const SignUpForm = () => {
     passwordIsValid;
 
   return (
-    <FormCard title="Sign Up">
+    <FormCard title={t("sign_up")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>

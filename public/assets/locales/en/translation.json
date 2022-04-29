@@ -1,5 +1,11 @@
 {
-  "welcome_to_green_gym" : "Welcome",
-  "main_title" : "We're a wellness platform",
-  "sub_title" : "\"Commited To Improving Planetary Health\""
+  "welcome_to_green_gym": "Welcome",
+  "main_title": "We're a wellness platform",
+  "sub_title": "\"Commited To Improving Planetary Health\"",
+  "sign_up": "Sign Up",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "company": "Company",
+  "e_mail": "E-Mail",
+  "password": "Password"
 }

@@ -14,13 +14,13 @@ const LandingPage = () => {
   return (
     <Background>
       <div className={classes.container}>
-        {/* <h1 className={classes.mainTitle}>{t("main_title")}</h1>
+        <h1 className={classes.mainTitle}>{t("main_title")}</h1>
         <h1 className={classes.subTitle}>{t("sub_title")}</h1>
         <CarouselMain />
         <div className={classes.buttonsContainer}>
           <Button color="white">Find Out More</Button>
           <Button>Join Green Gym</Button>
-        </div> */}
+        </div>
       </div>
     </Background>
   );
