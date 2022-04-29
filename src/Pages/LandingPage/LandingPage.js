@@ -3,11 +3,6 @@ import { useTranslation } from "react-i18next";
 import Background from '../../components/Layout/Background';
 import CarouselMain from "../../components/UI/CarouselMain";
 import Button from '../../components/UI/Button'
-import SignUpForm from "../../components/Forms/SignUpForm";
-import Login from "../../components/Forms/LoginForm";
-import LoginForm from "../../components/Forms/LoginForm";
-import ForgotPasswordForm from "../../components/Forms/ForgotPasswordForm";
-import RestPasswordForm from "../../components/Forms/ResetPasswordForm";
 
 const LandingPage = () => {
   const { t } = useTranslation();

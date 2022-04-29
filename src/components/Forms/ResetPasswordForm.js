@@ -3,7 +3,7 @@ import useInput from "./Hooks/use-input";
 import Button from '../UI/Button';
 import FormCard from "./FormCard";
 
-const RestPasswordForm = () => {
+const ResetPasswordForm = () => {
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -63,4 +63,4 @@ const RestPasswordForm = () => {
 
 };
 
-export default RestPasswordForm;
+export default ResetPasswordForm;
