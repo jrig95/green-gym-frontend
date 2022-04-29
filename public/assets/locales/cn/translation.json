@@ -1,5 +1,15 @@
 {
   "welcome_to_green_gym" : "欢迎",
   "main_title" : "We're a wellness platform",
-  "sub_title" : "\"Commited To Improving Planetary Health\""
+  "sub_title" : "\"Commited To Improving Planetary Health\"",
+  "sign_up": "注册",
+  "first_name": "名",
+  "last_name": "姓",
+  "company": "公司",
+  "e_mail": "邮箱",
+  "password": "密码",
+  "cancel": "取消",
+  "submit": "提交",
+  "carousel_card_one_title": "绿色健身房",
+  "carousel_card_one_body": "我们的会员越活跃，我们就越会回馈环境。"
 }
