@@ -7,11 +7,12 @@ import Login from './Pages/UserFormPages/Login';
 import ResetPassword from './Pages/UserFormPages/ResetPassword';
 import SignUp from './Pages/UserFormPages/SignUp';
 import UpdateProfile from './Pages/UserFormPages/UpdateProfile';
+import ProfilePage from './Pages/Profile/ProfilePage';
 
 function App() {
   return (
     <Layout>
-      <UpdateProfile />
+      <ProfilePage />
     </Layout>
   );
 }

@@ -1,0 +1,43 @@
+.container {
+  position: relative;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 9rem;
+  margin: 4rem 0 0 0;
+  background-color: var(--green);
+}
+
+.banner h1 {
+  font-size: 3.5rem;
+  color: var(--white);
+  margin: 0;
+}
+
+.caloriesText {
+  margin: 0;
+  font-weight: bold;
+}
+
+.imageContainer {
+  position: absolute;
+  top: 1.5rem;
+  left: 4rem;
+}
+
+img {
+  height: 13rem;
+  width: 13rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.name {
+  text-align: center;
+  margin: 0.5rem 0 0 0;
+}
