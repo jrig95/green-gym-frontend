@@ -14,7 +14,7 @@ const ProfileBanner = ({ title, calories, image, name }) => {
       <div className={classes.imageContainer}>
         <img src={image} />
         <h2 className={classes.name}>{name}</h2>
-        <TreesPlanted />
+        <TreesPlanted calories={calories}/>
       </div>
     </div>
   );
