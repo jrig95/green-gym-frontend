@@ -23,6 +23,9 @@ const RestPasswordForm = () => {
   ? `${classes.formControl} ${classes.invalid}`
   : classes.formControl;
 
+
+  const formIsValid = passwordIsValid
+
   return (
     <FormCard title="Reset Password" body="Enter a new password">
       <form onSubmit={formSubmitHandler}>
@@ -46,7 +49,7 @@ const RestPasswordForm = () => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>
           </div>

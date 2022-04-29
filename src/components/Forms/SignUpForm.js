@@ -59,8 +59,8 @@ const SignUpForm = () => {
       secondName: lastNameValue,
       company: companyValue,
       email: emailValue,
-      password: passwordValue
-    }
+      password: passwordValue,
+    };
 
     console.log(userData);
 
@@ -90,6 +90,13 @@ const SignUpForm = () => {
   const passwordClasses = passwordHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
+
+  const formIsValid =
+    firtNameIsValid &
+    lastNameIsValid &
+    companyIsValid &
+    emailIsValid &
+    passwordIsValid;
 
   return (
     <FormCard title="Sign Up">
@@ -170,7 +177,7 @@ const SignUpForm = () => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>
           </div>

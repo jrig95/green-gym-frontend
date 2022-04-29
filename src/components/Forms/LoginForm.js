@@ -37,6 +37,8 @@ const LoginForm = () => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
+  const formIsValid = emailIsValid & passwordIsValid;
+
   return (
     <FormCard title="Login">
       <form onSubmit={formSubmitHandler}>
@@ -75,7 +77,7 @@ const LoginForm = () => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>
           </div>

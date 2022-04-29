@@ -25,6 +25,8 @@ const ForgotPasswordForm = () => {
   ? `${classes.formControl} ${classes.invalid}`
   : classes.formControl;
 
+  const formIsValid = emailIsValid;
+
   return (
     <FormCard title="Forgot Password?" body="Enter the email you used to sign up">
       <form onSubmit={formSubmitHandler}>
@@ -48,7 +50,7 @@ const ForgotPasswordForm = () => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>
           </div>
