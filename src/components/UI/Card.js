@@ -1,8 +1,9 @@
 import classes from './Card.module.css';
 
-const Card = ({ children }) => {
+const Card = ({ children, className }) => {
+  
   return (
-    <div className={classes.card}>{children}</div>
+    <div className={`${classes.card} ${className}`}>{children}</div>
   )
 };
 

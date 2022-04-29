@@ -3,6 +3,7 @@
   background-color: var(--green);
   color: var(--white);
   padding: 1rem 2rem;
+  min-width: 14rem;
   border-radius: 0.25rem;
   border: none;
   font-size: 1.25rem;
