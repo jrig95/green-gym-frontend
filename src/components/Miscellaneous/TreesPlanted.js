@@ -2,7 +2,7 @@ import classes from './TreesPlanted.module.css';
 import { BsFillTreeFill } from 'react-icons/bs';
 
 const TreesPlanted = ({calories}) => {
-  const treesPlanted = parseInt(calories);
+  const treesPlanted = Math.round(calories / 2000);
 
   const treeMessage = treesPlanted !== 1 ? " trees planted" : " tree planted"
 
