@@ -1,0 +1,9 @@
+.card {
+  width: 40rem;
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+  margin: 0.5rem 0 2rem 0;
+}

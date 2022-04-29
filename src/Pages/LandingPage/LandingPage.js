@@ -2,6 +2,7 @@ import classes from "./LandingPage.module.css";
 import { useTranslation } from "react-i18next";
 import CarouselMain from "../../components/UI/CarouselMain";
 import Button from '../../components/UI/Button'
+import SignUpForm from "../../components/Forms/SignUpForm";
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ const LandingPage = () => {
           <Button color="white">Find Out More</Button>
           <Button>Join Green Gym</Button>
         </div>
+        <SignUpForm />
       </div>
     </div>
   );
