@@ -57,10 +57,6 @@ const ResetPasswordForm = () => {
       </form>
     </FormCard>
   );
-
-
-
-
 };
 
 export default ResetPasswordForm;
