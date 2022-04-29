@@ -6,6 +6,7 @@ import SignUpForm from "../../components/Forms/SignUpForm";
 import Login from "../../components/Forms/LoginForm";
 import LoginForm from "../../components/Forms/LoginForm";
 import ForgotPasswordForm from "../../components/Forms/ForgotPasswordForm";
+import RestPasswordForm from "../../components/Forms/ResetPasswordForm";
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ const LandingPage = () => {
           <Button color="white">Find Out More</Button>
           <Button>Join Green Gym</Button>
         </div> */}
+        <RestPasswordForm />
         <ForgotPasswordForm />
         <LoginForm />
         <SignUpForm />
