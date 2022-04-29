@@ -107,7 +107,7 @@ const SignUpForm = () => {
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>
-            <label htmlFor="first-name">First Name</label>
+            <label htmlFor="first-name">{t("first_name")}</label>
             <input
               type="text"
               id="first-name"
@@ -120,7 +120,7 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={secondNameClasses}>
-            <label htmlFor="last-name">Last Name</label>
+            <label htmlFor="last-name">{t("last_name")}</label>
             <input
               type="text"
               id="last-name"
@@ -133,7 +133,7 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={companyClasses}>
-            <label htmlFor="company">Company</label>
+            <label htmlFor="company">{t("company")}</label>
             <input
               type="text"
               id="company"
@@ -148,7 +148,7 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={emailClasses}>
-            <label htmlFor="email">E-Mail</label>
+            <label htmlFor="email">{t("e_mail")}</label>
             <input
               type="email"
               id="email"
@@ -163,7 +163,7 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={passwordClasses}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("password")}</label>
             <input
               type="password"
               id="password"
@@ -179,10 +179,10 @@ const SignUpForm = () => {
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small">
-              Cancel
+              {t("cancel")}
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+              {t("submit")}
             </Button>
           </div>
         </div>

@@ -2,10 +2,12 @@
   "welcome_to_green_gym" : "欢迎",
   "main_title" : "We're a wellness platform",
   "sub_title" : "\"Commited To Improving Planetary Health\"",
-  "sign_up": "Sign Up",
-  "first_name": "First Name",
-  "last_name": "Last Name",
-  "company": "Company",
-  "e_mail": "E-Mail",
-  "password": "Password"
+  "sign_up": "注册",
+  "first_name": "名",
+  "last_name": "姓",
+  "company": "公司",
+  "e_mail": "邮箱",
+  "password": "密码",
+  "cancel": "取消",
+  "submit": "提交"
 }
