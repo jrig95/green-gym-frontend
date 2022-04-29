@@ -1,6 +1,6 @@
 import classes from "./Form.module.css";
 import FormCard from "./FormCard";
-import Button from '../UI/Button';
+import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
 const SignUpForm = () => {
@@ -9,45 +9,156 @@ const SignUpForm = () => {
   const {
     value: firstNameValue,
     isValid: firtNameIsValid,
+    hasError: firstNameHasError,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
   } = useInput(textNotEmpty);
 
+  const {
+    vlaue: secondNameValue,
+    isValid: secondNameIsValid,
+    hasError: secondNameHasError,
+    valueChangeHandler: secondNameChangeHandler,
+    inputBlurHandler: secondNameBlurHandler,
+    reset: resetSecondName,
+  } = useInput(textNotEmpty);
+
+  const {
+    value: companyValue,
+    isValid: companyIsValid,
+    hasError: companyHasError,
+    valueChangeHandler: companyChangeHandler,
+    inputBlurHandler: companyBlurHandler,
+    reset: resetCompany,
+  } = useInput(textNotEmpty);
+
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(textNotEmpty);
+
+  const {
+    value: passwordValue,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: passwordRest,
+  } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-
-    console.log(event);
+    console.log(firstNameValue);
+    resetFirstName();
   };
+
+  const firstNameClasses = firstNameHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
+  const secondNameClasses = secondNameHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
+  const companyClasses = companyHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
+  const emailClasses = emailHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
+  const passwordClasses = passwordHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
 
   return (
     <FormCard title="Sign Up">
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
-          <div className={classes.formControl}>
+          <div className={firstNameClasses}>
             <label htmlFor="first-name">First Name</label>
-            <input type="text" id="first-name" />
+            <input
+              type="text"
+              id="first-name"
+              value={firstNameValue}
+              onChange={firstNameChangeHandler}
+              onBlur={firstNameBlurHandler}
+            />
+            {firstNameHasError && (
+              <p className={classes.errorText}>please enter your first name</p>
+            )}
           </div>
-          <div className={classes.formControl}>
+          <div className={secondNameClasses}>
             <label htmlFor="second-name">Second Name</label>
-            <input type="text" id="second-name" />
+            <input
+              type="text"
+              id="second-name"
+              value={secondNameValue}
+              onChange={secondNameChangeHandler}
+              onBlur={secondNameBlurHandler}
+            />
+            {secondNameHasError && (
+              <p className={classes.errorText}>please enter your second name</p>
+            )}
           </div>
-          <div className={classes.formControl}>
+          <div className={companyClasses}>
             <label htmlFor="company">Company</label>
-            <input type="text" id="company" />
+            <input
+              type="text"
+              id="company"
+              value={companyValue}
+              onChange={companyChangeHandler}
+              onBlur={companyBlurHandler}
+            />
+            {companyHasError && (
+              <p className={classes.errorText}>
+                please enter your company name
+              </p>
+            )}
           </div>
-          <div className={classes.formControl}>
+          <div className={emailClasses}>
             <label htmlFor="email">E-Mail</label>
-            <input type="email" id="email" />
+            <input
+              type="email"
+              id="email"
+              value={emailValue}
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
+            />
+            {emailHasError && (
+              <p className={classes.errorText}>
+                please enter a valid e-mail address
+              </p>
+            )}
           </div>
-          <div className={classes.formControl}>
+          <div className={passwordClasses}>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input
+              type="password"
+              id="password"
+              value={passwordValue}
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
+            />
+            {passwordHasError && (
+              <p className={classes.errorText}>
+                password must be longer than 8 characters
+              </p>
+            )}
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">Cancel</Button>
-            <Button size="small" type="submit">Submit</Button>
+            <Button color="blue" size="small">
+              Cancel
+            </Button>
+            <Button size="small" type="submit">
+              Submit
+            </Button>
           </div>
         </div>
       </form>
