@@ -16,12 +16,12 @@ const SignUpForm = () => {
   } = useInput(textNotEmpty);
 
   const {
-    vlaue: secondNameValue,
-    isValid: secondNameIsValid,
-    hasError: secondNameHasError,
-    valueChangeHandler: secondNameChangeHandler,
-    inputBlurHandler: secondNameBlurHandler,
-    reset: resetSecondName,
+    value: lastNameValue,
+    isValid: lastNameIsValid,
+    hasError: lastNameHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    inputBlurHandler: lastNameBlurHandler,
+    reset: resetLastName,
   } = useInput(textNotEmpty);
 
   const {
@@ -48,20 +48,34 @@ const SignUpForm = () => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: passwordRest,
+    reset: resetPassword,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(firstNameValue);
+
+    const userData = {
+      firstName: firstNameValue,
+      secondName: lastNameValue,
+      company: companyValue,
+      email: emailValue,
+      password: passwordValue
+    }
+
+    console.log(userData);
+
     resetFirstName();
+    resetLastName();
+    resetCompany();
+    resetEmail();
+    resetPassword();
   };
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const secondNameClasses = secondNameHasError
+  const secondNameClasses = lastNameHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
@@ -95,15 +109,15 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={secondNameClasses}>
-            <label htmlFor="second-name">Second Name</label>
+            <label htmlFor="last-name">Last Name</label>
             <input
               type="text"
-              id="second-name"
-              value={secondNameValue}
-              onChange={secondNameChangeHandler}
-              onBlur={secondNameBlurHandler}
+              id="last-name"
+              value={lastNameValue}
+              onChange={lastNameChangeHandler}
+              onBlur={lastNameBlurHandler}
             />
-            {secondNameHasError && (
+            {lastNameHasError && (
               <p className={classes.errorText}>please enter your second name</p>
             )}
           </div>
