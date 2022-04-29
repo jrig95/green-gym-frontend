@@ -1,9 +1,7 @@
 import classes from "./LandingPage.module.css";
-import Card from "../../components/UI/Card";
-import Footer from "../../components/Layout/Footer";
 import { useTranslation } from "react-i18next";
 import CarouselMain from "../../components/UI/CarouselMain";
-import CarouselCard from "../../components/UI/CarouselCard";
+import Button from '../../components/UI/Button'
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -13,6 +11,10 @@ const LandingPage = () => {
         <h1 className={classes.mainTitle}>{t("main_title")}</h1>
         <h1 className={classes.subTitle}>{t("sub_title")}</h1>
         <CarouselMain />
+        <div className={classes.buttonsContainer}>
+          <Button color="white">Find Out More</Button>
+          <Button>Join Green Gym</Button>
+        </div>
       </div>
     </div>
   );

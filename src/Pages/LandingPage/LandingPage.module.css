@@ -18,12 +18,24 @@
 
 .mainTitle {
   margin: 8rem 0 0 0;
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: var(--white)
 }
 
 .subTitle {
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 3rem 0;
   font-style: italic;
   color: var(--white)
+}
+
+.buttonsContainer {
+  margin: 2rem 0 0 0;
+  width: 35.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonsContainer button {
+  margin: 1rem 0 0 0;
 }
