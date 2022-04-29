@@ -7,5 +7,7 @@
   "last_name": "Last Name",
   "company": "Company",
   "e_mail": "E-Mail",
-  "password": "Password"
+  "password": "Password",
+  "carousel_card_one_title": "Green Gym",
+  "carousel_card_one_body": "The more active our members are, the more we will give back to the environment."
 }

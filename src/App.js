@@ -8,8 +8,8 @@ import SignUp from './Pages/UserFormPages/SignUp';
 function App() {
   return (
     <Layout>
-      {/* <LandingPage /> */}
-      <SignUp />
+      <LandingPage />
+      {/* <SignUp /> */}
     </Layout>
   );
 }
