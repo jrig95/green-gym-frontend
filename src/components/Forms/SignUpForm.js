@@ -1,8 +1,20 @@
 import classes from "./Form.module.css";
 import FormCard from "./FormCard";
 import Button from '../UI/Button';
+import useInput from "./Hooks/use-input";
 
 const SignUpForm = () => {
+  const textNotEmpty = (value) => value.trim() !== "";
+
+  const {
+    value: firstNameValue,
+    isValid: firtNameIsValid,
+    valueChangeHandler: firstNameChangeHandler,
+    inputBlurHandler: firstNameBlurHandler,
+    reset: resetFirstName,
+  } = useInput(textNotEmpty);
+
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
