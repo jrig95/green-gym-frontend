@@ -6,7 +6,7 @@
   --white-hover: #F7F7F7;
   --green: #55ca8a;
   --green-hover: #4CB47B;
-  --blue: hsl(236, 20%, 42%);
+  --blue: #575982;
   --grey: #aeaeae;
   --blue-hover: #4C4F75;
   --haze-white: #f7f7f7;
@@ -53,3 +53,28 @@ body {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+/* The CSS below is for the carousel and must be global */
+
+.swiper-pagination {
+	position: absolute;
+	top: 12rem;
+	right: 6.5rem;
+	width: auto !important;
+	left: auto !important;
+	margin: 0;
+}
+.swiper-pagination-bullet {
+	padding: 5px 10px;
+	border-radius: 0;
+	width: .4rem !important;
+	height: 1rem !important;
+	text-align: center;
+	color:#000;
+	opacity: 1;
+	background: var(--blue) !important;
+}
+.swiper-pagination-bullet-active {
+	color:#fff;
+	background: var(--green) !important;
+}

@@ -1,6 +1,10 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper";
+
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
 
 import Card from "./Card";
 import CarouselCard from "./CarouselCard";
@@ -10,64 +14,14 @@ import classes from "./CarouselMain.module.css";
 // uninstall react-multi-careous
 
 const CarouselMain = () => {
-  const CustomLeftArrow = ({ onClick }) => {
-    return <i onClick={() => onClick()} className={classes.customLeftArrow} />;
-  };
-
-  const CustomRightArrow = ({ onClick }) => {
-    return <i onClick={() => onClick()} className={classes.customRightArrow} />;
-  };
-
-  // const CustomDot = ({ onClick, active, index, carouselState }) => {
-  //   const { currentSlide } = carouselState;
-  //   return (
-  //     <li style={{ background: active ? "grey" : "initial" }}>
-  //       <button
-  //         className={classes.customDot}
-  //         active={classes.customDotActive}
-  //         onClick={() => onClick()}
-  //       />
-  //     </li>
-  //   );
-  // };
-
-  const CustomDot = ({ onClick, ...rest }) => {
-    const {
-      onMove,
-      index,
-      active,
-      carouselState: { currentSlide, deviceType },
-    } = rest;
-    const carouselItems = [];
-
-    return <button>{React.Children.toArray(carouselItems)[index]}</button>;
-  };
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-  };
-
   return (
     <Card className={classes.container}>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        autoplay={{ delay: 6000 }}
+        delay={1000}
+        pagination={{ clickable: true}}
+        navigation={{ clickable: true}}
+        modules={[Pagination, Autoplay]}
       >
         <SwiperSlide>
           <CarouselCard
