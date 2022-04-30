@@ -1,8 +1,11 @@
 import { Fragment } from "react";
+import { HiCamera } from 'react-icons/hi';
+
 import classes from "./ProfileBanner.module.css";
 import TreesPlanted from "../Cards/TreesPlanted";
 
-const ProfileBanner = ({ title, calories, image, name }) => {
+
+const ProfileBanner = ({ title, calories, image, name, update }) => {
   const caloriesNum = parseInt(calories);
   const caloriesBurned = caloriesNum.toLocaleString("en-US");
 
@@ -16,6 +19,7 @@ const ProfileBanner = ({ title, calories, image, name }) => {
       </div>
       <div className={classes.imageContainer}>
         <img src={image} />
+        {update && <HiCamera />}
         <h2 className={classes.name}>{name}</h2>
         <TreesPlanted calories={caloriesNum}/>
       </div>

@@ -8,11 +8,12 @@ import ResetPassword from './Pages/UserFormPages/ResetPassword';
 import SignUp from './Pages/UserFormPages/SignUp';
 import UpdateProfile from './Pages/UserFormPages/UpdateProfile';
 import ProfilePage from './Pages/Profile/ProfilePage';
+import UpdateProfilePage from './Pages/Profile/UpdateProfilePage';
 
 function App() {
   return (
     <Layout>
-      <ProfilePage />
+      <UpdateProfilePage />
     </Layout>
   );
 }
