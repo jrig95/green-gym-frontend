@@ -13,11 +13,12 @@ import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordP
 import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import CarouselMain from "./components/UI/CarouselMain";
 import ProfileBanner from "./components/Profile/ProfileBanner";
+import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 
 function App() {
   return (
     <Layout>
-      <ProgramsPage />
+      <ProgramPage />
     </Layout>
   );
 }
