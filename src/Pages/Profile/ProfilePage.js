@@ -1,4 +1,6 @@
 import ProfileBanner from "../../components/Layout/ProfileBanner";
+import ProfileCard from "../../components/Cards/ProfileCard";
+import classes from './ProfilePage.module.css';
 
 const DUMMY_DATA = {
   user_one: {
@@ -18,10 +20,11 @@ const ProfilePage = () => {
         name={DUMMY_DATA.user_one.name}
         image={DUMMY_DATA.user_one.image}
       />
+      <div className={classes.profileCardContainer}>
+        <ProfileCard/>
+      </div>
     </>
   );
 };
 
 export default ProfilePage;
-
-// title, calories, image, name

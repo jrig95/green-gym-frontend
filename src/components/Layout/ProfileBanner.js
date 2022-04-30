@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import classes from "./ProfileBanner.module.css";
-import TreesPlanted from "../Miscellaneous/TreesPlanted";
+import TreesPlanted from "../Cards/TreesPlanted";
 
 const ProfileBanner = ({ title, calories, image, name }) => {
   const caloriesNum = parseInt(calories);
