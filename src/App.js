@@ -14,6 +14,7 @@ function App() {
   return (
     <Layout>
       <UpdateProfilePage />
+      <ProfilePage />
     </Layout>
   );
 }

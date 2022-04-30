@@ -21,7 +21,7 @@ const ProfileBanner = ({ title, calories, image, name, update }) => {
         <img src={image} />
         {update && <HiCamera />}
         <h2 className={classes.name}>{name}</h2>
-        <TreesPlanted calories={caloriesNum}/>
+        {!update && <TreesPlanted calories={caloriesNum}/>}
       </div>
     </div>
   );

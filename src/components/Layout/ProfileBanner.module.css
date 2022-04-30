@@ -30,6 +30,13 @@
   left: 4rem;
 }
 
+.imageContainer svg {
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+  font-size: 3rem;
+}
+
 img {
   height: 13rem;
   width: 13rem;
