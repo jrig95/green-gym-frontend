@@ -4,8 +4,8 @@ import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 
-const DUMMY_DATA = {
-  program_one: {
+const DUMMY_DATA = [
+  {
     id: "p1",
     title: "Program",
     image:
@@ -13,86 +13,125 @@ const DUMMY_DATA = {
     description:
       "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
   },
-};
+  {
+    id: "p2",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p3",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p4",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p5",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p6",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p7",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p8",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p9",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p10",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p11",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p12",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+  {
+    id: "p13",
+    title: "Program",
+    image:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    description:
+      "Description of program asdjewfbwef fbewufew weiufbewiubf webfiu asdasdwef w ewfwef  wefew sda.",
+  },
+];
 
 const ProgramsPage = () => {
+
+  const programCards = DUMMY_DATA.map((program) => {
+    return (
+      <a href="">
+        <ProgramCard
+                id={program.id}
+                title={program.title}
+                image={program.image}
+                description={program.description}
+              />
+      </a>
+    )
+  })
+
   return (
     <Fragment>
       <Banner title="Our Programs" />
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
-          <ProgramCard
-            id={DUMMY_DATA.program_one.id}
-            title={DUMMY_DATA.program_one.title}
-            image={DUMMY_DATA.program_one.image}
-            description={DUMMY_DATA.program_one.description}
-          />
+          {programCards}
         </div>
       </div>
     </Fragment>
