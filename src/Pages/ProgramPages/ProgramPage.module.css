@@ -1,5 +1,30 @@
+.container {
+  margin: 0 10rem 0 10rem;
+}
+
+.descriptionContainer {
+  margin: 1rem 0 0 0;
+  display: flex;
+}
+
+.descriptionContainer h3 {
+  margin: 0;
+}
+
+.descriptionContainer img {
+  width: 19rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+
 .exerciseCardContainer {
   display: flex;
   justify-content: center;
   margin: 1rem 0 0 0;
+}
+
+.programWorkouts {
+  display: flex;
+  flex-direction: column;
 }
