@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { HiCamera } from 'react-icons/hi';
 
 import classes from "./ProfileBanner.module.css";
-import TreesPlanted from "../Cards/TreesPlanted";
+import TreesPlanted from "./TreesPlanted";
 
 
 const ProfileBanner = ({ title, calories, image, name, update }) => {

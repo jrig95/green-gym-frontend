@@ -1,6 +1,6 @@
-import ProfileBanner from "../../components/Layout/ProfileBanner";
-import ProfileCard from "../../components/Cards/ProfileCard";
-import classes from './ProfilePage.module.css';
+import ProfileBanner from "../../components/Profile/ProfileBanner";
+import UpdateProfileForm from "../../components/Forms/UpdateProfileForm";
+import classes from './UpdateProfilePage.module.css';
 
 const DUMMY_DATA = {
   user_one: {
@@ -11,20 +11,21 @@ const DUMMY_DATA = {
   },
 };
 
-const ProfilePage = () => {
+const UpdateProfilePage = () => {
   return (
     <>
       <ProfileBanner
         title="My Profile"
-        calories={DUMMY_DATA.user_one.calories}
+        // calories={DUMMY_DATA.user_one.calories}
         name={DUMMY_DATA.user_one.name}
         image={DUMMY_DATA.user_one.image}
+        update={true}
       />
-      <div className={classes.profileCardContainer}>
-        <ProfileCard/>
+      <div className={classes.updateProfileFormContainer}>
+        <UpdateProfileForm/>
       </div>
     </>
   );
 };
 
-export default ProfilePage;
+export default UpdateProfilePage;
