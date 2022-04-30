@@ -1,0 +1,32 @@
+.card {
+  width: 40rem;
+}
+
+.header {
+  display: flex;
+  font-weight: 700;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.row {
+  display: flex;
+}
+
+.exerciseHeader,
+.exerciseRow {
+  width: 23rem;
+  margin-left: 1rem;
+}
+
+.workHeader,
+.workRow,
+.restHeader,
+.restRow {
+  width: 8.5rem;
+}
+
+.workRow,
+.restRow {
+  font-weight: 700;
+}

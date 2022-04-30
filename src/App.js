@@ -18,7 +18,7 @@ import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 function App() {
   return (
     <Layout>
-      <ProgramPage />
+      <ProgramsPage />
     </Layout>
   );
 }
