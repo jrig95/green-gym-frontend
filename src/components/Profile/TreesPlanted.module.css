@@ -1,0 +1,16 @@
+.treeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  color: var(--white);
+  padding: 0.25rem 0.25rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.treeButton svg {
+  font-size: 2rem;
+}
