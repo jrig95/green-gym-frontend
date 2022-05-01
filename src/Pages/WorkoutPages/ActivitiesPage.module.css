@@ -2,3 +2,9 @@
   display: flex;
   justify-content: center;
 }
+
+.cardsContainer {
+  display: flex;
+  margin: 4rem 10rem 0 10rem;
+  justify-content: center;
+}

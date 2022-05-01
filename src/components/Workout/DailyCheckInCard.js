@@ -21,12 +21,18 @@ const DailyCheckInCard = () => {
 
   return (
     <Card className={classes.container}>
-      <h1>Daily Check In</h1>
+      <div className={classes.title}>
+        <h1>Daily Check In</h1>
+      </div>
       <div className={checkInClasses}>
-        <BsCheckCircle />
-        <Button onClick={checkInHandler} disabled={checkedIn}>
-          {checkedIn ? "Checked In!" : "Check in"}
-        </Button>
+        <div className={classes.icon}>
+          <BsCheckCircle />
+        </div>
+        <div className={classes.button}>
+          <Button onClick={checkInHandler} disabled={checkedIn}>
+            {checkedIn ? "Checked In!" : "Check in"}
+          </Button>
+        </div>
       </div>
     </Card>
   );
