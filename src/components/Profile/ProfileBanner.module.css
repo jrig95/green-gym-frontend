@@ -37,7 +37,7 @@
   font-size: 3rem;
 }
 
-img {
+.imageContainer img {
   height: 13rem;
   width: 13rem;
   object-fit: cover;

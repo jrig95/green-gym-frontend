@@ -1,0 +1,36 @@
+.card {
+  width: 21rem;
+}
+
+.header {
+  height: 2.5rem;
+  display: flex;
+  font-weight: 700;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.header,
+.row {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.exerciseHeader,
+.exerciseRow {
+  width: 10.5rem;
+}
+
+.setsHeader,
+.setsRow {
+  width: 10.5rem;
+}
+
+.setsRow {
+  font-weight: 700;
+}
