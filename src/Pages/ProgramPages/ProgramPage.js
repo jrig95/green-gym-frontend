@@ -12,14 +12,12 @@ const ProgramPage = () => {
   const programWorkouts = Data.daily_workouts.map((workout) => {
     console.log(workout.exercise_overview, "Line 13 - ProgramPage.js");
     return (
-      <Fragment>
-        <div>
-          <h2>{workout.day_number}</h2>
-          <p>This is the description of the day</p>
-          {/* <ExerciseCard exercises={workout.exercises}/> */}
-          <ExerciseOverviewCard exercises={workout.exercise_overview}/>
-        </div>
-      </Fragment>
+      <div className={classes.workoutCard}>
+        <h2>{workout.day_number}</h2>
+        <p>{workout.description}</p>
+        {/* <ExerciseCard exercises={workout.exercises}/> */}
+        <ExerciseOverviewCard exercises={workout.exercise_overview} />
+      </div>
     );
   });
 
@@ -34,9 +32,7 @@ const ProgramPage = () => {
           <img src={Data.program_cover_image} />
         </div>
         <div className={classes.exerciseCardContainer}>
-          <div className={classes.programWorkouts}>
-            {programWorkouts}
-          </div>
+          <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
       </div>
     </Fragment>

@@ -1,22 +1,28 @@
 .container {
-  margin: 0 10rem 0 10rem;
+  margin: 0 10rem 10rem 10rem;
 }
 
 .descriptionContainer {
   margin: 1rem 0 0 0;
   display: flex;
+  justify-content: center;
 }
 
-.descriptionContainer h3 {
+.description {
+  width: 24rem;
+  margin: 0 1rem 0 0;
+}
+
+.description h3 {
   margin: 0;
 }
 
 .descriptionContainer img {
-  width: 19rem;
+  width: 24rem;
+  max-height: 20rem;
   object-fit: cover;
   object-position: center;
 }
-
 
 .exerciseCardContainer {
   display: flex;
@@ -24,7 +30,13 @@
   margin: 1rem 0 0 0;
 }
 
-.programWorkouts {
-  display: flex;
-  flex-direction: column;
+/* this isn't doing anything */
+.programWorkoutsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.workoutCard {
+  width: 21rem;
 }
