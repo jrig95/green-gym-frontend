@@ -15,6 +15,7 @@ const ProgramPage = () => {
       <Fragment>
         <div>
           <h2>{workout.day_number}</h2>
+          <p>This is the description of the day</p>
           {/* <ExerciseCard exercises={workout.exercises}/> */}
           <ExerciseOverviewCard exercises={workout.exercise_overview}/>
         </div>

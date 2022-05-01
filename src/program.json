@@ -12,6 +12,7 @@
       "daily_challenge_title": "Walk 10,000 steps",
       "daily_challnege_desciption": "Walk untill you've done 10,000 steps",
       "number_of_exercises": "6",
+      "description": "Today we are going to get your arms working as well as your legs",
       "exercise_overview": [
         {
           "exercise_title": "Push Ups",
@@ -77,13 +78,19 @@
       "daily_challenge_title": "Walk 10,000 steps",
       "daily_challnege_desciption": "Walk untill you've done 10,000 steps",
       "number_of_exercises": "6",
+      "description": "Today we are going to get your arms working as well as your legs",
       "exercise_overview": [
         {
           "exercise_title": "Push Ups",
           "number_of_sets": "4"
         },
         {
-          "exercise_title": "Set ups"
+          "exercise_title": "Set ups",
+          "number_of_sets": "4"
+        },
+        {
+          "exercise_title": "Squats",
+          "number_of_sets": "4"
         }
       ],
       "exercises": [
@@ -137,13 +144,19 @@
       "daily_challenge_title": "Walk 10,000 steps",
       "daily_challnege_desciption": "Walk untill you've done 10,000 steps",
       "number_of_exercises": "6",
+      "description": "Today we are going to get your arms working as well as your legs",
       "exercise_overview": [
         {
           "exercise_title": "Push Ups",
           "number_of_sets": "4"
         },
         {
-          "exercise_title": "Set ups"
+          "exercise_title": "Set ups",
+          "number_of_sets": "4"
+        },
+        {
+          "exercise_title": "Squats",
+          "number_of_sets": "4"
         }
       ],
       "exercises": [
@@ -197,13 +210,19 @@
       "daily_challenge_title": "Walk 10,000 steps",
       "daily_challnege_desciption": "Walk untill you've done 10,000 steps",
       "number_of_exercises": "6",
+      "description": "Today we are going to get your arms working as well as your legs",
       "exercise_overview": [
         {
           "exercise_title": "Push Ups",
           "number_of_sets": "4"
         },
         {
-          "exercise_title": "Set ups"
+          "exercise_title": "Set ups",
+          "number_of_sets": "4"
+        },
+        {
+          "exercise_title": "Squats",
+          "number_of_sets": "4"
         }
       ],
       "exercises": [
