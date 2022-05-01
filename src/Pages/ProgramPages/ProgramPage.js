@@ -2,19 +2,21 @@ import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
 import { Fragment } from "react";
 
-import ExerciseCard from "../../components/Exercise/ExerciseCard";
+import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import Data from "../../program.json";
 
 const ProgramPage = () => {
   // this would be the api call
-  console.log(Data);
+  // console.log(Data);
 
   const programWorkouts = Data.daily_workouts.map((workout) => {
+    console.log(workout.exercise_overview, "Line 13 - ProgramPage.js");
     return (
       <Fragment>
         <div>
           <h2>{workout.day_number}</h2>
-          <ExerciseCard exercises={workout.exercises}/>
+          {/* <ExerciseCard exercises={workout.exercises}/> */}
+          <ExerciseOverviewCard exercises={workout.exercise_overview}/>
         </div>
       </Fragment>
     );
