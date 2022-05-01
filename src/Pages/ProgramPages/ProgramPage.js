@@ -14,7 +14,7 @@ const ProgramPage = () => {
       <Fragment>
         <div>
           <h2>{workout.day_number}</h2>
-          <ExerciseCard />
+          <ExerciseCard exercises={workout.exercises}/>
         </div>
       </Fragment>
     );
