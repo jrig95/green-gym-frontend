@@ -1,6 +1,6 @@
 import classes from "./Button.module.css";
 
-const Button = ({ children, type, disabled, color, size }) => {
+const Button = ({ children, type, disabled, color, size, onClick }) => {
   let buttonClasses = `${classes.button}`;
 
   if (size === "small") {
@@ -20,6 +20,7 @@ const Button = ({ children, type, disabled, color, size }) => {
       className={buttonClasses}
       type={type ? type : "button"}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>

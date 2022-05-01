@@ -1,0 +1,17 @@
+.container {
+  width: 24rem;
+  /* height: 19rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container img {
+  width: 24rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.container button {
+  margin: 1rem;
+}
