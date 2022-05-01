@@ -40,3 +40,13 @@
 .workoutCard {
   width: 21rem;
 }
+
+.purchaseContainer {
+  margin: 3rem 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.purchaseContainer h3 {
+  margin: 1rem 1rem 0 0;
+}

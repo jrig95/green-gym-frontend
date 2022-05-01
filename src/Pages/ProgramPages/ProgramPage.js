@@ -1,7 +1,8 @@
-import classes from "./ProgramPage.module.css";
-import Banner from "../../components/Layout/Banner";
 import { Fragment } from "react";
 
+import Button from '../../components/UI/Button';
+import classes from "./ProgramPage.module.css";
+import Banner from "../../components/Layout/Banner";
 import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import Data from "../../program.json";
 
@@ -33,6 +34,10 @@ const ProgramPage = () => {
         </div>
         <div className={classes.exerciseCardContainer}>
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
+        </div>
+        <div className={classes.purchaseContainer}>
+          <h3>Price: ¥{Data.price}</h3>
+          <Button>Purchase</Button>
         </div>
       </div>
     </Fragment>
