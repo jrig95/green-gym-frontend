@@ -1,5 +1,5 @@
 .container {
-  width: 24rem;
+  min-width: 24rem;
   /* height: 19rem; */
   display: flex;
   flex-direction: column;
@@ -8,11 +8,12 @@
 }
 
 .title {
-  height: 4rem;
+  min-height: 4rem;
+  margin: 0 0 1rem 0;
 }
 
 .icon {
-  height: 10rem;
+  min-height: 10rem;
 }
 
 .button {
@@ -28,12 +29,12 @@
 
 .buttonContainer svg {
   margin: 0;
-  font-size: 13rem;
+  font-size: 8rem;
   color: var(--grey)
 }
 
 .notCheckedIn svg {
-  font-size: 10rem;
+  font-size: 8rem;
   color: var(--grey)
 }
 
@@ -42,7 +43,7 @@
 }
 
 .checkedIn svg {
-  font-size: 13rem;
+  font-size: 8rem;
   color: var(--green) !important;
 }
 

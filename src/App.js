@@ -1,5 +1,6 @@
 // import classes from "./App.module.css";
 // import LoginForm from "./components/Forms/LoginForm";
+import { GiClawSlashes } from "react-icons/gi";
 import Layout from "./components/Layout/Layout";
 // import LandingPage from "./Pages/LandingPage/LandingPage";
 // import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
@@ -14,12 +15,13 @@ import Layout from "./components/Layout/Layout";
 // import CarouselMain from "./components/UI/CarouselMain";
 // import ProfileBanner from "./components/Profile/ProfileBanner";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
-import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
+// import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
+import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 
 function App() {
   return (
     <Layout>
-      <ActivitiesPage />
+      <DailyWorkoutPage />
     </Layout>
   );
 }

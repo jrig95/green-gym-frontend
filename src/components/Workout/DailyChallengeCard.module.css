@@ -1,37 +1,33 @@
 .container {
-  width: 24rem;
+  min-width: 24rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 1rem 0 1rem;
 }
 
-.container p {
-  margin: 10;
+.title {
+  min-height: 4rem;
+  /* margin: 0 0 1rem 0; */
 }
 
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 14rem;
+.description {
+  min-height: 2.5rem;
 }
 
-.buttonContainer svg {
-  font-size: 17rem;
+.description p {
+  margin: 0;
+}
+
+.icon {
+  height: 7.5rem;
+}
+
+.icon svg {
+  font-size: 10rem;
   color: var(--grey)
 }
 
-.notCheckedIn svg {
-  font-size: 17rem;
-  color: var(--grey)
-}
-
-.buttonContainer button {
-  margin: 1rem;
-}
-
-.checkedIn svg {
-  font-size: 17rem;
-  color: var(--green) !important;
+.button {
+  min-height: 5rem;
 }

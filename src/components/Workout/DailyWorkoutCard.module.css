@@ -16,3 +16,20 @@
 .container button {
   margin: 1rem;
 }
+
+.title {
+  min-height: 4rem;
+  margin: 0 0 1rem 0;
+}
+
+.image {
+  min-height: 10rem;
+}
+
+.buttonContainer {
+  height: 5rem;
+}
+
+.buttonContainer button {
+  margin: 1rem;
+}

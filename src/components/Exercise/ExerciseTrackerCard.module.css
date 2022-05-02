@@ -1,0 +1,47 @@
+.card {
+  width: 48.5rem;
+}
+
+.header {
+  display: flex;
+  font-weight: 700;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.row {
+  display: flex;
+}
+
+.exerciseHeader,
+.exerciseRow {
+  width: 23rem;
+  margin-left: 1rem;
+}
+
+.workHeader,
+.workRow,
+.restHeader,
+.restRow,
+.questionHeader,
+.questionRow {
+  width: 8.5rem;
+}
+
+.workRow,
+.restRow {
+  font-weight: 700;
+}
+
+.questionContainer input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  width: 5rem;
+}
+
+.questionContainer {
+  display: flex;
+  align-items: center;
+}
