@@ -1,8 +1,6 @@
 import classes from "./RestCard.module.css";
 import { useEffect, useState } from "react";
 
-import data from '../../program.json';
-
 const RestCard = ({ timer }) => {
   const [remainingTime, setRemainingTime] = useState(timer);
 
