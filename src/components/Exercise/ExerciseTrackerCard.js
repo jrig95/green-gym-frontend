@@ -2,7 +2,24 @@ import classes from "./ExerciseTrackerCard.module.css";
 import Card from "../UI/Card";
 import ExerciseTrackerCardRow from "./ExerciseTrackerCardRow";
 
-const ExerciseTrackerCard = () => {
+import data from "../../program.json";
+
+const ExerciseTrackerCard = ({ exerciseIndex }) => {
+  const exerciseTrackerCardRows = data.daily_workouts[0].exercises.map(
+    (exercise) => {
+      const isActive = exercise.id === data.daily_workouts[0].exercises[exerciseIndex].id;
+
+      return (
+        <ExerciseTrackerCardRow
+          exercise={exercise.exercise_title}
+          work={exercise.exercise_work_time}
+          rest={exercise.exercise_rest_time}
+          rowActive={isActive}
+        />
+      );
+    }
+  );
+
   return (
     <Card className={classes.card}>
       <div className={classes.header}>
@@ -19,11 +36,7 @@ const ExerciseTrackerCard = () => {
           <p>How Many?</p>
         </div>
       </div>
-      <ExerciseTrackerCardRow rowActive={false}/>
-      <ExerciseTrackerCardRow rowActive={false}/>
-      <ExerciseTrackerCardRow rowActive={true}/>
-      <ExerciseTrackerCardRow rowActive={false}/>
-      <ExerciseTrackerCardRow rowActive={false}/>
+      {exerciseTrackerCardRows}
     </Card>
   );
 };

@@ -1,0 +1,12 @@
+.videoContainer {
+  min-height: 28rem;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
+}

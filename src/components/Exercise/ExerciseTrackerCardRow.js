@@ -1,6 +1,6 @@
 import classes from "./ExerciseTrackerCard.module.css";
 
-const ExerciseTrackerCardRow = ({ rowActive }) => {
+const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive }) => {
 
   const rowClasses = rowActive ? `${classes.row} ${classes.rowActive}` : classes.row;
 
