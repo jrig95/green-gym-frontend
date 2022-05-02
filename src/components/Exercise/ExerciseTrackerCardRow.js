@@ -1,8 +1,8 @@
 import classes from "./ExerciseTrackerCard.module.css";
 
-const ExerciseTrackerCardRow = () => {
+const ExerciseTrackerCardRow = ({ rowActive }) => {
 
-  const rowClasses = false ? `${classes.row} ${classes.rowActive}` : classes.row;
+  const rowClasses = rowActive ? `${classes.row} ${classes.rowActive}` : classes.row;
 
   return (
     <div className={rowClasses}>
@@ -11,7 +11,7 @@ const ExerciseTrackerCardRow = () => {
       <p className={classes.restRow}>15secs</p>
       <div className={classes.questionContainer}>
         <form>
-          <input type="number" min={0}/>
+          <input type="number" min={0} placeholder={0}/>
         </form>
       </div>
     </div>

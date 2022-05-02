@@ -19,7 +19,11 @@ const ExerciseTrackerCard = () => {
           <p>How Many?</p>
         </div>
       </div>
-      <ExerciseTrackerCardRow />
+      <ExerciseTrackerCardRow rowActive={false}/>
+      <ExerciseTrackerCardRow rowActive={false}/>
+      <ExerciseTrackerCardRow rowActive={true}/>
+      <ExerciseTrackerCardRow rowActive={false}/>
+      <ExerciseTrackerCardRow rowActive={false}/>
     </Card>
   );
 };
