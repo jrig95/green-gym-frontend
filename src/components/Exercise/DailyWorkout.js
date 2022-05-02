@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import classes from './DailyWorkout.module.css';
+import classes from "./DailyWorkout.module.css";
 import RestCard from "./RestCard";
 import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
@@ -45,8 +45,13 @@ const DailyWorkout = () => {
 
   return (
     <div>
-      <div className={classes.videoContainer}>{!showRestScreen ? currentVideo : rest}</div>
-      <ExerciseTrackerCard exerciseIndex={exerciseIndex}/>
+      <div className={classes.videoContainer}>
+        {!showRestScreen ? currentVideo : rest}
+      </div>
+      <ExerciseTrackerCard exerciseIndex={exerciseIndex} />
+      <div className={classes.buttonContainer}>
+        <Button>Finish Workout</Button>
+      </div>
     </div>
   );
 };
