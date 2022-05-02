@@ -24,7 +24,7 @@
 .restHeader,
 .restRow,
 .questionHeader,
-.questionRow {
+.questionContainer {
   width: 8.5rem;
 }
 
@@ -44,4 +44,9 @@
 .questionContainer {
   display: flex;
   align-items: center;
+}
+
+.rowActive {
+  background-color: var(--green);
+  color: white;
 }
