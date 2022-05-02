@@ -30,7 +30,7 @@ const ProgramPage = () => {
           <div className={classes.description}>
             <h3>{Data.program_description}</h3>
           </div>
-          <img src={Data.program_cover_image} />
+          <img src={Data.program_cover_image} alt={Data.program_title} />
         </div>
         <div className={classes.exerciseCardContainer}>
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>

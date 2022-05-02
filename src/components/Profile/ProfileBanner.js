@@ -18,7 +18,7 @@ const ProfileBanner = ({ title, calories, image, name, update }) => {
         )}
       </div>
       <div className={classes.imageContainer}>
-        <img src={image} />
+        <img src={image} alt={name}/>
         {/* clicking this link should add an image to a users profile */}
         {update && <div className={classes.cameraIcon}><a href=""><HiCamera /></a></div>}
         <h2 className={classes.name}>{name}</h2>

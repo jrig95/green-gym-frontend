@@ -1,0 +1,52 @@
+.container {
+  width: 43rem;
+}
+
+.programName {
+  text-align: center;
+}
+
+.tracker {
+  background-color: var(--grey) !important;
+  padding: 0.5rem 0.25rem;
+  display: flex;
+}
+
+.day {
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 5.5rem;
+  width: 8rem;
+  margin: 0 0.25rem 0 0.25rem;
+}
+
+.day p {
+  margin: 0;
+}
+
+.dayNumber,
+.percentage {
+  color: var(--green);
+}
+
+.dayNumber {
+  font-weight: 700;
+  margin: 0 0 0.5rem 0 !important;
+}
+
+.dayCurrent {
+  background-color: var(--green) !important;
+}
+
+.dayNumberCurrent,
+.percentageCurrent {
+  color: var(--white);
+}
+
+.dayNumberNext,
+.percentageNext {
+  color: var(--grey);
+}
