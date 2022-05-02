@@ -23,39 +23,30 @@ const DailyWorkout = () => {
   const currentVideoEndedHandler = (timer) => {
     const timeRemaining = timer * 1000;
     setvideoIndex((prevIndex) => prevIndex + 1);
-    setExerciseIndex((prevIndex) => prevIndex + 1);
+    // setExerciseIndex((prevIndex) => prevIndex + 1);
     setShowRestScreen(true);
 
     setTimeout(() => {
       setShowRestScreen(false);
+      setExerciseIndex((prevIndex) => prevIndex + 1);
     }, timeRemaining);
   };
 
-  // useEffect(() => {
-  //   console.log(showRestScreen, 'line 26')
-  //   console.log(videoIndex, 'line 27')
-  // }, [showRestScreen])
-
   const videos = [videoOne, videoTwo, videoThree, videoFour];
 
-  // have a set state for show rest card (this could be a button??)
-  // it can have a timer and when the timer finishes it fires an event
-  // when the user clicks on the button the next video will play.
-  // check to make sure their is another video.
-
-  const rest = <RestCard timer={2} />;
+  const rest = <RestCard timer={10} />;
 
   const currentVideo = (
     <ExerciseVideo
       videoUrl={videos[videoIndex]}
-      onEnded={() => currentVideoEndedHandler(2)}
+      onEnded={() => currentVideoEndedHandler(10)}
     />
   );
 
   return (
     <div>
       <div className={classes.videoContainer}>{!showRestScreen ? currentVideo : rest}</div>
-      <ExerciseTrackerCard />
+      <ExerciseTrackerCard exerciseIndex={exerciseIndex}/>
     </div>
   );
 };
