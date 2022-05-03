@@ -15,14 +15,10 @@ const DUMMY_DATA = {
   },
 };
 
-const DUMMY_REWARD = {
-  title: "A MacBook Pro",
-  points: "50000",
-  image: "https://picsum.photos/200",
-};
-
 const RewardsPage = () => {
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
+  const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
+  const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -33,6 +29,8 @@ const RewardsPage = () => {
   const rewardsArray = data.filter((reward) => reward.program_id === null);
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
+    setClaimedRewardTitle(rewardTitle);
+    setClaimedRewardPoints(rewardPoints);
     setClaimRewardIsShown(true);
   };
 
@@ -70,7 +68,7 @@ const RewardsPage = () => {
 
   return (
     <Fragment>
-      {claimRewardIsShown && <ClaimReward />}
+      {claimRewardIsShown && <ClaimReward rewardTitle={claimedRewardTitle} rewardPoints={claimedRewardPoints} userPoints={23400}/>}
       <ProfileBanner
         title="My Rewards"
         image={DUMMY_DATA.user_one.image}

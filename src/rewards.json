@@ -8,22 +8,22 @@
   },
   {
     "id": "r2",
-    "title": "Just for this program",
-    "points": "50000",
+    "title": "A promotion to CEO",
+    "points": "10000",
     "image": "https://picsum.photos/200",
     "program_id": "1"
   },
   {
     "id": "r3",
-    "title": "A new MacBook",
-    "points": "50000",
+    "title": "Running Shoes",
+    "points": "5000",
     "image": "https://picsum.photos/200",
     "program_id": null
   },
   {
     "id": "r4",
-    "title": "A new MacBook",
-    "points": "50000",
+    "title": "Gift Card",
+    "points": "500",
     "image": "https://picsum.photos/200",
     "program_id": null
   }
