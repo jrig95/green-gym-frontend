@@ -67,7 +67,7 @@ const RewardsPage = () => {
           <div className={classes.programRewardsContainer}>
             <h1 className={classes.programRewardsTitle}>Just for you</h1>
             <div className={classes.programRewardsGrid}>{programRewards}</div>
-            <h1 className={classes.rewardsTitle}>Genral Rewards</h1>
+            <h1 className={classes.rewardsTitle}>General Rewards</h1>
           </div>
         </Fragment>
       )}
