@@ -1,9 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
-
 import data from "../../rewards.json";
+import ClaimReward from "../../components/Reward/ClaimReward";
 
 const DUMMY_DATA = {
   user_one: {
@@ -14,13 +16,12 @@ const DUMMY_DATA = {
   },
 };
 
-const DUMMY_REWARD = {
-  title: "A MacBook Pro",
-  points: "50000",
-  image: "https://picsum.photos/200",
-};
-
 const RewardsPage = () => {
+  const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
+    useState(false);
+  const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
+  const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
+  const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -28,9 +29,31 @@ const RewardsPage = () => {
   );
 
   // Create an array based on rewards that do not have a program_id
-  const rewardsArray = data.filter(
-    (reward) => reward.program_id === null
-  );
+  const rewardsArray = data.filter((reward) => reward.program_id === null);
+
+  const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
+    setClaimedRewardTitle(rewardTitle);
+    setClaimedRewardPoints(rewardPoints);
+    setClaimRewardIsShown(true);
+  };
+
+  const hideClaimRewardHandler = () => {
+    setClaimRewardIsShown(false);
+  };
+
+  const claimRewardHandler = () => {
+    setClaimRewardIsShown(false);
+    setClaimedRewardMessageIsShown(true);
+
+    // Here we need to send an email to the Admin to notify them that a reward has been claimed.
+    console.log(
+      `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
+    );
+  };
+
+  const hideClaimedRewardMessageHandler = () => {
+    setClaimedRewardMessageIsShown(false);
+  };
 
   const programRewards = programRewardsArray.map((reward) => {
     return (
@@ -39,6 +62,9 @@ const RewardsPage = () => {
         title={reward.title}
         points={reward.points}
         image={reward.image}
+        onClaimReward={() =>
+          showClaimRewardHandler(reward.title, reward.points)
+        }
       />
     );
   });
@@ -50,12 +76,27 @@ const RewardsPage = () => {
         title={reward.title}
         points={reward.points}
         image={reward.image}
+        onClaimReward={() =>
+          showClaimRewardHandler(reward.title, reward.points)
+        }
       />
     );
   });
 
   return (
     <Fragment>
+      {claimedRewardMessageIsShown && (
+        <RewardClaimedMessage onClose={hideClaimedRewardMessageHandler} />
+      )}
+      {claimRewardIsShown && (
+        <ClaimReward
+          rewardTitle={claimedRewardTitle}
+          rewardPoints={claimedRewardPoints}
+          userPoints={23400}
+          onClose={hideClaimRewardHandler}
+          onClaim={claimRewardHandler}
+        />
+      )}
       <ProfileBanner
         title="My Rewards"
         image={DUMMY_DATA.user_one.image}
