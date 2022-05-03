@@ -3,7 +3,13 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import classes from "./ClaimReward.module.css";
 
-const ClaimReward = ({ rewardTitle, rewardPoints, userPoints }) => {
+const ClaimReward = ({
+  rewardTitle,
+  rewardPoints,
+  userPoints,
+  onClose,
+  onClaim,
+}) => {
   console.log(rewardTitle, "line 6 - ClaimReward");
 
   const parseRewardPoints = parseInt(rewardPoints);
@@ -21,10 +27,12 @@ const ClaimReward = ({ rewardTitle, rewardPoints, userPoints }) => {
         <h2>You will have {strigifiedReamingPoints} points remaining</h2>
       </div>
       <div className={classes.buttonContainer}>
-        <Button size="small" color="blue">
+        <Button size="small" color="blue" onClick={onClose}>
           Cancel
         </Button>
-        <Button size="small">Claim</Button>
+        <Button size="small" onClick={onClaim}>
+          Claim
+        </Button>
       </div>
     </Fragment>
   );
@@ -35,7 +43,9 @@ const ClaimReward = ({ rewardTitle, rewardPoints, userPoints }) => {
         <h2>I'm sorry. You don't have enough points for this prize</h2>
       </div>
       <div className={classes.buttonContainer}>
-        <Button size="small">Confirm</Button>
+        <Button size="small" onClick={onClose}>
+          Confirm
+        </Button>
       </div>
     </Fragment>
   );

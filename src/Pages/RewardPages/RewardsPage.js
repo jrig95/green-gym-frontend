@@ -38,6 +38,11 @@ const RewardsPage = () => {
     setClaimRewardIsShown(false);
   };
 
+  const claimRewardHandler = () => {
+    setClaimRewardIsShown(false);
+    console.log(`The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`);
+  }
+
   const programRewards = programRewardsArray.map((reward) => {
     return (
       <RewardCard
@@ -68,7 +73,15 @@ const RewardsPage = () => {
 
   return (
     <Fragment>
-      {claimRewardIsShown && <ClaimReward rewardTitle={claimedRewardTitle} rewardPoints={claimedRewardPoints} userPoints={23400}/>}
+      {claimRewardIsShown && (
+        <ClaimReward
+          rewardTitle={claimedRewardTitle}
+          rewardPoints={claimedRewardPoints}
+          userPoints={23400}
+          onClose={hideClaimRewardHandler}
+          onClaim={claimRewardHandler}
+        />
+      )}
       <ProfileBanner
         title="My Rewards"
         image={DUMMY_DATA.user_one.image}
