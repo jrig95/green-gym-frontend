@@ -21,11 +21,15 @@ const DUMMY_REWARD = {
 };
 
 const RewardsPage = () => {
+
+  // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
     (reward) => parseInt(reward.program_id) === 1
   );
+
+  // Create an array based on rewards that do not have a program_id
   const rewardsArray = data.filter(
-    (reward) => parseInt(reward.program_id) !== 1
+    (reward) => reward.program_id === null
   );
 
   const programRewards = programRewardsArray.map((reward) => {
