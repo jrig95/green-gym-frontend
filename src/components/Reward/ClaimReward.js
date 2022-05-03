@@ -2,7 +2,7 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import classes from "./ClaimReward.module.css";
 
-const ClaimReward = () => {
+const ClaimReward = ({ rewardName, rewardCost, userPoints }) => {
   return (
     <Modal>
       <div className={classes.textContainer}>

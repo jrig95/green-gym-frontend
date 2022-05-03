@@ -22,6 +22,7 @@ const DUMMY_REWARD = {
 };
 
 const RewardsPage = () => {
+  const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -29,9 +30,15 @@ const RewardsPage = () => {
   );
 
   // Create an array based on rewards that do not have a program_id
-  const rewardsArray = data.filter(
-    (reward) => reward.program_id === null
-  );
+  const rewardsArray = data.filter((reward) => reward.program_id === null);
+
+  const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
+    setClaimRewardIsShown(true);
+  };
+
+  const hideClaimRewardHandler = () => {
+    setClaimRewardIsShown(false);
+  };
 
   const programRewards = programRewardsArray.map((reward) => {
     return (
@@ -40,6 +47,9 @@ const RewardsPage = () => {
         title={reward.title}
         points={reward.points}
         image={reward.image}
+        onClaimReward={() =>
+          showClaimRewardHandler(reward.title, reward.points)
+        }
       />
     );
   });
@@ -51,13 +61,16 @@ const RewardsPage = () => {
         title={reward.title}
         points={reward.points}
         image={reward.image}
+        onClaimReward={() =>
+          showClaimRewardHandler(reward.title, reward.points)
+        }
       />
     );
   });
 
   return (
     <Fragment>
-      <ClaimReward />
+      {claimRewardIsShown && <ClaimReward />}
       <ProfileBanner
         title="My Rewards"
         image={DUMMY_DATA.user_one.image}
@@ -77,7 +90,7 @@ const RewardsPage = () => {
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>
     </Fragment>
-  ); 
+  );
 };
 
 export default RewardsPage;
