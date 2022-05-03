@@ -48,3 +48,8 @@
   text-align: center;
   margin: 0.5rem 0 0 0;
 }
+
+.points {
+  font-weight: 400;
+  text-align: center;
+}

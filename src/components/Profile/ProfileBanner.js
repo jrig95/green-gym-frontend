@@ -5,9 +5,10 @@ import classes from "./ProfileBanner.module.css";
 import TreesPlanted from "./TreesPlanted";
 
 
-const ProfileBanner = ({ title, calories, image, name, update }) => {
+const ProfileBanner = ({ title, calories, image, name, update, rewards, points }) => {
   const caloriesNum = parseInt(calories);
   const caloriesBurned = caloriesNum.toLocaleString("en-US");
+  const stringifiedPoints = points.toLocaleString("en-US");
 
   return (
     <div className={classes.container}>
@@ -22,7 +23,8 @@ const ProfileBanner = ({ title, calories, image, name, update }) => {
         {/* clicking this link should add an image to a users profile */}
         {update && <div className={classes.cameraIcon}><a href=""><HiCamera /></a></div>}
         <h2 className={classes.name}>{name}</h2>
-        {!update && <TreesPlanted calories={caloriesNum}/>}
+        {rewards && <h3 className={classes.points}><b>Current Points:</b> {stringifiedPoints}</h3>}
+        {!update && !rewards && <TreesPlanted calories={caloriesNum}/>}
       </div>
     </div>
   );
