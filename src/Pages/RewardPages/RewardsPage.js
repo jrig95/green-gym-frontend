@@ -1,8 +1,9 @@
 import { Fragment, useState } from "react";
+
+import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
-
 import data from "../../rewards.json";
 import ClaimReward from "../../components/Reward/ClaimReward";
 
@@ -16,6 +17,8 @@ const DUMMY_DATA = {
 };
 
 const RewardsPage = () => {
+  const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
+    useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
@@ -40,8 +43,17 @@ const RewardsPage = () => {
 
   const claimRewardHandler = () => {
     setClaimRewardIsShown(false);
-    console.log(`The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`);
-  }
+    setClaimedRewardMessageIsShown(true);
+
+    // Here we need to send an email to the Admin to notify them that a reward has been claimed.
+    console.log(
+      `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
+    );
+  };
+
+  const hideClaimedRewardMessageHandler = () => {
+    setClaimedRewardMessageIsShown(false);
+  };
 
   const programRewards = programRewardsArray.map((reward) => {
     return (
@@ -73,6 +85,9 @@ const RewardsPage = () => {
 
   return (
     <Fragment>
+      {claimedRewardMessageIsShown && (
+        <RewardClaimedMessage onClose={hideClaimedRewardMessageHandler} />
+      )}
       {claimRewardIsShown && (
         <ClaimReward
           rewardTitle={claimedRewardTitle}
