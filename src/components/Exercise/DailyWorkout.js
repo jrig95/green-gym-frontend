@@ -16,6 +16,7 @@ const DailyWorkout = () => {
   const [videoIndex, setvideoIndex] = useState(0);
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [showRestScreen, setShowRestScreen] = useState(false);
+  const [startWorkout, setStartWorkout] = useState(false);
 
   // return an array of videos
   // itterate over each video
@@ -44,12 +45,25 @@ const DailyWorkout = () => {
     />
   );
 
+  const onStartWorkoutHandler = () => {
+    setStartWorkout(true);
+    console.log("line 48 - dailyworkout");
+  };
+
+  const workoutVideo = (
+    <div className={classes.videoContainer}>
+      {!showRestScreen ? currentVideo : rest}
+    </div>
+  );
+  const startWorkoutButton = (
+    <div className={classes.startWorkoutCardContainer}>
+      <StartWorkoutCard onStartWorkout={onStartWorkoutHandler} />
+    </div>
+  );
+
   return (
     <div>
-      <StartWorkoutCard />
-      <div className={classes.videoContainer}>
-        {!showRestScreen ? currentVideo : rest}
-      </div>
+      {startWorkout ? workoutVideo : startWorkoutButton}
       <ExerciseTrackerCard exerciseIndex={exerciseIndex} />
       <div className={classes.buttonContainer}>
         <Button>Finish Workout</Button>

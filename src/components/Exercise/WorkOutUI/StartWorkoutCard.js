@@ -13,14 +13,16 @@ const StartWorkoutCard = ({ onStartWorkout }) => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCountdown((prevTime) => prevTime - 1);
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+    if (isGettingReady) {
+      const intervalId = setInterval(() => {
+        setCountdown((prevTime) => prevTime - 1);
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
+  }, [isGettingReady]);
 
-  const onStartWorkoutHandler = () => {
-
+  if (countDown < 0) {
+    onStartWorkout();
   }
 
   const startWorkoutMessage = (
