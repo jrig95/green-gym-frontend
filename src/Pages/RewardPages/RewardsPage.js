@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
+import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
+
+import data from "../../rewards.json";
 
 const DUMMY_DATA = {
   user_one: {
@@ -11,10 +14,62 @@ const DUMMY_DATA = {
   },
 };
 
+const DUMMY_REWARD = {
+  title: "A MacBook Pro",
+  points: "50000",
+  image: "https://picsum.photos/200",
+};
+
 const RewardsPage = () => {
+  const programRewardsArray = data.filter(
+    (reward) => parseInt(reward.program_id) === 1
+  );
+  const rewardsArray = data.filter(
+    (reward) => parseInt(reward.program_id) !== 1
+  );
+
+  const programRewards = programRewardsArray.map((reward) => {
+    return (
+      <RewardCard
+        key={reward.id}
+        title={reward.title}
+        points={reward.points}
+        image={reward.image}
+      />
+    );
+  });
+
+  const rewards = rewardsArray.map((reward) => {
+    return (
+      <RewardCard
+        key={reward.id}
+        title={reward.title}
+        points={reward.points}
+        image={reward.image}
+      />
+    );
+  });
+
   return (
     <Fragment>
-      <ProfileBanner title="My Rewards" image={DUMMY_DATA.user_one.image} rewards={true} points={23400}/>
+      <ProfileBanner
+        title="My Rewards"
+        image={DUMMY_DATA.user_one.image}
+        rewards={true}
+        points={23400}
+      />
+      {programRewards.length > 0 && (
+        <Fragment>
+          <div className={classes.programRewardsContainer}>
+            <h1 className={classes.programRewardsTitle}>Just for you</h1>
+            <div className={classes.programRewardsGrid}>{programRewards}</div>
+            <h1 className={classes.rewardsTitle}>Genral Rewards</h1>
+          </div>
+        </Fragment>
+      )}
+      <div className={classes.container}>
+        <div className={classes.rewardsGrid}>{rewards}</div>
+      </div>
     </Fragment>
   );
 };
