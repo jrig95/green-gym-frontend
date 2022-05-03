@@ -1,7 +1,8 @@
 import { useState } from "react";
 
+import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyWorkout.module.css";
-import RestCard from "./RestCard";
+import RestCard from "./WorkOutUI/RestCard";
 import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
 import videoOne from "../../assets/exercise_video_1.mp4";
@@ -45,6 +46,7 @@ const DailyWorkout = () => {
 
   return (
     <div>
+      <StartWorkoutCard />
       <div className={classes.videoContainer}>
         {!showRestScreen ? currentVideo : rest}
       </div>
