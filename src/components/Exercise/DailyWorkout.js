@@ -25,7 +25,6 @@ const DailyWorkout = () => {
   const currentVideoEndedHandler = (timer) => {
     const timeRemaining = timer * 1000;
     setvideoIndex((prevIndex) => prevIndex + 1);
-    // setExerciseIndex((prevIndex) => prevIndex + 1);
     setShowRestScreen(true);
 
     setTimeout(() => {
@@ -36,7 +35,12 @@ const DailyWorkout = () => {
 
   const videos = [videoOne, videoTwo, videoThree, videoFour];
 
+  const exerciseLength = videos.length;
+  const workoutFinish = exerciseLength === videoIndex;
+
   const rest = <RestCard timer={10} />;
+
+  const workoutFinishedCard = <div>Workout Finished</div>
 
   const currentVideo = (
     <ExerciseVideo
@@ -47,7 +51,6 @@ const DailyWorkout = () => {
 
   const onStartWorkoutHandler = () => {
     setStartWorkout(true);
-    console.log("line 48 - dailyworkout");
   };
 
   const workoutVideo = (
@@ -55,6 +58,7 @@ const DailyWorkout = () => {
       {!showRestScreen ? currentVideo : rest}
     </div>
   );
+
   const startWorkoutButton = (
     <div className={classes.startWorkoutCardContainer}>
       <StartWorkoutCard onStartWorkout={onStartWorkoutHandler} />

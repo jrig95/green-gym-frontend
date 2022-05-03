@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const StartWorkoutCard = ({ onStartWorkout }) => {
   const [isGettingReady, setIsGettingReady] = useState(false);
-  const [countDown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(5);
 
   const onStartCountdownHandler = () => {
     setIsGettingReady(true);
@@ -21,7 +21,7 @@ const StartWorkoutCard = ({ onStartWorkout }) => {
     }
   }, [isGettingReady]);
 
-  if (countDown < 0) {
+  if (countdown < 0) {
     onStartWorkout();
   }
 
@@ -35,7 +35,7 @@ const StartWorkoutCard = ({ onStartWorkout }) => {
   const getReadyCountDown = (
     <Card className={classes.container}>
       <h1>Get Ready!</h1>
-      <h2>{countDown}</h2>
+      <h2>{countdown}</h2>
     </Card>
   );
 
