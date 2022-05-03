@@ -1,0 +1,24 @@
+.container {
+  background-color: var(--green) !important;
+  min-height: 25rem;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.container svg {
+  font-size: 16rem;
+}
+
+.container h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.container h2 {
+  margin: 0;
+  font-size: 12rem;
+}

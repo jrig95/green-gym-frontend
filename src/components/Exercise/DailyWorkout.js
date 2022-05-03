@@ -1,7 +1,8 @@
 import { useState } from "react";
 
+import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyWorkout.module.css";
-import RestCard from "./RestCard";
+import RestCard from "./WorkOutUI/RestCard";
 import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
 import videoOne from "../../assets/exercise_video_1.mp4";
@@ -15,6 +16,7 @@ const DailyWorkout = () => {
   const [videoIndex, setvideoIndex] = useState(0);
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [showRestScreen, setShowRestScreen] = useState(false);
+  const [startWorkout, setStartWorkout] = useState(false);
 
   // return an array of videos
   // itterate over each video
@@ -23,7 +25,6 @@ const DailyWorkout = () => {
   const currentVideoEndedHandler = (timer) => {
     const timeRemaining = timer * 1000;
     setvideoIndex((prevIndex) => prevIndex + 1);
-    // setExerciseIndex((prevIndex) => prevIndex + 1);
     setShowRestScreen(true);
 
     setTimeout(() => {
@@ -34,7 +35,12 @@ const DailyWorkout = () => {
 
   const videos = [videoOne, videoTwo, videoThree, videoFour];
 
+  const exerciseLength = videos.length;
+  const workoutFinish = exerciseLength === videoIndex;
+
   const rest = <RestCard timer={10} />;
+
+  const workoutFinishedCard = <div>Workout Finished</div>
 
   const currentVideo = (
     <ExerciseVideo
@@ -43,11 +49,25 @@ const DailyWorkout = () => {
     />
   );
 
+  const onStartWorkoutHandler = () => {
+    setStartWorkout(true);
+  };
+
+  const workoutVideo = (
+    <div className={classes.videoContainer}>
+      {!showRestScreen ? currentVideo : rest}
+    </div>
+  );
+
+  const startWorkoutButton = (
+    <div className={classes.startWorkoutCardContainer}>
+      <StartWorkoutCard onStartWorkout={onStartWorkoutHandler} />
+    </div>
+  );
+
   return (
     <div>
-      <div className={classes.videoContainer}>
-        {!showRestScreen ? currentVideo : rest}
-      </div>
+      {startWorkout ? workoutVideo : startWorkoutButton}
       <ExerciseTrackerCard exerciseIndex={exerciseIndex} />
       <div className={classes.buttonContainer}>
         <Button>Finish Workout</Button>

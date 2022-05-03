@@ -15,13 +15,14 @@ import Layout from "./components/Layout/Layout";
 // import ProfileBanner from "./components/Profile/ProfileBanner";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
-// import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
+import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 import RewardsPage from "./Pages/RewardPages/RewardsPage";
+
 
 function App() {
   return (
     <Layout>
-      <RewardsPage />
+      <DailyWorkoutPage />
     </Layout>
   );
 }

@@ -1,5 +1,7 @@
-import classes from "./RestCard.module.css";
 import { useEffect, useState } from "react";
+
+import Card from "../../UI/Card";
+import classes from "./RestCard.module.css";
 
 const RestCard = ({ timer }) => {
   const [remainingTime, setRemainingTime] = useState(timer);
@@ -13,20 +15,20 @@ const RestCard = ({ timer }) => {
 
   if (remainingTime >= 0) {
     return (
-      <div className={classes.container}>
+      <Card className={classes.container}>
         <h2>Rest</h2>
         <h1>{remainingTime}</h1>
         <h2>seconds</h2>
-      </div>
+      </Card>
     );
   } else {
     return (
-      <div className={classes.container}>
+      <Card className={classes.container}>
         <h2>Rest</h2>
         <h1>{0}</h1>
         <h2>seconds</h2>
         <p></p>
-      </div>
+      </Card>
     );
   }
 };
