@@ -1,0 +1,52 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%; */
+  height: 5.5rem;
+  margin: 4rem 0 0 0;
+  padding: 0 6rem 0 6rem;
+  background-color: var(--green);
+}
+
+.banner button {
+  margin-right: auto;
+}
+
+.banner h1 {
+  font-size: 3.5rem;
+  color: var(--white);
+}
+
+input {
+  display: block;
+}
+
+.inputContainer {
+  position: relative;
+  margin-right: auto;
+}
+
+.inputContainer svg {
+  position: absolute;
+  color: var(--grey);
+  top: 0.7rem;
+  left: 0.5rem;
+}
+
+.inputContainer input {
+  font: inherit;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  width: 20rem;
+  max-width: 40rem;
+}
+
+.inputContainer input:focus {
+  outline: none;
+  border-color: var(--green);
+  background-color: var(--white);
+}
