@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
 
 import data from "../../rewards.json";
+import ClaimReward from "../../components/Reward/ClaimReward";
 
 const DUMMY_DATA = {
   user_one: {
@@ -56,6 +57,7 @@ const RewardsPage = () => {
 
   return (
     <Fragment>
+      <ClaimReward />
       <ProfileBanner
         title="My Rewards"
         image={DUMMY_DATA.user_one.image}
@@ -75,7 +77,7 @@ const RewardsPage = () => {
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>
     </Fragment>
-  );
+  ); 
 };
 
 export default RewardsPage;
