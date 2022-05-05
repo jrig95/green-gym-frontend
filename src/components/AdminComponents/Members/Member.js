@@ -19,16 +19,16 @@ const Member = () => {
   return (
     <Card className={memberClasses}>
       <p>
-        <b>First Name:</b> Darren
+        First Name: <b>Darren</b>
       </p>
       <p>
-        <b>Last Name:</b> Lewis
+        Last Name: <b>Lewis</b>
       </p>
       <p>
-        <b>Company:</b> Green Gym
+        Company: <b>Green Gym</b>
       </p>
       <p>
-        <b>E-Mail:</b> darren@lewis.com
+        E-Mail: <b>darren@lewis.com</b>
       </p>
       <div onClick={selectMemberHandler}>{memberIsSelected ? <BsCheckSquare /> : <BsSquare />}</div>
     </Card>

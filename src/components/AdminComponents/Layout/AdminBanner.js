@@ -12,7 +12,7 @@ const AdminBanner = ({ title }) => {
 
   return (
     <div className={classes.banner}>
-      <Button color="blue">Hello</Button>
+      <Button color="blue">Add User(s) to Program</Button>
       {searchBar && (
         <div className={classes.inputContainer}>
           <form onSubmit={searchSubmitHandler}>
