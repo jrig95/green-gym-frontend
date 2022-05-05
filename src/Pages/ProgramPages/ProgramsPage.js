@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
+import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 
 const DUMMY_DATA = [
   {
@@ -112,27 +113,34 @@ const DUMMY_DATA = [
 ];
 
 const ProgramsPage = () => {
+  const admin = true;
+
+
 
   const programCards = DUMMY_DATA.map((program) => {
     return (
-      <a href="">
-        <ProgramCard
-                id={program.id}
-                title={program.title}
-                image={program.image}
-                description={program.description}
-              />
-      </a>
-    )
-  })
+      <div>
+        <div>
+          <ProgramCard
+            id={program.id}
+            title={program.title}
+            image={program.image}
+            description={program.description}
+            admin={admin}
+            onDelete={true}
+            onUpdate={true}
+          />
+        </div>
+    </div>
+    );
+  });
 
   return (
     <Fragment>
-      <Banner title="Our Programs" />
+      {!admin && <Banner title="Our Programs" />}
+      {admin && <AdminBanner searchBar={true} programs={true} />}
       <div className={classes.gridContainer}>
-        <div className={classes.programCardGrid}>
-          {programCards}
-        </div>
+        <div className={classes.programCardGrid}>{programCards}</div>
       </div>
     </Fragment>
   );

@@ -18,8 +18,8 @@ import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 // import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 // import RewardsPage from "./Pages/RewardPages/RewardsPage";
 // import MembersPage from "./Pages/MemberPages/MembersPage";
-import MemberPage from "./Pages/MemberPages/MemberPage";
-import ProgramPage from "./Pages/ProgramPages/ProgramPage";
+// import MemberPage from "./Pages/MemberPages/MemberPage";
+// import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 
 
 function App() {
