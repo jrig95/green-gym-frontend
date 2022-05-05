@@ -7,6 +7,7 @@
   cursor: pointer;
 }
 
+.cardIsSelected,
 .card:hover {
   background-color: var(--green);
   color: var(--white);
