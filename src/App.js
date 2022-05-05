@@ -10,19 +10,22 @@ import Layout from "./components/Layout/Layout";
 // import ProfilePage from "./Pages/ProfilePages/ProfilePage";
 // import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 // import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
-// import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
+import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 // import CarouselMain from "./components/UI/CarouselMain";
 // import ProfileBanner from "./components/Profile/ProfileBanner";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
-import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
-import RewardsPage from "./Pages/RewardPages/RewardsPage";
+// import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
+// import RewardsPage from "./Pages/RewardPages/RewardsPage";
+// import MembersPage from "./Pages/MemberPages/MembersPage";
+import MemberPage from "./Pages/MemberPages/MemberPage";
+import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 
 
 function App() {
   return (
     <Layout>
-      <DailyWorkoutPage />
+      <ProgramsPage />
     </Layout>
   );
 }

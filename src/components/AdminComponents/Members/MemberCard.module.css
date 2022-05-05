@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  padding: 1rem;
+  width: 50rem;
+}
+
+.profilePictureContainer img {
+  height: 13rem;
+  width: 13rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profilePictureContainer {
+  margin: 0 1rem 0 0;
+}
+
+.userDetailsContainer {
+  margin: 0;
+}
+
+.userDetailsContainer h2 {
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+}
