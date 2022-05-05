@@ -1,14 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
+import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
 
 const DUMMY_DATA = [
   {
     id: "p1",
-    title: "Program",
+    title: "Hand Stands",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -16,7 +17,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p2",
-    title: "Program",
+    title: "Buff and Beautiful",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -24,7 +25,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p3",
-    title: "Program",
+    title: "Run till you die",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -32,7 +33,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p4",
-    title: "Program",
+    title: "Sweat and tears",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -40,7 +41,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p5",
-    title: "Program",
+    title: "This hurts. Please make it stop",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -48,7 +49,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p6",
-    title: "Program",
+    title: "Another Name",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -56,7 +57,7 @@ const DUMMY_DATA = [
   },
   {
     id: "p7",
-    title: "Program",
+    title: "Push ups",
     image:
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zml0bmVzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
     description:
@@ -113,9 +114,23 @@ const DUMMY_DATA = [
 ];
 
 const ProgramsPage = () => {
+  const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
+  const [programDetails, setProgramDetails] = useState({id: 0, title: "Unknown"});
   const admin = true;
 
+  const deleteProgramHandler = () => {
+    console.log(`Delete program ${programDetails.title} with ID: ${programDetails.id}`);
+    setDeleteProgramIsShown(false);
+  };
 
+  const showDeleteProgramHandler = (program) => {
+    setDeleteProgramIsShown(true)
+    setProgramDetails(program);
+  }
+
+  const hideDeleteProgramHandler = () => {
+    setDeleteProgramIsShown(false);
+  };
 
   const programCards = DUMMY_DATA.map((program) => {
     return (
@@ -127,18 +142,20 @@ const ProgramsPage = () => {
             image={program.image}
             description={program.description}
             admin={admin}
-            onDelete={true}
+            onDelete={() => showDeleteProgramHandler(program)}
             onUpdate={true}
+            onClose={true}
           />
         </div>
-    </div>
+      </div>
     );
   });
 
   return (
     <Fragment>
+      {deleteProgramIsShown && <DeleteProgram program={programDetails} onClose={hideDeleteProgramHandler} onDelete={deleteProgramHandler}/>}
       {!admin && <Banner title="Our Programs" />}
-      {admin && <AdminBanner searchBar={true} programs={true} />}
+      {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>{programCards}</div>
       </div>

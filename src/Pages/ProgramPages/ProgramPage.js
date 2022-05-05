@@ -11,7 +11,6 @@ const ProgramPage = () => {
   // console.log(Data);
 
   const programWorkouts = Data.daily_workouts.map((workout) => {
-    console.log(workout.exercise_overview, "Line 13 - ProgramPage.js");
     return (
       <div className={classes.workoutCard}>
         <h2>{workout.day_number}</h2>
