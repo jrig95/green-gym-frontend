@@ -5,9 +5,8 @@ import Button from "../../UI/Button";
 import classes from "./AdminBanner.module.css";
 import { useState } from "react";
 
-const AdminBanner = ({ members, rewards }) => {
+const AdminBanner = ({ members, rewards, searchBar }) => {
   const [addUserToProgramIsShown, setAddUserToProgramIsShown] = useState(false)
-  const searchBar = true;
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();

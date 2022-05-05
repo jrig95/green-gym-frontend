@@ -17,13 +17,14 @@ import Layout from "./components/Layout/Layout";
 // import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
 // import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 // import RewardsPage from "./Pages/RewardPages/RewardsPage";
-import MembersPage from "./Pages/MemberPages/MembersPage";
+// import MembersPage from "./Pages/MemberPages/MembersPage";
+import MemberPage from "./Pages/MemberPages/MemberPage";
 
 
 function App() {
   return (
     <Layout>
-      <MembersPage />
+      <MemberPage />
     </Layout>
   );
 }
