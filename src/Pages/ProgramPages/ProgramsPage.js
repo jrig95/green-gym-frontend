@@ -115,19 +115,24 @@ const DUMMY_DATA = [
 
 const ProgramsPage = () => {
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
-  const [programDetails, setProgramDetails] = useState({id: 0, title: "Unknown"});
+  const [programDetails, setProgramDetails] = useState({
+    id: 0,
+    title: "Unknown",
+  });
 
   const admin = true;
 
   const deleteProgramHandler = () => {
-    console.log(`Delete program ${programDetails.title} with ID: ${programDetails.id}`);
+    console.log(
+      `Delete program ${programDetails.title} with ID: ${programDetails.id}`
+    );
     setDeleteProgramIsShown(false);
   };
 
   const showDeleteProgramHandler = (program) => {
-    setDeleteProgramIsShown(true)
+    setDeleteProgramIsShown(true);
     setProgramDetails(program);
-  }
+  };
 
   const hideDeleteProgramHandler = () => {
     setDeleteProgramIsShown(false);
@@ -135,26 +140,29 @@ const ProgramsPage = () => {
 
   const programCards = DUMMY_DATA.map((program) => {
     return (
-      <div>
-        <div>
-          <ProgramCard
-            id={program.id}
-            title={program.title}
-            image={program.image}
-            description={program.description}
-            admin={admin}
-            onDelete={() => showDeleteProgramHandler(program)}
-            onUpdate={true}
-            onClose={true}
-          />
-        </div>
-      </div>
+      <ProgramCard
+        key={program.id}
+        id={program.id}
+        title={program.title}
+        image={program.image}
+        description={program.description}
+        admin={admin}
+        onDelete={() => showDeleteProgramHandler(program)}
+        onUpdate={true}
+        onClose={true}
+      />
     );
   });
 
   return (
     <Fragment>
-      {deleteProgramIsShown && <DeleteProgram program={programDetails} onClose={hideDeleteProgramHandler} onDelete={deleteProgramHandler}/>}
+      {deleteProgramIsShown && (
+        <DeleteProgram
+          program={programDetails}
+          onClose={hideDeleteProgramHandler}
+          onDelete={deleteProgramHandler}
+        />
+      )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
