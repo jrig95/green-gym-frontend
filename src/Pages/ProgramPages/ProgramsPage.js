@@ -116,6 +116,7 @@ const DUMMY_DATA = [
 const ProgramsPage = () => {
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
   const [programDetails, setProgramDetails] = useState({id: 0, title: "Unknown"});
+
   const admin = true;
 
   const deleteProgramHandler = () => {
