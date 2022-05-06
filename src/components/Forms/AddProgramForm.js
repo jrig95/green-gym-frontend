@@ -6,9 +6,25 @@ import useInput from "./Hooks/use-input";
 const AddProgramForm = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
+
+    const newProgram = {
+      program_name: programNameValue,
+      number_of_days: numberOfDaysValue,
+      descriptiom: descriptionValue,
+      cover_image: coverImageValue
+    }
+
+    console.log(newProgram);
+
+    resetprogramName();
+    resetNumberOfDays();
+    resetDescription();
+    resetCoverImage();
   };
 
   const textNotEmpty = (value) => value !== "";
+
   const isNotANumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
@@ -49,6 +65,8 @@ const AddProgramForm = () => {
     inputBlurHandler: coverImageBlurHandler,
     reset: resetCoverImage,
   } = useInput(textNotEmpty);
+
+
 
   const programNameClasses = programNameHasError
     ? `${classes.formControl} ${classes.invalid}`
