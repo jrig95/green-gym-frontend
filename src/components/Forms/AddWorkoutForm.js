@@ -2,6 +2,7 @@ import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
+import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 
 const AddWorkoutForm = () => {
   const textNotEmpty = (value) => value !== "";
@@ -10,6 +11,14 @@ const AddWorkoutForm = () => {
     const number = parseInt(value);
     return !isNaN(number);
   };
+
+  const {
+    value: numberOfTypesValue,
+    isValid: numberOfTypesIsValid,
+    valueChangeHandler: numberOfTypesChangeHandler,
+    inputBlurHandler: numberOfTypesBlurHandler,
+    reset: resetNumberOfTypes,
+  } = useInput(isNotANumber);
 
   const {
     value: numberOfExercisesValue,
@@ -27,21 +36,46 @@ const AddWorkoutForm = () => {
     reset: resetDailyChallenge,
   } = useInput(textNotEmpty);
 
+  const times = parseInt(numberOfTypesValue); 
+  const numbersArray = Array.from({ length: times }, (_,i) => i + 1);
+
+  const exerciseOverview = numbersArray.map((exercise) => {
+    return <AddExerciseOverviewForm />
+  })
+
   return (
     <FormCard title="Day 1">
       <form>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
-            <label htmlFor="description">Description (a few words describing what your users will be doing today)</label>
+            <label htmlFor="description">
+              Description (a few words describing what your users will be doing
+              today)
+            </label>
             <input type="text" id="description" />
           </div>
-          <h3>Let's create an overview that will be displayed when users are browsing the programs.</h3>
+          <h3>
+            Let's create an overview that will be displayed when users are
+            browsing the programs.
+          </h3>
           <div className={classes.formControl}>
-            <label htmlFor="number_of_exercises">Types of Exercise</label>
-            <input type="number" min={0} id="number_of_exercises" />
+            <label htmlFor="number_of_exercises">
+              How many different types of Exercises?
+            </label>
+            <input
+              type="number"
+              min={0}
+              id="number_of_exercises"
+              value={numberOfTypesValue}
+              onChange={numberOfTypesChangeHandler}
+              onBlur={numberOfTypesBlurHandler}
+            />
           </div>
+          {exerciseOverview}
           <div className={classes.formControl}>
-            <label htmlFor="number_of_exercises">Total Number of Exercises</label>
+            <label htmlFor="number_of_exercises">
+              Total Number of Exercises
+            </label>
             <input type="number" min={0} id="number_of_exercises" />
           </div>
           <div className={classes.formControl}>
