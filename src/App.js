@@ -20,13 +20,14 @@ import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 // import MembersPage from "./Pages/MemberPages/MembersPage";
 // import MemberPage from "./Pages/MemberPages/MemberPage";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
-import AddProgramPage from "./Pages/AdminFormPages/AddProgram";
+// import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
+import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 
 function App() {
   return (
     <Layout>
-      <AddProgramPage />
+      <AddWorkoutPage />
     </Layout>
   );
 }
