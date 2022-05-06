@@ -3,8 +3,11 @@ import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
+import { useState } from "react";
 
 const AddWorkoutForm = () => {
+  const [canGetExerciseOverview, setCanGetExerciseOverview] = useState(false);
+
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
@@ -36,16 +39,33 @@ const AddWorkoutForm = () => {
     reset: resetDailyChallenge,
   } = useInput(textNotEmpty);
 
-  const times = parseInt(numberOfTypesValue); 
-  const numbersArray = Array.from({ length: times }, (_,i) => i + 1);
+  const times = parseInt(numberOfTypesValue);
+  const numbersArray = Array.from({ length: times }, (_, i) => i + 1);
+  
+  let exerciseOverviewArray = [];
 
+  const getOverviewDataHandler = (data) => {
+    exerciseOverviewArray.push(data);
+    console.log(exerciseOverviewArray);
+  };
+  
   const exerciseOverview = numbersArray.map((exercise) => {
-    return <AddExerciseOverviewForm />
-  })
+    return (
+      <AddExerciseOverviewForm
+        key={exercise}
+        exerciseNumber={exercise}
+        getOverviewData={getOverviewDataHandler}
+      />
+    );
+  });
+
+  const formSubmitHandler = (event) => {  
+    event.preventDefault();
+  };
 
   return (
     <FormCard title="Day 1">
-      <form>
+      <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
             <label htmlFor="description">
