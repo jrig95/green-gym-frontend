@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import classes from "./Form.module.css";
+import classes from "./AddExerciseOverviewForm.module.css";
 import useInput from "./Hooks/use-input";
 
 const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
@@ -13,12 +13,11 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
   const onSubmit = () => {
     const overviewData = {
       title: exerciseTitleValue,
-      number_of_sets: numberOfSetsValue
-    }
+      number_of_sets: numberOfSetsValue,
+    };
 
     getOverviewData(overviewData);
-  }
-
+  };
 
   const {
     value: exerciseTitleValue,
@@ -49,8 +48,6 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
           onChange={exerciseTitleChangeHandler}
           onBlur={exerciseTitleBlurHandler}
         />
-      </div>
-      <div className={classes.formControl}>
         <label htmlFor={`exercise_${exerciseNumber}_sets`}>
           Number of Sets for exercise {exerciseNumber}
         </label>
@@ -62,8 +59,8 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
           onChange={numberOfSetsChangeHandler}
           onBlur={numberOfSetsBlurHandler}
         />
+        <button onClick={onSubmit}>add</button>
       </div>
-      <button onClick={onSubmit}>add</button>
     </Fragment>
   );
 };

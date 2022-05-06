@@ -1,4 +1,4 @@
-import FormCard from "./FormCard";
+import AdminFormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
@@ -64,7 +64,7 @@ const AddWorkoutForm = () => {
   };
 
   return (
-    <FormCard title="Day 1">
+    <AdminFormCard title="Day 1" >
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
@@ -118,7 +118,7 @@ const AddWorkoutForm = () => {
           </div>
         </div>
       </form>
-    </FormCard>
+    </AdminFormCard>
   );
 };
 
