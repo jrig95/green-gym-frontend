@@ -37,28 +37,31 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
 
   return (
     <Fragment>
-      <div className={classes.formControl}>
-        <label htmlFor={`exercise_${exerciseNumber}`}>
-          Exercise {exerciseNumber} Title
-        </label>
-        <input
-          type="text"
-          id={`exercise_${exerciseNumber}`}
-          value={exerciseTitleValue}
-          onChange={exerciseTitleChangeHandler}
-          onBlur={exerciseTitleBlurHandler}
-        />
-        <label htmlFor={`exercise_${exerciseNumber}_sets`}>
-          Number of Sets for exercise {exerciseNumber}
-        </label>
-        <input
-          type="number"
-          min={0}
-          id={`exercise_${exerciseNumber}_sets`}
-          value={numberOfSetsValue}
-          onChange={numberOfSetsChangeHandler}
-          onBlur={numberOfSetsBlurHandler}
-        />
+      <div className={classes.formGrid}>
+        <div className={classes.number}>{exerciseNumber}</div>
+        <div className={classes.formRowControl}>
+          <label htmlFor={`exercise_${exerciseNumber}`}>Title</label>
+          <input
+            type="text"
+            id={`exercise_${exerciseNumber}`}
+            value={exerciseTitleValue}
+            onChange={exerciseTitleChangeHandler}
+            onBlur={exerciseTitleBlurHandler}
+          />
+        </div>
+        <div>
+          <label htmlFor={`exercise_${exerciseNumber}_sets`}>
+            Number of Sets
+          </label>
+          <input
+            type="number"
+            min={0}
+            id={`exercise_${exerciseNumber}_sets`}
+            value={numberOfSetsValue}
+            onChange={numberOfSetsChangeHandler}
+            onBlur={numberOfSetsBlurHandler}
+          />
+        </div>
         <button onClick={onSubmit}>add</button>
       </div>
     </Fragment>
