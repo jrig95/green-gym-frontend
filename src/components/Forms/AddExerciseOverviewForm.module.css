@@ -5,6 +5,11 @@
   grid-template-columns: 0.5fr 8fr 2fr 1fr;
 }
 
+.titlesGrey {
+  color: var(--grey);
+}
+
+
 .formGrid input,
 .formGrid label {
   display: block;
