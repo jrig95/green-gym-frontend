@@ -22,12 +22,12 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
 
   const onSubmit = () => {
     const overviewData = {
+      exerciseNumber,
       title: exerciseTitleValue,
       number_of_sets: numberOfSetsValue,
     };
 
     getOverviewData(overviewData);
-
     setOverviewIsSubmitted(true);
   };
 

@@ -1,3 +1,4 @@
+import AddExerciseForm from "./AddExerciseForm";
 import AdminFormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
@@ -6,13 +7,20 @@ import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
 const AddWorkoutForm = () => {
-  const [exerciseOverviewArray, setExerciseOverviewArray] = useState([])
+  const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
+  const {
+    value: dailyChallengeValue,
+    isValid: dailyChallengeIsValid,
+    valueChangeHandler: dailyChallengeValueHandler,
+    inputBlurHandler: dailyChallengeBlurHandler,
+    reset: resetDailyChallenge,
+  } = useInput(textNotEmpty);
 
   const {
     value: numberOfTypesValue,
@@ -30,27 +38,27 @@ const AddWorkoutForm = () => {
     reset: resetNumberOfExercises,
   } = useInput(isNotANumber);
 
-  const {
-    value: dailyChallengeValue,
-    isValid: dailyChallengeIsValid,
-    valueChangeHandler: dailyChallengeValueHandler,
-    inputBlurHandler: dailyChallengeBlurHandler,
-    reset: resetDailyChallenge,
-  } = useInput(textNotEmpty);
+  const overviewTimes = parseInt(numberOfTypesValue);
+  const overviewNumbersArray = Array.from(
+    { length: overviewTimes },
+    (_, i) => i + 1
+  );
 
-  const times = parseInt(numberOfTypesValue);
-  const numbersArray = Array.from({ length: times }, (_, i) => i + 1);
-  
+  const exerciseTimes = parseInt(numberOfExercisesValue);
+  const ecerciseNumbersArray = Array.from(
+    { length: exerciseTimes },
+    (_, i) => i + 1
+  );
 
   const getOverviewDataHandler = (data) => {
-    setExerciseOverviewArray((array) => [...array, data])    
+    setExerciseOverviewArray((array) => [...array, data]);
   };
-  
+
   useEffect(() => {
     console.log(exerciseOverviewArray);
-  }, [exerciseOverviewArray])
+  }, [exerciseOverviewArray]);
 
-  const exerciseOverview = numbersArray.map((exercise) => {
+  const exerciseOverview = overviewNumbersArray.map((exercise) => {
     return (
       <AddExerciseOverviewForm
         key={exercise}
@@ -60,13 +68,20 @@ const AddWorkoutForm = () => {
     );
   });
 
+  const exercises = ecerciseNumbersArray.map((exercise) => {
+    return <AddExerciseForm />;
+  });
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(exerciseOverviewArray);
+    const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
+      (a, b) => a.exerciseNumber - b.exerciseNumber
+    );
+    console.log(sortedExerciseOverviewArray);
   };
 
   return (
-    <AdminFormCard title="Day 1" >
+    <AdminFormCard title="Day 1">
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
@@ -75,6 +90,16 @@ const AddWorkoutForm = () => {
               today)
             </label>
             <input type="text" id="description" />
+          </div>
+          <div className={classes.formControl}>
+            <label htmlFor="daily_challenge">Daily Challenge</label>
+            <input type="text" id="daily_challenge" />
+          </div>
+          <div className={classes.formControl}>
+            <label htmlFor="daily_challenge_description">
+              Daily Challenge Description
+            </label>
+            <input type="text" id="daily_challenge_description" />
           </div>
           <h3>
             Let's create an overview that will be displayed when users are
@@ -94,23 +119,20 @@ const AddWorkoutForm = () => {
             />
           </div>
           {exerciseOverview}
-          {/* <Button onClick={addExerciseOverviewHandler}>Add</Button> */}
           <div className={classes.formControl}>
             <label htmlFor="number_of_exercises">
               Total Number of Exercises
             </label>
-            <input type="number" min={0} id="number_of_exercises" />
+            <input
+              type="number"
+              min={0}
+              id="number_of_exercises"
+              value={numberOfExercisesValue}
+              onChange={numberOfTypesChangeHandler}
+              onBlur={numberOfExercisesBlurHandler}
+            />
           </div>
-          <div className={classes.formControl}>
-            <label htmlFor="daily_challenge">Daily Challenge</label>
-            <input type="text" id="daily_challenge" />
-          </div>
-          <div className={classes.formControl}>
-            <label htmlFor="daily_challenge_description">
-              Daily Challenge Description
-            </label>
-            <input type="text" id="daily_challenge_description" />
-          </div>
+          {exercises}
           <div className={classes.formActions}>
             <Button color="blue" size="small">
               Cancel
