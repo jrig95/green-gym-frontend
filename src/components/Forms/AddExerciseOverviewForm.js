@@ -1,23 +1,16 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import classes from "./AddExerciseOverviewForm.module.css";
 import useInput from "./Hooks/use-input";
 
-const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData, triggerGetOverview }) => {
+const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
+  const [overviewIsSubmitted, setOverviewIsSubmitted] = useState(false);
+
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
-
-  // if (triggerGetOverview) {
-  //   const overviewData = {
-  //     title: exerciseTitleValue,
-  //     number_of_sets: numberOfSetsValue,
-  //   };
-
-  //   getOverviewData(overviewData);
-  // }
 
   const onSubmit = () => {
     const overviewData = {
@@ -26,6 +19,8 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData, triggerGetOv
     };
 
     getOverviewData(overviewData);
+
+    setOverviewIsSubmitted(true);
   };
 
   const {
@@ -72,7 +67,9 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData, triggerGetOv
           />
         </div>
         <div className={classes.addButton}>
-          <button onClick={onSubmit} >add</button>
+          <button onClick={onSubmit} disabled={overviewIsSubmitted}>
+            {overviewIsSubmitted ? "added" : "add"}
+          </button>
         </div>
       </div>
     </Fragment>

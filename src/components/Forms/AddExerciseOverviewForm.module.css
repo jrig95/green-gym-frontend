@@ -72,5 +72,24 @@
 }
 
 .addButton button {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
   width: 100%;
+}
+
+.addButton button:hover {
+  background-color: var(--green-hover);
+}
+
+.addButton button:disabled,
+.addButton button:disabled:hover,
+.addButton button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
 }

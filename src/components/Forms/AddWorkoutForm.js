@@ -3,11 +3,10 @@ import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AddWorkoutForm = () => {
-  const [canGetExerciseOverview, setCanGetExerciseOverview] = useState(false);
-
+  const [exerciseOverviewArray, setExerciseOverviewArray] = useState([])
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
@@ -42,30 +41,28 @@ const AddWorkoutForm = () => {
   const times = parseInt(numberOfTypesValue);
   const numbersArray = Array.from({ length: times }, (_, i) => i + 1);
   
-  let exerciseOverviewArray = [];
 
   const getOverviewDataHandler = (data) => {
-    exerciseOverviewArray.push(data);
-    console.log(exerciseOverviewArray);
+    setExerciseOverviewArray((array) => [...array, data])    
   };
   
+  useEffect(() => {
+    console.log(exerciseOverviewArray);
+  }, [exerciseOverviewArray])
+
   const exerciseOverview = numbersArray.map((exercise) => {
     return (
       <AddExerciseOverviewForm
         key={exercise}
         exerciseNumber={exercise}
         getOverviewData={getOverviewDataHandler}
-        triggerGetOverview={canGetExerciseOverview}
       />
     );
   });
 
-  const addExerciseOverviewHandler = () => {
-    setCanGetExerciseOverview(true);
-  };
-
-  const formSubmitHandler = (event) => {  
+  const formSubmitHandler = (event) => {
     event.preventDefault();
+    console.log(exerciseOverviewArray);
   };
 
   return (
@@ -97,7 +94,7 @@ const AddWorkoutForm = () => {
             />
           </div>
           {exerciseOverview}
-          <Button onClick={addExerciseOverviewHandler}>Add</Button>
+          {/* <Button onClick={addExerciseOverviewHandler}>Add</Button> */}
           <div className={classes.formControl}>
             <label htmlFor="number_of_exercises">
               Total Number of Exercises
