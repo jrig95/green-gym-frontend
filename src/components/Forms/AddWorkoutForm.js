@@ -55,9 +55,14 @@ const AddWorkoutForm = () => {
         key={exercise}
         exerciseNumber={exercise}
         getOverviewData={getOverviewDataHandler}
+        triggerGetOverview={canGetExerciseOverview}
       />
     );
   });
+
+  const addExerciseOverviewHandler = () => {
+    setCanGetExerciseOverview(true);
+  };
 
   const formSubmitHandler = (event) => {  
     event.preventDefault();
@@ -92,6 +97,7 @@ const AddWorkoutForm = () => {
             />
           </div>
           {exerciseOverview}
+          <Button onClick={addExerciseOverviewHandler}>Add</Button>
           <div className={classes.formControl}>
             <label htmlFor="number_of_exercises">
               Total Number of Exercises

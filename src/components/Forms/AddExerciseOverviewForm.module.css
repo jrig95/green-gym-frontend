@@ -24,28 +24,14 @@
   border-radius: .25rem;
   box-sizing: border-box;
   width: 100%;
-  max-width: 40rem;
+  max-width: 100%;
 }
-
-/* .formControl select {
-  display: none;
-} */
 
 .formGrid input:focus,
 .formGrid textarea:focus {
   outline: none;
   border-color: var(--green);
   background-color: var(--white);
-}
-
-.formActions {
-  display: flex;
-  justify-content: flex-end;
-  margin: 1rem 0 0 0;
-}
-
-.formActions button {
-  margin: 0 0 0 1rem;
 }
 
 .invalid input,
@@ -63,4 +49,28 @@
 .errorText {
   color: #b40e0e;
   margin: 0.25rem 0;
+}
+
+.number {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numberOfSets {
+  margin: 0 1rem 0 0;
+}
+
+.title {
+  margin: 0 1rem 0 0;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+}
+
+.addButton button {
+  width: 100%;
 }

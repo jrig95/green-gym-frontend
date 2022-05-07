@@ -2,13 +2,22 @@ import { Fragment } from "react";
 import classes from "./AddExerciseOverviewForm.module.css";
 import useInput from "./Hooks/use-input";
 
-const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
+const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData, triggerGetOverview }) => {
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
+
+  // if (triggerGetOverview) {
+  //   const overviewData = {
+  //     title: exerciseTitleValue,
+  //     number_of_sets: numberOfSetsValue,
+  //   };
+
+  //   getOverviewData(overviewData);
+  // }
 
   const onSubmit = () => {
     const overviewData = {
@@ -39,7 +48,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
     <Fragment>
       <div className={classes.formGrid}>
         <div className={classes.number}>{exerciseNumber}</div>
-        <div className={classes.formRowControl}>
+        <div className={classes.title}>
           <label htmlFor={`exercise_${exerciseNumber}`}>Title</label>
           <input
             type="text"
@@ -49,7 +58,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
             onBlur={exerciseTitleBlurHandler}
           />
         </div>
-        <div>
+        <div className={classes.numberOfSets}>
           <label htmlFor={`exercise_${exerciseNumber}_sets`}>
             Number of Sets
           </label>
@@ -62,7 +71,9 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
             onBlur={numberOfSetsBlurHandler}
           />
         </div>
-        <button onClick={onSubmit}>add</button>
+        <div className={classes.addButton}>
+          <button onClick={onSubmit} >add</button>
+        </div>
       </div>
     </Fragment>
   );
