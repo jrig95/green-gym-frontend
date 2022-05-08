@@ -20,7 +20,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
     return isTrue;
   };
 
-  const onSubmit = () => {
+  const getOverviewDataHandler = () => {
     const overviewData = {
       exerciseNumber,
       title: exerciseTitleValue,
@@ -100,7 +100,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
           )}
         </div>
         <div className={classes.addButton}>
-          <button onClick={onSubmit} disabled={buttonDisabled}>
+          <button onClick={getOverviewDataHandler} disabled={buttonDisabled}>
             {overviewIsSubmitted ? "added" : "add"}
           </button>
         </div>

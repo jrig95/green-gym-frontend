@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 
 const AddWorkoutForm = () => {
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
+  const [exerciseArray, setExerciseArray] = useState([]);
+
   const textNotEmpty = (value) => value !== "";
 
   const isNotANumber = (value) => {
@@ -45,13 +47,17 @@ const AddWorkoutForm = () => {
   );
 
   const exerciseTimes = parseInt(numberOfExercisesValue);
-  const ecerciseNumbersArray = Array.from(
+  const exerciseNumbersArray = Array.from(
     { length: exerciseTimes },
     (_, i) => i + 1
   );
 
   const getOverviewDataHandler = (data) => {
     setExerciseOverviewArray((array) => [...array, data]);
+  };
+
+  const getExerciseDataHandler = (data) => {
+    setExerciseArray((array) => [...array, data]);
   };
 
   useEffect(() => {
@@ -68,16 +74,29 @@ const AddWorkoutForm = () => {
     );
   });
 
-  const exercises = ecerciseNumbersArray.map((exercise) => {
-    return <AddExerciseForm />;
+  const exercises = exerciseNumbersArray.map((exercise) => {
+    return (
+      <AddExerciseForm
+        key={exercise}
+        exerciseNumber={exercise}
+        getExerciseData={getExerciseDataHandler}
+      />
+    );
   });
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
     const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
+
+    const sortedExerciseArray = exerciseArray.sort(
+      (a, b) => a.exerciseNumber - b.exerciseNumber
+    );
+
     console.log(sortedExerciseOverviewArray);
+    console.log(sortedExerciseArray);
   };
 
   return (
@@ -102,7 +121,7 @@ const AddWorkoutForm = () => {
             <input type="text" id="daily_challenge_description" />
           </div>
           <h3>
-            Let's create an overview that will be displayed when users are
+            Create an overview that will be displayed when users are
             browsing the programs.
           </h3>
           <div className={classes.formControl}>
@@ -119,6 +138,9 @@ const AddWorkoutForm = () => {
             />
           </div>
           {exerciseOverview}
+          <h3>
+            Create the exercises for the workout.
+          </h3>
           <div className={classes.formControl}>
             <label htmlFor="number_of_exercises">
               Total Number of Exercises
@@ -128,7 +150,7 @@ const AddWorkoutForm = () => {
               min={0}
               id="number_of_exercises"
               value={numberOfExercisesValue}
-              onChange={numberOfTypesChangeHandler}
+              onChange={numberOfExercisesChangeHandler}
               onBlur={numberOfExercisesBlurHandler}
             />
           </div>
