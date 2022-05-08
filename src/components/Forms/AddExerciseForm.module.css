@@ -32,6 +32,10 @@
   max-width: 100%;
 }
 
+/* .formGrid select {
+  appearance: none;
+} */
+
 .formGrid input:focus,
 .formGrid textarea:focus {
   outline: none;
