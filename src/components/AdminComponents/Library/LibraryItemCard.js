@@ -1,10 +1,26 @@
+import ReactPlayer from "react-player";
+import { BsFillGearFill } from "react-icons/bs";
+import { AiFillDelete } from "react-icons/ai";
+
 import Card from "../../UI/Card";
 import classes from "./LibraryItemCard.module.css";
+import videoOne from "../../../assets/exercise_video_1.mp4";
 
-const LibraryItemCard = () => {
-  return <Card className={classes.card}>
-    <h1 className={classes.title}>Title</h1>
-  </Card>;
+const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
+  return (
+    <Card className={classes.card}>
+      <h1 className={classes.title}>{title}</h1>
+      <div className={classes.icons}>
+        <div className={classes.iconGear}>
+          <BsFillGearFill />
+        </div>
+        <div className={classes.iconBin}>
+          <AiFillDelete />
+        </div>
+      </div>
+      <ReactPlayer playing={false} width={640} url={videoUrl} />
+    </Card>
+  );
 };
 
 export default LibraryItemCard;

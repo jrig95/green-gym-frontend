@@ -13,7 +13,7 @@ const DeleteProgram = ({onClose, onDelete, program}) => {
           Cancel
         </Button>
         <Button size="small" onClick={onDelete}>
-          Claim
+          Delete
         </Button>
       </div>
     </Modal>
