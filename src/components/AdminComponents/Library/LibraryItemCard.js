@@ -14,11 +14,11 @@ const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
         <div className={classes.iconGear}>
           <BsFillGearFill />
         </div>
-        <div className={classes.iconBin}>
+        <div className={classes.iconBin} onClick={onDelete}>
           <AiFillDelete />
         </div>
       </div>
-      <ReactPlayer playing={false} width={640} url={videoUrl} />
+      <ReactPlayer playing={false} width={344} height={200} url={videoUrl} />
     </Card>
   );
 };

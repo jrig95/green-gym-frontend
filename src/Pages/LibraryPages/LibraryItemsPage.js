@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 
-import DeleteLibraryItem from "./DeleteLibraryItem";
+import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
 import videoOne from "../../assets/exercise_video_1.mp4";
 import LibraryItemCard from "../../components/AdminComponents/Library/LibraryItemCard";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
@@ -55,19 +55,28 @@ const DUMMY_ITEMS = [
 ];
 
 const LibraryItemsPage = () => {
-  const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] = useState(false);
+  const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
+    useState(false);
   const [libraryItemDetails, setLibraryItemDetails] = useState({
     id: 0,
-    title: "Unknown"
-  })
+    title: "Unknown",
+  });
 
   const deleteLibraryItemHandler = () => {
-
+    console.log(
+      `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
+    );
+    setDeleteLibraryItemIsShown(false);
   };
 
-  const showDeleteLibraryItemHandler = () => {};
+  const showDeleteLibraryItemHandler = (libraryItem) => {
+    setDeleteLibraryItemIsShown(true);
+    setLibraryItemDetails(libraryItem);
+  };
 
-  const hideDeleteLibraryItemHandler = () => {};
+  const hideDeleteLibraryItemHandler = () => {
+    setDeleteLibraryItemIsShown(false);
+  };
 
   const libraryItems = DUMMY_ITEMS.map((libraryItem) => {
     return (
@@ -75,19 +84,23 @@ const LibraryItemsPage = () => {
         key={libraryItem.id}
         title={libraryItem.title}
         videoUrl={libraryItem.videoUrl}
-
+        onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
       />
     );
   });
 
   return (
     <Fragment>
-      <DeleteLibraryItem libraryItem={libraryItemDetails}/>
+      {deleteLibraryItemIsShown && (
+        <DeleteLibraryItem
+          libraryItem={libraryItemDetails}
+          onClose={hideDeleteLibraryItemHandler}
+          onDelete={deleteLibraryItemHandler}
+        />
+      )}
       <AdminBanner searchBar library />
       <div className={classes.gridContainer}>
-        <div className={classes.libraryItemCardGrid}>
-          {libraryItems}
-        </div>
+        <div className={classes.libraryItemCardGrid}>{libraryItems}</div>
       </div>
     </Fragment>
   );
