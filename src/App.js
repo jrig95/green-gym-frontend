@@ -1,9 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // import classes from "./App.module.css";
 // import LoginForm from "./components/Forms/LoginForm";
 import Layout from "./components/Layout/Layout";
-// import LandingPage from "./Pages/LandingPage/LandingPage";
+import LandingPage from "./Pages/LandingPage/LandingPage";
 import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 // import Login from "./Pages/UserFormPages/Login";
 // import ResetPassword from "./Pages/UserFormPages/ResetPassword";
@@ -12,7 +12,7 @@ import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 // import ProfilePage from "./Pages/ProfilePages/ProfilePage";
 // import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
-// import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
+import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
 // import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
@@ -28,7 +28,10 @@ import MemberPage from "./Pages/MemberPages/MemberPage";
 function App() {
   return (
     <Layout>
-      <MemberPage />
+      <Routes>
+        <Route path="/" element={<LandingPage />}/>
+        <Route path="programs" element={<ProgramsPage />} />
+      </Routes>
     </Layout>
   );
 }
