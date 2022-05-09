@@ -47,6 +47,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
           Add Library Item
         </Button>
       )}
+      {rewards && <Button color="blue">Add Reward</Button>}
       {searchBar && (
         <div className={classes.inputContainer}>
           <form onSubmit={searchSubmitHandler}>

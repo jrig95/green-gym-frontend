@@ -16,19 +16,19 @@ import Layout from "./components/Layout/Layout";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
 // import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
-// import RewardsPage from "./Pages/RewardPages/RewardsPage";
+import RewardsPage from "./Pages/RewardPages/RewardsPage";
 // import MembersPage from "./Pages/MemberPages/MembersPage";
 // import MemberPage from "./Pages/MemberPages/MemberPage";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 // import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
-import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
+// import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 
 function App() {
   return (
     <Layout>
-      <LibraryItemsPage />
+      <RewardsPage />
     </Layout>
   );
 }

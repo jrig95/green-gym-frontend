@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
@@ -6,6 +6,7 @@ import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
 import data from "../../rewards.json";
 import ClaimReward from "../../components/Reward/ClaimReward";
+import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 
 const DUMMY_DATA = {
   user_one: {
@@ -22,6 +23,9 @@ const RewardsPage = () => {
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
+
+  // this can be changed later and used by context
+  const admin = true;
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -50,6 +54,10 @@ const RewardsPage = () => {
       `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
     );
   };
+
+  useEffect(() => {
+    console.log("hello");
+  }, []);
 
   const hideClaimedRewardMessageHandler = () => {
     setClaimedRewardMessageIsShown(false);
@@ -97,12 +105,15 @@ const RewardsPage = () => {
           onClaim={claimRewardHandler}
         />
       )}
-      <ProfileBanner
-        title="My Rewards"
-        image={DUMMY_DATA.user_one.image}
-        rewards={true}
-        points={23400}
-      />
+      {!admin && (
+        <ProfileBanner
+          title="My Rewards"
+          image={DUMMY_DATA.user_one.image}
+          rewards={true}
+          points={23400}
+        />
+      )}
+      {admin && <AdminBanner rewards/>}
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
