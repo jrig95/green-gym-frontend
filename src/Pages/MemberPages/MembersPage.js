@@ -9,7 +9,7 @@ import Sort from "../../components/AdminComponents/Members/Sort";
 const MembersPage = () => {
   return (
     <Fragment>
-      <AdminBanner members={true} />
+      <AdminBanner members={true} searchBar={true}/>
       <div className={classes.container}>
         <Sort />
         < MembersList />

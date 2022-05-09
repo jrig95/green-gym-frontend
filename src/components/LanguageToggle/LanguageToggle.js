@@ -12,7 +12,7 @@ const LanguageToggle = () => {
 
   const [isEnglish, setIsEnglish] = useState((jsCookie.get('i18next') === 'en'));
 
-  console.log(isEnglish, "isEnglish")
+  // console.log(isEnglish, "isEnglish")
 
   const changeLanguageHandler = () => {
     setIsEnglish((prevIsEnglish) => !prevIsEnglish);

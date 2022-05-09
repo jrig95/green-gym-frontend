@@ -1,0 +1,103 @@
+.formGrid {
+  margin: 0 0 1rem 0;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 0.5fr 6fr 2fr 2fr 3fr 1.3fr;
+}
+
+.titlesGrey {
+  color: var(--grey);
+}
+
+
+.formGrid input,
+.formGrid label {
+  display: block;
+}
+
+.formGrid label {
+  font-size: 1.2rem;
+  margin: 0 0 .5rem 0;
+}
+
+.formGrid input,
+.formGrid textarea,
+.formGrid select {
+  font: inherit;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* .formGrid select {
+  appearance: none;
+} */
+
+.formGrid input:focus,
+.formGrid textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  background-color: var(--white);
+}
+
+.invalid input,
+.invalid textarea {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus,
+.invalid textarea:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.errorText {
+  color: #b40e0e;
+  margin: 0.25rem 0;
+}
+
+.number {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.libraryItem,
+.workTime,
+.restTime,
+.title {
+  margin: 0 1rem 0 0;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+}
+
+.addButton button {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.addButton button:hover {
+  background-color: var(--green-hover);
+}
+
+.addButton button:disabled,
+.addButton button:disabled:hover,
+.addButton button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}

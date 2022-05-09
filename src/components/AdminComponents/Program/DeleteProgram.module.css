@@ -1,0 +1,9 @@
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.textContainer {
+  text-align: center;  
+  margin-bottom: 2rem;
+}
