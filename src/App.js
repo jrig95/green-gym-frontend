@@ -21,13 +21,14 @@ import Layout from "./components/Layout/Layout";
 // import MemberPage from "./Pages/MemberPages/MemberPage";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 // import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
-import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
+// import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
+import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 
 function App() {
   return (
     <Layout>
-      <AddWorkoutPage />
+      <LibraryItemsPage />
     </Layout>
   );
 }

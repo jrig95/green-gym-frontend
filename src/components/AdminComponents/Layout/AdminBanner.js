@@ -5,7 +5,7 @@ import Button from "../../UI/Button";
 import classes from "./AdminBanner.module.css";
 import { useState } from "react";
 
-const AdminBanner = ({ programs, members, rewards, searchBar }) => {
+const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
   const [addUserToProgramIsShown, setAddUserToProgramIsShown] = useState(false)
 
   const searchSubmitHandler = (event) => {
@@ -25,6 +25,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar }) => {
       {addUserToProgramIsShown && <AddUserToProgram onClose={hideAddUserToProgramHandler}/>}
       {members && <Button color="blue" onClick={showAddUserToProgramHandler}>Add User(s) to Program</Button>}
       {programs && <Button color="blue">Add Program</Button>}
+      {library && <Button color="blue">Add Library Item</Button>}
       {searchBar && (
         <div className={classes.inputContainer}>
           <form onSubmit={searchSubmitHandler}>
