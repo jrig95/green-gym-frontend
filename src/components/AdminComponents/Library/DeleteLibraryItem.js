@@ -1,12 +1,12 @@
 import Button from "../../UI/Button";
+import classes from "./DeleteLibraryItem.module.css";
 import Modal from "../../UI/Modal";
-import classes from "./DeleteProgram.module.css";
 
-const DeleteProgram = ({onClose, onDelete, program}) => {
+const DeleteLibraryItem = ({ onClose, onDelete, libraryItem }) => {
   return (
     <Modal>
       <div className={classes.textContainer}>
-        <h2>Are you sure you wish to delete the program "{program.title}"?</h2>
+        <h2>Are you sure you wish to delete {libraryItem.title}?</h2>
       </div>
       <div className={classes.buttonContainer}>
         <Button size="small" color="blue" onClick={onClose}>
@@ -20,4 +20,4 @@ const DeleteProgram = ({onClose, onDelete, program}) => {
   );
 };
 
-export default DeleteProgram;
+export default DeleteLibraryItem;
