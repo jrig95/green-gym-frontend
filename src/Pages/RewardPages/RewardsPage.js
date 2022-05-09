@@ -7,6 +7,7 @@ import classes from "./RewardsPage.module.css";
 import data from "../../rewards.json";
 import ClaimReward from "../../components/Reward/ClaimReward";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
+import DeleteReward from "../../components/Reward/DeleteReward";
 
 const DUMMY_DATA = {
   user_one: {
@@ -24,6 +25,7 @@ const RewardsPage = () => {
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
 
+  const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
   const admin = true;
 
@@ -63,6 +65,18 @@ const RewardsPage = () => {
     setClaimedRewardMessageIsShown(false);
   };
 
+  const showDeleteRewardHandler = () => {
+    setDeleteRewardIsShown(true);
+  };
+
+  const hideDeleteRewardHandler = () => {
+    setDeleteRewardIsShown(false);
+  };
+
+  const deleteRewardHandler = (rewardId) => {
+    console.log(rewardId);
+  };
+
   const programRewards = programRewardsArray.map((reward) => {
     return (
       <RewardCard
@@ -73,6 +87,7 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.title, reward.points)
         }
+        onDelete={showDeleteRewardHandler}
       />
     );
   });
@@ -87,6 +102,7 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.title, reward.points)
         }
+        onDelete={showDeleteRewardHandler}
       />
     );
   });
@@ -113,7 +129,7 @@ const RewardsPage = () => {
           points={23400}
         />
       )}
-      {admin && <AdminBanner rewards/>}
+      {admin && <AdminBanner rewards />}
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
@@ -122,6 +138,13 @@ const RewardsPage = () => {
             <h1 className={classes.rewardsTitle}>General Rewards</h1>
           </div>
         </Fragment>
+      )}
+      {deleteRewardIsShown && (
+        <DeleteReward
+          onClose={hideDeleteRewardHandler}
+          onDelete={() => deleteRewardHandler({title: 'test'})}
+          reward={{title: 'test'}}
+        />
       )}
       <div className={classes.container}>
         <div className={classes.rewardsGrid}>{rewards}</div>
