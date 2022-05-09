@@ -37,7 +37,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
   };
 
   const hideAddRewardHandler = () => {
-    setAddLibraryItemIsShown(false);
+    setAddRewardIsShown(false);
   };
 
   return (
