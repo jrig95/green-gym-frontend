@@ -1,15 +1,16 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import classes from "./AddExerciseForm.module.css";
 import useInput from "./Hooks/use-input";
 
 const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
+  const [exerciseIsSubmitted, setExerciseIsSubmitted] = useState(false);
+  const [exerciseTitlePlaceHolder, setExerciseTitlePlaceHolder] =
+    useState("Title");
+
   const textNotEmpty = (value) => value !== "";
+
   const selectIsValid = (value) => {
-    return (
-      value !== "select a time..." &&
-      value !== "" &&
-      value !== "select a video..."
-    );
+    return value !== "select..." && value !== "";
   };
 
   const getExerciseDataHandler = () => {
@@ -18,19 +19,12 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
       title: exerciseTitleValue,
       workTime: workTimeValue,
       restTime: restTimeValue,
-      libraryItem: libraryItemValue
+      libraryItem: libraryItemValue,
     };
 
     getExerciseData(exercise);
+    setExerciseIsSubmitted(true);
   };
-
-  const videoLibrary = ["video one", "video two"].map((video, index) => {
-    return (
-      <option key={index} value={video}>
-        {video}
-      </option>
-    );
-  });
 
   const {
     value: exerciseTitleValue,
@@ -68,11 +62,49 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     reset: resetLibraryItem,
   } = useInput(selectIsValid);
 
+  const formIsValid =
+    exerciseTitleIsValid &&
+    workTimeIsValid &&
+    restTimeIsValid &&
+    libraryItemIsValid;
+
   useEffect(() => {
-    console.log(workTimeValue);
-    console.log(workTimeHasError);
-    console.log(workTimeIsValid);
-  }, [workTimeValue]);
+    if (exerciseIsSubmitted) {
+      setExerciseTitlePlaceHolder(exerciseTitleValue);
+    }
+  }, [exerciseIsSubmitted]);
+
+  const exerciseTitleValueTernery = exerciseIsSubmitted
+    ? ""
+    : exerciseTitleValue;
+
+  const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
+    .filter((num) => num % 5 === 0)
+    .map((num) => {
+      return (
+        <option
+          key={num}
+          value={num}
+          disabled={exerciseIsSubmitted}
+          hidden={exerciseIsSubmitted}
+        >
+          {num} secs
+        </option>
+      );
+    });
+
+  const videoLibraryOptions = ["video one", "video two"].map((video, index) => {
+    return (
+      <option
+        key={index}
+        value={video}
+        disabled={exerciseIsSubmitted}
+        hidden={exerciseIsSubmitted}
+      >
+        {video}
+      </option>
+    );
+  });
 
   return (
     <Fragment>
@@ -83,7 +115,8 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           <input
             type="text"
             id={`exercise_${exerciseNumber}`}
-            value={exerciseTitleValue}
+            value={exerciseTitleValueTernery}
+            placeholder={exerciseTitlePlaceHolder}
             onChange={exerciseTitleChangeHandler}
             onBlur={exerciseTitleBlurHandler}
           />
@@ -97,19 +130,16 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             id={`exercise_${exerciseNumber}_work_time`}
             value={workTimeValue}
             onChange={workTimeChangeHandler}
+            placeholder="test"
           >
-            <option>select a time...</option>
-            <option value={10}>10 secs</option>
-            <option value={15}>15 secs</option>
-            <option value={20}>20 secs</option>
-            <option value={25}>25 secs</option>
-            <option value={30}>30 secs</option>
-            <option value={35}>35 secs</option>
-            <option value={40}>40 secs</option>
-            <option value={45}>45 secs</option>
-            <option value={50}>50 secs</option>
-            <option value={55}>55 secs</option>
-            <option value={60}>60 secs</option>
+            <option
+              value="default"
+              disabled={exerciseIsSubmitted}
+              hidden={exerciseIsSubmitted}
+            >
+              select...
+            </option>
+            {restAndWorkOptions}
           </select>
         </div>
         <div className={classes.restTime}>
@@ -125,18 +155,14 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             name={`exercise_${exerciseNumber}_rest_time`}
             id={`exercise_${exerciseNumber}_rest_time`}
           >
-            <option>select a time...</option>
-            <option value={10}>10 secs</option>
-            <option value={15}>15 secs</option>
-            <option value={20}>20 secs</option>
-            <option value={25}>25 secs</option>
-            <option value={30}>30 secs</option>
-            <option value={35}>35 secs</option>
-            <option value={40}>40 secs</option>
-            <option value={45}>45 secs</option>
-            <option value={50}>50 secs</option>
-            <option value={55}>55 secs</option>
-            <option value={60}>60 secs</option>
+            <option
+              value="default"
+              disabled={exerciseIsSubmitted}
+              hidden={exerciseIsSubmitted}
+            >
+              select...
+            </option>
+            {restAndWorkOptions}
           </select>
         </div>
         <div className={classes.libraryItem}>
@@ -147,14 +173,19 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             name={`exercise_${exerciseNumber}_library_item`}
             id={`exercise_${exerciseNumber}_library_item`}
           >
-            <option>select a video...</option>
-            {videoLibrary}
+            <option
+              value="default"
+              disabled={exerciseIsSubmitted}
+              hidden={exerciseIsSubmitted}
+            >
+              select...
+            </option>
+            {videoLibraryOptions}
           </select>
         </div>
         <div className={classes.addButton}>
-          <button onClick={getExerciseDataHandler}>
-            add
-            {/* {overviewIsSubmitted ? "added" : "add"} */}
+          <button onClick={getExerciseDataHandler} disabled={!formIsValid}>
+            {exerciseIsSubmitted ? "added" : "add"}
           </button>
         </div>
       </div>

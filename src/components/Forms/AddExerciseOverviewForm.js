@@ -50,7 +50,6 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
   } = useInput(numberIsValid);
 
   const formIsValid = exerciseTitleIsValid && numberOfSetsIsValid;
-  const buttonDisabled = !formIsValid;
 
   useEffect(() => {
     if (overviewIsSubmitted) {
@@ -66,6 +65,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
     : classes.formGrid;
 
   const exerciseTitleValueTernery = overviewIsSubmitted ? "" : exerciseTitleValue;
+  const numberOfSetsValueTernery = overviewIsSubmitted ? "" : numberOfSetsValue;
 
   return (
     <Fragment>
@@ -90,7 +90,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
             type="number"
             min={0}
             id={`exercise_${exerciseNumber}_sets`}
-            value={numberOfSetsValue}
+            value={numberOfSetsValueTernery}
             placeholder={numberOfRepsPlaceHolder}
             onChange={numberOfSetsChangeHandler}
             onBlur={numberOfSetsBlurHandler}
@@ -100,7 +100,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
           )}
         </div>
         <div className={classes.addButton}>
-          <button onClick={getOverviewDataHandler} disabled={buttonDisabled}>
+          <button onClick={getOverviewDataHandler} disabled={!formIsValid}>
             {overviewIsSubmitted ? "added" : "add"}
           </button>
         </div>
