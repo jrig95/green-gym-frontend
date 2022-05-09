@@ -105,7 +105,7 @@ const AddProgramForm = () => {
             />
             {programNameHasError && (
               <p className={classes.errorText}>
-                program name must be longer than 0 characters
+                Program must have a name
               </p>
             )}
           </div>

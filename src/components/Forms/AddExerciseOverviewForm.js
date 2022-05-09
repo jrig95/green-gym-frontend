@@ -81,6 +81,9 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
             onChange={exerciseTitleChangeHandler}
             onBlur={exerciseTitleBlurHandler}
           />
+          {exerciseTitleHasError && (
+            <p className={classes.errorText}>Enter a valid title</p>
+          )}
         </div>
         <div className={classes.numberOfSets}>
           <label htmlFor={`exercise_${exerciseNumber}_sets`}>
@@ -96,7 +99,7 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
             onBlur={numberOfSetsBlurHandler}
           />
           {numberOfSetsHasError && (
-            <p className={classes.invalid}>Must be a number</p>
+            <p className={classes.errorText}>Enter valid number</p>
           )}
         </div>
         <div className={classes.addButton}>

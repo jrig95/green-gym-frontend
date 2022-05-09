@@ -72,15 +72,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     if (exerciseIsSubmitted) {
       setExerciseTitlePlaceHolder(exerciseTitleValue);
     }
-    console.log(exerciseTitleIsValid, 'exercise');
-    console.log(restTimeIsValid, 'rest time');
-    console.log(workTimeIsValid, 'work time');
-    console.log(libraryItemIsValid, 'library item');
-    console.log(exerciseTitleValue, 'exercise value');
-    console.log(restTimeValue, 'rest time value');
-    console.log(workTimeValue, 'work time value');
-    console.log(libraryItemValue, 'library item value');
-  }, [exerciseIsSubmitted, exerciseTitleIsValid]);
+  }, [exerciseIsSubmitted]);
 
   const exerciseTitleValueTernery = exerciseIsSubmitted
     ? ""
@@ -118,9 +110,13 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     );
   });
 
+  const submittedClasses = exerciseIsSubmitted
+  ? `${classes.formGrid} ${classes.titlesGrey}`
+  : classes.formGrid;
+
   return (
     <Fragment>
-      <div className={classes.formGrid}>
+      <div className={submittedClasses}>
         <div className={classes.number}>{exerciseNumber}</div>
         <div className={classes.title}>
           <label htmlFor={`exercise_${exerciseNumber}`}>Title</label>
@@ -132,6 +128,9 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             onChange={exerciseTitleChangeHandler}
             onBlur={exerciseTitleBlurHandler}
           />
+          {exerciseTitleHasError && (
+            <p className={classes.errorText}>Enter a valid title</p>
+          )}
         </div>
         <div className={classes.workTime}>
           <label htmlFor={`exercise_${exerciseNumber}_work_time`}>
@@ -156,15 +155,13 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           </select>
         </div>
         <div className={classes.restTime}>
-          <label
-            htmlFor={`exercise_${exerciseNumber}_rest_time`}
-          >
+          <label htmlFor={`exercise_${exerciseNumber}_rest_time`}>
             Rest Time
           </label>
           <select
             name={`exercise_${exerciseNumber}_rest_time`}
             id={`exercise_${exerciseNumber}_rest_time`}
-            value={restTimeValue}
+            value={restTimeValueTernery}
             onChange={restTimeChangeHandler}
             onBlur={restTimeBlurHandler}
           >
@@ -200,7 +197,10 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           </select>
         </div>
         <div className={classes.addButton}>
-          <button onClick={getExerciseDataHandler} disabled={!formIsValid}>
+          <button
+            onClick={getExerciseDataHandler}
+            disabled={!formIsValid || exerciseIsSubmitted}
+          >
             {exerciseIsSubmitted ? "added" : "add"}
           </button>
         </div>
