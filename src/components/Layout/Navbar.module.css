@@ -10,10 +10,6 @@
   z-index: 10;
 }
 
-.h1 {
-  margin: 0;
-}
-
 .linksContainer {
   display: flex;
   align-items: center;
@@ -27,4 +23,9 @@
 
 .links {
   display: flex;
+  margin: 0 1rem 0 0;
+}
+
+.links h2{
+  margin: 0 1rem 0 0;
 }
