@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
@@ -6,6 +6,8 @@ import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
 import data from "../../rewards.json";
 import ClaimReward from "../../components/Reward/ClaimReward";
+import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
+import DeleteReward from "../../components/Reward/DeleteReward";
 
 const DUMMY_DATA = {
   user_one: {
@@ -22,6 +24,10 @@ const RewardsPage = () => {
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
+
+  const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
+  // this can be changed later and used by context
+  const admin = true;
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -51,8 +57,24 @@ const RewardsPage = () => {
     );
   };
 
+  useEffect(() => {
+    console.log("hello");
+  }, []);
+
   const hideClaimedRewardMessageHandler = () => {
     setClaimedRewardMessageIsShown(false);
+  };
+
+  const showDeleteRewardHandler = () => {
+    setDeleteRewardIsShown(true);
+  };
+
+  const hideDeleteRewardHandler = () => {
+    setDeleteRewardIsShown(false);
+  };
+
+  const deleteRewardHandler = (rewardId) => {
+    console.log(rewardId);
   };
 
   const programRewards = programRewardsArray.map((reward) => {
@@ -65,6 +87,7 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.title, reward.points)
         }
+        onDelete={showDeleteRewardHandler}
       />
     );
   });
@@ -79,6 +102,7 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.title, reward.points)
         }
+        onDelete={showDeleteRewardHandler}
       />
     );
   });
@@ -97,12 +121,15 @@ const RewardsPage = () => {
           onClaim={claimRewardHandler}
         />
       )}
-      <ProfileBanner
-        title="My Rewards"
-        image={DUMMY_DATA.user_one.image}
-        rewards={true}
-        points={23400}
-      />
+      {!admin && (
+        <ProfileBanner
+          title="My Rewards"
+          image={DUMMY_DATA.user_one.image}
+          rewards={true}
+          points={23400}
+        />
+      )}
+      {admin && <AdminBanner rewards />}
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
@@ -111,6 +138,13 @@ const RewardsPage = () => {
             <h1 className={classes.rewardsTitle}>General Rewards</h1>
           </div>
         </Fragment>
+      )}
+      {deleteRewardIsShown && (
+        <DeleteReward
+          onClose={hideDeleteRewardHandler}
+          onDelete={() => deleteRewardHandler({title: 'test'})}
+          reward={{title: 'test'}}
+        />
       )}
       <div className={classes.container}>
         <div className={classes.rewardsGrid}>{rewards}</div>
