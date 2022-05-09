@@ -72,11 +72,23 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     if (exerciseIsSubmitted) {
       setExerciseTitlePlaceHolder(exerciseTitleValue);
     }
-  }, [exerciseIsSubmitted]);
+    console.log(exerciseTitleIsValid, 'exercise');
+    console.log(restTimeIsValid, 'rest time');
+    console.log(workTimeIsValid, 'work time');
+    console.log(libraryItemIsValid, 'library item');
+    console.log(exerciseTitleValue, 'exercise value');
+    console.log(restTimeValue, 'rest time value');
+    console.log(workTimeValue, 'work time value');
+    console.log(libraryItemValue, 'library item value');
+  }, [exerciseIsSubmitted, exerciseTitleIsValid]);
 
   const exerciseTitleValueTernery = exerciseIsSubmitted
     ? ""
     : exerciseTitleValue;
+
+  const workTimeValueTernery = exerciseIsSubmitted ? "" : workTimeValue;
+  const restTimeValueTernery = exerciseIsSubmitted ? "" : restTimeValue;
+  const libraryItemValueTernery = exerciseIsSubmitted ? "" : libraryItemValue;
 
   const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
     .filter((num) => num % 5 === 0)
@@ -128,8 +140,9 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           <select
             name={`exercise_${exerciseNumber}_work_time`}
             id={`exercise_${exerciseNumber}_work_time`}
-            value={workTimeValue}
+            value={workTimeValueTernery}
             onChange={workTimeChangeHandler}
+            onBlur={workTimeBlurHandler}
             placeholder="test"
           >
             <option
@@ -145,15 +158,15 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
         <div className={classes.restTime}>
           <label
             htmlFor={`exercise_${exerciseNumber}_rest_time`}
-            value={restTimeValue}
-            onChange={restTimeChangeHandler}
-            onBlur={restTimeBlurHandler}
           >
             Rest Time
           </label>
           <select
             name={`exercise_${exerciseNumber}_rest_time`}
             id={`exercise_${exerciseNumber}_rest_time`}
+            value={restTimeValue}
+            onChange={restTimeChangeHandler}
+            onBlur={restTimeBlurHandler}
           >
             <option
               value="default"
@@ -172,6 +185,9 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           <select
             name={`exercise_${exerciseNumber}_library_item`}
             id={`exercise_${exerciseNumber}_library_item`}
+            value={libraryItemValueTernery}
+            onChange={libraryItemChangeHandler}
+            onBlur={libraryItemBlurHandler}
           >
             <option
               value="default"
