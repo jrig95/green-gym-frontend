@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import classes from "./DailyWorkoutCard.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -15,7 +16,9 @@ const DailyWorkoutCard = () => {
         />
       </div>
       <div className={classes.buttonContainer}>
-        <Button>Today's Workout</Button>
+        <Link to="workout">
+          <Button>Today's Workout</Button>
+        </Link>
       </div>
     </Card>
   );

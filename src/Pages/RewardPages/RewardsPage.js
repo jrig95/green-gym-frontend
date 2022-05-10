@@ -57,10 +57,6 @@ const RewardsPage = () => {
     );
   };
 
-  useEffect(() => {
-    console.log("hello");
-  }, []);
-
   const hideClaimedRewardMessageHandler = () => {
     setClaimedRewardMessageIsShown(false);
   };

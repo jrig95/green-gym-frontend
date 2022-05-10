@@ -13,9 +13,19 @@ const ProfileBanner = ({
   rewards,
   points,
 }) => {
-  const caloriesNum = parseInt(calories);
-  const caloriesBurned = caloriesNum.toLocaleString("en-US");
-  const stringifiedPoints = points.toLocaleString("en-US");
+
+  let caloriesNum = 0;
+  let caloriesBurned = "";
+  let stringifiedPoints = ""
+
+  if (points) {
+    caloriesNum = parseInt(calories);
+  }
+
+  if (calories) {
+    caloriesBurned = caloriesNum.toLocaleString("en-US");
+    stringifiedPoints = points.toLocaleString("en-US");
+  }
 
   return (
     <div className={classes.container}>
