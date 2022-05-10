@@ -10,14 +10,13 @@ import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 // import SignUp from "./Pages/UserFormPages/SignUp";
 // import UpdateProfile from "./Pages/UserFormPages/UpdateProfile";
 import ProfilePage from "./Pages/ProfilePages/ProfilePage";
-// import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
 import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
 import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 import RewardsPage from "./Pages/RewardPages/RewardsPage";
-// import MembersPage from "./Pages/MemberPages/MembersPage";
+import MembersPage from "./Pages/MemberPages/MembersPage";
 import MemberPage from "./Pages/MemberPages/MemberPage";
 import DailyWorkout from "./components/Exercise/DailyWorkout";
 import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
@@ -25,7 +24,7 @@ import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 // import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 // import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
-// import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
+import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 
 function App() {
   return (
@@ -39,6 +38,10 @@ function App() {
         <Route path="rewards" element={<RewardsPage />}/>
         <Route path="profile" element={<ProfilePage />}/>
         <Route path="profile/update" element={<UpdateProfilePage />}/>
+        <Route path="profile/change-password" element={<ProfileResetPasswordPage />} />
+        <Route path="members" element={<MembersPage />}/>
+        <Route path="members/:memberId" element={<MemberPage />} />
+        <Route path="library" element={<LibraryItemsPage />} />
       </Routes>
     </Layout>
   );
