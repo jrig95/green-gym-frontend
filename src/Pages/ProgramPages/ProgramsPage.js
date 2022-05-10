@@ -120,7 +120,7 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const admin = true;
+  const admin = false;
 
   const deleteProgramHandler = () => {
     console.log(
@@ -157,7 +157,7 @@ const ProgramsPage = () => {
   return (
     <Fragment>
       {deleteProgramIsShown && (
-        <DeleteProgram
+      <DeleteProgram
           program={programDetails}
           onClose={hideDeleteProgramHandler}
           onDelete={deleteProgramHandler}
