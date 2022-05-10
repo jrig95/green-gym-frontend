@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"; 
 import { useTranslation } from "react-i18next";
 
 import classes from "./Form.module.css";
@@ -178,9 +179,11 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">
-              {t("cancel")}
-            </Button>
+            <Link to="/">
+              <Button color="blue" size="small">
+                {t("cancel")}
+              </Button>
+            </Link>
             <Button size="small" type="submit" disabled={!formIsValid}>
               {t("submit")}
             </Button>
