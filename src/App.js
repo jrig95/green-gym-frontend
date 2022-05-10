@@ -1,13 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
 // import classes from "./App.module.css";
-// import LoginForm from "./components/Forms/LoginForm";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
-// import Login from "./Pages/UserFormPages/Login";
+import Login from "./Pages/UserFormPages/Login";
 // import ResetPassword from "./Pages/UserFormPages/ResetPassword";
-// import SignUp from "./Pages/UserFormPages/SignUp";
+import SignUp from "./Pages/UserFormPages/SignUp";
 // import UpdateProfile from "./Pages/UserFormPages/UpdateProfile";
 import ProfilePage from "./Pages/ProfilePages/ProfilePage";
 import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
@@ -31,6 +30,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<LandingPage />}/>
+        <Route path="login" element={<Login />}/>
+        <Route path="signup" element={<SignUp />}/>
         <Route path="programs" element={<ProgramsPage />} />
         <Route path="programs/:programId" element={<ProgramPage />} />
         <Route path="activities" element={<ActivitiesPage />}/>

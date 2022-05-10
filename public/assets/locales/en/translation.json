@@ -15,5 +15,7 @@
   "nav_bar_rewards": "Rewards",
   "nav_bar_profile": "Profile",
   "nav_bar_members": "Members",
-  "nav_bar_library": "Library"
+  "nav_bar_library": "Library",
+  "nav_bar_already_a_member": "Already a member? Login",
+  "nav_bar_create_a_profile": "Create a Profile"
 }

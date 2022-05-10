@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 
+import Button from "../UI/Button";
 import classes from "./Navbar.module.css";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,8 @@ const Navbar = () => {
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
   const userLoggedIn = false;
-  const adminLoggedIn = true;
+  const adminLoggedIn = false;
+  const loggedOut = !userLoggedIn && !adminLoggedIn;
 
   const activeStyle = {
     color: "#55ca8a",
@@ -21,15 +23,25 @@ const Navbar = () => {
       <Link to="/">
         <h1>Green Gym</h1>
       </Link>
-      <h2 className={classes.admin}>Admin</h2>
+      {adminLoggedIn && <h2 className={classes.admin}>Admin</h2>}
       <div className={classes.linksContainer}>
+        {loggedOut && (
+          <div className={classes.linksButton}>
+            <Link to="login">
+              {t("nav_bar_already_a_member")}
+            </Link>
+            <Link to="signup">
+              <Button>{t("nav_bar_create_a_profile")}</Button>
+            </Link>
+          </div>
+        )}
         {adminLoggedIn && (
           <div className={classes.links}>
             <NavLink style={isActive} to="members">
               {t("nav_bar_members")}
             </NavLink>
             <NavLink style={isActive} to="library">
-              {t("nav_bar_programs")}
+              {t("nav_bar_library")}
             </NavLink>
             <NavLink style={isActive} to="programs">
               {t("nav_bar_programs")}
