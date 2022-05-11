@@ -24,11 +24,13 @@ import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 // import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
+import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
 
 function App() {
   return (
     <Layout>
       <Routes>
+        <Route path="*" element={<NotFoundPage />}/>
         <Route path="/" element={<LandingPage />}/>
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<SignUp />}/>
