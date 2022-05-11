@@ -23,6 +23,7 @@ const MembersList = () => {
       <Member />
       <Member />
       <Member />
+      <Member />
     </Fragment>
   );
 };

@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import classes from "./Form.module.css";
 import useInput from "./Hooks/use-input";
-import Button from '../UI/Button';
+import Button from "../UI/Button";
 import FormCard from "./FormCard";
 
 const LoginForm = () => {
-
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -74,9 +74,11 @@ const LoginForm = () => {
             )}
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">
-              Cancel
-            </Button>
+            <Link to="/">
+              <Button color="blue" size="small">
+                Cancel
+              </Button>
+            </Link>
             <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>

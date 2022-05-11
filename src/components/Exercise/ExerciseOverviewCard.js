@@ -3,11 +3,10 @@ import Card from "../UI/Card";
 import ExerciseOverviewRow from "./ExerciseOverviewRow";
 
 const ExerciseOverviewCard = ({ exercises }) => {
-  console.log(exercises, "line 6 - ExerciseOverviewCard.js");
-
-  const exerciseRows = exercises.map((exercise) => {
+  const exerciseRows = exercises.map((exercise, index) => {
     return (
       <ExerciseOverviewRow
+        key={index}
         exercise={exercise.exercise_title}
         sets={exercise.number_of_sets}
       />

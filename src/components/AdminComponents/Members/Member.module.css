@@ -1,9 +1,10 @@
 .card {
+  position: relative;
   padding: 0 1rem 0 1rem;
   margin: 0 0 1rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
   cursor: pointer;
 }
 
@@ -15,4 +16,21 @@
 .card:hover {
   background-color: var(--green);
   color: var(--white);
+}
+
+.card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.linkContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5rem 0 0;
+}
+
+.checkBox {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }

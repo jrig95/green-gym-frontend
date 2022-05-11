@@ -27,7 +27,7 @@ const RewardsPage = () => {
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = true;
+  const admin = false;
 
   // This will match a reward from the programs the user is a part of
   const programRewardsArray = data.filter(
@@ -56,10 +56,6 @@ const RewardsPage = () => {
       `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
     );
   };
-
-  useEffect(() => {
-    console.log("hello");
-  }, []);
 
   const hideClaimedRewardMessageHandler = () => {
     setClaimedRewardMessageIsShown(false);

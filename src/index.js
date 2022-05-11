@@ -1,6 +1,7 @@
+import { BrowserRouter } from "react-router-dom";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import HttpApi from 'i18next-http-backend';
+import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -15,14 +16,14 @@ i18n
   .use(LanguageDetector)
   .use(HttpApi)
   .init({
-    supportedLngs: ['en', 'cn'],
+    supportedLngs: ["en", "cn"],
     fallbackLng: "en",
     detection: {
       order: ["cookie", "htmlTag", "localStorage", "path", "subdomain"],
       caches: ["cookie"],
     },
     backend: {
-      loadPath: "/assets/locales/{{lng}}/translation.json"
+      loadPath: "/assets/locales/{{lng}}/translation.json",
     },
     // Is this needed?
     // react: { useSuspense: false }
@@ -31,6 +32,8 @@ i18n
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
