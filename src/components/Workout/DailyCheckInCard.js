@@ -5,14 +5,12 @@ import classes from "./DailyCheckInCard.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 
-const DailyCheckInCard = () => {
+const DailyCheckInCard = ({ getCompleted }) => {
   const [checkedIn, setCheckedIn] = useState(false);
 
   const checkInHandler = (event) => {
-    event.preventDefault();
-    console.log("hello");
     setCheckedIn(true);
-    console.log(checkedIn);
+    getCompleted(true);
   };
 
   const checkInClasses = checkedIn
