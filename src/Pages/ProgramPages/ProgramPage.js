@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { Fragment } from "react";
 
 import Button from '../../components/UI/Button';
@@ -11,9 +10,6 @@ const ProgramPage = () => {
   // this would be the api call
   // console.log(Data);
   
-  const params = useParams();
-
-  console.log(params.programId);
 
   const programWorkouts = Data.daily_workouts.map((workout) => {
     return (
