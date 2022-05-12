@@ -25,6 +25,7 @@ import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
+import PurchasePage from "./Pages/ProgramPages/PurchasePage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="signup" element={<SignUp />}/>
         <Route path="programs" element={<ProgramsPage />} />
         <Route path="programs/:programId" element={<ProgramPage />} />
+        <Route path="programs/:programId/purchase" element={<PurchasePage />}/>
         <Route path="activities" element={<ActivitiesPage />}/>
         <Route path="activities/workout" element={<DailyWorkoutPage />}/>
         <Route path="rewards" element={<RewardsPage />}/>

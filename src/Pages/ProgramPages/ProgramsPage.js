@@ -120,7 +120,7 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const admin = false;
+  const admin = true;
 
   const deleteProgramHandler = () => {
     console.log(
