@@ -26,6 +26,7 @@ import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
 import PurchasePage from "./Pages/ProgramPages/PurchasePage";
+import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="programs/:programId" element={<ProgramPage />} />
         <Route path="programs/:programId/purchase" element={<PurchasePage />}/>
         <Route path="programs/add-program" element={<AddProgramPage />}/>
+        <Route path="add-workout" element={<AddWorkoutPage />}/>
         <Route path="activities" element={<ActivitiesPage />}/>
         <Route path="activities/workout" element={<DailyWorkoutPage />}/>
         <Route path="rewards" element={<RewardsPage />}/>

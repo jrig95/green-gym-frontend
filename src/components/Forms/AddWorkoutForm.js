@@ -6,7 +6,7 @@ import useInput from "./Hooks/use-input";
 import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
-const AddWorkoutForm = () => {
+const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);
 
@@ -126,6 +126,7 @@ const AddWorkoutForm = () => {
     };
 
     console.log(workout);
+    onAddWorkout();
   };
 
   const descriptionClasses = descriptionHasError
@@ -155,7 +156,7 @@ const AddWorkoutForm = () => {
     numberOfTypesIsValid && numberOfExercisesIsValid;
 
   return (
-    <AdminFormCard title="Day 1">
+    <AdminFormCard title={`Day ${dayNumber}`}>
       <form onSubmit={preventFormSubmit}>
         <div className={classes.controlGroup}>
           <div className={descriptionClasses}>
