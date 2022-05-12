@@ -7,11 +7,13 @@ import AdminFormTemplate from "./AdminFormTemplate";
 
 const AddWorkoutPage = () => {
   const [currentArrayIndex, setCurrentArrayIndex] = useState(1);
-  const array = [1, 2, 3, 4, 5];
+  const array = [1, 2];
 
   const changeCurrentArrayIndexHandler = () => {
     setCurrentArrayIndex((currentValue) => currentValue + 1);
   };
+
+  const renderForms = currentArrayIndex <= array.length;
 
   const addWorkoutForms = array.map((num) => {
     if (currentArrayIndex === num) {
@@ -30,7 +32,8 @@ const AddWorkoutPage = () => {
     <Fragment>
       <AdminBanner />
       <AdminFormTemplate>
-        <div className={classes.formsContainer}>{addWorkoutForms} </div>
+        {renderForms && <div className={classes.formsContainer}>{addWorkoutForms} </div>}
+        {!renderForms && <p>There will be a review of the current exercise. Can edit if needed.</p>}
       </AdminFormTemplate>
     </Fragment>
   );
