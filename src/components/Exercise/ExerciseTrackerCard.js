@@ -11,6 +11,7 @@ const ExerciseTrackerCard = ({ exerciseIndex }) => {
 
       return (
         <ExerciseTrackerCardRow
+          key={exercise.id}
           exercise={exercise.exercise_title}
           work={exercise.exercise_work_time}
           rest={exercise.exercise_rest_time}
