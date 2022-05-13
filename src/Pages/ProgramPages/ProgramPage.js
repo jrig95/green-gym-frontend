@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
 import Button from '../../components/UI/Button';
@@ -37,7 +38,9 @@ const ProgramPage = () => {
         </div>
         <div className={classes.purchaseContainer}>
           <h3>Price: ¥{Data.price}</h3>
-          <Button>Purchase</Button>
+          <Link to="purchase">
+            <Button>Purchase</Button>
+          </Link>
         </div>
       </div>
     </Fragment>

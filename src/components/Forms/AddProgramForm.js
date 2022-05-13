@@ -1,9 +1,17 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
 const AddProgramForm = () => {
+  const navigate = useNavigate();
+
+  // useState to set the number of days a program will run
+  const [numberOfWorkoutDays, setNumberOfWorkoutDays] = useState(0); 
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -15,12 +23,18 @@ const AddProgramForm = () => {
       cover_image: coverImageValue
     }
 
-    console.log(newProgram);
+    console.log(newProgram, "newProgram - AddProgramForm line 22");
+
+    setNumberOfWorkoutDays(numberOfDaysValue);
 
     resetprogramName();
     resetNumberOfDays();
     resetDescription();
     resetCoverImage();
+
+    // programatic navigation to the add workout page.
+    // need to pass the number of days here
+    navigate("/programs/add-program/add-workout", { state: { pageNumber: numberOfDaysValue }} );
   };
 
   const textNotEmpty = (value) => value !== "";

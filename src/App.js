@@ -20,20 +20,28 @@ import MemberPage from "./Pages/MemberPages/MemberPage";
 import DailyWorkout from "./components/Exercise/DailyWorkout";
 import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 // import ProgramPage from "./Pages/ProgramPages/ProgramPage";
-// import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
+import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 // import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
+import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
+import PurchasePage from "./Pages/ProgramPages/PurchasePage";
+import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 function App() {
   return (
     <Layout>
       <Routes>
+        <Route path="*" element={<NotFoundPage />}/>
         <Route path="/" element={<LandingPage />}/>
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<SignUp />}/>
         <Route path="programs" element={<ProgramsPage />} />
         <Route path="programs/:programId" element={<ProgramPage />} />
+        <Route path="programs/:programId/purchase" element={<PurchasePage />}/>
+        <Route path="programs/add-program" element={<AddProgramPage />}/>
+        <Route path="programs/add-program/add-workout" element={<AddWorkoutPage />}/>
+        <Route path="add-workout" element={<AddWorkoutPage />}/>
         <Route path="activities" element={<ActivitiesPage />}/>
         <Route path="activities/workout" element={<DailyWorkoutPage />}/>
         <Route path="rewards" element={<RewardsPage />}/>

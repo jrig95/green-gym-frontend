@@ -3,10 +3,22 @@
   display: flex;
   justify-content: center;
   height: 5.75rem;
-  position: absolute;
+  position: fixed;
+  left: 0;
   bottom: 0;
   width: 100vw;
 }
+/* 
+.footer {
+  background-color: var(--green);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  height: 5.75rem;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+} */
 
 .logoContainer {
   display: flex;

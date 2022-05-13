@@ -20,14 +20,19 @@
 }
 
 .icon {
-  height: 7.5rem;
+  height: 10rem;
 }
 
 .icon svg {
-  font-size: 10rem;
+  font-size: 8rem;
   color: var(--grey)
 }
 
 .button {
   min-height: 5rem;
+}
+
+.checkedIn svg {
+  font-size: 8rem;
+  color: var(--green) !important;
 }

@@ -6,9 +6,11 @@ import classes from "./Footer.module.css";
 const Footer = () => {
   return (
     <div className={classes.container}>
-      <div className={classes.logoContainer}>
-        <BsFacebook />
-        <IoLogoWechat />
+      <div>
+        <div className={classes.logoContainer}>
+          <BsFacebook />
+          <IoLogoWechat />
+        </div>
       </div>
     </div>
   );

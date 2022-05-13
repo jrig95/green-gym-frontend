@@ -13,6 +13,11 @@
   margin-right: auto;
 }
 
+.banner a {
+  margin-right: auto;
+}
+
+
 .banner h1 {
   font-size: 3.5rem;
   color: var(--white);

@@ -1,9 +1,22 @@
+import { useState } from "react";
+import { GiBiceps } from "react-icons/gi";
+
 import classes from "./DailyChallengeCard.module.css";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import { GiBiceps } from "react-icons/gi";
 
-const DailyChallengeCard = () => {
+const DailyChallengeCard = ({ getCompleted }) => {
+  const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
+
+  const challengeCompletedHandler = () => {
+    setChallengeIsCompleted(true);
+    getCompleted(true);
+  };
+
+  const iconClasses = challengeIsCompleted
+    ? `${classes.icon} ${classes.checkedIn}`
+    : classes.icon;
+
   return (
     <Card className={classes.container}>
       <div className={classes.title}>
@@ -12,11 +25,11 @@ const DailyChallengeCard = () => {
       <div className={classes.description}>
         <p>Daily challenge description.</p>
       </div>
-      <div className={classes.icon}>
+      <div className={iconClasses}>
         <GiBiceps />
       </div>
       <div className={classes.button}>
-        <Button>Do it</Button>
+        <Button onClick={challengeCompletedHandler} disabled={challengeIsCompleted}>Do it</Button>
       </div>
     </Card>
   );

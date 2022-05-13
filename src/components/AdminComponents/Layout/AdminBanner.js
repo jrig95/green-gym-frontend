@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 
 import AddUserToProgram from "../Members/AddUserToProgram";
@@ -42,7 +43,9 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
 
   return (
     <div className={classes.banner}>
-      {addLibraryItemIsShown && <AddLibraryItem onClose={hideAddLibraryItemHandler}/>}
+      {addLibraryItemIsShown && (
+        <AddLibraryItem onClose={hideAddLibraryItemHandler} />
+      )}
       {addUserToProgramIsShown && (
         <AddUserToProgram onClose={hideAddUserToProgramHandler} />
       )}
@@ -51,14 +54,22 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
           Add User(s) to Program
         </Button>
       )}
-      {programs && <Button color="blue">Add Program</Button>}
+      {programs && (
+        <Link to="add-program">
+          <Button color="blue">Add Program</Button>
+        </Link>
+      )}
       {library && (
         <Button color="blue" onClick={showAddLibraryItemHandler}>
           Add Library Item
         </Button>
       )}
-      {addRewardIsShown && <AddReward onClose={hideAddRewardHandler}/>}
-      {rewards && <Button color="blue" onClick={showAddRewardHandler}>Add Reward</Button>}
+      {addRewardIsShown && <AddReward onClose={hideAddRewardHandler} />}
+      {rewards && (
+        <Button color="blue" onClick={showAddRewardHandler}>
+          Add Reward
+        </Button>
+      )}
       {searchBar && (
         <div className={classes.inputContainer}>
           <form onSubmit={searchSubmitHandler}>
