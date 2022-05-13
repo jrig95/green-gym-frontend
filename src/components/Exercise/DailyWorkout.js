@@ -17,11 +17,11 @@ const DailyWorkout = () => {
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [showRestScreen, setShowRestScreen] = useState(false);
   const [startWorkout, setStartWorkout] = useState(false);
+  const [workoutIsFinish, setWorkoutIsFinished] = useState(false);
 
   // return an array of videos
   // itterate over each video
   // on end load a picture for n seconds then play next video
-
   const currentVideoEndedHandler = (timer) => {
     const timeRemaining = timer * 1000;
     setvideoIndex((prevIndex) => prevIndex + 1);
@@ -38,9 +38,14 @@ const DailyWorkout = () => {
   const exerciseLength = videos.length;
   const workoutFinish = exerciseLength === videoIndex;
 
-  const rest = <RestCard timer={10} />;
+  useState(() => {
+    console.log(workoutFinish);
+    console.log(exerciseLength, "exerciseLength- line 43 DailyWorkout");
+    console.log(videoIndex, "videoIndex - line 44 DailyWorkout");
+    console.log(exerciseIndex, "exerciseIndex - line 45 DailyWorkout");
+  }, [workoutFinish, videoIndex, exerciseIndex, showRestScreen]);
 
-  const workoutFinishedCard = <div>Workout Finished</div>
+  const rest = <RestCard timer={10} />;
 
   const currentVideo = (
     <ExerciseVideo
@@ -51,6 +56,10 @@ const DailyWorkout = () => {
 
   const onStartWorkoutHandler = () => {
     setStartWorkout(true);
+  };
+
+  const onFinishWorkoutHandler = () => {
+    setWorkoutIsFinished(true);
   };
 
   const workoutVideo = (
@@ -65,12 +74,16 @@ const DailyWorkout = () => {
     </div>
   );
 
+  const workoutFinishedCard = <div>Workout Finished</div>;
+
   return (
     <div>
-      {startWorkout ? workoutVideo : startWorkoutButton}
+      {startWorkout && workoutVideo}
+      {!startWorkout && startWorkoutButton}
+      {workoutIsFinish && workoutFinishedCard}
       <ExerciseTrackerCard exerciseIndex={exerciseIndex} />
       <div className={classes.buttonContainer}>
-        <Button>Finish Workout</Button>
+        <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
       </div>
     </div>
   );
