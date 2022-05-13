@@ -12,15 +12,6 @@ const StartWorkoutCard = ({ onStartWorkout }) => {
     setIsGettingReady(true);
   };
 
-  // useEffect(() => {
-  //   if (isGettingReady) {
-  //     const intervalId = setInterval(() => {
-  //       setCountdown((prevTime) => prevTime - 1);
-  //     }, 1000);
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, [isGettingReady]);
-
   useEffect(() => {
     if (countdown > 0 && isGettingReady) {
       const timer = setInterval(

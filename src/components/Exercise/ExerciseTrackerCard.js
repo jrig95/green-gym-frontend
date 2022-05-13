@@ -20,7 +20,7 @@ const ExerciseTrackerCard = ({ exerciseIndex }) => {
       );
     }
   );
-
+  
   return (
     <Card className={classes.card}>
       <div className={classes.header}>
