@@ -4,7 +4,7 @@ import classes from "./DeleteProgram.module.css";
 
 const DeleteProgram = ({onClose, onDelete, program}) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className={classes.textContainer}>
         <h2>Are you sure you wish to delete the program "{program.title}"?</h2>
       </div>

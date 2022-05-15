@@ -4,7 +4,7 @@ import Modal from "../../UI/Modal";
 
 const DeleteLibraryItem = ({ onClose, onDelete, libraryItem }) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className={classes.textContainer}>
         <h2>Are you sure you wish to delete {libraryItem.title}?</h2>
       </div>

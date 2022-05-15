@@ -3,7 +3,7 @@ import Modal from "../UI/Modal";
 
 const AddReward = ({ onClose }) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <AddRewardForm onClose={onClose} />
     </Modal>
   );

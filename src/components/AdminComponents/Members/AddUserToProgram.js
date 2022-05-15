@@ -4,7 +4,7 @@ import classes from "./AddUserToProgram.module.css";
 
 const AddUserToProgram = ({ onClose }) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className={classes.textContainer}>
         <h2>Select Program</h2>
       </div>

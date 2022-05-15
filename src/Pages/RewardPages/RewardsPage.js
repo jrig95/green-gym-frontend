@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
