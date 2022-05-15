@@ -50,6 +50,8 @@ const RewardsPage = () => {
     programRewardsArray = data.filter(
       (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
     );
+
+    console.log(programRewardsArray, 'programRewardsArray');
   
     // Create an array based on rewards that do not have a program_id
     rewardsArray = data.filter((reward) => reward.program_id === null);
@@ -100,7 +102,7 @@ const RewardsPage = () => {
         points={reward.reward_points}
         image={reward.reward_image}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.title, reward.points)
+          showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
         onDelete={showDeleteRewardHandler}
       />
@@ -108,7 +110,6 @@ const RewardsPage = () => {
   });
 
   const rewards = rewardsArray.map((reward) => {
-    console.log(reward, "reward from rewards array")
     return (
       <RewardCard
         key={reward.id}
