@@ -6,7 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import classes from "./ProgramCard.module.css";
 import Card from "../UI/Card";
 
-const ProgramCard = ({ title, image, description, onDelete, admin }) => {
+const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
   const slug = slugify(title);
 
   return (
@@ -21,7 +21,7 @@ const ProgramCard = ({ title, image, description, onDelete, admin }) => {
           </div>
         </div>
       )}
-      <Link to={`/programs/${slug}`}>
+      <Link to={`/programs/${slug}`} state={id}>
         <h1 className={classes.title}>{title}</h1>
         <img src={image} alt={title} />
         <h3 className={classes.description}>{description}</h3>

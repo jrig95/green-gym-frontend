@@ -1,16 +1,18 @@
+import { useQuery } from "react-query";
 import { Fragment, useEffect, useState } from "react";
 
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
 import classes from "./RewardsPage.module.css";
-import data from "../../rewards.json";
+import jsonData from "../../rewards.json";
 import ClaimReward from "../../components/Reward/ClaimReward";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteReward from "../../components/Reward/DeleteReward";
 
 const DUMMY_DATA = {
   user_one: {
+    id: 1,
     name: "Darren Lewis",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
@@ -29,13 +31,32 @@ const RewardsPage = () => {
   // this can be changed later and used by context
   const admin = false;
 
-  // This will match a reward from the programs the user is a part of
-  const programRewardsArray = data.filter(
-    (reward) => parseInt(reward.program_id) === 1
-  );
+  // API call here
+  const getRewards = async () => {
+    const response = await fetch("http://localhost:3000/api/v1/rewards")
+    return response.json();
+  };
 
-  // Create an array based on rewards that do not have a program_id
-  const rewardsArray = data.filter((reward) => reward.program_id === null);
+  // useQuery
+  const { data, isError, error, isLoading } = useQuery("rewards", getRewards);
+
+  console.log(data, "data");
+
+  let programRewardsArray = [];
+  let rewardsArray = [];
+
+  if (!isError && !isLoading) {
+    // This will match a reward from the programs the user is a part of
+    programRewardsArray = data.filter(
+      (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
+    );
+
+    console.log(programRewardsArray, 'programRewardsArray');
+  
+    // Create an array based on rewards that do not have a program_id
+    rewardsArray = data.filter((reward) => reward.program_id === null);
+  }
+
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);
@@ -77,11 +98,11 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
-        title={reward.title}
-        points={reward.points}
-        image={reward.image}
+        title={reward.reward_name}
+        points={reward.reward_points}
+        image={reward.reward_image}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.title, reward.points)
+          showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
         onDelete={showDeleteRewardHandler}
       />
@@ -92,11 +113,11 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
-        title={reward.title}
-        points={reward.points}
-        image={reward.image}
+        title={reward.reward_name}
+        points={reward.reward_points}
+        image={reward.reward_image}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.title, reward.points)
+          showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
         onDelete={showDeleteRewardHandler}
       />
@@ -123,6 +144,7 @@ const RewardsPage = () => {
           image={DUMMY_DATA.user_one.image}
           rewards={true}
           points={23400}
+          calories={23400}
         />
       )}
       {admin && <AdminBanner rewards />}

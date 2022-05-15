@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
 import classes from "./ProgramsPage.module.css";
@@ -120,6 +121,16 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
+  const fetchPrograms = async () => {
+    const response = await fetch("http://localhost:3000/api/v1/programs");
+    return response.json();
+  };
+
+  // Programs data
+  const { data, isError, error, isLoading } = useQuery("programs", fetchPrograms);
+
+  console.log(data);
+
   const admin = true;
 
   const deleteProgramHandler = () => {
@@ -138,26 +149,10 @@ const ProgramsPage = () => {
     setDeleteProgramIsShown(false);
   };
 
-  const programCards = DUMMY_DATA.map((program) => {
-    return (
-      <ProgramCard
-        key={program.id}
-        id={program.id}
-        title={program.title}
-        image={program.image}
-        description={program.description}
-        admin={admin}
-        onDelete={() => showDeleteProgramHandler(program)}
-        onUpdate={true}
-        onClose={true}
-      />
-    );
-  });
-
   return (
     <Fragment>
       {deleteProgramIsShown && (
-      <DeleteProgram
+        <DeleteProgram
           program={programDetails}
           onClose={hideDeleteProgramHandler}
           onDelete={deleteProgramHandler}
@@ -165,9 +160,29 @@ const ProgramsPage = () => {
       )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
-      <div className={classes.gridContainer}>
-        <div className={classes.programCardGrid}>{programCards}</div>
-      </div>
+      {isLoading && <h3>Loading...</h3>}
+      {isError && <h3>Error... {error.toString()}</h3>}
+      {!isLoading && !isError && (
+        <div className={classes.gridContainer}>
+          <div className={classes.programCardGrid}>
+            {data.map((program) => {
+              return (
+                <ProgramCard
+                  key={program.id}
+                  id={program.id}
+                  title={program.program_title}
+                  image={program.program_cover_image}
+                  description={program.program_description}
+                  admin={admin}
+                  onDelete={() => showDeleteProgramHandler(program)}
+                  onUpdate={true}
+                  onClose={true}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
     </Fragment>
   );
 };
