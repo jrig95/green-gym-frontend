@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Fragment } from "react";
 
 import Button from '../../components/UI/Button';
@@ -10,6 +10,9 @@ import Data from "../../program.json";
 const ProgramPage = () => {
   // this would be the api call
   // console.log(Data);
+  const { state } = useLocation();
+
+  console.log(state, "state");
   
 
   const programWorkouts = Data.daily_workouts.map((workout) => {
