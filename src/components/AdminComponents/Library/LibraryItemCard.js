@@ -4,7 +4,6 @@ import { AiFillDelete } from "react-icons/ai";
 
 import Card from "../../UI/Card";
 import classes from "./LibraryItemCard.module.css";
-import videoOne from "../../../assets/exercise_video_1.mp4";
 
 const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
   return (
