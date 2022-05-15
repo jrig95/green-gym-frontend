@@ -50,7 +50,7 @@ const ClaimReward = ({
     </Fragment>
   );
 
-  return <Modal>{enoughPoints ? claimMessage : notEnoughPointsMessage}</Modal>;
+  return <Modal onClose={onClose}>{enoughPoints ? claimMessage : notEnoughPointsMessage}</Modal>;
 };
 
 export default ClaimReward;

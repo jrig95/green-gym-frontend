@@ -4,7 +4,7 @@ import classes from "./RewardClaimedMessage.module.css";
 
 const RewardClaimedMessage = ({ onClose }) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className={classes.textContainer}>
         <h2>Congratulations!</h2>
         <h3>We will be in contact with you shortly to deliver your reward.</h3>

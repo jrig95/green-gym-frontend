@@ -3,7 +3,7 @@ import AddLibraryItemForm from "../../Forms/AddLibraryItemForm";
 
 const AddLibraryItem = ({ onClose }) => {
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <AddLibraryItemForm onClose={onClose} />
     </Modal>
   );
