@@ -9,6 +9,24 @@ import Card from "../UI/Card";
 const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
   const slug = slugify(title);
 
+  const titleLength = title.length;
+
+  let responsiveFontSize;
+
+  if (titleLength <= 20) {
+    responsiveFontSize = "1.5rem";
+  }
+
+  if (titleLength > 20 && titleLength <= 30) {
+    responsiveFontSize = "1.2rem";
+  }
+
+  if (titleLength > 30) {
+    responsiveFontSize = "1rem";
+  }
+
+  console.log(titleLength);
+
   return (
     <Card className={classes.card}>
       {admin && (
@@ -22,7 +40,15 @@ const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
         </div>
       )}
       <Link to={`/programs/${slug}`} state={id}>
-        <h1 className={classes.title}>{title}</h1>
+        <div className={classes.title}>
+          <h1
+            style={{
+              fontSize: responsiveFontSize,
+            }}
+          >
+            {title}
+          </h1>
+        </div>
         <img src={image} alt={title} />
         <h3 className={classes.description}>{description}</h3>
       </Link>
