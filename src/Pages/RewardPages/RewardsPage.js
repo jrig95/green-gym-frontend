@@ -33,7 +33,7 @@ const RewardsPage = () => {
 
   // API call here
   const getRewards = async () => {
-    const response = await fetch("http://localhost:30000/api/v1/rewards")
+    const response = await fetch("http://localhost:3000/api/v1/rewards")
     return response.json();
   };
 
