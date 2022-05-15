@@ -6,6 +6,7 @@ import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
 
 const ProgramsPage = () => {
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
@@ -53,7 +54,7 @@ const ProgramsPage = () => {
       )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
-      {isLoading && <h3>Loading...</h3>}
+      {isLoading && <LoadingSpinner />}
       {isError && <h3>Error... {error.toString()}</h3>}
       {!isLoading && !isError && (
         <div className={classes.gridContainer}>

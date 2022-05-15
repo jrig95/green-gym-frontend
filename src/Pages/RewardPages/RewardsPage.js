@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
@@ -32,7 +33,7 @@ const RewardsPage = () => {
 
   // API call here
   const getRewards = async () => {
-    const response = await fetch("http://localhost:30000/api/v1/rewards")
+    const response = await fetch("http://localhost:3000/api/v1/rewards")
     return response.json();
   };
 
@@ -164,7 +165,7 @@ const RewardsPage = () => {
         />
       )}
       <div className={classes.container}>
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <LoadingSpinner />}
         {isError && <div>Error...{error.toString()}</div>}
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>
