@@ -1,8 +1,10 @@
 import { ReactQueryDevtools } from "react-query/devtools";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
-// import classes from "./App.module.css";
+
+import { queryClient } from "./react-query/queryClient";
+
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 // import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
@@ -31,7 +33,7 @@ import PurchasePage from "./Pages/ProgramPages/PurchasePage";
 import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 function App() {
-  const queryClient = new QueryClient();
+  // const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
