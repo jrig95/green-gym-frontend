@@ -116,7 +116,7 @@ const RewardsPage = () => {
         points={reward.reward_points}
         image={reward.reward_image}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.rewards_name, reward.reward_points)
+          showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
         onDelete={showDeleteRewardHandler}
       />
@@ -143,6 +143,7 @@ const RewardsPage = () => {
           image={DUMMY_DATA.user_one.image}
           rewards={true}
           points={23400}
+          calories={23400}
         />
       )}
       {admin && <AdminBanner rewards />}
