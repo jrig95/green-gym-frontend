@@ -8,7 +8,6 @@ import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
 
 const ProgramsPage = () => {
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
@@ -16,7 +15,6 @@ const ProgramsPage = () => {
     id: 0,
     title: "Unknown",
   });
-
 
   const { data, isError, error, isLoading } = usePrograms();
 
@@ -49,29 +47,26 @@ const ProgramsPage = () => {
       )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
-      {isLoading && <LoadingSpinner />}
       {isError && <h3>Error... {error.toString()}</h3>}
-      {!isLoading && !isError && (
-        <div className={classes.gridContainer}>
-          <div className={classes.programCardGrid}>
-            {data.map((program) => {
-              return (
-                <ProgramCard
-                  key={program.id}
-                  id={program.id}
-                  title={program.program_title}
-                  image={program.program_cover_image}
-                  description={program.program_description}
-                  admin={admin}
-                  onDelete={() => showDeleteProgramHandler(program)}
-                  onUpdate={true}
-                  onClose={true}
-                />
-              );
-            })}
-          </div>
+      <div className={classes.gridContainer}>
+        <div className={classes.programCardGrid}>
+          {data.map((program) => {
+            return (
+              <ProgramCard
+                key={program.id}
+                id={program.id}
+                title={program.program_title}
+                image={program.program_cover_image}
+                description={program.program_description}
+                admin={admin}
+                onDelete={() => showDeleteProgramHandler(program)}
+                onUpdate={true}
+                onClose={true}
+              />
+            );
+          })}
         </div>
-      )}
+      </div>
     </Fragment>
   );
 };
