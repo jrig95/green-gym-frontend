@@ -12,6 +12,12 @@ const getPrograms = async () => {
 };
 
 export const usePrograms = () => {
-  const { data } = useQuery(queryKeys.programs, getPrograms);
-  return data;
+  const fallback = [];
+  const {
+    data = fallback,
+    isError,
+    error,
+    isLoading,
+  } = useQuery(queryKeys.programs, getPrograms);
+  return { data, isError, error, isLoading };
 };

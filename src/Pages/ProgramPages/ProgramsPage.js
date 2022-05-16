@@ -2,6 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
+import { usePrograms } from "../../components/Program/hooks/use-programs";
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
@@ -16,28 +17,8 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  // const fetchPrograms = async () => {
-  //   const response = await fetch("http://localhost:3000/api/v1/programs");
-  //   return response.json();
-  // };
 
-  const fetchPrograms = async () => {
-    const { data } = await axios("http://localhost:3000/api/v1/programs");
-    console.log(data);
-    return data;
-  };
-
-  // const { data: newData } = usePrograms();
-
-  // console.log(newData);
-
-  // Programs data
-  const { data, isError, error, isLoading } = useQuery(
-    "programs",
-    fetchPrograms
-  );
-
-  console.log(data);
+  const { data, isError, error, isLoading } = usePrograms();
 
   const admin = true;
 
