@@ -16,7 +16,7 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const { data, isError, error, isLoading } = usePrograms();
+  const { data } = usePrograms();
 
   const admin = true;
 
@@ -47,7 +47,6 @@ const ProgramsPage = () => {
       )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
-      {isError && <h3>Error... {error.toString()}</h3>}
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>
           {data.map((program) => {

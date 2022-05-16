@@ -1,3 +1,6 @@
+import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClientProvider } from "react-query";
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -6,6 +9,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import { queryClient } from "./react-query/queryClient";
 import "./index.css";
 import App from "./App";
 
@@ -32,8 +36,13 @@ i18n
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ChakraProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </React.StrictMode>
 );

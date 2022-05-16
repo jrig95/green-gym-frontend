@@ -1,9 +1,6 @@
-import { ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
-
-import { queryClient } from "./react-query/queryClient";
 
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
@@ -36,43 +33,35 @@ function App() {
   // const queryClient = new QueryClient();
 
   return (
-    <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
-        <Layout>
-          <Routes>
-            <Route path="*" element={<NotFoundPage />} />
-            <Route path="/" element={<LandingPage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="programs" element={<ProgramsPage />} />
-            <Route path="programs/:programId" element={<ProgramPage />} />
-            <Route
-              path="programs/:programId/purchase"
-              element={<PurchasePage />}
-            />
-            <Route path="programs/add-program" element={<AddProgramPage />} />
-            <Route
-              path="programs/add-program/add-workout"
-              element={<AddWorkoutPage />}
-            />
-            <Route path="add-workout" element={<AddWorkoutPage />} />
-            <Route path="activities" element={<ActivitiesPage />} />
-            <Route path="activities/workout" element={<DailyWorkoutPage />} />
-            <Route path="rewards" element={<RewardsPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="profile/update" element={<UpdateProfilePage />} />
-            <Route
-              path="profile/change-password"
-              element={<ProfileResetPasswordPage />}
-            />
-            <Route path="members" element={<MembersPage />} />
-            <Route path="members/:memberId" element={<MemberPage />} />
-            <Route path="library" element={<LibraryItemsPage />} />
-          </Routes>
-        </Layout>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <Layout>
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="programs" element={<ProgramsPage />} />
+        <Route path="programs/:programId" element={<ProgramPage />} />
+        <Route path="programs/:programId/purchase" element={<PurchasePage />} />
+        <Route path="programs/add-program" element={<AddProgramPage />} />
+        <Route
+          path="programs/add-program/add-workout"
+          element={<AddWorkoutPage />}
+        />
+        <Route path="add-workout" element={<AddWorkoutPage />} />
+        <Route path="activities" element={<ActivitiesPage />} />
+        <Route path="activities/workout" element={<DailyWorkoutPage />} />
+        <Route path="rewards" element={<RewardsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/update" element={<UpdateProfilePage />} />
+        <Route
+          path="profile/change-password"
+          element={<ProfileResetPasswordPage />}
+        />
+        <Route path="members" element={<MembersPage />} />
+        <Route path="members/:memberId" element={<MemberPage />} />
+        <Route path="library" element={<LibraryItemsPage />} />
+      </Routes>
+    </Layout>
   );
 }
 

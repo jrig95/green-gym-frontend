@@ -25,8 +25,6 @@ const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
     responsiveFontSize = "1rem";
   }
 
-  console.log(titleLength);
-
   return (
     <Card className={classes.card}>
       {admin && (
