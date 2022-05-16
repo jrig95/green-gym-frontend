@@ -1,7 +1,5 @@
-import { extendTheme } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider } from "react-query";
-import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -42,7 +40,7 @@ root.render(
         <BrowserRouter>
           <App />
         </BrowserRouter>
-‰      <ReactQueryDevtools />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>
 );

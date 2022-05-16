@@ -1,4 +1,3 @@
-import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useQuery } from "react-query";
 
@@ -13,7 +12,6 @@ const getPrograms = async () => {
 };
 
 export const usePrograms = () => {
-  const toast = useToast();
   const fallback = [];
   const {
     data = fallback,
@@ -22,9 +20,9 @@ export const usePrograms = () => {
     isLoading,
   } = useQuery(queryKeys.programs, getPrograms, {
     onError: (error) => {
-      const title = error instanceof Error ? error.message : 'error connecting to server';
-      toast({ title, status: 'error', isClosable: true, position: 'bottom', variant: 'subtle'})
-    }
+      const title =
+        error instanceof Error ? error.message : "error connecting to server";
+    },
   });
   return { data, isError, error, isLoading };
 };

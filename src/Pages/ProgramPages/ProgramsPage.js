@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
 import { usePrograms } from "../../components/Program/hooks/use-programs";
@@ -16,9 +14,9 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const { data } = usePrograms();
+  const { data, isError, error } = usePrograms();
 
-  const admin = true;
+  const admin = false;
 
   const deleteProgramHandler = () => {
     console.log(
@@ -48,6 +46,7 @@ const ProgramsPage = () => {
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
+        {isError && <p>Error... {error.toString()}</p>}
         <div className={classes.programCardGrid}>
           {data.map((program) => {
             return (
