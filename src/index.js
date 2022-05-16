@@ -1,3 +1,4 @@
+import { extendTheme } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider } from "react-query";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -33,16 +34,15 @@ i18n
     // react: { useSuspense: false }
   });
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </ChakraProvider>
-      <ReactQueryDevtools />
+‰      <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>
 );
