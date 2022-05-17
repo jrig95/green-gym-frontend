@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 
-import { usePrograms } from "../../components/Program/hooks/use-programs";
+import { usePrograms } from "../../components/Program/Hooks/use-programs";
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";

@@ -1,19 +1,23 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createRewards = async (reward) => {
-  console.log(reward, 'createRewards');
+  console.log(reward, "createRewards");
   await axios.post(`${baseUrl}/rewards`, {
-    data: reward,
+    reward: reward,
   });
 };
 
-export const useCreateReward = (reward) => {
-  console.log(reward, 'useCreateReward');
-  const { mutate } = useMutation(() => createRewards(reward));
+export const useCreateReward = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation((reward) => createRewards(reward), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.rewards]);
+    },
+  });
 
   return mutate;
 };

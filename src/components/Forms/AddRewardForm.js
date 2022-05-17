@@ -1,14 +1,15 @@
-import { useCreateReward } from "../Reward/hooks/use-create-reward";
+import { useCreateReward } from "../Reward/Hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
+
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
-    return !isNaN(number);
+    return !isNaN(number); 
   };
 
   const {
@@ -36,7 +37,7 @@ const AddRewardForm = ({ onClose }) => {
       reward_image: "https://picsum.photos/200",
       reward_points: pointsValue
     }
-    
+
     createReward(reward);
 
     // t.string "reward_name"
