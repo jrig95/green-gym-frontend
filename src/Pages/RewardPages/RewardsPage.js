@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
+import { useRewards } from "../../components/Reward/Hooks/use-rewards";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
@@ -29,34 +30,16 @@ const RewardsPage = () => {
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = false;
+  const admin = true;
 
-  // API call here
-  const getRewards = async () => {
-    const response = await fetch("http://localhost:3000/api/v1/rewards")
-    return response.json();
-  };
+  const { data, isError, error, isLoading } = useRewards();
 
-  // useQuery
-  const { data, isError, error, isLoading } = useQuery("rewards", getRewards);
+  const programRewardsArray = data.filter(
+    (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
+  );
 
-  console.log(data, "data");
-
-  let programRewardsArray = [];
-  let rewardsArray = [];
-
-  if (!isError && !isLoading) {
-    // This will match a reward from the programs the user is a part of
-    programRewardsArray = data.filter(
-      (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
-    );
-
-    console.log(programRewardsArray, 'programRewardsArray');
-  
-    // Create an array based on rewards that do not have a program_id
-    rewardsArray = data.filter((reward) => reward.program_id === null);
-  }
-
+  // Create an array based on rewards that do not have a program_id
+  const rewardsArray = data.filter((reward) => reward.program_id === null);
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);
@@ -160,12 +143,11 @@ const RewardsPage = () => {
       {deleteRewardIsShown && (
         <DeleteReward
           onClose={hideDeleteRewardHandler}
-          onDelete={() => deleteRewardHandler({title: 'test'})}
-          reward={{title: 'test'}}
+          onDelete={() => deleteRewardHandler({ title: "test" })}
+          reward={{ title: "test" }}
         />
       )}
       <div className={classes.container}>
-        {isLoading && <LoadingSpinner />}
         {isError && <div>Error...{error.toString()}</div>}
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>

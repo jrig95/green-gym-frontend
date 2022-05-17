@@ -2,3 +2,17 @@
   position: relative;
   min-height: 100vh;
 }
+
+.outerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.loadingSpinnerContainer {
+  position: relative;
+}
+
+.loadingSpinner {
+  position: absolute;
+  top: 20rem;
+}

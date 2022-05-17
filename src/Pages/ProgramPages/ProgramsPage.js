@@ -1,12 +1,11 @@
-import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
+import { usePrograms } from "../../components/Program/Hooks/use-programs";
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
 
 const ProgramsPage = () => {
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
@@ -15,17 +14,9 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const fetchPrograms = async () => {
-    const response = await fetch("http://localhost:3000/api/v1/programs");
-    return response.json();
-  };
+  const { data, isError, error } = usePrograms();
 
-  // Programs data
-  const { data, isError, error, isLoading } = useQuery("programs", fetchPrograms);
-
-  console.log(data);
-
-  const admin = true;
+  const admin = false;
 
   const deleteProgramHandler = () => {
     console.log(
@@ -54,29 +45,26 @@ const ProgramsPage = () => {
       )}
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
-      {isLoading && <LoadingSpinner />}
-      {isError && <h3>Error... {error.toString()}</h3>}
-      {!isLoading && !isError && (
-        <div className={classes.gridContainer}>
-          <div className={classes.programCardGrid}>
-            {data.map((program) => {
-              return (
-                <ProgramCard
-                  key={program.id}
-                  id={program.id}
-                  title={program.program_title}
-                  image={program.program_cover_image}
-                  description={program.program_description}
-                  admin={admin}
-                  onDelete={() => showDeleteProgramHandler(program)}
-                  onUpdate={true}
-                  onClose={true}
-                />
-              );
-            })}
-          </div>
+      <div className={classes.gridContainer}>
+        {isError && <p>Error... {error.toString()}</p>}
+        <div className={classes.programCardGrid}>
+          {data.map((program) => {
+            return (
+              <ProgramCard
+                key={program.id}
+                id={program.id}
+                title={program.program_title}
+                image={program.program_cover_image}
+                description={program.program_description}
+                admin={admin}
+                onDelete={() => showDeleteProgramHandler(program)}
+                onUpdate={true}
+                onClose={true}
+              />
+            );
+          })}
         </div>
-      )}
+      </div>
     </Fragment>
   );
 };

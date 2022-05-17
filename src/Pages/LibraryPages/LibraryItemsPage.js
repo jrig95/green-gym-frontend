@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 
+import { useLibraryItems } from "../../components/AdminComponents/Library/Hooks/use-library-items";
 import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
 import videoOne from "../../assets/exercise_video_1.mp4";
 import LibraryItemCard from "../../components/AdminComponents/Library/LibraryItemCard";
@@ -55,6 +56,8 @@ const DUMMY_ITEMS = [
 ];
 
 const LibraryItemsPage = () => {
+  const { data } = useLibraryItems();
+  
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
   const [libraryItemDetails, setLibraryItemDetails] = useState({
@@ -78,12 +81,12 @@ const LibraryItemsPage = () => {
     setDeleteLibraryItemIsShown(false);
   };
 
-  const libraryItems = DUMMY_ITEMS.map((libraryItem) => {
+  const libraryItems = data.map((libraryItem) => {
     return (
       <LibraryItemCard
         key={libraryItem.id}
         title={libraryItem.title}
-        videoUrl={libraryItem.videoUrl}
+        videoUrl={videoOne}
         onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
       />
     );
