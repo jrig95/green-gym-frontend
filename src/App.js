@@ -1,5 +1,3 @@
-import { ReactQueryDevtools } from "react-query/devtools";
-import { QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout/Layout";

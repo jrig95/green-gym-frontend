@@ -42,9 +42,9 @@ const ProfileBanner = ({
         {/* clicking this link should add an image to a users profile */}
         {update && (
           <div className={classes.cameraIcon}>
-            <a href="">
+            <div onClick={() => console.log('click')}>
               <HiCamera />
-            </a>
+            </div>
           </div>
         )}
         <h2 className={classes.name}>{name}</h2>
