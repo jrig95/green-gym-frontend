@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
-import { useRewards } from "../../components/Reward/Hooks/use-rewards";
+import { useRewards } from "../../components/Reward/hooks/use-rewards";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
