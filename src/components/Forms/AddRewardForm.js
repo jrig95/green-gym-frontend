@@ -2,14 +2,19 @@ import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
+import { useRef } from "react";
 
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
 
+  const imageRef = useRef();
+
+  console.log(imageRef.current);
+
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
-    return !isNaN(number); 
+    return !isNaN(number);
   };
 
   const {
@@ -35,8 +40,8 @@ const AddRewardForm = ({ onClose }) => {
     const reward = {
       reward_name: titleValue,
       reward_image: "https://picsum.photos/200",
-      reward_points: pointsValue
-    }
+      reward_points: pointsValue,
+    };
 
     createReward(reward);
     onClose();
@@ -77,7 +82,17 @@ const AddRewardForm = ({ onClose }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
-            <input type="file" id="image" accept="image/jpeg, image/png" onChange={fileSelectHander}/>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="image"
+              accept="image/jpega image/png"
+              onChange={fileSelectHander}
+              ref={imageRef}
+            />
+            <Button size="small" onClick={() => imageRef.current.click()}>
+              Add Image
+            </Button>
           </div>
           <div className={pointsClasses}>
             <label htmlFor="points">Points</label>
