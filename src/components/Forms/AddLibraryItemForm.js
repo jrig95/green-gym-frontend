@@ -1,9 +1,11 @@
+import { useCreateLibraryItem } from "../AdminComponents/Library/Hooks/use-create-library-item";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
 
 const AddLibraryItemForm = ({ onClose }) => {
+  const createLibraryItem = useCreateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
   const {
@@ -21,7 +23,13 @@ const AddLibraryItemForm = ({ onClose }) => {
 
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
-    console.log(titleValue);
+
+    const library_item = {
+      title: titleValue,
+    };
+
+    createLibraryItem(library_item);
+    onClose();
   };
 
   return (
