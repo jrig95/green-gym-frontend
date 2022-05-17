@@ -3,8 +3,13 @@ import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
+import { useRef, useState } from "react";
 
 const AddLibraryItemForm = ({ onClose }) => {
+  const [selectedVideoFile, setSelectedVideoFile] = useState();
+  const videoRef = useRef();
+
+  // React query custom hook
   const createLibraryItem = useCreateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
@@ -32,6 +37,10 @@ const AddLibraryItemForm = ({ onClose }) => {
     onClose();
   };
 
+  const fileSelectHandler = (event) => {
+    setSelectedVideoFile(event.target.files[0]);
+  };
+
   return (
     <div>
       <h1 className={classes.title}>Add Library Item</h1>
@@ -51,8 +60,16 @@ const AddLibraryItemForm = ({ onClose }) => {
             )}
           </div>
           <div className={classes.formControl}>
-            <label>Video</label>
-            <input />
+            <label htmlFor="video">Video</label>
+            <input
+              style={{display: 'none'}}
+              type="file"
+              id="video"
+              accept="video/*"
+              onChange={fileSelectHandler}
+              ref={videoRef}
+            />
+            <Button size="small" onClick={() => videoRef.current.click()}>Add Video</Button>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>

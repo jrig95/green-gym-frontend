@@ -58,7 +58,7 @@ const AddRewardForm = ({ onClose }) => {
     : classes.formControl;
 
   const fileSelectHander = (event) => {
-    setSelecetedImageFile(event.target.files);
+    setSelecetedImageFile(event.target.files[0]);
   };
 
   return (
