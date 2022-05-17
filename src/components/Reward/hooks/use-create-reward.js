@@ -5,7 +5,6 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createRewards = async (reward) => {
-  console.log(reward, "createRewards");
   await axios.post(`${baseUrl}/rewards`, {
     reward: reward,
   });
@@ -21,7 +20,3 @@ export const useCreateReward = () => {
 
   return mutate;
 };
-
-// t.string "reward_name"
-//     t.string "reward_image"
-//     t.integer "reward_points"

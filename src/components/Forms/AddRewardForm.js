@@ -39,10 +39,7 @@ const AddRewardForm = ({ onClose }) => {
     }
 
     createReward(reward);
-
-    // t.string "reward_name"
-    // t.string "reward_image"
-    // t.integer "reward_points"
+    onClose();
   };
 
   const formIsValid = titleIsValid && pointsIsValid;

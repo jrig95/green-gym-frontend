@@ -1,4 +1,5 @@
 export const queryKeys = {
   programs: "programs",
-  rewards: "rewards"
+  rewards: "rewards",
+  libraryItems: "library_items"
 };
