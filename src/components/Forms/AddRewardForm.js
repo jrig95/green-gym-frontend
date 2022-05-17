@@ -52,6 +52,11 @@ const AddRewardForm = ({ onClose }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
+  const fileSelectHander = (event) => {
+    event.preventDefault();
+    console.log(event.target.files);
+  };
+
   return (
     <div>
       <h1 className={classes.title}>Add Reward</h1>
@@ -72,7 +77,7 @@ const AddRewardForm = ({ onClose }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
-            <input type="text" id="image" />
+            <input type="file" id="image" accept="image/jpeg, image/png" onChange={fileSelectHander}/>
           </div>
           <div className={pointsClasses}>
             <label htmlFor="points">Points</label>
