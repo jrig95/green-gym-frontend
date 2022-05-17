@@ -30,24 +30,16 @@ const RewardsPage = () => {
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = false;
+  const admin = true;
 
   const { data, isError, error, isLoading } = useRewards();
 
-  let programRewardsArray = [];
-  let rewardsArray = [];
+  const programRewardsArray = data.filter(
+    (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
+  );
 
-  if (!isError && !isLoading) {
-    // This will match a reward from the programs the user is a part of
-    programRewardsArray = data.filter(
-      (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
-    );
-
-    console.log(programRewardsArray, "programRewardsArray");
-
-    // Create an array based on rewards that do not have a program_id
-    rewardsArray = data.filter((reward) => reward.program_id === null);
-  }
+  // Create an array based on rewards that do not have a program_id
+  const rewardsArray = data.filter((reward) => reward.program_id === null);
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);
@@ -156,7 +148,6 @@ const RewardsPage = () => {
         />
       )}
       <div className={classes.container}>
-        {isLoading && <LoadingSpinner />}
         {isError && <div>Error...{error.toString()}</div>}
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>

@@ -1,8 +1,10 @@
+import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 
 const AddRewardForm = ({ onClose }) => {
+  const createReward = useCreateReward();
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
@@ -30,11 +32,16 @@ const AddRewardForm = ({ onClose }) => {
   const addRewardHandler = (event) => {
     event.preventDefault();
     const reward = {
-      title: titleValue,
-      points: pointsValue
+      reward_name: titleValue,
+      reward_image: "https://picsum.photos/200",
+      reward_points: pointsValue
     }
+    
+    createReward(reward);
 
-    console.log(reward);
+    // t.string "reward_name"
+    // t.string "reward_image"
+    // t.integer "reward_points"
   };
 
   const formIsValid = titleIsValid && pointsIsValid;
