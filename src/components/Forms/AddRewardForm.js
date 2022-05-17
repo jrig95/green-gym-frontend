@@ -1,4 +1,4 @@
-import { useCreateReward } from "../Reward/Hooks/use-create-reward";
+import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
