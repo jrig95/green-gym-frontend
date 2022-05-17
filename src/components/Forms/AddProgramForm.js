@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const AddProgramForm = () => {
   const navigate = useNavigate();
 
+  // Image ref for adding an image to the program
+  const imageRef = useRef();
+    
   // useState to set the number of days a program will run
   const [numberOfWorkoutDays, setNumberOfWorkoutDays] = useState(0); 
 
@@ -80,6 +84,9 @@ const AddProgramForm = () => {
     reset: resetCoverImage,
   } = useInput(textNotEmpty);
 
+  const fileSelectHandler = (event) => {
+    console.log(event.target.files);
+  };
 
 
   const programNameClasses = programNameHasError
@@ -155,12 +162,16 @@ const AddProgramForm = () => {
           <div className={coverImageClasses}>
             <label htmlFor="cover_image">Cover Image</label>
             <input
-              type="text"
+              type="file"
               id="cover_image"
+              accept="image/jpeg, image/png"
               value={coverImageValue}
-              onChange={coverImageChangeHandler}
+              onChange={fileSelectHandler}
               onBlur={coverImageBlurHandler}
+              style={{ display: 'none'}}
+              ref={imageRef}
             />
+            <Button size="small" onClick={() => imageRef.current.click()}>Add Image</Button>
             {coverImageHasError && (
               <p className={classes.errorText}>cover image cannot be blank</p>
             )}

@@ -15,7 +15,7 @@ const ProgramsPage = () => {
 
   const { data, isError, error } = usePrograms();
 
-  const admin = false;
+  const admin = true;
 
   const deleteProgramHandler = () => {
     console.log(

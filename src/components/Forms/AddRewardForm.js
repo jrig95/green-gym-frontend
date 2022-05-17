@@ -9,8 +9,6 @@ const AddRewardForm = ({ onClose }) => {
 
   const imageRef = useRef();
 
-  console.log(imageRef.current);
-
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
@@ -111,6 +109,7 @@ const AddRewardForm = ({ onClose }) => {
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
             <select id="program">
+              <option>none</option>
               <option>1</option>
             </select>
           </div>
