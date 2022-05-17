@@ -8,10 +8,13 @@ import useInput from "./Hooks/use-input";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const AddProgramForm = () => {
+  // Set up a navigate to change routes on form submittion
   const navigate = useNavigate();
 
-  // Image ref for adding an image to the program
+  // Image ref for adding an image to the program and a useState for the file
   const imageRef = useRef();
+  const [selectedImageFile, setSelecetedImageFile] = useState(null);
+
     
   // useState to set the number of days a program will run
   const [numberOfWorkoutDays, setNumberOfWorkoutDays] = useState(0); 
@@ -85,7 +88,7 @@ const AddProgramForm = () => {
   } = useInput(textNotEmpty);
 
   const fileSelectHandler = (event) => {
-    console.log(event.target.files);
+    setSelecetedImageFile(event.target.files);
   };
 
 
