@@ -79,20 +79,6 @@ const AddRewardForm = ({ onClose }) => {
               <p className={classes.errorText}>Must include a name</p>
             )}
           </div>
-          <div className={classes.formControl}>
-            <label htmlFor="image">Cover Image</label>
-            <input
-              style={{ display: "none" }}
-              type="file"
-              id="image"
-              accept="image/jpega image/png"
-              onChange={fileSelectHander}
-              ref={imageRef}
-            />
-            <Button size="small" onClick={() => imageRef.current.click()}>
-              Add Image
-            </Button>
-          </div>
           <div className={pointsClasses}>
             <label htmlFor="points">Points</label>
             <input
@@ -106,6 +92,20 @@ const AddRewardForm = ({ onClose }) => {
             {pointsHasError && (
               <p className={classes.errorText}>Must include points</p>
             )}
+          </div>
+          <div className={classes.formControl}>
+            <label htmlFor="image">Cover Image</label>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="image"
+              accept="image/jpega image/png"
+              onChange={fileSelectHander}
+              ref={imageRef}
+            />
+            <Button size="small" onClick={() => imageRef.current.click()}>
+              Add Image
+            </Button>
           </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
