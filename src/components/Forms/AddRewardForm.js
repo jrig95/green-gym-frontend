@@ -2,12 +2,14 @@ import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
 
+  // Image ref for the add image button - use state for image
   const imageRef = useRef();
+  const [selectedImageFile, setSelecetedImageFile] = useState(null);
 
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
@@ -56,8 +58,7 @@ const AddRewardForm = ({ onClose }) => {
     : classes.formControl;
 
   const fileSelectHander = (event) => {
-    event.preventDefault();
-    console.log(event.target.files);
+    setSelecetedImageFile(event.target.files);
   };
 
   return (
