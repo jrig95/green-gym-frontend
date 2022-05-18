@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 import ToastMessage from "./ToastMessage";
 import useAPIError from "../../common/hooks/use-API-error";
@@ -9,6 +9,18 @@ const APIErrorNotification = () => {
   const removeErrorHandler = () => {
     removeError();
   };
+
+  useEffect(() => {
+    console.log("inside useEffect");
+    if (error) {
+      const wait = setTimeout(() => {
+        console.log("inside Set timeout");
+        removeError();
+      }, 3000);
+
+      return clearTimeout(wait);
+    }
+  }, [error]);
 
   return (
     <Fragment>

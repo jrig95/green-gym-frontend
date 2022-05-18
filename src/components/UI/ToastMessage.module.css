@@ -4,8 +4,6 @@
   justify-content: center;
   position: fixed;
   bottom: 5vh;
-  left: 40%;
-  width: 90%;
   z-index: 30;
   width: 20rem;
   height: 5rem;
@@ -13,6 +11,11 @@
   padding: 1rem;
   cursor: pointer;
   animation: slide-up 300ms ease-out forwards;
+}
+.container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .message {

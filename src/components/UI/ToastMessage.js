@@ -6,9 +6,11 @@ import classes from "./ToastMessage.module.css";
 
 const Toast = ({ children, onClose }) => {
   return (
-    <Card className={classes.errorContainer} onClick={onClose}>
-      <div className={classes.message}>{children}</div>
-    </Card>
+    <div className={classes.container}>
+      <Card className={classes.errorContainer} onClick={onClose}>
+        <div className={classes.message}>{children}</div>
+      </Card>
+    </div>
   );
 };
 
