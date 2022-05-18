@@ -25,7 +25,6 @@ export const usePrograms = () => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
-      console.log(error, "useQuery")
     },
   });
   return { data, isError, error, isLoading };

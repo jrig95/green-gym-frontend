@@ -45,7 +45,6 @@ const ProgramsPage = () => {
       {!admin && <Banner title="Our Programs" />}
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
-        {isError && <p>Error... {error.toString()}</p>}
         <div className={classes.programCardGrid}>
           {data.map((program) => {
             return (
