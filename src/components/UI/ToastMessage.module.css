@@ -9,6 +9,7 @@
   background-color: lightpink;
   padding: 1rem;
   cursor: pointer;
+  animation: slide-up 300ms ease-out forwards;
 }
 
 @keyframes slide-up {
@@ -20,5 +21,4 @@
     opacity: 1;
     transition: translateY(0);
   }
-  
 }

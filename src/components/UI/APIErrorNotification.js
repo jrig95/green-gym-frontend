@@ -1,4 +1,7 @@
-import classes from "./APIErrorNotification.module.css";
+import { Fragment } from "react";
+import ReactDOM from "react-dom";
+
+import ToastMessage from "./ToastMessage";
 import useAPIError from "../../common/hooks/use-API-error";
 
 const APIErrorNotification = () => {
@@ -8,9 +11,15 @@ const APIErrorNotification = () => {
     removeError();
   };
 
-
-
-  return <div className={classes.errorContainer} onClick={removeErrorHandler}>This is an error</div>;
+  return (
+    <Fragment>
+      {error && (
+        <ToastMessage onClose={removeErrorHandler}>
+          {error && error.message}
+        </ToastMessage>
+      )}
+    </Fragment>
+  );
 };
 
 export default APIErrorNotification;
