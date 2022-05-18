@@ -7,7 +7,7 @@ import classes from "./ProgramCard.module.css";
 import Card from "../UI/Card";
 
 const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
-  const slug = slugify(title);
+  const slug = slugify(`${title}-${id}`);
 
   const titleLength = title.length;
 

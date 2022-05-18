@@ -11,7 +11,7 @@ const getProgram = async (id) => {
   return data;
 };
 
-export const usePrograms = (id) => {
+export const useProgram = (id) => {
   const fallback = [];
   const {
     data = fallback,
