@@ -1,8 +1,8 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 
 export const APIErrorContext = React.createContext({
   error: null,
-  oldError: () => {},
+  addError: () => {},
   removeError: () => {},
 });
 

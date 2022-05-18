@@ -8,6 +8,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import APIErrorNotification from "./components/UI/APIErrorNotification";
+import APIErrorProvider from "./context/APIErrorProvider";
 import { queryClient } from "./react-query/queryClient";
 import "./index.css";
 import App from "./App";
@@ -32,15 +34,17 @@ i18n
     // react: { useSuspense: false }
   });
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+    <APIErrorProvider>
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+      <APIErrorNotification />
+    </APIErrorProvider>
   </React.StrictMode>
 );
