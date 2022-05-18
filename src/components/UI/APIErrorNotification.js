@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import ReactDOM from "react-dom";
 
 import ToastMessage from "./ToastMessage";
 import useAPIError from "../../common/hooks/use-API-error";
