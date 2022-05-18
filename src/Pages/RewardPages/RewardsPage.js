@@ -148,7 +148,6 @@ const RewardsPage = () => {
         />
       )}
       <div className={classes.container}>
-        {isError && <div>Error...{error.toString()}</div>}
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>
     </Fragment>
