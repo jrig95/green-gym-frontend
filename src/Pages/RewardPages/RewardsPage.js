@@ -83,7 +83,7 @@ const RewardsPage = () => {
         key={reward.id}
         title={reward.reward_name}
         points={reward.reward_points}
-        image={reward.reward_image}
+        image={reward.photo_url}
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
@@ -98,7 +98,7 @@ const RewardsPage = () => {
         key={reward.id}
         title={reward.reward_name}
         points={reward.reward_points}
-        image={reward.reward_image}
+        image={reward.photo_url}
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }

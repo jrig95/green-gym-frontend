@@ -13,7 +13,7 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
-  const { data, isError, error } = usePrograms();
+  const { data } = usePrograms();
 
   const admin = true;
 

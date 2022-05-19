@@ -29,7 +29,7 @@ const RewardCard = ({ title, points, image, onClaimReward, onDelete }) => {
         </Button>
       </div>
       <div className={classes.imageContainer}>
-        <img src={image} alt="picture" />
+        <img src={image} alt={title} />
       </div>
     </Card>
   );
