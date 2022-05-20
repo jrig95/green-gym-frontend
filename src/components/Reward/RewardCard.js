@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+import UpdateReward from "./UpdateReward";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./RewardCard.module.css";
@@ -6,6 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 
 const RewardCard = ({
   admin,
+  id,
   title,
   points,
   image,
@@ -13,14 +17,24 @@ const RewardCard = ({
   onDelete,
   onUpdate,
 }) => {
+  const [updateRewardIsShown, setUpdateRewardIsShown] = useState(false);
   const stringifiedPoints = parseInt(points).toLocaleString("en-US");
+
+  const showRewardHandler = () => {
+    setUpdateRewardIsShown(true);
+  };
+
+  const hideRewardHandler = () => {
+    setUpdateRewardIsShown(false);
+  };
 
   return (
     <Card className={classes.card}>
+      {updateRewardIsShown && <UpdateReward onClose={hideRewardHandler} editForm={true} rewardId={id}/>}
       <div className={classes.textContainer}>
         {admin && (
           <div className={classes.icons}>
-            <div className={classes.iconGear} onClick={onUpdate}>
+            <div className={classes.iconGear} onClick={showRewardHandler}>
               <BsFillGearFill />
             </div>
             <div className={classes.iconBin} onClick={onDelete}>

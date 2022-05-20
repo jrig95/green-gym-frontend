@@ -86,6 +86,7 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
         admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
@@ -107,6 +108,7 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
         admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
@@ -120,6 +122,7 @@ const RewardsPage = () => {
             reward_name: reward.reward_name,
           })
         }
+        onUpdate={() => console.log('edit')}
       />
     );
   });

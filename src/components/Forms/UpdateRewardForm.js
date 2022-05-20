@@ -1,14 +1,16 @@
+import { useReward } from "../Reward/hooks/use-reward";
 import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
 
-const AddRewardForm = ({ onClose }) => {
+const UpdateRewardForm = ({ onClose, rewardId }) => {
   const createReward = useCreateReward();
-
+  const { data } = useReward(rewardId);
+  
   // use state to managed edited values
-
+  console.log(data, "why is it getting all rewards?");
   // Image ref for the add image button - use state for image
   const imageRef = useRef();
   const [selectedImageFile, setSelecetedImageFile] = useState(null);
@@ -47,18 +49,8 @@ const AddRewardForm = ({ onClose }) => {
 
     console.log(formData);
 
-    // const reward = {
-    //   reward_name: titleValue,
-    //   reward_points: pointsValue,
-    //   photo_url: selectedImageFile,
-    // };
-
-    // console.log(reward);
     createReward(formData);
 
-    // if (selectedImageFile) {
-    //   createReward(formData);
-    // }
     onClose();
   };
 
@@ -143,4 +135,4 @@ const AddRewardForm = ({ onClose }) => {
   );
 };
 
-export default AddRewardForm;
+export default UpdateRewardForm;

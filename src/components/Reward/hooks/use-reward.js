@@ -1,27 +1,32 @@
 import axios from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 
 import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const updateReward = async (reward) => {
-  await axios.patch(`${baseUrl}/rewards/${reward.id}`, reward);
+const getReward = async (id) => {
+  const { data } = await axios(`${baseUrl}/rewards/466`);
+  return data;
 };
 
-export const useUpdateReward = () => {
+export const useReward = (id) => {
   const { addError } = useAPIError();
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation((reward) => updateReward(reward), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.rewards]);
-    },
+
+  const fallback = [];
+  const {
+    data = fallback,
+    isError,
+    error,
+    isLoading,
+  } = useQuery(queryKeys.reward, () => getReward(id), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     },
+    staleTime: Infinity,
   });
 
-  return mutate;
+  return { data, isError, error, isLoading };
 };
