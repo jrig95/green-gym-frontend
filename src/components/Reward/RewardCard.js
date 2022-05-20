@@ -4,22 +4,31 @@ import classes from "./RewardCard.module.css";
 import { BsFillGearFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 
-const RewardCard = ({ title, points, image, onClaimReward, onDelete }) => {
+const RewardCard = ({
+  admin,
+  title,
+  points,
+  image,
+  onClaimReward,
+  onDelete,
+  onUpdate,
+}) => {
   const stringifiedPoints = parseInt(points).toLocaleString("en-US");
-
-  const admin = true;
 
   return (
     <Card className={classes.card}>
       <div className={classes.textContainer}>
-        <div className={classes.icons}>
-          <div className={classes.iconGear}>
-            <BsFillGearFill />
+        {admin && (
+          <div className={classes.icons}>
+            <div className={classes.iconGear} onClick={onUpdate}>
+              <BsFillGearFill />
+            </div>
+            <div className={classes.iconBin} onClick={onDelete}>
+              <AiFillDelete />
+            </div>
           </div>
-          <div className={classes.iconBin} onClick={onDelete}>
-            <AiFillDelete />
-          </div>
-        </div>
+        )}
+
         <h3 className={classes.title}>{title}</h3>
         <p className={classes.points}>
           <b>Cost:</b> {stringifiedPoints} pts
