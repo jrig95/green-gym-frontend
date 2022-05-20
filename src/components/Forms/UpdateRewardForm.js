@@ -1,16 +1,14 @@
-import { useReward } from "../Reward/hooks/use-reward";
 import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
 
-const UpdateRewardForm = ({ onClose, rewardId }) => {
+const UpdateRewardForm = ({ onClose, reward }) => {
   const createReward = useCreateReward();
-  const { data } = useReward(rewardId);
-  
+
   // use state to managed edited values
-  console.log(data, "why is it getting all rewards?");
+  console.log(reward, "UpdateRewardForm");
   // Image ref for the add image button - use state for image
   const imageRef = useRef();
   const [selectedImageFile, setSelecetedImageFile] = useState(null);
@@ -20,15 +18,15 @@ const UpdateRewardForm = ({ onClose, rewardId }) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
-
+  
   const {
     value: titleValue,
     isValid: titleIsValid,
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHandler,
-    reset: restTitle,
-  } = useInput(textNotEmpty);
+    reset: resetTitle,
+  } = useInput(textNotEmpty, reward.reward_name);
 
   const {
     value: pointsValue,
@@ -36,16 +34,16 @@ const UpdateRewardForm = ({ onClose, rewardId }) => {
     hasError: pointsHasError,
     valueChangeHandler: pointsChangeHandler,
     inputBlurHandler: pointsBlurHandler,
-    reset: restPoints,
-  } = useInput(isNumber);
+    reset: resetPoints,
+  } = useInput(isNumber, reward.reward_points);
 
   const addRewardHandler = (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('reward[reward_name]', titleValue);
-    formData.append('reward[reward_points]', pointsValue);
-    formData.append('reward[photo]', selectedImageFile);
+    formData.append("reward[reward_name]", titleValue);
+    formData.append("reward[reward_points]", pointsValue);
+    formData.append("reward[photo]", selectedImageFile);
 
     console.log(formData);
 
@@ -70,7 +68,7 @@ const UpdateRewardForm = ({ onClose, rewardId }) => {
 
   return (
     <div>
-      <h1 className={classes.title}>Add Reward</h1>
+      <h1 className={classes.title}>Update {reward.reward_name}</h1>
       <form onSubmit={addRewardHandler}>
         <div className={classes.controlGroup}>
           <div className={titleClasses}>
@@ -126,7 +124,7 @@ const UpdateRewardForm = ({ onClose, rewardId }) => {
               Cancel
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+              Update
             </Button>
           </div>
         </div>

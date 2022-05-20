@@ -6,7 +6,7 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const getReward = async (id) => {
-  const { data } = await axios(`${baseUrl}/rewards/466`);
+  const { data } = await axios(`${baseUrl}/rewards/${id}`);
   return data;
 };
 
@@ -24,8 +24,7 @@ export const useReward = (id) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
-    },
-    staleTime: Infinity,
+    }
   });
 
   return { data, isError, error, isLoading };
