@@ -1,32 +1,29 @@
-import { useCreateReward } from "../Reward/hooks/use-create-reward";
+import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useRef, useState } from "react";
 
-const AddRewardForm = ({ onClose }) => {
-  const createReward = useCreateReward();
+const UpdateRewardForm = ({ onClose, reward }) => {
+  const updateReward = useUpdateReward();
 
   // use state to managed edited values
-
-  // Image ref for the add image button - use state for image
-  const imageRef = useRef();
-  const [selectedImageFile, setSelecetedImageFile] = useState(null);
+  // how do I stop this from updating?
+  console.log(reward, "UpdateRewardForm");
 
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
-
+  
   const {
     value: titleValue,
     isValid: titleIsValid,
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHandler,
-    reset: restTitle,
-  } = useInput(textNotEmpty);
+    reset: resetTitle,
+  } = useInput(textNotEmpty, reward.reward_name);
 
   const {
     value: pointsValue,
@@ -34,31 +31,20 @@ const AddRewardForm = ({ onClose }) => {
     hasError: pointsHasError,
     valueChangeHandler: pointsChangeHandler,
     inputBlurHandler: pointsBlurHandler,
-    reset: restPoints,
-  } = useInput(isNumber);
+    reset: resetPoints,
+  } = useInput(isNumber, reward.reward_points);
 
-  const addRewardHandler = (event) => {
+  const updateRewardHandler = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append('reward[reward_name]', titleValue);
-    formData.append('reward[reward_points]', pointsValue);
-    formData.append('reward[photo]', selectedImageFile);
+    const updatedReward = {
+      id: reward.id,
+      reward_name: titleValue,
+      reward_points: pointsValue
+    }
 
-    console.log(formData);
+    updateReward(updatedReward)
 
-    // const reward = {
-    //   reward_name: titleValue,
-    //   reward_points: pointsValue,
-    //   photo_url: selectedImageFile,
-    // };
-
-    // console.log(reward);
-    createReward(formData);
-
-    // if (selectedImageFile) {
-    //   createReward(formData);
-    // }
     onClose();
   };
 
@@ -72,14 +58,10 @@ const AddRewardForm = ({ onClose }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const fileSelectHander = (event) => {
-    setSelecetedImageFile(event.target.files[0]);
-  };
-
   return (
     <div>
-      <h1 className={classes.title}>Add Reward</h1>
-      <form onSubmit={addRewardHandler}>
+      <h1 className={classes.title}>Update {reward.reward_name}</h1>
+      <form onSubmit={updateRewardHandler}>
         <div className={classes.controlGroup}>
           <div className={titleClasses}>
             <label htmlFor="title">Reward Name</label>
@@ -108,7 +90,7 @@ const AddRewardForm = ({ onClose }) => {
               <p className={classes.errorText}>Must include points</p>
             )}
           </div>
-          <div className={classes.formControl}>
+          {/* <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
             <input
               style={{ display: "none" }}
@@ -121,7 +103,7 @@ const AddRewardForm = ({ onClose }) => {
             <Button size="small" onClick={() => imageRef.current.click()}>
               Add Image
             </Button>
-          </div>
+          </div> */}
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
             <select id="program">
@@ -134,7 +116,7 @@ const AddRewardForm = ({ onClose }) => {
               Cancel
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+              Update
             </Button>
           </div>
         </div>
@@ -143,4 +125,4 @@ const AddRewardForm = ({ onClose }) => {
   );
 };
 
-export default AddRewardForm;
+export default UpdateRewardForm;

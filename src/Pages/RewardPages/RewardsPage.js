@@ -35,7 +35,7 @@ const RewardsPage = () => {
   // this can be changed later and used by context
   const admin = true;
 
-  const { data, isError, error, isLoading } = useRewards();
+  const { data } = useRewards();
 
   const programRewardsArray = data.filter(
     (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
@@ -86,6 +86,8 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
+        admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
         image={reward.photo_url}
@@ -106,6 +108,8 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
+        admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
         image={reward.photo_url}
@@ -118,6 +122,7 @@ const RewardsPage = () => {
             reward_name: reward.reward_name,
           })
         }
+        onUpdate={() => console.log('edit')}
       />
     );
   });
