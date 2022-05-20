@@ -7,10 +7,8 @@ const UpdateRewardForm = ({ onClose, reward }) => {
   const updateReward = useUpdateReward();
 
   // use state to managed edited values
+  // how do I stop this from updating?
   console.log(reward, "UpdateRewardForm");
-  // Image ref for the add image button - use state for image
-  // const imageRef = useRef();
-  // const [selectedImageFile, setSelecetedImageFile] = useState(null);
 
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
@@ -39,14 +37,6 @@ const UpdateRewardForm = ({ onClose, reward }) => {
   const updateRewardHandler = (event) => {
     event.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append("reward[reward_name]", titleValue);
-    // formData.append("reward[reward_points]", pointsValue);
-    // formData.append("reward[photo]", selectedImageFile);
-
-    // console.log(formData);
-
-    // createReward(formData);
     const updatedReward = {
       id: reward.id,
       reward_name: titleValue,
@@ -67,10 +57,6 @@ const UpdateRewardForm = ({ onClose, reward }) => {
   const pointsClasses = pointsHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
-
-  // const fileSelectHander = (event) => {
-  //   setSelecetedImageFile(event.target.files[0]);
-  // };
 
   return (
     <div>
