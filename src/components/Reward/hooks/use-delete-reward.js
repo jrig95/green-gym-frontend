@@ -5,16 +5,16 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const createRewards = async (reward) => {
-  await axios.post(`${baseUrl}/rewards`, reward);
+const deleteRewards = async (id) => {
+  await axios.delete(`${baseUrl}/rewards/${id}`);
 };
 
-export const useCreateReward = () => {
+export const useDeleteReward = () => {
   const { addError } = useAPIError();
+
   const queryClient = useQueryClient();
-  const { mutate } = useMutation((reward) => createRewards(reward), {
+  const { mutate } = useMutation((id) => deleteRewards(id), {
     onSuccess: () => {
-      console.log("success")
       queryClient.invalidateQueries([queryKeys.rewards]);
     },
     onError: (error) => {
