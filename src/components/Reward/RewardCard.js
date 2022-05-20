@@ -9,6 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 
 const RewardCard = ({
   admin,
+  id,
   title,
   points,
   image,
@@ -28,7 +29,7 @@ const RewardCard = ({
 
   return (
     <Card className={classes.card}>
-      {updateRewardIsShown && <UpdateReward onClose={hideRewardHandler} editForm={true} reward={{reward_name: title, reward_points: points}}/>}
+      {updateRewardIsShown && <UpdateReward onClose={hideRewardHandler} editForm={true} reward={{id: id, reward_name: title, reward_points: points}}/>}
       <div className={classes.textContainer}>
         {admin && (
           <div className={classes.icons}>

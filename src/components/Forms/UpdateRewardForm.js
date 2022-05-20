@@ -1,17 +1,16 @@
-import { useCreateReward } from "../Reward/hooks/use-create-reward";
+import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useRef, useState } from "react";
 
 const UpdateRewardForm = ({ onClose, reward }) => {
-  const createReward = useCreateReward();
+  const updateReward = useUpdateReward();
 
   // use state to managed edited values
   console.log(reward, "UpdateRewardForm");
   // Image ref for the add image button - use state for image
-  const imageRef = useRef();
-  const [selectedImageFile, setSelecetedImageFile] = useState(null);
+  // const imageRef = useRef();
+  // const [selectedImageFile, setSelecetedImageFile] = useState(null);
 
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
@@ -37,17 +36,24 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     reset: resetPoints,
   } = useInput(isNumber, reward.reward_points);
 
-  const addRewardHandler = (event) => {
+  const updateRewardHandler = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("reward[reward_name]", titleValue);
-    formData.append("reward[reward_points]", pointsValue);
-    formData.append("reward[photo]", selectedImageFile);
+    // const formData = new FormData();
+    // formData.append("reward[reward_name]", titleValue);
+    // formData.append("reward[reward_points]", pointsValue);
+    // formData.append("reward[photo]", selectedImageFile);
 
-    console.log(formData);
+    // console.log(formData);
 
-    createReward(formData);
+    // createReward(formData);
+    const updatedReward = {
+      id: reward.id,
+      reward_name: titleValue,
+      reward_points: pointsValue
+    }
+
+    updateReward(updatedReward)
 
     onClose();
   };
@@ -62,14 +68,14 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const fileSelectHander = (event) => {
-    setSelecetedImageFile(event.target.files[0]);
-  };
+  // const fileSelectHander = (event) => {
+  //   setSelecetedImageFile(event.target.files[0]);
+  // };
 
   return (
     <div>
       <h1 className={classes.title}>Update {reward.reward_name}</h1>
-      <form onSubmit={addRewardHandler}>
+      <form onSubmit={updateRewardHandler}>
         <div className={classes.controlGroup}>
           <div className={titleClasses}>
             <label htmlFor="title">Reward Name</label>
@@ -98,7 +104,7 @@ const UpdateRewardForm = ({ onClose, reward }) => {
               <p className={classes.errorText}>Must include points</p>
             )}
           </div>
-          <div className={classes.formControl}>
+          {/* <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
             <input
               style={{ display: "none" }}
@@ -111,7 +117,7 @@ const UpdateRewardForm = ({ onClose, reward }) => {
             <Button size="small" onClick={() => imageRef.current.click()}>
               Add Image
             </Button>
-          </div>
+          </div> */}
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
             <select id="program">

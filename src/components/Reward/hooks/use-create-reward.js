@@ -14,7 +14,6 @@ export const useCreateReward = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((reward) => createRewards(reward), {
     onSuccess: () => {
-      console.log("success")
       queryClient.invalidateQueries([queryKeys.rewards]);
     },
     onError: (error) => {
