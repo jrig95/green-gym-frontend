@@ -52,7 +52,7 @@ const ProgramsPage = () => {
                 key={program.id}
                 id={program.id}
                 title={program.program_title}
-                image={program.program_cover_image}
+                image={program.photo_url}
                 description={program.program_description}
                 admin={admin}
                 onDelete={() => showDeleteProgramHandler(program)}

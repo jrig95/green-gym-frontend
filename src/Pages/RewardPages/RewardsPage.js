@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
+import { useDeleteReward } from "../../components/Reward/hooks/use-delete-reward";
 import { useRewards } from "../../components/Reward/hooks/use-rewards";
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
@@ -22,11 +22,14 @@ const DUMMY_DATA = {
 };
 
 const RewardsPage = () => {
+  const deleteReward = useDeleteReward();
+
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
+  const [reward, setReward] = useState({ id: 0, reward_name: "" });
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
@@ -65,7 +68,8 @@ const RewardsPage = () => {
     setClaimedRewardMessageIsShown(false);
   };
 
-  const showDeleteRewardHandler = () => {
+  const showDeleteRewardHandler = (reward) => {
+    setReward(reward);
     setDeleteRewardIsShown(true);
   };
 
@@ -73,8 +77,9 @@ const RewardsPage = () => {
     setDeleteRewardIsShown(false);
   };
 
-  const deleteRewardHandler = (rewardId) => {
-    console.log(rewardId);
+  const deleteRewardHandler = (id) => {
+    deleteReward(id);
+    hideDeleteRewardHandler();
   };
 
   const programRewards = programRewardsArray.map((reward) => {
@@ -87,7 +92,12 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
-        onDelete={showDeleteRewardHandler}
+        onDelete={() =>
+          showDeleteRewardHandler({
+            id: reward.id,
+            reward_name: reward.reward_name,
+          })
+        }
       />
     );
   });
@@ -102,7 +112,12 @@ const RewardsPage = () => {
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
-        onDelete={showDeleteRewardHandler}
+        onDelete={() =>
+          showDeleteRewardHandler({
+            id: reward.id,
+            reward_name: reward.reward_name,
+          })
+        }
       />
     );
   });
@@ -143,8 +158,8 @@ const RewardsPage = () => {
       {deleteRewardIsShown && (
         <DeleteReward
           onClose={hideDeleteRewardHandler}
-          onDelete={() => deleteRewardHandler({ title: "test" })}
-          reward={{ title: "test" }}
+          onDelete={() => deleteRewardHandler(reward.id)}
+          reward={reward.reward_name}
         />
       )}
       <div className={classes.container}>

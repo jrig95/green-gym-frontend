@@ -1,32 +1,28 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const getRewards = async () => {
-  const { data } = await axios(`${baseUrl}/rewards`);
-  return data;
+const deleteRewards = async (id) => {
+  await axios.delete(`${baseUrl}/rewards/${id}`);
 };
 
-export const useRewards = () => {
+export const useDeleteReward = () => {
   const { addError } = useAPIError();
 
-  const fallback = [];
-  const {
-    data = fallback,
-    isError,
-    error,
-    isLoading,
-  } = useQuery(queryKeys.rewards, getRewards, {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation((id) => deleteRewards(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.rewards]);
+    },
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     },
-    staleTime: Infinity,
   });
 
-  return { data, isError, error, isLoading };
+  return mutate;
 };
