@@ -37,13 +37,26 @@ const AddRewardForm = ({ onClose }) => {
 
   const addRewardHandler = (event) => {
     event.preventDefault();
-    const reward = {
-      reward_name: titleValue,
-      reward_image: "https://picsum.photos/200",
-      reward_points: pointsValue,
-    };
 
-    createReward(reward);
+    const formData = new FormData();
+    formData.append('reward[reward_name]', titleValue);
+    formData.append('reward[reward_points]', pointsValue);
+    formData.append('reward[photo]', selectedImageFile);
+
+    console.log(formData);
+
+    // const reward = {
+    //   reward_name: titleValue,
+    //   reward_points: pointsValue,
+    //   photo_url: selectedImageFile,
+    // };
+
+    // console.log(reward);
+    createReward(formData);
+
+    // if (selectedImageFile) {
+    //   createReward(formData);
+    // }
     onClose();
   };
 
@@ -99,7 +112,7 @@ const AddRewardForm = ({ onClose }) => {
               style={{ display: "none" }}
               type="file"
               id="image"
-              accept="image/jpega image/png"
+              accept="image/jpeg image/png"
               onChange={fileSelectHander}
               ref={imageRef}
             />
