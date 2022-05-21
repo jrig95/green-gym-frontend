@@ -1,18 +1,32 @@
+import ReactPlayer from "react-player";
+import { useParams } from "react-router-dom";
 import { Fragment } from "react";
-import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
+
+import { useLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-library-item";
+import Banner from "../../components/Layout/Banner";
 import classes from "./LibraryItemPage.module.css";
 
 const LibraryItemPage = () => {
   // Get id from params
-  // useLibraryItem to get the library item
-  // display the title of the video in the banner
-  // display the video in the body
+  const params = useParams();
+  
+  const id = params.libraryId;
 
+  const { data } = useLibraryItem(id);
+
+  console.log(data);
+  
   return (
     <Fragment>
-      <AdminBanner />
+      <Banner title={data.title} />
       <div className={classes.container}>
-        <h2>test</h2>
+      <ReactPlayer
+        playing={true}
+        width={600}
+        style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.26)" }}
+        url={data.video_url}
+        controls={true}
+      />
       </div>
     </Fragment>
   );

@@ -5,10 +5,10 @@ import { AiFillDelete } from "react-icons/ai";
 import Card from "../../UI/Card";
 import classes from "./LibraryItemCard.module.css";
 
-const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
+const LibraryItemCard = ({ id, title, onDelete }) => {
   return (
     <Card className={classes.card}>
-      <Link to="/">
+      <Link to={`/library/${id}`}>
         <h3 className={classes.title}>{title}</h3>
       </Link>
       <div className={classes.icons}>

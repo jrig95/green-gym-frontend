@@ -39,6 +39,7 @@ const LibraryItemsPage = () => {
     return (
       <LibraryItemCard
         key={libraryItem.id}
+        id={libraryItem.id}
         title={libraryItem.title}
         videoUrl={libraryItem.video_url}
         onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
