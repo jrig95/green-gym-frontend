@@ -1,16 +1,10 @@
-import { useCreateLibraryItem } from "../AdminComponents/Library/Hooks/use-create-library-item";
+import { useUpdateLibraryItem } from "../AdminComponents/Library/Hooks/use-update-library-items";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
-import FormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
-import { useRef, useState } from "react";
 
-const AddLibraryItemForm = ({ onClose }) => {
-  const [selectedVideoFile, setSelectedVideoFile] = useState();
-  const videoRef = useRef();
-
-  // React query custom hook
-  const createLibraryItem = useCreateLibraryItem();
+const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
+  const updateLibraryItem = useUpdateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
   const {
@@ -20,7 +14,7 @@ const AddLibraryItemForm = ({ onClose }) => {
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHander,
     reset: resetTitle,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, libraryItem.title);
 
   const titleClasses = titleHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -29,26 +23,19 @@ const AddLibraryItemForm = ({ onClose }) => {
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    const library_item = {
+      id: libraryItem.id,
+      title: titleValue,
+    };
 
-    formData.append("library_item[title]", titleValue);
-    formData.append("library_item[video]", selectedVideoFile);
+    updateLibraryItem(library_item);
 
-    // const library_item = {
-    //   title: titleValue,
-    // };
-
-    createLibraryItem(formData);
     onClose();
-  };
-
-  const fileSelectHandler = (event) => {
-    setSelectedVideoFile(event.target.files[0]);
   };
 
   return (
     <div>
-      <h1 className={classes.title}>Add Library Item</h1>
+      <h1 className={classes.title}>Update {libraryItem.title}</h1>
       <form onSubmit={addLibraryItemHandler}>
         <div className={classes.controlGroup}>
           <div className={titleClasses}>
@@ -64,24 +51,12 @@ const AddLibraryItemForm = ({ onClose }) => {
               <p className={classes.errorText}>Must have a title</p>
             )}
           </div>
-          <div className={classes.formControl}>
-            <label htmlFor="video">Video</label>
-            <input
-              style={{display: 'none'}}
-              type="file"
-              id="video"
-              accept="video/*"
-              onChange={fileSelectHandler}
-              ref={videoRef}
-            />
-            <Button size="small" onClick={() => videoRef.current.click()}>Add Video</Button>
-          </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
             <Button size="small" type="submit">
-              Submit
+              Update
             </Button>
           </div>
         </div>
@@ -90,4 +65,4 @@ const AddLibraryItemForm = ({ onClose }) => {
   );
 };
 
-export default AddLibraryItemForm;
+export default UpdateLibraryItemForm;

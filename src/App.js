@@ -23,6 +23,7 @@ import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 // import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 // import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
+import LibraryItemPage from "./Pages/LibraryPages/LibraryItemPage";
 import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
 import PurchasePage from "./Pages/ProgramPages/PurchasePage";
 import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
@@ -58,6 +59,7 @@ function App() {
         <Route path="members" element={<MembersPage />} />
         <Route path="members/:memberId" element={<MemberPage />} />
         <Route path="library" element={<LibraryItemsPage />} />
+        <Route path="library/:libraryId" element={<LibraryItemPage />}/>
       </Routes>
     </Layout>
   );
