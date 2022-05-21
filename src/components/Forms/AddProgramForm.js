@@ -15,33 +15,39 @@ const AddProgramForm = () => {
   const imageRef = useRef();
   const [selectedImageFile, setSelecetedImageFile] = useState(null);
 
-    
-  // useState to set the number of days a program will run
-  const [numberOfWorkoutDays, setNumberOfWorkoutDays] = useState(0); 
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
+    const formData = new FormData();
+
+    formData.append("program[program_name]", programNameValue);
+    formData.append("program[number_of_days]", numberOfDaysValue);
+    formData.append("program[description]", descriptionValue);
+    formData.append("program[photo]", selectedImageFile);
 
     const newProgram = {
       program_name: programNameValue,
       number_of_days: numberOfDaysValue,
       descriptiom: descriptionValue,
-      cover_image: coverImageValue
-    }
+      cover_image: coverImageValue,
+    };
 
     console.log(newProgram, "newProgram - AddProgramForm line 22");
-
-    setNumberOfWorkoutDays(numberOfDaysValue);
 
     resetprogramName();
     resetNumberOfDays();
     resetDescription();
     resetCoverImage();
 
+    // 1. Query React to create the program
+    // 2. Return the id of the program that has just been created
+    // 3. pass that onto add-workout via state
+
     // programatic navigation to the add workout page.
     // need to pass the number of days here
-    navigate("/programs/add-program/add-workout", { state: { pageNumber: numberOfDaysValue }} );
+    navigate("/programs/add-program/add-workout", {
+      state: { pageNumber: numberOfDaysValue },
+    });
   };
 
   const textNotEmpty = (value) => value !== "";
@@ -91,7 +97,6 @@ const AddProgramForm = () => {
     setSelecetedImageFile(event.target.files);
   };
 
-
   const programNameClasses = programNameHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
@@ -128,9 +133,7 @@ const AddProgramForm = () => {
               onBlur={programNameBlurHandler}
             />
             {programNameHasError && (
-              <p className={classes.errorText}>
-                Program must have a name
-              </p>
+              <p className={classes.errorText}>Program must have a name</p>
             )}
           </div>
           <div className={numberOfDaysClasses}>
@@ -144,9 +147,7 @@ const AddProgramForm = () => {
               onBlur={numberOfDaysBlurHandler}
             />
             {numberOfDaysHasError && (
-              <p className={classes.errorText}>
-                must be a valid number
-              </p>
+              <p className={classes.errorText}>must be a valid number</p>
             )}
           </div>
           <div className={descriptionClasses}>
@@ -171,10 +172,12 @@ const AddProgramForm = () => {
               value={coverImageValue}
               onChange={fileSelectHandler}
               onBlur={coverImageBlurHandler}
-              style={{ display: 'none'}}
+              style={{ display: "none" }}
               ref={imageRef}
             />
-            <Button size="small" onClick={() => imageRef.current.click()}>Add Image</Button>
+            <Button size="small" onClick={() => imageRef.current.click()}>
+              Add Image
+            </Button>
             {coverImageHasError && (
               <p className={classes.errorText}>cover image cannot be blank</p>
             )}
