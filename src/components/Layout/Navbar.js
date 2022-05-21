@@ -1,12 +1,19 @@
 import { NavLink, Link } from "react-router-dom";
+import {FaBars, FaTimes} from 'react-icons/fa'
+
+
 
 import Button from "../UI/Button";
 import classes from "./Navbar.module.css";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
+import React, {useState} from 'react';
+
 
 const Navbar = () => {
   const { t } = useTranslation();
+  const [nav, setNav] = useState(false)
+  const handleClick = () => setNav(!nav)
 
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
@@ -25,50 +32,54 @@ const Navbar = () => {
         <h1>Green Gym</h1>
       </Link>
       {adminLoggedIn && <h2 className={classes.admin}>Admin</h2>}
-      <div className={classes.linksContainer}>
+      <div className={!nav ? classes.linksContainer : classes.mobileMenu}>
         {loggedOut && (
           <div className={classes.links}>
-            <Link to="login">
+            <Link onClick={handleClick}to="login">
               {t("nav_bar_already_a_member")}
             </Link>
-            <Link to="signup">
+            <Link onClick={handleClick} to="signup">
               <Button size="small">{t("nav_bar_create_a_profile")}</Button>
             </Link>
           </div>
         )}
         {adminLoggedIn && (
           <div className={classes.links}>
-            <NavLink style={isActive} to="members">
+            <NavLink onClick={handleClick} style={isActive} to="members">
               {t("nav_bar_members")}
             </NavLink>
-            <NavLink style={isActive} to="library">
+            <NavLink onClick={handleClick} style={isActive} to="library">
               {t("nav_bar_library")}
             </NavLink>
-            <NavLink style={isActive} to="programs">
+            <NavLink onClick={handleClick} style={isActive} to="programs">
               {t("nav_bar_programs")}
             </NavLink>
-            <NavLink style={isActive} to="rewards">
+            <NavLink onClick={handleClick} style={isActive} to="rewards">
               {t("nav_bar_rewards")}
             </NavLink>
           </div>
         )}
         {userLoggedIn && (
           <div className={classes.links}>
-            <NavLink style={isActive} to="programs">
+            <NavLink onClick={handleClick} style={isActive} to="programs">
               {t("nav_bar_programs")}
             </NavLink>
-            <NavLink style={isActive} to="activities">
+            <NavLink onClick={handleClick} style={isActive} to="activities">
               {t("nav_bar_my_activites")}
             </NavLink>
-            <NavLink style={isActive} to="rewards">
+            <NavLink onClick={handleClick} style={isActive} to="rewards">
               {t("nav_bar_rewards")}
             </NavLink>
-            <NavLink style={isActive} to="profile">
+            <NavLink onClick={handleClick} style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
           </div>
         )}
         <LanguageToggle />
+      </div>
+
+        <div onClick={handleClick} className={classes.hamburger}>
+         {!nav ? <FaBars /> : <FaTimes />}
       </div>
     </div>
   );

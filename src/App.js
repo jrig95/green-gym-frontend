@@ -2,6 +2,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Routes, Route } from "react-router-dom";
 
+
 // import classes from "./App.module.css";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
@@ -69,7 +70,12 @@ function App() {
       </Layout>
       <ReactQueryDevtools />
     </QueryClientProvider>
+
+
+
   );
+
+
 }
 
 export default App;
