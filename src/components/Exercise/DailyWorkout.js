@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useExercises } from "./hooks/use-exercises";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyWorkout.module.css";
 import RestCard from "./WorkOutUI/RestCard";
@@ -12,6 +13,13 @@ import videoFour from "../../assets/exercise_video_4.mp4";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
 const DailyWorkout = () => {
+  // Hook to get the workout.
+  const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises();
+
+  if (!exerciseIsLoading) {
+    console.log();
+  }
+
   // have a set state for index - start at 0
   const [videoIndex, setvideoIndex] = useState(0);
   const [exerciseIndex, setExerciseIndex] = useState(0);
@@ -33,23 +41,22 @@ const DailyWorkout = () => {
     }, timeRemaining);
   };
 
+  let videoUls = [];
+
+
+
   const videos = [videoOne, videoTwo, videoThree, videoFour];
 
   const exerciseLength = videos.length;
   const workoutFinish = exerciseLength === videoIndex;
 
-  useState(() => {
-    console.log(workoutFinish);
-    console.log(exerciseLength, "exerciseLength- line 43 DailyWorkout");
-    console.log(videoIndex, "videoIndex - line 44 DailyWorkout");
-    console.log(exerciseIndex, "exerciseIndex - line 45 DailyWorkout");
-  }, [workoutFinish, videoIndex, exerciseIndex, showRestScreen]);
+  if (exerciseIsLoading) return <p>Loading...</p>
 
   const rest = <RestCard timer={10} />;
 
   const currentVideo = (
     <ExerciseVideo
-      videoUrl={videos[videoIndex]}
+      videoUrl={exerciseData[videoIndex].video_url}
       onEnded={() => currentVideoEndedHandler(10)}
     />
   );
@@ -81,7 +88,11 @@ const DailyWorkout = () => {
       {startWorkout && workoutVideo}
       {!startWorkout && startWorkoutButton}
       {workoutIsFinish && workoutFinishedCard}
-      <ExerciseTrackerCard exerciseIndex={exerciseIndex} />
+      <ExerciseTrackerCard
+        exerciseIndex={exerciseIndex}
+        exercises={exerciseData}
+        isLoading={exerciseIsLoading}
+      />
       <div className={classes.buttonContainer}>
         <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
       </div>

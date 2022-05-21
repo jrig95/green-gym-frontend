@@ -2,64 +2,18 @@ import { Fragment, useState } from "react";
 
 import { useLibraryItems } from "../../components/AdminComponents/Library/Hooks/use-library-items";
 import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
-import videoOne from "../../assets/exercise_video_1.mp4";
 import LibraryItemCard from "../../components/AdminComponents/Library/LibraryItemCard";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import classes from "./LibraryItemsPage.module.css";
 
-const DUMMY_ITEMS = [
-  {
-    id: "li1",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li2",
-    title: "squat",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li3",
-    title: "bench press",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li4",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li5",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li6",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li7",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li8",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li9",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-];
-
 const LibraryItemsPage = () => {
   const { data } = useLibraryItems();
+
+  console.log(data);
   
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
+    
   const [libraryItemDetails, setLibraryItemDetails] = useState({
     id: 0,
     title: "Unknown",
@@ -86,7 +40,7 @@ const LibraryItemsPage = () => {
       <LibraryItemCard
         key={libraryItem.id}
         title={libraryItem.title}
-        videoUrl={videoOne}
+        videoUrl={libraryItem.video_url}
         onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
       />
     );
