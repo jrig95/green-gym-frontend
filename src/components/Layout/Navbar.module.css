@@ -99,20 +99,34 @@
     font-size: 1.8rem;
     cursor: pointer;
     color: black;
-    margin-right: 1rem;
+    margin-right: 2rem;
  }
 
  .mobileMenu {
    position: absolute;
    top: 0;
    left: 0;
-   width: 100vw;
+   width: 100%;
    height: 100vh;
-   background-color: #0a192f;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   background-color: white;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .links {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  line-height: 2.5rem;
+ }
+
+ .links a{
+   font-size: 2.25rem;
+  padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
  }
 
  .noMobileMenu{
