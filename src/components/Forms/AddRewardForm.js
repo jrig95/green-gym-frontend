@@ -7,7 +7,7 @@ import { useRef, useState } from "react";
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
 
-  // use state to managed edited values
+  // use state to managed edited value
 
   // Image ref for the add image button - use state for image
   const imageRef = useRef();
@@ -41,24 +41,12 @@ const AddRewardForm = ({ onClose }) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('reward[reward_name]', titleValue);
-    formData.append('reward[reward_points]', pointsValue);
-    formData.append('reward[photo]', selectedImageFile);
+    formData.append("reward[reward_name]", titleValue);
+    formData.append("reward[reward_points]", pointsValue);
+    formData.append("reward[photo]", selectedImageFile);
 
-    console.log(formData);
-
-    // const reward = {
-    //   reward_name: titleValue,
-    //   reward_points: pointsValue,
-    //   photo_url: selectedImageFile,
-    // };
-
-    // console.log(reward);
     createReward(formData);
 
-    // if (selectedImageFile) {
-    //   createReward(formData);
-    // }
     onClose();
   };
 

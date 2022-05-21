@@ -1,12 +1,17 @@
+import { useLastProgram } from "../Program/hooks/use-last-program";
 import AddExerciseForm from "./AddExerciseForm";
 import AdminFormCard from "./AdminFormCard";
 import classes from "./AddWorkoutForm.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
+  const { data } = useLastProgram()
+
+  console.log(data);
+
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);
 

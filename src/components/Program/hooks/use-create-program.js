@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 import useAPIError from "../../../common/hooks/use-API-error";
+import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createProgram = async (program) => {
@@ -10,14 +11,18 @@ const createProgram = async (program) => {
 
 export const useCreateProgram = () => {
   const { addError } = useAPIError();
-  const fallback = [];
-
-  const { mutate, data = fallback, isSuccess } = useMutation((program) => createProgram(program), {
+  // const fallback = [];
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation((program) => createProgram(program), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.programs]);
+    },
     onError: (error) => {
-      const title = error instanceof Error ? error.message : "error connecting to server";
-      addError(program, error.status);
-    }
+      const title =
+        error instanceof Error ? error.message : "error connecting to server";
+      addError(title, error.status);
+    },
   });
 
-  return { mutate, data, isSuccess };
+  return mutate;
 };

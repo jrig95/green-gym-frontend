@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 
+import { useCreateProgram } from "../Program/hooks/use-create-program";
 import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
@@ -8,6 +9,8 @@ import useInput from "./Hooks/use-input";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const AddProgramForm = () => {
+  const createProgram = useCreateProgram();
+
   // Set up a navigate to change routes on form submittion
   const navigate = useNavigate();
 
@@ -20,35 +23,34 @@ const AddProgramForm = () => {
 
     const formData = new FormData();
 
-    formData.append("program[program_name]", programNameValue);
-    formData.append("program[number_of_days]", numberOfDaysValue);
-    formData.append("program[description]", descriptionValue);
-    formData.append("program[photo]", selectedImageFile);
-
     const newProgram = {
       program_name: programNameValue,
       number_of_days: numberOfDaysValue,
       descriptiom: descriptionValue,
-      cover_image: coverImageValue,
+      pricee: priceValue,
     };
 
-    console.log(newProgram, "newProgram - AddProgramForm line 22");
+    formData.append("program[program_title]", programNameValue);
+    formData.append("program[number_of_days]", numberOfDaysValue);
+    formData.append("program[program_description]", descriptionValue);
+    formData.append("program[price]", priceValue);
+    formData.append("program[photo]", selectedImageFile);
 
-    resetprogramName();
-    resetNumberOfDays();
-    resetDescription();
-    resetCoverImage();
 
-    // 1. Query React to create the program
+    createProgram(formData);
     // 2. Return the id of the program that has just been created
+    // if (isSuccess) {
+    //   console.log(data, "program data");
+    // }
     // 3. pass that onto add-workout via state
 
     // programatic navigation to the add workout page.
     // need to pass the number of days here
-    navigate("/programs/add-program/add-workout", {
-      state: { pageNumber: numberOfDaysValue },
-    });
+    // navigate("/programs/add-program/add-workout", {
+    //   state: { pageNumber: numberOfDaysValue },
+    // });
   };
+
 
   const textNotEmpty = (value) => value !== "";
 
@@ -85,6 +87,15 @@ const AddProgramForm = () => {
   } = useInput(textNotEmpty);
 
   const {
+    value: priceValue,
+    isValid: priceIsValid,
+    hasError: priceHasError,
+    valueChangeHandler: priceChangeHandler,
+    inputBlurHandler: priceBlurHandler,
+    reset: restPrice,
+  } = useInput(isNotANumber);
+
+  const {
     value: coverImageValue,
     isValid: coverImageIsValid,
     hasError: coverImageHasError,
@@ -94,7 +105,7 @@ const AddProgramForm = () => {
   } = useInput(textNotEmpty);
 
   const fileSelectHandler = (event) => {
-    setSelecetedImageFile(event.target.files);
+    setSelecetedImageFile(event.target.files[0]);
   };
 
   const programNameClasses = programNameHasError
@@ -109,15 +120,16 @@ const AddProgramForm = () => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
+  const priceClasses = priceHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
   const coverImageClasses = coverImageHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
   const formIsValid =
-    programNameIsValid &&
-    numberOfDaysIsValid &&
-    descriptionIsValid &&
-    coverImageIsValid;
+    programNameIsValid && numberOfDaysIsValid && descriptionIsValid;
 
   return (
     <FormCard title="Add Program">
@@ -161,6 +173,19 @@ const AddProgramForm = () => {
             />
             {descriptionHasError && (
               <p className={classes.errorText}>description cannot be blank</p>
+            )}
+          </div>
+          <div className={priceClasses}>
+            <label htmlFor="price">Price</label>
+            <input
+              type="number"
+              id="price"
+              value={priceValue}
+              onChange={priceChangeHandler}
+              onBlur={priceBlurHandler}
+            />
+            {priceHasError && (
+              <p className={classes.errorText}>price cannot be blank</p>
             )}
           </div>
           <div className={coverImageClasses}>
