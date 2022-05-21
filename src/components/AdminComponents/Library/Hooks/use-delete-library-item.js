@@ -6,7 +6,7 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const deleteLibraryItem = async (id) => {
-  await axios.delete(`${baseUrl}/library_item/${id}`);
+  await axios.delete(`${baseUrl}/library_items/${id}`);
 };
 
 export const useDeleteLibraryItem = () => {
@@ -15,9 +15,9 @@ export const useDeleteLibraryItem = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((id) => deleteLibraryItem(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.libraryItem]);
+      queryClient.invalidateQueries([queryKeys.libraryItems]);
     },
-    onError: () => {
+    onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     }

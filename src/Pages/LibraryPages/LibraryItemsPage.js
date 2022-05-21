@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 
+import { useDeleteLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-delete-library-item";
 import { useLibraryItems } from "../../components/AdminComponents/Library/Hooks/use-library-items";
 import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
 import LibraryItemCard from "../../components/AdminComponents/Library/LibraryItemCard";
@@ -7,6 +8,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import classes from "./LibraryItemsPage.module.css";
 
 const LibraryItemsPage = () => {
+  const deleteLibraryItem = useDeleteLibraryItem();
   const { data } = useLibraryItems();
 
   console.log(data);
@@ -20,9 +22,12 @@ const LibraryItemsPage = () => {
   });
 
   const deleteLibraryItemHandler = () => {
-    console.log(
-      `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
-    );
+    // console.log(
+    //   `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
+    // );
+
+    deleteLibraryItem(libraryItemDetails.id);
+
     setDeleteLibraryItemIsShown(false);
   };
 
