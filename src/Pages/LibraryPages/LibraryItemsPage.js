@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 
+import UpdateLibraryItem from "../../components/AdminComponents/Library/UpdateLibraryItem";
 import { useDeleteLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-delete-library-item";
 import { useLibraryItems } from "../../components/AdminComponents/Library/Hooks/use-library-items";
 import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
@@ -11,11 +12,11 @@ const LibraryItemsPage = () => {
   const deleteLibraryItem = useDeleteLibraryItem();
   const { data } = useLibraryItems();
 
-  console.log(data);
-  
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
-    
+  const [updateLibraryItemIsShown, setUpdateLibraryItemIsShown] =
+    useState(false);
+
   const [libraryItemDetails, setLibraryItemDetails] = useState({
     id: 0,
     title: "Unknown",
@@ -31,6 +32,10 @@ const LibraryItemsPage = () => {
     setDeleteLibraryItemIsShown(false);
   };
 
+  const updateLibraryItemHandler = () => {
+    console.log("delete");
+  };
+
   const showDeleteLibraryItemHandler = (libraryItem) => {
     setDeleteLibraryItemIsShown(true);
     setLibraryItemDetails(libraryItem);
@@ -38,6 +43,15 @@ const LibraryItemsPage = () => {
 
   const hideDeleteLibraryItemHandler = () => {
     setDeleteLibraryItemIsShown(false);
+  };
+
+  const showUpdateLibraryItemHandler = (libraryItem) => {
+    setUpdateLibraryItemIsShown(true);
+    setLibraryItemDetails(libraryItem);
+  };
+
+  const hideUpdateLibraryItemHandler = () => {
+    setUpdateLibraryItemIsShown(false);
   };
 
   const libraryItems = data.map((libraryItem) => {
@@ -48,12 +62,20 @@ const LibraryItemsPage = () => {
         title={libraryItem.title}
         videoUrl={libraryItem.video_url}
         onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
+        onUpdate={() => showUpdateLibraryItemHandler(libraryItem)}
       />
     );
   });
 
   return (
     <Fragment>
+      {updateLibraryItemIsShown && (
+        <UpdateLibraryItem
+          libraryItem={libraryItemDetails}
+          onClose={hideUpdateLibraryItemHandler}
+          onUpdate={updateLibraryItemHandler}
+        />
+      )}
       {deleteLibraryItemIsShown && (
         <DeleteLibraryItem
           libraryItem={libraryItemDetails}
