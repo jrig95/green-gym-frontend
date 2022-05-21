@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useProgram } from "../Program/hooks/use-program";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyWorkout.module.css";
 import RestCard from "./WorkOutUI/RestCard";
@@ -12,6 +13,9 @@ import videoFour from "../../assets/exercise_video_4.mp4";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
 const DailyWorkout = () => {
+  const { data } = useProgram(276);
+  
+  console.log(data.daily_workouts);
   // have a set state for index - start at 0
   const [videoIndex, setvideoIndex] = useState(0);
   const [exerciseIndex, setExerciseIndex] = useState(0);
@@ -39,10 +43,6 @@ const DailyWorkout = () => {
   const workoutFinish = exerciseLength === videoIndex;
 
   useState(() => {
-    console.log(workoutFinish);
-    console.log(exerciseLength, "exerciseLength- line 43 DailyWorkout");
-    console.log(videoIndex, "videoIndex - line 44 DailyWorkout");
-    console.log(exerciseIndex, "exerciseIndex - line 45 DailyWorkout");
   }, [workoutFinish, videoIndex, exerciseIndex, showRestScreen]);
 
   const rest = <RestCard timer={10} />;
