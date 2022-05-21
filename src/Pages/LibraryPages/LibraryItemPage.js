@@ -13,8 +13,6 @@ const LibraryItemPage = () => {
   const id = params.libraryId;
 
   const { data } = useLibraryItem(id);
-
-  console.log(data);
   
   return (
     <Fragment>
