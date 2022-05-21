@@ -8,7 +8,7 @@ import classes from "./LibraryItemCard.module.css";
 const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
   return (
     <Card className={classes.card}>
-      <h1 className={classes.title}>{title}</h1>
+      <h3 className={classes.title}>{title}</h3>
       <div className={classes.icons}>
         <div className={classes.iconGear}>
           <BsFillGearFill />
@@ -17,7 +17,7 @@ const LibraryItemCard = ({ title, videoUrl, onDelete }) => {
           <AiFillDelete />
         </div>
       </div>
-      <ReactPlayer playing={false} width={344} height={200} url={videoUrl} />
+      {/* <ReactPlayer playing={false} width={344} height={200} url={videoUrl} /> */}
     </Card>
   );
 };
