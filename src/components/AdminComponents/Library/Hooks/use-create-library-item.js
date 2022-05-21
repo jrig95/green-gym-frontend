@@ -5,9 +5,7 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const createLibraryItem = async (libraryItem) => {
-  await axios.post(`${baseUrl}/library_items`, {
-    library_item: libraryItem,
-  });
+  await axios.post(`${baseUrl}/library_items`, libraryItem);
 };
 
 export const useCreateLibraryItem = () => {
