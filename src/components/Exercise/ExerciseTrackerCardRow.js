@@ -6,9 +6,9 @@ const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive }) => {
 
   return (
     <div className={rowClasses}>
-      <p className={classes.exerciseRow}>Push Up - Set 1</p>
-      <p className={classes.workRow}>45 secs</p>
-      <p className={classes.restRow}>15secs</p>
+      <p className={classes.exerciseRow}>{exercise}</p>
+      <p className={classes.workRow}>{work} secs</p>
+      <p className={classes.restRow}>{rest} secs</p>
       <div className={classes.questionContainer}>
         <form>
           <input type="number" min={0} placeholder={0}/>
