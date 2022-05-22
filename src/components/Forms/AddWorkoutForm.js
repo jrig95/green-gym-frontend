@@ -6,11 +6,11 @@ import classes from "./AddWorkoutForm.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
-  const createWorkout = useCreateWorkout();
-  const { data } = useLastProgram()
+  const { mutate:createWorkout, isSuccess } = useCreateWorkout();
+  const { data } = useLastProgram();
 
   console.log(data.id);
 
@@ -138,13 +138,33 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
-    
 
     // 1. Itterate through the exercise overview array.
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
-    onAddWorkout();
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('success');
+      addExercisesHandler();
+      onAddWorkout();
+    }
+  }, [isSuccess])
+
+  // If isSuccess
+  
+  // another function to add the overviews and exercises.
+  const addExercisesHandler = () => {
+    // call this for isSuccess.
+    exerciseOverviewArray.map((exerciseOverview) => {
+      console.log(exerciseOverview);
+      // post call here
+    })
+  };
+
+  // get the last id for the daily workout
+  // itteratte over the array and for each item post request.
 
   const descriptionClasses = descriptionHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -170,7 +190,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     descriptionIsValid &&
     dailyChallengeIsValid &&
     dailyChallengeDescriptionIsValid &&
-    numberOfTypesIsValid && numberOfExercisesIsValid;
+    numberOfTypesIsValid &&
+    numberOfExercisesIsValid;
 
   return (
     <AdminFormCard title={`Day ${dayNumber}`}>
@@ -263,7 +284,11 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" disabled={!formIsValid} onClick={formSubmitHandler}>
+            <Button
+              size="small"
+              disabled={!formIsValid}
+              onClick={formSubmitHandler}
+            >
               Add
             </Button>
           </div>
