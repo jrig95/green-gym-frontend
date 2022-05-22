@@ -2,7 +2,7 @@
   margin: 0 0 1rem 0;
   display: grid;
   width: 100%;
-  grid-template-columns: 0.5fr 6fr 2fr 2fr 3fr 1.3fr;
+  grid-template-columns: 0.5fr 6fr 2fr 2fr 2fr 2fr 3fr 1.3fr;
 }
 
 .titlesGrey {

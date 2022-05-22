@@ -14,8 +14,7 @@ const createExerciseOverview = async (exerciseOverview) => {
 export const useCreateExerciseOverview = () => {
   const { addError } = useAPIError();
   const { mutate } = useMutation(
-    (programId, exerciseOverview) =>
-      createExerciseOverview(programId, exerciseOverview),
+    (exerciseOverview) => createExerciseOverview(exerciseOverview),
     {
       onError: (error) => {
         const title =

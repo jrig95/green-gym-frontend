@@ -1,3 +1,4 @@
+import { useCreateExercise } from "../Exercise/hooks/use-create-exercise";
 import { useCreateExerciseOverview } from "../Exercise/hooks/use-create-exercise-overview";
 import { useCreateWorkout } from "../Exercise/hooks/use-create-workout";
 import { useLastWorkout } from "../Exercise/hooks/use-last-workout";
@@ -13,11 +14,9 @@ import { useEffect, useState } from "react";
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   const { mutate: createWorkout, isSuccess } = useCreateWorkout();
   const createExerciseOverview = useCreateExerciseOverview();
+  const createExercise = useCreateExercise();
   const { data: lastProgramData } = useLastProgram();
   const { data: lastWorkoutData } = useLastWorkout();
-
-  console.log(lastProgramData.id, "program id");
-  console.log(lastWorkoutData.id, "workout id");
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);
@@ -163,21 +162,32 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   const addExercisesHandler = () => {
     const workoutId = lastWorkoutData.id + 1;
     const programId = lastProgramData.id;
-    // console.log(lastWorkoutData.id, "inside add exercise handler");
-    // call this for isSuccess.
+
     exerciseOverviewArray.map((exerciseOverview) => {
       const exercise_overview = {
         program_id: programId,
         daily_workout_id: workoutId,
         overview_exercise_title: exerciseOverview.title,
-        number_of_sets: exerciseOverview.number_of_sets
+        number_of_sets: exerciseOverview.number_of_sets,
+      };
+      // Post call to create overview
+      createExerciseOverview(exercise_overview);
+    });
+
+    exerciseArray.map((exerciseItem) => {
+      const exercise = {
+        program_id: programId,
+        daily_workout_id: workoutId,
+        library_item_id: exerciseItem.libraryItem,
+        exercise_work_time: exerciseItem.workTime,
+        exercise_rest_time: exerciseItem.restTime,
+        calories_per_exercise: exerciseItem.calories,
+        exercise_question: exerciseItem.question,
       }
 
-      createExerciseOverview(exercise_overview);
-      // console.log(exerciseOverview);
-      // console.log(workoutId, 'current workout id');
-      // post call here
-    });
+      // Post call to create exercise
+      createExercise(exercise);
+    })
   };
 
   // get the last id for the daily workout
