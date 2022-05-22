@@ -6,7 +6,7 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getLibraryItem = async (id) => {
-  const { data } = await axios(`${baseUrl}/library_items/${id}`);
+  const { data } = axios(`${baseUrl}/library_items/${id}`);
   return data;
 };
 
@@ -19,7 +19,7 @@ export const useLibraryItem = (id) => {
     isError,
     error,
     isLoading,
-  } = useQuery([queryKeys.libraryItem, id], () => getLibraryItem(id), {
+  } = useQuery(queryKeys.libraryItem, getLibraryItem(id), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";

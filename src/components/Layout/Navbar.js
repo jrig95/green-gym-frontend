@@ -17,8 +17,8 @@ const Navbar = () => {
 
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
-  const userLoggedIn = false;
-  const adminLoggedIn = true;
+  const userLoggedIn = true;
+  const adminLoggedIn = false;
   const loggedOut = !userLoggedIn && !adminLoggedIn;
 
 

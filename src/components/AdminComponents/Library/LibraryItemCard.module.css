@@ -1,17 +1,8 @@
 .card {
   position: relative;
   width: 21.5rem;
-  /* height: 17.5rem; */
+  height: 17.5rem;
   transition: all 0.3s;
-}
-
-.card h3 {
-  cursor: pointer;
-}
-
-.card a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .title {
@@ -24,7 +15,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .icons {
@@ -43,7 +34,7 @@
 
 .iconGear,
 .iconBin {
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 0 0 0 0.25rem;
   transition: all 0.3s;
 }

@@ -29,16 +29,11 @@ const AddLibraryItemForm = ({ onClose }) => {
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    const library_item = {
+      title: titleValue,
+    };
 
-    formData.append("library_item[title]", titleValue);
-    formData.append("library_item[video]", selectedVideoFile);
-
-    // const library_item = {
-    //   title: titleValue,
-    // };
-
-    createLibraryItem(formData);
+    createLibraryItem(library_item);
     onClose();
   };
 
