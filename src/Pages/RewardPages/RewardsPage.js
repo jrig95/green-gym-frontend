@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 import { Fragment, useState } from "react";
 
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import { useDeleteReward } from "../../components/Reward/hooks/use-delete-reward";
+import { useRewards } from "../../components/Reward/hooks/use-rewards";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import RewardCard from "../../components/Reward/RewardCard";
@@ -21,42 +22,27 @@ const DUMMY_DATA = {
 };
 
 const RewardsPage = () => {
+  const deleteReward = useDeleteReward();
+
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
+  const [reward, setReward] = useState({ id: 0, reward_name: "" });
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = false;
+  const admin = true;
 
-  // API call here
-  const getRewards = async () => {
-    const response = await fetch("http://localhost:3000/api/v1/rewards")
-    return response.json();
-  };
+  const { data } = useRewards();
 
-  // useQuery
-  const { data, isError, error, isLoading } = useQuery("rewards", getRewards);
+  const programRewardsArray = data.filter(
+    (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
+  );
 
-  console.log(data, "data");
-
-  let programRewardsArray = [];
-  let rewardsArray = [];
-
-  if (!isError && !isLoading) {
-    // This will match a reward from the programs the user is a part of
-    programRewardsArray = data.filter(
-      (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
-    );
-
-    console.log(programRewardsArray, 'programRewardsArray');
-  
-    // Create an array based on rewards that do not have a program_id
-    rewardsArray = data.filter((reward) => reward.program_id === null);
-  }
-
+  // Create an array based on rewards that do not have a program_id
+  const rewardsArray = data.filter((reward) => reward.program_id === null);
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);
@@ -82,7 +68,8 @@ const RewardsPage = () => {
     setClaimedRewardMessageIsShown(false);
   };
 
-  const showDeleteRewardHandler = () => {
+  const showDeleteRewardHandler = (reward) => {
+    setReward(reward);
     setDeleteRewardIsShown(true);
   };
 
@@ -90,21 +77,29 @@ const RewardsPage = () => {
     setDeleteRewardIsShown(false);
   };
 
-  const deleteRewardHandler = (rewardId) => {
-    console.log(rewardId);
+  const deleteRewardHandler = (id) => {
+    deleteReward(id);
+    hideDeleteRewardHandler();
   };
 
   const programRewards = programRewardsArray.map((reward) => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
+        admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
-        image={reward.reward_image}
+        image={reward.photo_url}
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
-        onDelete={showDeleteRewardHandler}
+        onDelete={() =>
+          showDeleteRewardHandler({
+            id: reward.id,
+            reward_name: reward.reward_name,
+          })
+        }
       />
     );
   });
@@ -113,13 +108,21 @@ const RewardsPage = () => {
     return (
       <RewardCard
         key={reward.id}
+        id={reward.id}
+        admin={admin}
         title={reward.reward_name}
         points={reward.reward_points}
-        image={reward.reward_image}
+        image={reward.photo_url}
         onClaimReward={() =>
           showClaimRewardHandler(reward.reward_name, reward.reward_points)
         }
-        onDelete={showDeleteRewardHandler}
+        onDelete={() =>
+          showDeleteRewardHandler({
+            id: reward.id,
+            reward_name: reward.reward_name,
+          })
+        }
+        onUpdate={() => console.log('edit')}
       />
     );
   });
@@ -160,13 +163,11 @@ const RewardsPage = () => {
       {deleteRewardIsShown && (
         <DeleteReward
           onClose={hideDeleteRewardHandler}
-          onDelete={() => deleteRewardHandler({title: 'test'})}
-          reward={{title: 'test'}}
+          onDelete={() => deleteRewardHandler(reward.id)}
+          reward={reward.reward_name}
         />
       )}
       <div className={classes.container}>
-        {isLoading && <LoadingSpinner />}
-        {isError && <div>Error...{error.toString()}</div>}
         <div className={classes.rewardsGrid}>{rewards}</div>
       </div>
     </Fragment>

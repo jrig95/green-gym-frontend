@@ -1,72 +1,39 @@
 import { Fragment, useState } from "react";
 
+import UpdateLibraryItem from "../../components/AdminComponents/Library/UpdateLibraryItem";
+import { useDeleteLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-delete-library-item";
+import { useLibraryItems } from "../../components/AdminComponents/Library/Hooks/use-library-items";
 import DeleteLibraryItem from "../../components/AdminComponents/Library/DeleteLibraryItem";
-import videoOne from "../../assets/exercise_video_1.mp4";
 import LibraryItemCard from "../../components/AdminComponents/Library/LibraryItemCard";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import classes from "./LibraryItemsPage.module.css";
 
-const DUMMY_ITEMS = [
-  {
-    id: "li1",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li2",
-    title: "squat",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li3",
-    title: "bench press",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li4",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li5",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li6",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li7",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li8",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-  {
-    id: "li9",
-    title: "push up",
-    videoUrl: videoOne,
-  },
-];
-
 const LibraryItemsPage = () => {
+  const deleteLibraryItem = useDeleteLibraryItem();
+  const { data } = useLibraryItems();
+
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
+  const [updateLibraryItemIsShown, setUpdateLibraryItemIsShown] =
+    useState(false);
+
   const [libraryItemDetails, setLibraryItemDetails] = useState({
     id: 0,
     title: "Unknown",
   });
 
   const deleteLibraryItemHandler = () => {
-    console.log(
-      `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
-    );
+    // console.log(
+    //   `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
+    // );
+
+    deleteLibraryItem(libraryItemDetails.id);
+
     setDeleteLibraryItemIsShown(false);
+  };
+
+  const updateLibraryItemHandler = () => {
+    console.log("delete");
   };
 
   const showDeleteLibraryItemHandler = (libraryItem) => {
@@ -78,19 +45,37 @@ const LibraryItemsPage = () => {
     setDeleteLibraryItemIsShown(false);
   };
 
-  const libraryItems = DUMMY_ITEMS.map((libraryItem) => {
+  const showUpdateLibraryItemHandler = (libraryItem) => {
+    setUpdateLibraryItemIsShown(true);
+    setLibraryItemDetails(libraryItem);
+  };
+
+  const hideUpdateLibraryItemHandler = () => {
+    setUpdateLibraryItemIsShown(false);
+  };
+
+  const libraryItems = data.map((libraryItem) => {
     return (
       <LibraryItemCard
         key={libraryItem.id}
+        id={libraryItem.id}
         title={libraryItem.title}
-        videoUrl={libraryItem.videoUrl}
+        videoUrl={libraryItem.video_url}
         onDelete={() => showDeleteLibraryItemHandler(libraryItem)}
+        onUpdate={() => showUpdateLibraryItemHandler(libraryItem)}
       />
     );
   });
 
   return (
     <Fragment>
+      {updateLibraryItemIsShown && (
+        <UpdateLibraryItem
+          libraryItem={libraryItemDetails}
+          onClose={hideUpdateLibraryItemHandler}
+          onUpdate={updateLibraryItemHandler}
+        />
+      )}
       {deleteLibraryItemIsShown && (
         <DeleteLibraryItem
           libraryItem={libraryItemDetails}

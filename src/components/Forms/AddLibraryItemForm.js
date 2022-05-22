@@ -1,9 +1,16 @@
+import { useCreateLibraryItem } from "../AdminComponents/Library/Hooks/use-create-library-item";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
+import { useRef, useState } from "react";
 
 const AddLibraryItemForm = ({ onClose }) => {
+  const [selectedVideoFile, setSelectedVideoFile] = useState();
+  const videoRef = useRef();
+
+  // React query custom hook
+  const createLibraryItem = useCreateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
   const {
@@ -21,7 +28,22 @@ const AddLibraryItemForm = ({ onClose }) => {
 
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
-    console.log(titleValue);
+
+    const formData = new FormData();
+
+    formData.append("library_item[title]", titleValue);
+    formData.append("library_item[video]", selectedVideoFile);
+
+    // const library_item = {
+    //   title: titleValue,
+    // };
+
+    createLibraryItem(formData);
+    onClose();
+  };
+
+  const fileSelectHandler = (event) => {
+    setSelectedVideoFile(event.target.files[0]);
   };
 
   return (
@@ -43,8 +65,16 @@ const AddLibraryItemForm = ({ onClose }) => {
             )}
           </div>
           <div className={classes.formControl}>
-            <label>Video</label>
-            <input />
+            <label htmlFor="video">Video</label>
+            <input
+              style={{display: 'none'}}
+              type="file"
+              id="video"
+              accept="video/*"
+              onChange={fileSelectHandler}
+              ref={videoRef}
+            />
+            <Button size="small" onClick={() => videoRef.current.click()}>Add Video</Button>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
