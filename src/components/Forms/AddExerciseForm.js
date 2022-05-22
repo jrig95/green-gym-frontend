@@ -25,7 +25,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
   };
 
   const getExerciseDataHandler = () => {
-    const updateQuestionValue = questioValue === "yes" ? true : false;
+    const updateQuestionValue = questioValue === "yes" ? "true" : "false";
 
     const exercise = {
       exerciseNumber,

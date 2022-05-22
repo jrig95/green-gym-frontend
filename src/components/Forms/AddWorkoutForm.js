@@ -164,6 +164,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const programId = lastProgramData.id;
 
     exerciseOverviewArray.map((exerciseOverview) => {
+      console.log(exerciseOverview.title)
       const exercise_overview = {
         program_id: programId,
         daily_workout_id: workoutId,
@@ -174,10 +175,14 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExerciseOverview(exercise_overview);
     });
 
+    console.log("finished overviews")
+
     exerciseArray.map((exerciseItem) => {
+      console.log(exerciseItem.title)
       const exercise = {
         program_id: programId,
         daily_workout_id: workoutId,
+        exercise_title: exerciseItem.title,
         library_item_id: exerciseItem.libraryItem,
         exercise_work_time: exerciseItem.workTime,
         exercise_rest_time: exerciseItem.restTime,

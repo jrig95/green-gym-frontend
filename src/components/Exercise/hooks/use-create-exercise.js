@@ -2,7 +2,6 @@ import axios from "axios";
 import { useMutation } from "react-query";
 
 import useAPIError from "../../../common/hooks/use-API-error";
-import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createExercise = async (exercise) => {
@@ -16,9 +15,10 @@ export const useCreateExercise = () => {
   const { addError } = useAPIError();
   const { mutate } = useMutation((exercise) => createExercise(exercise), {
     onError: (error) => {
-      const title = error instanceof Error ? error.message : "error connecting to server";
+      const title =
+        error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
-    }
+    },
   });
 
   return mutate;
