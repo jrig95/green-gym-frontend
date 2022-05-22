@@ -16,10 +16,6 @@ const AddWorkoutPage = () => {
 
   const numberOfWorkoutsArray = Array.from({ length: dayNumberToInt }, (_, i) => i + 1);
 
-  console.log(dayNumberToInt, "dayNumberToInt - line 18")
-  console.log(typeof dayNumberToInt, "type of")
-  console.log(numberOfWorkoutsArray, "number of Workouts Array");
-
   const changeCurrentArrayIndexHandler = () => {
     setCurrentArrayIndex((currentValue) => currentValue + 1);
   };

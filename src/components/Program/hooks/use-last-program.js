@@ -20,12 +20,13 @@ export const useLastProgram = () => {
     isError,
     error,
     isLoading,
-  } = useQuery(queryKeys.program, getLastProgram, {
+  } = useQuery(queryKeys.last_program, getLastProgram, {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
         addError(title, error.status);
     },
+    staleTime: 60000
   });
   return { data, isError, error, isLoading };
 };

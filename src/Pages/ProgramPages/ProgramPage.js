@@ -7,7 +7,6 @@ import Button from '../../components/UI/Button';
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
 import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
-import Data from "../../program.json";
 
 const ProgramPage = () => {
   const params = useParams();
@@ -22,10 +21,11 @@ const ProgramPage = () => {
 
   if (!isLoading) {
     programWorkouts = data.daily_workouts.map((workout) => {
+      console.log(workout);
       return (
         <div key={workout.id} className={classes.workoutCard}>
           <h2>Day {workout.day_number}</h2>
-          <p>{workout.daily_challenge_description}</p>
+          <p>{workout.description}</p>
           {/* <ExerciseCard exercises={workout.exercises}/> */}
           <ExerciseOverviewCard exercises={workout.exercise_overviews} />
         </div>

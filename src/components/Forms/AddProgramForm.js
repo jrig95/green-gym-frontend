@@ -23,32 +23,18 @@ const AddProgramForm = () => {
 
     const formData = new FormData();
 
-    const newProgram = {
-      program_name: programNameValue,
-      number_of_days: numberOfDaysValue,
-      descriptiom: descriptionValue,
-      pricee: priceValue,
-    };
-
     formData.append("program[program_title]", programNameValue);
     formData.append("program[number_of_days]", numberOfDaysValue);
     formData.append("program[program_description]", descriptionValue);
     formData.append("program[price]", priceValue);
     formData.append("program[photo]", selectedImageFile);
 
-
     createProgram(formData);
-    // 2. Return the id of the program that has just been created
-    // if (isSuccess) {
-    //   console.log(data, "program data");
-    // }
-    // 3. pass that onto add-workout via state
-
     // programatic navigation to the add workout page.
     // need to pass the number of days here
-    // navigate("/programs/add-program/add-workout", {
-    //   state: { pageNumber: numberOfDaysValue },
-    // });
+    navigate("/programs/add-program/add-workout", {
+      state: { pageNumber: numberOfDaysValue },
+    });
   };
 
 

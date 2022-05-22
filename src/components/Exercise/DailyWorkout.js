@@ -50,6 +50,8 @@ const DailyWorkout = () => {
   const exerciseLength = videos.length;
   const workoutFinish = exerciseLength === videoIndex;
 
+
+  // this should be a loading spinner
   if (exerciseIsLoading) return <p>Loading...</p>
 
   const rest = <RestCard timer={10} />;
