@@ -122,20 +122,20 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
 
-    const workout = {
+    const daily_workout = {
       program_id: data.id,
       day_number: dayNumber,
-      workout_description: descriptionValue,
+      description: descriptionValue,
       daily_challenge_title: dailyChallengeValue,
       daily_challenge_description: dailyChallengeDescriptionValue,
-      number_of_exercise_overview: numberOfTypesValue,
-      exercise_overviews: sortedExerciseOverviewArray,
+      // number_of_exercise_overview: numberOfTypesValue,
+      // exercise_overviews: sortedExerciseOverviewArray,
       number_of_exercises: numberOfExercisesValue,
     };
 
     // 1. Send the workout data to the back end - find out what data is the work in the schema
     //  a. Go and create the use hook that will do this job first.
-    createWorkout(workout);
+    createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
     
@@ -143,8 +143,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     // 1. Itterate through the exercise overview array.
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
-
-    console.log(workout);
     onAddWorkout();
   };
 
