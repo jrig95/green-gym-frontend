@@ -22,3 +22,43 @@
 .title {
   margin: 0;
 }
+
+@media (min-width: 769px) {
+  .container {
+    width: 35.5rem;
+    height: 14.5rem;
+  }
+
+  .container img {
+    width: 16rem;
+    height: 14.5rem;
+    object-fit: cover;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+
+  .imageAndTextContainer {
+    display: flex;
+  }
+
+  .text {
+    padding: 1rem;
+  }
+
+  .title {
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 617px) and (max-width: 768px) {}
+
+@media only screen and (min-width: 320px) and (max-width: 615px) {
+
+  .container img {
+    display: none;
+  }
+
+  .imageAndTextContainer {
+    display: flex;
+  }
+}
