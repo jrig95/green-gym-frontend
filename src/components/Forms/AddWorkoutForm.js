@@ -12,7 +12,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   const createWorkout = useCreateWorkout();
   const { data } = useLastProgram()
 
-  // console.log(data.id);
+  console.log(data.id);
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);

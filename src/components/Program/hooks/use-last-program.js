@@ -26,7 +26,7 @@ export const useLastProgram = () => {
         error instanceof Error ? error.message : "error connecting to server";
         addError(title, error.status);
     },
-    staleTime: 60000
+    staleTime: 10000
   });
   return { data, isError, error, isLoading };
 };
