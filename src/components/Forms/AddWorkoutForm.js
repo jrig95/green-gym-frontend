@@ -1,4 +1,6 @@
+import { useCreateExerciseOverview } from "../Exercise/hooks/use-create-exercise-overview";
 import { useCreateWorkout } from "../Exercise/hooks/use-create-workout";
+import { useLastWorkout } from "../Exercise/hooks/use-last-workout";
 import { useLastProgram } from "../Program/hooks/use-last-program";
 import AddExerciseForm from "./AddExerciseForm";
 import AdminFormCard from "./AdminFormCard";
@@ -9,10 +11,13 @@ import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
-  const { mutate:createWorkout, isSuccess } = useCreateWorkout();
-  const { data } = useLastProgram();
+  const { mutate: createWorkout, isSuccess } = useCreateWorkout();
+  const createExerciseOverview = useCreateExerciseOverview();
+  const { data: lastProgramData } = useLastProgram();
+  const { data: lastWorkoutData } = useLastWorkout();
 
-  console.log(data.id);
+  console.log(lastProgramData.id, "program id");
+  console.log(lastWorkoutData.id, "workout id");
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);
@@ -123,7 +128,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     );
 
     const daily_workout = {
-      program_id: data.id,
+      program_id: lastProgramData.id,
       day_number: dayNumber,
       description: descriptionValue,
       daily_challenge_title: dailyChallengeValue,
@@ -146,21 +151,33 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('success');
+      console.log("success");
       addExercisesHandler();
       onAddWorkout();
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   // If isSuccess
-  
+
   // another function to add the overviews and exercises.
   const addExercisesHandler = () => {
+    const workoutId = lastWorkoutData.id + 1;
+    const programId = lastProgramData.id;
+    // console.log(lastWorkoutData.id, "inside add exercise handler");
     // call this for isSuccess.
     exerciseOverviewArray.map((exerciseOverview) => {
-      console.log(exerciseOverview);
+      const exercise_overview = {
+        program_id: programId,
+        daily_workout_id: workoutId,
+        overview_exercise_title: exerciseOverview.title,
+        number_of_sets: exerciseOverview.number_of_sets
+      }
+
+      createExerciseOverview(exercise_overview);
+      // console.log(exerciseOverview);
+      // console.log(workoutId, 'current workout id');
       // post call here
-    })
+    });
   };
 
   // get the last id for the daily workout

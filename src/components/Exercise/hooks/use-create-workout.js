@@ -10,7 +10,7 @@ const createWorkout = async (daily_workout) => {
 
 export const useCreateWorkout = () => {
   const { addError } = useAPIError();
-  const { mutate, isSuccess } = useMutation((daily_workout) => createWorkout(daily_workout), {
+  const { mutate, isSuccess, data } = useMutation((daily_workout) => createWorkout(daily_workout), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
@@ -18,5 +18,5 @@ export const useCreateWorkout = () => {
     },
   });
 
-  return { mutate, isSuccess };
+  return { mutate, isSuccess, data };
 };
