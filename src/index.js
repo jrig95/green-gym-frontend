@@ -13,6 +13,7 @@ import APIErrorProvider from "./context/APIErrorProvider";
 import { queryClient } from "./react-query/queryClient";
 import "./index.css";
 import App from "./App";
+import { AuthContextProvider } from "./context/AuthContext";
 
 // the following code is related to language detection and change.
 // do not move from index.js
@@ -38,12 +39,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <APIErrorProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-        <ReactQueryDevtools />
-      </QueryClientProvider>
+      <AuthContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+      </AuthContextProvider>
       <APIErrorNotification />
     </APIErrorProvider>
   </React.StrictMode>
