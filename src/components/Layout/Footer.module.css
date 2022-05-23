@@ -2,13 +2,13 @@
   background-color: var(--green);
   display: flex;
   justify-content: center;
-  height: 5.75rem;
+  height: 3.75rem;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
 }
-/* 
+/*
 .footer {
   background-color: var(--green);
   z-index: 100;
@@ -24,8 +24,16 @@
   display: flex;
   align-items: center;
   font-size: 2rem;
+  cursor: pointer;
 }
+
+
 
 .logoContainer svg {
   padding: 1rem;
+}
+
+.logoContainer svg:hover{
+  color: white;
+  transition: .7s;
 }
