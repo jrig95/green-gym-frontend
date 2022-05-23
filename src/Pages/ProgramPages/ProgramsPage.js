@@ -15,7 +15,7 @@ const ProgramsPage = () => {
 
   const { data } = usePrograms();
 
-  const admin = true;
+  const admin = false;
 
   const deleteProgramHandler = () => {
     console.log(
