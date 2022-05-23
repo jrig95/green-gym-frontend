@@ -9,3 +9,26 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem 1rem;
 }
+
+@media only screen and (min-width: 618px) and (max-width: 1000px) {
+
+  .programCardGrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1rem;
+    }
+    .programCard .card {
+    position: relative;
+    width: 19.5rem;
+    height: 15.5rem;
+    transition: all 0.3s;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+    .programCardGrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem 1rem;
+      }
+}

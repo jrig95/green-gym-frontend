@@ -53,3 +53,23 @@
   margin: 0 0 0 0.25rem;
   transition: all 0.3s;
 }
+
+@media only screen and (min-width: 618px) and (max-width: 768px) {
+
+ .card {
+    position: relative;
+    width: 19.5rem;
+    height: 17.5rem;
+    transition: all 0.3s;
+  }
+    .card img {
+      object-fit: cover;
+      box-sizing: content-box;
+      width: 100%;
+      height: 7rem;
+    }
+
+    .title{
+      font-size: 1rem;
+    }
+}
