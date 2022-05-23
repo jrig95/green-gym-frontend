@@ -175,8 +175,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExerciseOverview(exercise_overview);
     });
 
-    console.log("finished overviews")
-
     exerciseArray.map((exerciseItem) => {
       console.log(exerciseItem.title)
       const exercise = {
@@ -186,7 +184,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
         library_item_id: exerciseItem.libraryItem,
         exercise_work_time: exerciseItem.workTime,
         exercise_rest_time: exerciseItem.restTime,
-        calories_per_exercise: exerciseItem.calories,
+        calories_per_exercise: parseInt(exerciseItem.calories),
         exercise_question: exerciseItem.question,
       }
 
