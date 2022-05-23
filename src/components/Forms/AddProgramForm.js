@@ -6,7 +6,6 @@ import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const AddProgramForm = () => {
   const createProgram = useCreateProgram();

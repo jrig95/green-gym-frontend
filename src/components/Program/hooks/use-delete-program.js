@@ -5,7 +5,7 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const deleteProgram = (id) => {
+const deleteProgram = async (id) => {
   await axios.delete(`${baseUrl}/programs/${id}`);
 };
 

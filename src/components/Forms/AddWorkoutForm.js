@@ -15,7 +15,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   const { mutate: createWorkout, isSuccess } = useCreateWorkout();
   const createExerciseOverview = useCreateExerciseOverview();
   const createExercise = useCreateExercise();
-  const { data: lastProgramData } = useLastProgram();
+  // how to get this once. then keep it the same.
+  const { data: lastProgramData, refetch: refetchLastProgram } = useLastProgram();
   const { data: lastWorkoutData } = useLastWorkout();
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
@@ -117,6 +118,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     event.preventDefault();
   };
 
+  refetchLastProgram();
+
   const formSubmitHandler = () => {
     const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
@@ -125,7 +128,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const sortedExerciseArray = exerciseArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
-
+    
+    console.log(lastProgramData.id, "last program id in form submit - creating workout")
     const daily_workout = {
       program_id: lastProgramData.id,
       day_number: dayNumber,
@@ -163,8 +167,12 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const workoutId = lastWorkoutData.id + 1;
     const programId = lastProgramData.id;
 
+    console.log(workoutId, "workout id inHandler");
+    console.log(programId, "program id inHandler");
+
     exerciseOverviewArray.map((exerciseOverview) => {
-      console.log(exerciseOverview.title)
+      console.log(workoutId, "workout id in exercise overviews");
+      console.log(programId, "workout id in exercise overviews");
       const exercise_overview = {
         program_id: programId,
         daily_workout_id: workoutId,
@@ -176,7 +184,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     });
 
     exerciseArray.map((exerciseItem) => {
-      console.log(exerciseItem.title)
+      console.log(workoutId, "workout id in exercises");
+      console.log(programId, "workout id in exercises");
       const exercise = {
         program_id: programId,
         daily_workout_id: workoutId,
