@@ -11,10 +11,8 @@ const APIErrorNotification = () => {
   };
 
   useEffect(() => {
-    console.log("inside useEffect");
     if (error) {
       const wait = setTimeout(() => {
-        console.log("inside Set timeout");
         removeError();
       }, 3000);
 

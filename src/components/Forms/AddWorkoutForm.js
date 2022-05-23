@@ -1,3 +1,8 @@
+import { useCreateExercise } from "../Exercise/hooks/use-create-exercise";
+import { useCreateExerciseOverview } from "../Exercise/hooks/use-create-exercise-overview";
+import { useCreateWorkout } from "../Exercise/hooks/use-create-workout";
+import { useLastWorkout } from "../Exercise/hooks/use-last-workout";
+import { useLastProgram } from "../Program/hooks/use-last-program";
 import AddExerciseForm from "./AddExerciseForm";
 import AdminFormCard from "./AdminFormCard";
 import classes from "./AddWorkoutForm.module.css";
@@ -7,6 +12,13 @@ import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
+  const { mutate: createWorkout, isSuccess } = useCreateWorkout();
+  const createExerciseOverview = useCreateExerciseOverview();
+  const createExercise = useCreateExercise();
+  // how to get this once. then keep it the same.
+  const { data: lastProgramData, refetch: refetchLastProgram } = useLastProgram();
+  const { data: lastWorkoutData } = useLastWorkout();
+
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
   const [exerciseArray, setExerciseArray] = useState([]);
 
@@ -106,6 +118,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     event.preventDefault();
   };
 
+  refetchLastProgram();
+
   const formSubmitHandler = () => {
     const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
@@ -114,20 +128,82 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const sortedExerciseArray = exerciseArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
-
-    const workout = {
-      workout_description: descriptionValue,
-      daily_challenge: dailyChallengeValue,
+    
+    console.log(lastProgramData.id, "last program id in form submit - creating workout")
+    const daily_workout = {
+      program_id: lastProgramData.id,
+      day_number: dayNumber,
+      description: descriptionValue,
+      daily_challenge_title: dailyChallengeValue,
       daily_challenge_description: dailyChallengeDescriptionValue,
-      number_of_exercise_overview: numberOfTypesValue,
-      exercise_overviews: sortedExerciseOverviewArray,
+      // number_of_exercise_overview: numberOfTypesValue,
+      // exercise_overviews: sortedExerciseOverviewArray,
       number_of_exercises: numberOfExercisesValue,
-      exercises: sortedExerciseArray,
     };
 
-    console.log(workout);
-    onAddWorkout();
+    // 1. Send the workout data to the back end - find out what data is the work in the schema
+    //  a. Go and create the use hook that will do this job first.
+    createWorkout(daily_workout);
+    // 2. Make this an await event.
+    // 3. test to make sure this works before doing the below work.
+
+    // 1. Itterate through the exercise overview array.
+    // 2. On each itteration create the exercise overview
+    // How to get the workout ID?
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log("success");
+      addExercisesHandler();
+      onAddWorkout();
+    }
+  }, [isSuccess]);
+
+  // If isSuccess
+
+  // another function to add the overviews and exercises.
+  const addExercisesHandler = () => {
+    const workoutId = lastWorkoutData.id + 1;
+    const programId = lastProgramData.id;
+
+    console.log(workoutId, "workout id inHandler");
+    console.log(programId, "program id inHandler");
+
+    exerciseOverviewArray.map((exerciseOverview) => {
+      console.log(workoutId, "workout id in exercise overviews");
+      console.log(programId, "workout id in exercise overviews");
+      const exercise_overview = {
+        program_id: programId,
+        daily_workout_id: workoutId,
+        overview_exercise_title: exerciseOverview.title,
+        number_of_sets: exerciseOverview.number_of_sets,
+      };
+      // Post call to create overview
+      createExerciseOverview(exercise_overview);
+    });
+
+    exerciseArray.map((exerciseItem) => {
+      console.log(workoutId, "workout id in exercises");
+      console.log(programId, "workout id in exercises");
+      const exercise = {
+        program_id: programId,
+        daily_workout_id: workoutId,
+        exercise_title: exerciseItem.title,
+        library_item_id: exerciseItem.libraryItem,
+        exercise_work_time: exerciseItem.workTime,
+        exercise_rest_time: exerciseItem.restTime,
+        calories_per_exercise: parseInt(exerciseItem.calories),
+        exercise_question: exerciseItem.question,
+      }
+
+      // Post call to create exercise
+      createExercise(exercise);
+    })
+  };
+
+  // get the last id for the daily workout
+  // itteratte over the array and for each item post request.
 
   const descriptionClasses = descriptionHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -153,7 +229,8 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     descriptionIsValid &&
     dailyChallengeIsValid &&
     dailyChallengeDescriptionIsValid &&
-    numberOfTypesIsValid && numberOfExercisesIsValid;
+    numberOfTypesIsValid &&
+    numberOfExercisesIsValid;
 
   return (
     <AdminFormCard title={`Day ${dayNumber}`}>
@@ -246,7 +323,11 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
             <Button color="blue" size="small">
               Cancel
             </Button>
-            <Button size="small" disabled={!formIsValid} onClick={formSubmitHandler}>
+            <Button
+              size="small"
+              disabled={!formIsValid}
+              onClick={formSubmitHandler}
+            >
               Add
             </Button>
           </div>

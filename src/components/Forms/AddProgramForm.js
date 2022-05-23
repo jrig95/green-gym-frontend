@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 
+import { useCreateProgram } from "../Program/hooks/use-create-program";
 import FormCard from "./FormCard";
 import classes from "./Form.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const AddProgramForm = () => {
+  const createProgram = useCreateProgram();
+
   // Set up a navigate to change routes on form submittion
   const navigate = useNavigate();
 
@@ -15,34 +17,25 @@ const AddProgramForm = () => {
   const imageRef = useRef();
   const [selectedImageFile, setSelecetedImageFile] = useState(null);
 
-    
-  // useState to set the number of days a program will run
-  const [numberOfWorkoutDays, setNumberOfWorkoutDays] = useState(0); 
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
+    const formData = new FormData();
 
-    const newProgram = {
-      program_name: programNameValue,
-      number_of_days: numberOfDaysValue,
-      descriptiom: descriptionValue,
-      cover_image: coverImageValue
-    }
+    formData.append("program[program_title]", programNameValue);
+    formData.append("program[number_of_days]", numberOfDaysValue);
+    formData.append("program[program_description]", descriptionValue);
+    formData.append("program[price]", priceValue);
+    formData.append("program[photo]", selectedImageFile);
 
-    console.log(newProgram, "newProgram - AddProgramForm line 22");
-
-    setNumberOfWorkoutDays(numberOfDaysValue);
-
-    resetprogramName();
-    resetNumberOfDays();
-    resetDescription();
-    resetCoverImage();
-
+    createProgram(formData);
     // programatic navigation to the add workout page.
     // need to pass the number of days here
-    navigate("/programs/add-program/add-workout", { state: { pageNumber: numberOfDaysValue }} );
+    navigate("/programs/add-program/add-workout", {
+      state: { pageNumber: numberOfDaysValue },
+    });
   };
+
 
   const textNotEmpty = (value) => value !== "";
 
@@ -79,6 +72,15 @@ const AddProgramForm = () => {
   } = useInput(textNotEmpty);
 
   const {
+    value: priceValue,
+    isValid: priceIsValid,
+    hasError: priceHasError,
+    valueChangeHandler: priceChangeHandler,
+    inputBlurHandler: priceBlurHandler,
+    reset: restPrice,
+  } = useInput(isNotANumber);
+
+  const {
     value: coverImageValue,
     isValid: coverImageIsValid,
     hasError: coverImageHasError,
@@ -88,9 +90,8 @@ const AddProgramForm = () => {
   } = useInput(textNotEmpty);
 
   const fileSelectHandler = (event) => {
-    setSelecetedImageFile(event.target.files);
+    setSelecetedImageFile(event.target.files[0]);
   };
-
 
   const programNameClasses = programNameHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -104,15 +105,16 @@ const AddProgramForm = () => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
+  const priceClasses = priceHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
   const coverImageClasses = coverImageHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
   const formIsValid =
-    programNameIsValid &&
-    numberOfDaysIsValid &&
-    descriptionIsValid &&
-    coverImageIsValid;
+    programNameIsValid && numberOfDaysIsValid && descriptionIsValid;
 
   return (
     <FormCard title="Add Program">
@@ -128,9 +130,7 @@ const AddProgramForm = () => {
               onBlur={programNameBlurHandler}
             />
             {programNameHasError && (
-              <p className={classes.errorText}>
-                Program must have a name
-              </p>
+              <p className={classes.errorText}>Program must have a name</p>
             )}
           </div>
           <div className={numberOfDaysClasses}>
@@ -144,9 +144,7 @@ const AddProgramForm = () => {
               onBlur={numberOfDaysBlurHandler}
             />
             {numberOfDaysHasError && (
-              <p className={classes.errorText}>
-                must be a valid number
-              </p>
+              <p className={classes.errorText}>must be a valid number</p>
             )}
           </div>
           <div className={descriptionClasses}>
@@ -162,6 +160,19 @@ const AddProgramForm = () => {
               <p className={classes.errorText}>description cannot be blank</p>
             )}
           </div>
+          <div className={priceClasses}>
+            <label htmlFor="price">Price</label>
+            <input
+              type="number"
+              id="price"
+              value={priceValue}
+              onChange={priceChangeHandler}
+              onBlur={priceBlurHandler}
+            />
+            {priceHasError && (
+              <p className={classes.errorText}>price cannot be blank</p>
+            )}
+          </div>
           <div className={coverImageClasses}>
             <label htmlFor="cover_image">Cover Image</label>
             <input
@@ -171,10 +182,12 @@ const AddProgramForm = () => {
               value={coverImageValue}
               onChange={fileSelectHandler}
               onBlur={coverImageBlurHandler}
-              style={{ display: 'none'}}
+              style={{ display: "none" }}
               ref={imageRef}
             />
-            <Button size="small" onClick={() => imageRef.current.click()}>Add Image</Button>
+            <Button size="small" onClick={() => imageRef.current.click()}>
+              Add Image
+            </Button>
             {coverImageHasError && (
               <p className={classes.errorText}>cover image cannot be blank</p>
             )}

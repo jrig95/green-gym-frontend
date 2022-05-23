@@ -1,3 +1,4 @@
+import { useDeleteProgram } from "../../components/Program/hooks/use-delete-program";
 import { Fragment, useState } from "react";
 import { usePrograms } from "../../components/Program/hooks/use-programs";
 import classes from "./ProgramsPage.module.css";
@@ -13,14 +14,16 @@ const ProgramsPage = () => {
     title: "Unknown",
   });
 
+  const deleteProgram = useDeleteProgram();
   const { data } = usePrograms();
 
   const admin = true;
 
   const deleteProgramHandler = () => {
-    console.log(
-      `Delete program ${programDetails.title} with ID: ${programDetails.id}`
-    );
+    // console.log(
+    //   `Delete program ${programDetails.title} with ID: ${programDetails.id}`
+    // );
+    deleteProgram(programDetails.id)
     setDeleteProgramIsShown(false);
   };
 

@@ -1,11 +1,17 @@
+import { useLibraryItems } from "../AdminComponents/Library/Hooks/use-library-items";
 import { Fragment, useEffect, useState } from "react";
 import classes from "./AddExerciseForm.module.css";
+import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import useInput from "./Hooks/use-input";
 
 const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
   const [exerciseIsSubmitted, setExerciseIsSubmitted] = useState(false);
-  const [exerciseTitlePlaceHolder, setExerciseTitlePlaceHolder] =
+  const [exerciseTitlePlaceholder, setExerciseTitlePlaceholder] =
     useState("Title");
+  const [caloriesPlaceholder, setCaloriesPlaceholder] = useState(0);
+
+  // get all the library items
+  const { data: libraryData } = useLibraryItems();
 
   const textNotEmpty = (value) => value !== "";
 
@@ -13,12 +19,21 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     return value !== "select..." && value !== "";
   };
 
+  const isANumber = (value) => {
+    const number = parseInt(value);
+    return !isNaN(number);
+  };
+
   const getExerciseDataHandler = () => {
+    const updateQuestionValue = questioValue === "yes" ? true : false;
+
     const exercise = {
       exerciseNumber,
       title: exerciseTitleValue,
       workTime: workTimeValue,
       restTime: restTimeValue,
+      calories: caloriesValue,
+      question: updateQuestionValue,
       libraryItem: libraryItemValue,
     };
 
@@ -62,6 +77,24 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     reset: resetLibraryItem,
   } = useInput(selectIsValid);
 
+  const {
+    value: caloriesValue,
+    isValid: caloriesIsValid,
+    hasError: caloriesHasError,
+    valueChangeHandler: caloriesChangeHandler,
+    inputBlurHandler: caloriesBlurHandler,
+    reset: resetCalories,
+  } = useInput(isANumber);
+
+  const {
+    value: questioValue,
+    isValid: questionValid,
+    hasError: questionHasError,
+    valueChangeHandler: questionChangeHandler,
+    inputBlurHandler: questionBlurHandler,
+    reset: resetQuestion,
+  } = useInput(selectIsValid);
+
   const formIsValid =
     exerciseTitleIsValid &&
     workTimeIsValid &&
@@ -70,7 +103,8 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
 
   useEffect(() => {
     if (exerciseIsSubmitted) {
-      setExerciseTitlePlaceHolder(exerciseTitleValue);
+      setExerciseTitlePlaceholder(exerciseTitleValue);
+      setCaloriesPlaceholder(caloriesValue);
     }
   }, [exerciseIsSubmitted]);
 
@@ -81,6 +115,8 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
   const workTimeValueTernery = exerciseIsSubmitted ? "" : workTimeValue;
   const restTimeValueTernery = exerciseIsSubmitted ? "" : restTimeValue;
   const libraryItemValueTernery = exerciseIsSubmitted ? "" : libraryItemValue;
+  const caloriesValueTernery = exerciseIsSubmitted ? "" : caloriesValue;
+  const questionValueTernery = exerciseIsSubmitted ? "" : questioValue;
 
   const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
     .filter((num) => num % 5 === 0)
@@ -97,22 +133,22 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
       );
     });
 
-  const videoLibraryOptions = ["video one", "video two"].map((video, index) => {
+  const libraryItemOptions = libraryData.map((libraryItem) => {
     return (
       <option
-        key={index}
-        value={video}
+        key={libraryItem.id}
+        value={libraryItem.id}
         disabled={exerciseIsSubmitted}
         hidden={exerciseIsSubmitted}
       >
-        {video}
+        {libraryItem.title}
       </option>
     );
   });
 
   const submittedClasses = exerciseIsSubmitted
-  ? `${classes.formGrid} ${classes.titlesGrey}`
-  : classes.formGrid;
+    ? `${classes.formGrid} ${classes.titlesGrey}`
+    : classes.formGrid;
 
   return (
     <Fragment>
@@ -124,7 +160,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             type="text"
             id={`exercise_${exerciseNumber}`}
             value={exerciseTitleValueTernery}
-            placeholder={exerciseTitlePlaceHolder}
+            placeholder={exerciseTitlePlaceholder}
             onChange={exerciseTitleChangeHandler}
             onBlur={exerciseTitleBlurHandler}
           />
@@ -133,9 +169,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           )}
         </div>
         <div className={classes.workTime}>
-          <label htmlFor={`exercise_${exerciseNumber}_work_time`}>
-            Work Time
-          </label>
+          <label htmlFor={`exercise_${exerciseNumber}_work_time`}>Work</label>
           <select
             name={`exercise_${exerciseNumber}_work_time`}
             id={`exercise_${exerciseNumber}_work_time`}
@@ -155,9 +189,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
           </select>
         </div>
         <div className={classes.restTime}>
-          <label htmlFor={`exercise_${exerciseNumber}_rest_time`}>
-            Rest Time
-          </label>
+          <label htmlFor={`exercise_${exerciseNumber}_rest_time`}>Rest</label>
           <select
             name={`exercise_${exerciseNumber}_rest_time`}
             id={`exercise_${exerciseNumber}_rest_time`}
@@ -173,6 +205,48 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
               select...
             </option>
             {restAndWorkOptions}
+          </select>
+        </div>
+        <div className={classes.title}>
+          <label htmlFor={`exercise_${exerciseNumber}_calories`}>
+            Calories
+          </label>
+          <input
+            type="number"
+            id={`exercise_${exerciseNumber}_calories`}
+            value={caloriesValueTernery}
+            placeholder={caloriesPlaceholder}
+            onChange={caloriesChangeHandler}
+            onBlur={caloriesBlurHandler}
+          />
+          {caloriesHasError && (
+            <p className={classes.errorText}>Must be a number</p>
+          )}
+        </div>
+        <div className={classes.restTime}>
+          <label htmlFor={`exercise_${exerciseNumber}_rest_time`}>
+            Question?
+          </label>
+          <select
+            name={`exercise_${exerciseNumber}_rest_time`}
+            id={`exercise_${exerciseNumber}_rest_time`}
+            value={questionValueTernery}
+            onChange={questionChangeHandler}
+            onBlur={questionBlurHandler}
+          >
+            <option
+              value="default"
+              disabled={exerciseIsSubmitted}
+              hidden={exerciseIsSubmitted}
+            >
+              select...
+            </option>
+            <option disabled={exerciseIsSubmitted} hidden={exerciseIsSubmitted}>
+              yes
+            </option>
+            <option disabled={exerciseIsSubmitted} hidden={exerciseIsSubmitted}>
+              no
+            </option>
           </select>
         </div>
         <div className={classes.libraryItem}>
@@ -193,7 +267,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
             >
               select...
             </option>
-            {videoLibraryOptions}
+            {libraryItemOptions}
           </select>
         </div>
         <div className={classes.addButton}>
@@ -210,11 +284,3 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
 };
 
 export default AddExerciseForm;
-
-// {
-//   "id": "e2",
-//   "exercise_title": "Sit ups - set 1",
-//   "exercise_work_time": "45 secs",
-//   "exercise_rest_time": "15 secs",
-//   "video": "www.youtube.com"
-// },
