@@ -10,7 +10,7 @@ const getExercises = async (prodramId, workoutId) => {
   //   `${baseUrl}/programs/${prodramId}/daily_workouts/${workoutId}`
   // );
   const { data } = await axios(
-    `${baseUrl}/programs/276/daily_workouts/4894/exercises`
+    `${baseUrl}/programs/438/daily_workouts/6746/exercises`
   );
 
   return data;

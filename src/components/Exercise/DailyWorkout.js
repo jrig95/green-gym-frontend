@@ -16,9 +16,7 @@ const DailyWorkout = () => {
   // Hook to get the workout.
   const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises();
 
-  if (!exerciseIsLoading) {
-    console.log();
-  }
+  console.log(exerciseData);
 
   // have a set state for index - start at 0
   const [videoIndex, setvideoIndex] = useState(0);
@@ -43,23 +41,21 @@ const DailyWorkout = () => {
 
   let videoUls = [];
 
-
-
   const videos = [videoOne, videoTwo, videoThree, videoFour];
 
-  const exerciseLength = videos.length;
+  const exerciseLength = exerciseData.length;
   const workoutFinish = exerciseLength === videoIndex;
 
 
   // this should be a loading spinner
   if (exerciseIsLoading) return <p>Loading...</p>
 
-  const rest = <RestCard timer={10} />;
+  const rest = <RestCard timer={parseInt(exerciseData[videoIndex].exercise_rest_time)} />;
 
   const currentVideo = (
     <ExerciseVideo
       videoUrl={exerciseData[videoIndex].video_url}
-      onEnded={() => currentVideoEndedHandler(10)}
+      onEnded={() => currentVideoEndedHandler(parseInt(exerciseData[videoIndex].exercise_rest_time))}
     />
   );
 
