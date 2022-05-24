@@ -74,12 +74,13 @@ const SignUpForm = () => {
 
     // console.log(userData);
 
-    // resetFirstName();
-    // resetLastName();
-    // resetCompany();
-    // resetEmail();
-    // resetPassword();
+    resetFirstName();
+    resetLastName();
+    resetCompany();
+    resetEmail();
+    resetPassword();
 
+    navigate("/");
   };
 
   const firstNameClasses = firstNameHasError

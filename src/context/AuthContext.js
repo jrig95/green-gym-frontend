@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaRegFontAwesomeLogoFull } from "react-icons/fa";
 
 const AuthContext = React.createContext({
   token: "",
@@ -10,24 +11,43 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const [admin, setAdmin] = useState(false);
+  // get tokens
+  const rawUserId = localStorage.getItem("token");
+  const rawAdmin = localStorage.getItem("token");
+  const initialToken = localStorage.getItem("token");
+
+  // Deserialize
+  const initialUserId = parseInt(rawUserId);
+  const initialAdmin = JSON.parse(rawAdmin);
+
+  const [token, setToken] = useState(initialToken);
+  const [userId, setUserId] = useState(initialUserId);
+  const [admin, setAdmin] = useState(initialAdmin);
 
   const userIsLoggedIn = !!token && !admin;
-
   const adminIsLoggedIn = !!token && admin;
 
-  const loginHandler = (userData) => {
-    setToken(userData.token);
-    setUserId(userData.userId);
-    setAdmin(userData.admin);
+  const loginHandler = ({ token, userId, admin }) => {
+    setToken(token);
+    setUserId(userId);
+    setAdmin(admin);
+
+    // Serialize
+    const adminString = admin.toString();
+    const userIdString = userId.toString();
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("admin", adminString);
+    localStorage.setItem("userId", userIdString);
   };
 
   const logoutHandler = () => {
     setUserId(null);
     setToken(null);
     setAdmin(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
+    localStorage.removeItem("userId");
   };
 
   const contextValue = {
