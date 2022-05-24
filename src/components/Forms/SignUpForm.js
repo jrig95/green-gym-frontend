@@ -104,7 +104,7 @@ const SignUpForm = () => {
     passwordIsValid;
 
   return (
-    <SignUpFormCard title={t("sign_up")}>
+    <SignUpFormCard title={t("sign_up")} >
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>

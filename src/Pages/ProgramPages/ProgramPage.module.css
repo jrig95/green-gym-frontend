@@ -50,3 +50,49 @@
 .purchaseContainer h3 {
   margin: 1rem 1rem 0 0;
 }
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+
+  .container{
+    width: 100vw;
+    margin: 0 auto;
+  }
+
+  .descriptionContainer {
+      margin: 1rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .programWorkoutsGrid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
+    }
+
+    .descriptionContainer h3{
+      width: 23rem;
+      padding-left: 1.5rem;
+      padding-bottom: 1rem;
+      padding-top: .5rem;
+    }
+
+    .descriptionContainer img {
+    width: 22rem;
+    max-height: 20rem;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  }
+
+    .purchaseContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+}
