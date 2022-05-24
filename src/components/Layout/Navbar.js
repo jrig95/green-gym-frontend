@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
-  const userLoggedIn = true;
+  const userLoggedIn = false;
   const adminLoggedIn = false;
   const loggedOut = !userLoggedIn && !adminLoggedIn;
 
@@ -79,8 +79,8 @@ const Navbar = () => {
           <div className={!nav ? classes.hidden : classes.mobileMenu}>
             {loggedOut && (
           <div className={classes.links}>
-            <Link  onClick={handleClick} to="login">
-              {t("nav_bar_already_a_member")}
+            <Link  className={classes.login} onClick={handleClick} to="login">
+              Login
             </Link>
             <Link  onClick={handleClick} to="signup">
               <Button size="small">{t("nav_bar_create_a_profile")}</Button>

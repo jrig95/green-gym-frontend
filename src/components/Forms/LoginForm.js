@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import classes from "./Form.module.css";
+import classes from "./LoginForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
-import FormCard from "./FormCard";
+import LoginFormCard from "./LoginFormCard";
+
 
 const LoginForm = () => {
   const textNotEmpty = (value) => value.trim() !== "";
@@ -40,7 +41,7 @@ const LoginForm = () => {
   const formIsValid = emailIsValid & passwordIsValid;
 
   return (
-    <FormCard title="Login">
+    <LoginFormCard title="Login">
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={emailClasses}>
@@ -85,7 +86,7 @@ const LoginForm = () => {
           </div>
         </div>
       </form>
-    </FormCard>
+    </LoginFormCard>
   );
 };
 

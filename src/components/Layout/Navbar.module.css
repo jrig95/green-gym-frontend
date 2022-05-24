@@ -166,4 +166,23 @@
   .noMobileMenu {
     display: none;
   }
+
+  .links .login{
+    cursor: pointer;
+      background-color: var(--green);
+      color: var(--white);
+      border-radius: 0.25rem;
+      border: none;
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 0;
+      min-width: 12rem;
+      display: flex;
+      justify-content: center;
+  }
+
+    .links .login:hover {
+      color: var(--white);
+      background-color: var(--green-hover);
+    }
 }
