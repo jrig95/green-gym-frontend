@@ -8,9 +8,9 @@ import FormCard from "./FormCard";
 
 const LoginForm = () => {
   const userLogin = useUserLogin();
-  // const { data } = useUser();
+  const { data } = useUser();
 
-  // console.log(data);
+  console.log(data);
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
