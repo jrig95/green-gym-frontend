@@ -8,9 +8,7 @@ import FormCard from "./FormCard";
 
 const LoginForm = () => {
   const userLogin = useUserLogin();
-  const { data } = useUser();
 
-  console.log(data);
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -33,7 +31,7 @@ const LoginForm = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-
+    
     const user = {
       email: emailValue,
       password: passwordValue

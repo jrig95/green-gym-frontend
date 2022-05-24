@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate, useNavigationType } from "react-router-dom"; 
 import { useTranslation } from "react-i18next";
 
+import { useUserSignup } from "../User/hooks/use-user-signup";
 import classes from "./Form.module.css";
 import FormCard from "./FormCard";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const textNotEmpty = (value) => value.trim() !== "";
+  const userSignup = useUserSignup();
 
   const {
     value: firstNameValue,
@@ -59,21 +62,24 @@ const SignUpForm = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    const userData = {
-      firstName: firstNameValue,
-      secondName: lastNameValue,
+    const user = {
+      first_name: firstNameValue,
+      second_name: lastNameValue,
       company: companyValue,
       email: emailValue,
       password: passwordValue,
     };
 
-    console.log(userData);
+    userSignup(user);
 
-    resetFirstName();
-    resetLastName();
-    resetCompany();
-    resetEmail();
-    resetPassword();
+    // console.log(userData);
+
+    // resetFirstName();
+    // resetLastName();
+    // resetCompany();
+    // resetEmail();
+    // resetPassword();
+
   };
 
   const firstNameClasses = firstNameHasError
