@@ -1,3 +1,5 @@
+import { useUser } from "../User/hooks/use-user";
+import { useUserLogin } from "../User/hooks/use-user-login";
 import { Link } from "react-router-dom";
 import classes from "./Form.module.css";
 import useInput from "./Hooks/use-input";
@@ -5,6 +7,10 @@ import Button from "../UI/Button";
 import FormCard from "./FormCard";
 
 const LoginForm = () => {
+  const userLogin = useUserLogin();
+  // const { data } = useUser();
+
+  // console.log(data);
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -27,6 +33,13 @@ const LoginForm = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
+    const user = {
+      email: emailValue,
+      password: passwordValue
+    }
+
+    userLogin(user);
   };
 
   const emailClasses = emailHasError

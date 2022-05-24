@@ -8,5 +8,6 @@ export const queryKeys = {
   rewards: "rewards",
   reward: "reward",
   libraryItems: "library_items",
-  libraryItem: "library_item"
+  libraryItem: "library_item",
+  user: "user",
 };

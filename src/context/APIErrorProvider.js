@@ -16,14 +16,14 @@ const APIErrorProvider = ({ children }) => {
   const contextValue = {
     error,
     addError: useCallback((message, status) => addError(message, status), []),
-    removeError: useCallback(() => removeError(), [])
-  }
+    removeError: useCallback(() => removeError(), []),
+  };
 
   return (
     <APIErrorContext.Provider value={contextValue}>
       {children}
     </APIErrorContext.Provider>
-  )
+  );
 };
 
 export default APIErrorProvider;
