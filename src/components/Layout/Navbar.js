@@ -89,9 +89,9 @@ const Navbar = () => {
       <div className={!nav ? classes.hidden : classes.mobileMenu}>
         {loggedOut && (
           <div className={classes.links}>
-            <Link onClick={handleClick} to="login">
+            {/* <Link onClick={handleClick} to="login">
               {t("nav_bar_already_a_member")}
-            </Link>
+            </Link> */}
             <Link  className={classes.login} onClick={handleClick} to="login">
               Login
             </Link>
