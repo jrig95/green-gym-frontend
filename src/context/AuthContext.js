@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaRegFontAwesomeLogoFull } from "react-icons/fa";
 
 const AuthContext = React.createContext({
   token: "",
@@ -18,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // Deserialize
   const initialUserId = parseInt(rawUserId);
-  const initialAdmin = JSON.parse(rawAdmin);
+  const initialAdmin = rawAdmin === "true" ? true : false;
 
   const [token, setToken] = useState(initialToken);
   const [userId, setUserId] = useState(initialUserId);

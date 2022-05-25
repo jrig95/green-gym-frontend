@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import React, { useState, useContext } from "react";
 
+import { useUserLogout } from "../User/hooks/use-user-logout";
 import AuthContext from "../../context/AuthContext";
 import Button from "../UI/Button";
 import classes from "./Navbar.module.css";
@@ -9,10 +10,18 @@ import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const userLogout = useUserLogout();
   const authCtx = useContext(AuthContext);
   const { t } = useTranslation();
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+
+  const logoutHandler = () => {
+    // Call a logout function here.
+    console.log("logout");
+    userLogout(authCtx.token);
+    authCtx.logout();
+  };
 
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
@@ -69,6 +78,7 @@ const Navbar = () => {
             <NavLink style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
+            <Button onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
           </div>
         )}
         <LanguageToggle />

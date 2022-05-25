@@ -64,8 +64,8 @@ const SignUpForm = () => {
 
     const user = {
       first_name: firstNameValue,
-      second_name: lastNameValue,
-      company: companyValue,
+      last_name: lastNameValue,
+      user_company: companyValue,
       email: emailValue,
       password: passwordValue,
     };

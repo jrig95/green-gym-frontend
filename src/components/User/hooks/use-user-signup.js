@@ -24,16 +24,6 @@ export const useUserSignup = () => {
     (user) => createUserSignup(user),
     {
       onSuccess: (data) => {
-        // here we set the bearer token to context
-        
-        console.log(data.headers.authorization, "these is bareer token");
-        // const token = data.headers.authorization
-        // here we can set the user id
-        console.log(data.response.data.id, "this is the user id");
-        // const userId = data.response.data.id
-        console.log(data.response.data.admin, "this is the admin boolean");
-        // const admin = data.response.data.admin
-
         const userData = {
           token: data.headers.authorization,
           userId: data.response.data.id,
@@ -49,7 +39,7 @@ export const useUserSignup = () => {
           error instanceof Error
             ? error.response.data.status.message
             : "error connecting to server";
-        addError(title, error);
+        addError(title, error.status);
       },
     }
   );
