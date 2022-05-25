@@ -1,6 +1,6 @@
-import { useQuery } from "react-query";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 
+import AuthContext from "../../context/AuthContext";
 import { useDeleteReward } from "../../components/Reward/hooks/use-delete-reward";
 import { useRewards } from "../../components/Reward/hooks/use-rewards";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
@@ -22,6 +22,7 @@ const DUMMY_DATA = {
 };
 
 const RewardsPage = () => {
+  const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
 
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
@@ -33,7 +34,7 @@ const RewardsPage = () => {
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = true;
+  const admin = authCtx.isAdmin;
 
   const { data } = useRewards();
 

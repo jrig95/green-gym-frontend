@@ -46,17 +46,17 @@ function App() {
         />
         {!authCtx.isLoggedIn && (
           <Fragment>
-            <Route path="programs" element={<SignUp />} />
-            <Route path="programs/:programId" element={<SignUp />} />
+            <Route path="programs" element={<LandingPage />} />
+            <Route path="programs/:programId" element={<LandingPage />} />
             <Route
               path="programs/:programId/purchase"
-              element={<SignUp />}
+              element={<LandingPage />}
             />
-            <Route path="activities" element={<SignUp />} />
-            <Route path="activities/workout" element={<SignUp />} />
-            <Route path="rewards" element={<SignUp />} />
-            <Route path="profile" element={<SignUp />} />
-            <Route path="profile/update" element={<SignUp />} />
+            <Route path="activities" element={<LandingPage />} />
+            <Route path="activities/workout" element={<LandingPage />} />
+            <Route path="rewards" element={<LandingPage />} />
+            <Route path="profile" element={<LandingPage />} />
+            <Route path="profile/update" element={<LandingPage />} />
           </Fragment>
         )}
 
