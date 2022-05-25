@@ -20,7 +20,7 @@ const ActivitiesPage = () => {
   };
 
   useEffect(() => {
-    console.log(challengeIsComplete);
+    // console.log(challengeIsComplete);
   }, [challengeIsComplete])
 
   return (

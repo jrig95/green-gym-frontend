@@ -1,22 +1,29 @@
 import axios from "axios";
 
-import { userBaseUrl } from "../../../axiosInstance/user-constants";
+import useAPIError from "../../../common/hooks/use-API-error";
+import { baseUrl } from "../../../axiosInstance/constants";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../../react-query/constants";
 // have a axios call to get the user
 
-const getUserSession = async () => {
-  const { data } = await axios(`${userBaseUrl}/login`);
+const getUser = async (id) => {
+  const { data } = await axios(`${baseUrl}/users/${id}`);
 
   return data;
 };
 
 export const useUser = () => {
+  const { addError } = useAPIError();
   const fallback = [];
-  const { data, isError, error, isLoading } = useQuery(
-    queryKeys.user,
-    getUserSession
-  );
+  const { data } = useQuery(queryKeys.user, (id) => getUser(id), {
+    onError: (error) => {
+      const title =
+        error instanceof Error
+          ? error.response.data
+          : "error connecting to server";
+      addError(title, error.response.status);
+    },
+  });
 
   return { data };
 };

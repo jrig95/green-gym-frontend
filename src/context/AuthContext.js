@@ -11,9 +11,10 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = ({ children }) => {
   // get tokens
-  const rawUserId = localStorage.getItem("token");
-  const rawAdmin = localStorage.getItem("token");
+  const rawUserId = localStorage.getItem("userId");
+  const rawAdmin = localStorage.getItem("admin");
   const initialToken = localStorage.getItem("token");
+
 
   // Deserialize
   const initialUserId = parseInt(rawUserId);
