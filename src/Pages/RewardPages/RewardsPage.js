@@ -1,6 +1,6 @@
-import { useQuery } from "react-query";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 
+import AuthContext from "../../context/AuthContext";
 import { useDeleteReward } from "../../components/Reward/hooks/use-delete-reward";
 import { useRewards } from "../../components/Reward/hooks/use-rewards";
 import RewardClaimedMessage from "../../components/Reward/RewardClaimedMessage";
@@ -10,6 +10,7 @@ import classes from "./RewardsPage.module.css";
 import ClaimReward from "../../components/Reward/ClaimReward";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteReward from "../../components/Reward/DeleteReward";
+import { useUser } from "../../components/User/hooks/use-user";
 
 const DUMMY_DATA = {
   user_one: {
@@ -22,7 +23,11 @@ const DUMMY_DATA = {
 };
 
 const RewardsPage = () => {
+  const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
+  const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
+
+  console.log(userData);
 
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
@@ -33,16 +38,17 @@ const RewardsPage = () => {
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
   // this can be changed later and used by context
-  const admin = true;
+  const admin = authCtx.isAdmin;
 
-  const { data } = useRewards();
+  const { data: rewardData } = useRewards();
 
-  const programRewardsArray = data.filter(
+
+  const programRewardsArray = rewardData.filter(
     (reward) => parseInt(reward.program_id) === DUMMY_DATA.user_one.id
   );
 
   // Create an array based on rewards that do not have a program_id
-  const rewardsArray = data.filter((reward) => reward.program_id === null);
+  const rewardsArray = rewardData.filter((reward) => reward.program_id === null);
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);

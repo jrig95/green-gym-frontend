@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom";
+import { useUserLogin } from "../User/hooks/use-user-login";
 import { Link } from "react-router-dom";
 import classes from "./LoginForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
+import FormCard from "./FormCard";
+import { useEffect } from "react";
 import LoginFormCard from "./LoginFormCard";
 
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const { mutate:userLogin, isSuccess: loginIsSuccess} = useUserLogin();
+
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -28,7 +35,20 @@ const LoginForm = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
+    const user = {
+      email: emailValue,
+      password: passwordValue
+    }
+
+    userLogin(user);  
   };
+
+  useEffect(() => {
+    if (loginIsSuccess) {
+      navigate("/activities");
+    }
+  }, [loginIsSuccess])
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`

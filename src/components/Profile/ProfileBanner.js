@@ -31,7 +31,7 @@ const ProfileBanner = ({
     <div className={classes.container}>
       <div className={classes.banner}>
         <h1>{title || "Profile Banner"}</h1>
-        {calories && (
+        {!!calories && (
           <p className={classes.caloriesText}>
             {caloriesBurned} calories burned
           </p>

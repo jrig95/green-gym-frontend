@@ -21,7 +21,6 @@ const ProgramPage = () => {
 
   if (!isLoading) {
     programWorkouts = data.daily_workouts.map((workout) => {
-      console.log(workout);
       return (
         <div key={workout.id} className={classes.workoutCard}>
           <h2>Day {workout.day_number}</h2>

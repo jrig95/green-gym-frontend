@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import { useDeleteProgram } from "../../components/Program/hooks/use-delete-program";
 import { Fragment, useState } from "react";
+
+import AuthContext from "../../context/AuthContext";
 import { usePrograms } from "../../components/Program/hooks/use-programs";
 import classes from "./ProgramsPage.module.css";
 import ProgramCard from "../../components/Program/ProgramCard";
@@ -8,6 +11,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
 
 const ProgramsPage = () => {
+  const authCtx = useContext(AuthContext);
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
   const [programDetails, setProgramDetails] = useState({
     id: 0,
@@ -17,7 +21,7 @@ const ProgramsPage = () => {
   const deleteProgram = useDeleteProgram();
   const { data } = usePrograms();
 
-  const admin = true;
+  const admin = authCtx.isAdmin;
 
   const deleteProgramHandler = () => {
     // console.log(
