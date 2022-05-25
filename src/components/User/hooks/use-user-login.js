@@ -17,7 +17,7 @@ export const useUserLogin = () => {
   const authCtx = useContext(AuthContext);
 
   const { addError } = useAPIError();
-  const { mutate } = useMutation(
+  const { mutate, isSuccess } = useMutation(
     queryKeys.user,
     (user) => createUserLogin(user),
     {
@@ -31,16 +31,14 @@ export const useUserLogin = () => {
         authCtx.login(userData);
       },
       onError: (error) => {
-        console.log(error);
-        console.log(error.response.data);
         const title =
           error instanceof Error
             ? error.response.data
             : "error connecting to server";
-        addError(title, error);
+        addError(title, error.response.status);
       },
     }
   );
 
-  return mutate;
+  return { mutate, isSuccess };
 };
