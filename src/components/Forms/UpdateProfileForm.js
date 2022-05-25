@@ -23,11 +23,9 @@ const DUMMY_DATA = {
   },
 };
 
-const UpdateProfileForm = ({ user }) => {
+const UpdateProfileForm = ({ user: userData }) => {
   // Get Translation hook
   const { t } = useTranslation();
-
-  console.log(user);
 
   const {
     value: firstNameValue,
@@ -36,7 +34,7 @@ const UpdateProfileForm = ({ user }) => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
-  } = useInput(textNotEmpty, user.first_name);
+  } = useInput(textNotEmpty, userData.first_name);
 
   const {
     value: lastNameValue,
@@ -45,7 +43,7 @@ const UpdateProfileForm = ({ user }) => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastName,
-  } = useInput(textNotEmpty, user.last_name);
+  } = useInput(textNotEmpty, userData.last_name);
 
   const {
     value: companyValue,
@@ -54,7 +52,7 @@ const UpdateProfileForm = ({ user }) => {
     valueChangeHandler: companyChangeHandler,
     inputBlurHandler: companyBlurHandler,
     reset: resetCompany,
-  } = useInput(textNotEmpty, user.user_company);
+  } = useInput(textNotEmpty, userData.user_company);
 
   const {
     value: emailValue,
@@ -63,7 +61,7 @@ const UpdateProfileForm = ({ user }) => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
-  } = useInput(textNotEmpty, user.email);
+  } = useInput(textNotEmpty, userData.email);
 
   const { value: genderValue, valueChangeHandler: genderChangeHandler } =
     useInput(selectIsValid);
@@ -71,12 +69,13 @@ const UpdateProfileForm = ({ user }) => {
   const {
     value: fitnessLevelValue,
     valueChangeHandler: fitnessLevelChangeHandler,
-  } = useInput(selectIsValid, user.user_fitness_level);
+  } = useInput(selectIsValid, userData.user_fitness_level);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
     const user = {
+      id: userData.id,
       email: emailValue,
       first_name: firstNameValue,
       last_name: lastNameValue,
@@ -86,7 +85,7 @@ const UpdateProfileForm = ({ user }) => {
     }
 
     // Write hook to create user update
-    
+
   };
 
   const firstNameClasses = firstNameHasError
