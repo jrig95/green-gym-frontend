@@ -1,5 +1,6 @@
 import { useContext } from "react";
 
+import { createFullName } from "../../utils/create-full-name"
 import AuthContext from "../../context/AuthContext";
 import { useUser } from "../../components/User/hooks/use-user";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
@@ -19,19 +20,21 @@ const DUMMY_DATA = {
 const ProfilePage = () => {
   const authCtx = useContext(AuthContext);
 
-  console.log(authCtx.userId);
+  const { data: user, isLoading } = useUser(authCtx.userId);
 
-  // const { data: user } = useUser(authCtx.userId);
+  console.log()
 
-  // console.log(user);
+  if (isLoading) return <p>Loading...</p>;
+
+  const fullName = createFullName(user.first_name, user.last_name);
 
   return (
     <>
       <ProfileBanner
         title="My Profile"
-        calories={DUMMY_DATA.user_one.calories}
-        points={DUMMY_DATA.user_one.points}
-        name={DUMMY_DATA.user_one.name}
+        calories={toString(user.user_total_calories)}
+        points={user.user_points}
+        name={fullName}
         image={DUMMY_DATA.user_one.image}
       />
       <div className={classes.profileCardContainer}>

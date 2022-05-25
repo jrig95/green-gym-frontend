@@ -12,10 +12,10 @@ const getUser = async (id) => {
   return data;
 };
 
-export const useUser = () => {
+export const useUser = (id) => {
   const { addError } = useAPIError();
   const fallback = [];
-  const { data } = useQuery(queryKeys.user, (id) => getUser(id), {
+  const { data, isLoading } = useQuery(queryKeys.user, () => getUser(id), {
     onError: (error) => {
       const title =
         error instanceof Error
@@ -25,5 +25,5 @@ export const useUser = () => {
     },
   });
 
-  return { data };
+  return { data, isLoading };
 };
