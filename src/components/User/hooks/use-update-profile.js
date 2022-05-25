@@ -10,7 +10,7 @@ const updateProfile = async (user) => {
 
 export const useUpdatePorfile = () => {
   const { addError } = useAPIError();
-  const { mutate } = useMutation((user) => updateProfile(user), {
+  const { mutate, isSuccess } = useMutation((user) => updateProfile(user), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
@@ -18,5 +18,5 @@ export const useUpdatePorfile = () => {
     },
   });
 
-  return mutate;
+  return { mutate, isSuccess };
 };

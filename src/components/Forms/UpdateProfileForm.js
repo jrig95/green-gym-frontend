@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useUpdatePorfile } from "../User/hooks/use-update-profile";
 import {
   textNotEmpty,
   selectIsValid,
@@ -24,6 +27,11 @@ const DUMMY_DATA = {
 };
 
 const UpdateProfileForm = ({ user: userData }) => {
+  const navigate = useNavigate();
+
+  const { mutate: updateProfile, isSuccess: updateProfileIsSuccess } =
+    useUpdatePorfile();
+
   // Get Translation hook
   const { t } = useTranslation();
 
@@ -81,12 +89,18 @@ const UpdateProfileForm = ({ user: userData }) => {
       last_name: lastNameValue,
       user_company: companyValue,
       user_fitness_level: fitnessLevelValue,
-      user_gender: genderValue
-    }
+      user_gender: genderValue,
+    };
 
     // Write hook to create user update
-
+    updateProfile(user);
   };
+
+  useEffect(() => {
+    if (updateProfileIsSuccess) {
+      navigate("/profile");
+    }
+  }, [updateProfileIsSuccess]);
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`
