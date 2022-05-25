@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import { Fragment, useContext } from "react";
 
+import AuthContext from "./context/AuthContext";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 // import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
@@ -29,7 +31,7 @@ import PurchasePage from "./Pages/ProgramPages/PurchasePage";
 import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 function App() {
-  // const queryClient = new QueryClient();
+  const authCtx = useContext(AuthContext);
 
   return (
     <Layout>
@@ -38,28 +40,56 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="programs" element={<ProgramsPage />} />
-        <Route path="programs/:programId" element={<ProgramPage />} />
-        <Route path="programs/:programId/purchase" element={<PurchasePage />} />
-        <Route path="programs/add-program" element={<AddProgramPage />} />
-        <Route
-          path="programs/add-program/add-workout"
-          element={<AddWorkoutPage />}
-        />
-        <Route path="add-workout" element={<AddWorkoutPage />} />
-        <Route path="activities" element={<ActivitiesPage />} />
-        <Route path="activities/workout" element={<DailyWorkoutPage />} />
-        <Route path="rewards" element={<RewardsPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="profile/update" element={<UpdateProfilePage />} />
         <Route
           path="profile/change-password"
           element={<ProfileResetPasswordPage />}
         />
-        <Route path="members" element={<MembersPage />} />
-        <Route path="members/:memberId" element={<MemberPage />} />
-        <Route path="library" element={<LibraryItemsPage />} />
-        <Route path="library/:libraryId" element={<LibraryItemPage />}/>
+        {!authCtx.isLoggedIn && (
+          <Fragment>
+            <Route path="programs" element={<SignUp />} />
+            <Route path="programs/:programId" element={<SignUp />} />
+            <Route
+              path="programs/:programId/purchase"
+              element={<SignUp />}
+            />
+            <Route path="activities" element={<SignUp />} />
+            <Route path="activities/workout" element={<SignUp />} />
+            <Route path="rewards" element={<SignUp />} />
+            <Route path="profile" element={<SignUp />} />
+            <Route path="profile/update" element={<SignUp />} />
+          </Fragment>
+        )}
+
+
+        {authCtx.isLoggedIn && (
+          <Fragment>
+            <Route path="programs" element={<ProgramsPage />} />
+            <Route path="programs/:programId" element={<ProgramPage />} />
+            <Route
+              path="programs/:programId/purchase"
+              element={<PurchasePage />}
+            />
+            <Route path="activities" element={<ActivitiesPage />} />
+            <Route path="activities/workout" element={<DailyWorkoutPage />} />
+            <Route path="rewards" element={<RewardsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/update" element={<UpdateProfilePage />} />
+          </Fragment>
+        )}
+        {authCtx.isAdmin && (
+          <Fragment>
+            <Route path="programs/add-program" element={<AddProgramPage />} />
+            <Route
+              path="programs/add-program/add-workout"
+              element={<AddWorkoutPage />}
+            />
+            <Route path="add-workout" element={<AddWorkoutPage />} />
+            <Route path="members" element={<MembersPage />} />
+            <Route path="members/:memberId" element={<MemberPage />} />
+            <Route path="library" element={<LibraryItemsPage />} />
+            <Route path="library/:libraryId" element={<LibraryItemPage />} />
+          </Fragment>
+        )}
       </Routes>
     </Layout>
   );
