@@ -77,6 +77,13 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
+
+  .card {
+      width: 20rem;
+      padding: 1rem;
+      background-color: var(--haze-white);
+    }
+
   .formControl input,
   .formControl textarea,
   .formControl select {
@@ -89,25 +96,25 @@
     max-width: 20rem;
   }
 
-  .title{
+  .title {
     font-size: 1.5rem;
   }
 
-    .formControl label {
-      font-size: 1.25rem;
-      margin: 0 0 .5rem 0;
-    }
+  .formControl label {
+    font-size: 1.25rem;
+    margin: 0 0 .5rem 0;
+  }
 
-    .formActions{
+  .formActions {
     display: flex;
-      justify-content: space-around;
-      margin: 1rem 0 0 0;
-    }
+    justify-content: space-around;
+    margin: 1rem 0 0 0;
+  }
 
-    .formActions button{
-      padding: 0.25rem 0.5rem;
-      min-width: 9rem;
-      margin: 0 0 0 0;
-    }
+  .formActions button {
+    padding: 0.25rem 0.5rem;
+    min-width: 9rem;
+    margin: 0 0 0 0;
+  }
 
 }

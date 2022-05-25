@@ -2,8 +2,9 @@ import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { useUserSignup } from "../User/hooks/use-user-signup";
-import classes from "./Form.module.css";
 import FormCard from "./FormCard";
+import classes from "./SignUpForm.module.css";
+import SignUpFormCard from "./SignUpFormCard";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
@@ -111,7 +112,7 @@ const SignUpForm = () => {
     passwordIsValid;
 
   return (
-    <FormCard title={t("sign_up")}>
+    <SignUpFormCard title={t("sign_up")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>
@@ -197,7 +198,7 @@ const SignUpForm = () => {
           </div>
         </div>
       </form>
-    </FormCard>
+    </SignUpFormCard>
   );
 };
 

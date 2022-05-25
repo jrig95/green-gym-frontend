@@ -27,6 +27,7 @@ const Navbar = () => {
 
   const userLoggedIn = authCtx.isLoggedIn;
   const adminLoggedIn = authCtx.isAdmin;
+
   const loggedOut = !userLoggedIn && !adminLoggedIn;
 
   const activeStyle = {
@@ -90,6 +91,9 @@ const Navbar = () => {
           <div className={classes.links}>
             <Link onClick={handleClick} to="login">
               {t("nav_bar_already_a_member")}
+            </Link>
+            <Link  className={classes.login} onClick={handleClick} to="login">
+              Login
             </Link>
             <Link onClick={handleClick} to="signup">
               <Button size="small">{t("nav_bar_create_a_profile")}</Button>
