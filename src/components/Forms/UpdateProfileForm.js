@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 
+import { useUpdatePorfile } from "../User/hooks/use-update-profile";
+import {
+  textNotEmpty,
+  selectIsValid,
+} from "../../utils/input-from-validations";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import FormCard from "./FormCard";
@@ -16,22 +22,18 @@ const DUMMY_DATA = {
     phone_number: "",
     email: "darren@lewis.com",
     fitness_level: "",
-    passions: "" 
+    passions: "",
   },
 };
 
-const UpdateProfileForm = () => {
-  // const [updatedFirstName, setUpdatedFirstName] = useState(
-  //   DUMMY_DATA.user_one.first_name
-  // );
+const UpdateProfileForm = ({ user: userData }) => {
+  const navigate = useNavigate();
 
-  // const updatedFirstNameChangeHandler = (event) => {
-  //   setUpdatedFirstName(event.target.value);
-  // };
+  const { mutate: updateProfile, isSuccess: updateProfileIsSuccess } =
+    useUpdatePorfile();
 
+  // Get Translation hook
   const { t } = useTranslation();
-
-  const textNotEmpty = (value) => value.trim() !== "";
 
   const {
     value: firstNameValue,
@@ -40,7 +42,7 @@ const UpdateProfileForm = () => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, userData.first_name);
 
   const {
     value: lastNameValue,
@@ -49,7 +51,7 @@ const UpdateProfileForm = () => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastName,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, userData.last_name);
 
   const {
     value: companyValue,
@@ -58,29 +60,47 @@ const UpdateProfileForm = () => {
     valueChangeHandler: companyChangeHandler,
     inputBlurHandler: companyBlurHandler,
     reset: resetCompany,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, userData.user_company);
 
   const {
     value: emailValue,
-    setEnteredValue: setEmail,
     isValid: emailIsValid,
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, userData.email);
 
-  // useEffect(() => {
-  //   firstNameChangeHandler(DUMMY_DATA.user_one.first_name);
-  // }, [])
+  const { value: genderValue, valueChangeHandler: genderChangeHandler } =
+    useInput(selectIsValid);
+
+  const {
+    value: fitnessLevelValue,
+    valueChangeHandler: fitnessLevelChangeHandler,
+  } = useInput(selectIsValid, userData.user_fitness_level);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    resetFirstName();
-    resetLastName();
-    resetCompany();
+    const user = {
+      id: userData.id,
+      email: emailValue,
+      first_name: firstNameValue,
+      last_name: lastNameValue,
+      user_company: companyValue,
+      user_fitness_level: fitnessLevelValue,
+      user_gender: genderValue,
+    };
+
+    // Write hook to create user update
+    updateProfile(user);
   };
+
+  useEffect(() => {
+    if (updateProfileIsSuccess) {
+      navigate("/profile");
+    }
+  }, [updateProfileIsSuccess]);
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -127,17 +147,24 @@ const UpdateProfileForm = () => {
               onBlur={lastNameBlurHandler}
             />
             {lastNameHasError && (
-              <p className={classes.errorText}>please enter your second name</p>
+              <p className={classes.errorText}>please enter your last name</p>
             )}
           </div>
 
           <div className={classes.formControl}>
             <label>Age</label>
-            <input type="number" min={18} max={100} placeholder="18" />
+            <input type="number" min={18} max={100} />
           </div>
           <div className={`${classes.formControl} ${classes.customSelect}`}>
-            <label htmlFor="gender">Gender</label>
+            <label
+              value={genderValue}
+              onChange={genderChangeHandler}
+              htmlFor="gender"
+            >
+              Gender
+            </label>
             <select name="gender" id="gender">
+              <option>Selecet...</option>
               <option>Male</option>
               <option>Female</option>
             </select>
@@ -147,7 +174,7 @@ const UpdateProfileForm = () => {
             <input
               type="text"
               id="company"
-              value={DUMMY_DATA.user_one.company || companyValue}
+              value={companyValue}
               onChange={companyChangeHandler}
               onBlur={companyBlurHandler}
             />
@@ -178,7 +205,13 @@ const UpdateProfileForm = () => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="fitness_level">Fitness Level</label>
-            <select name="fitness_level" id="fitness_level">
+            <select
+              value={fitnessLevelValue}
+              onChange={fitnessLevelChangeHandler}
+              name="fitness_level"
+              id="fitness_level"
+            >
+              <option>Select...</option>
               <option>Beginner</option>
               <option>Intermediate</option>
               <option>Advanced</option>

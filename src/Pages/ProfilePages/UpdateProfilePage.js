@@ -1,3 +1,8 @@
+import { useContext } from "react";
+
+import { createFullName } from "../../utils/create-full-name";
+import AuthContext from "../../context/AuthContext";
+import { useUser } from "../../components/User/hooks/use-user";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import UpdateProfileForm from "../../components/Forms/UpdateProfileForm";
 import classes from './UpdateProfilePage.module.css';
@@ -12,17 +17,25 @@ const DUMMY_DATA = {
 };
 
 const UpdateProfilePage = () => {
+  const authCtx = useContext(AuthContext);
+
+  const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
+
+  if (userIsLoading) return <p>Loading...</p>
+
+  const fullName = createFullName(userData.first_name, userData.last_name);
+
   return (
     <>
       <ProfileBanner
         title="My Profile"
         // calories={DUMMY_DATA.user_one.calories}
-        name={DUMMY_DATA.user_one.name}
+        name={fullName}
         image={DUMMY_DATA.user_one.image}
         update={true}
       />
       <div className={classes.updateProfileFormContainer}>
-        <UpdateProfileForm/>
+        <UpdateProfileForm user={userData}/>
       </div>
     </>
   );

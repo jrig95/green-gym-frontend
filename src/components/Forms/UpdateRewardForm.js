@@ -6,10 +6,6 @@ import classes from "./Form.module.css";
 const UpdateRewardForm = ({ onClose, reward }) => {
   const updateReward = useUpdateReward();
 
-  // use state to managed edited values
-  // how do I stop this from updating?
-  console.log(reward, "UpdateRewardForm");
-
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
