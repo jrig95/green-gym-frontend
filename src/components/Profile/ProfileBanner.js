@@ -14,6 +14,8 @@ const ProfileBanner = ({
   points,
 }) => {
 
+  console.log(calories);
+
   let caloriesNum = 0;
   let caloriesBurned = "";
   let stringifiedPoints = ""
