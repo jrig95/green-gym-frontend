@@ -79,7 +79,7 @@ const Navbar = () => {
             <NavLink style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
-            <Button onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
+            <Button className={classes.logout} onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
           </div>
         )}
         <LanguageToggle />
