@@ -6,25 +6,12 @@ import { useUpdatePorfile } from "../User/hooks/use-update-profile";
 import {
   textNotEmpty,
   selectIsValid,
+  isANumber,
 } from "../../utils/input-from-validations";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import FormCard from "./FormCard";
 import classes from "./Form.module.css";
-
-const DUMMY_DATA = {
-  user_one: {
-    first_name: "Darren",
-    last_name: "Lewis",
-    age: "",
-    gender: "",
-    company: "Green Gym",
-    phone_number: "",
-    email: "darren@lewis.com",
-    fitness_level: "",
-    passions: "",
-  },
-};
 
 const UpdateProfileForm = ({ user: userData }) => {
   const navigate = useNavigate();
@@ -32,8 +19,10 @@ const UpdateProfileForm = ({ user: userData }) => {
   const { mutate: updateProfile, isSuccess: updateProfileIsSuccess } =
     useUpdatePorfile();
 
-  // Get Translation hook
+    // Get Translation hook
   const { t } = useTranslation();
+
+  console.log(userData);
 
   const {
     value: firstNameValue,
@@ -41,7 +30,6 @@ const UpdateProfileForm = ({ user: userData }) => {
     hasError: firstNameHasError,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
-    reset: resetFirstName,
   } = useInput(textNotEmpty, userData.first_name);
 
   const {
@@ -50,8 +38,15 @@ const UpdateProfileForm = ({ user: userData }) => {
     hasError: lastNameHasError,
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
-    reset: resetLastName,
   } = useInput(textNotEmpty, userData.last_name);
+
+  const {
+    value: ageValue,
+    isValid: ageIsValid,
+    hasError: ageHasError,
+    valueChangeHandler: ageChangeHandler,
+    inputBlurHandler: ageBlurHandler,
+  } = useInput(isANumber, userData.age);
 
   const {
     value: companyValue,
@@ -59,40 +54,54 @@ const UpdateProfileForm = ({ user: userData }) => {
     hasError: companyHasError,
     valueChangeHandler: companyChangeHandler,
     inputBlurHandler: companyBlurHandler,
-    reset: resetCompany,
   } = useInput(textNotEmpty, userData.user_company);
 
   const {
-    value: emailValue,
-    isValid: emailIsValid,
-    hasError: emailHasError,
-    valueChangeHandler: emailChangeHandler,
-    inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
-  } = useInput(textNotEmpty, userData.email);
+    value: phoneNumberValue,
+    isValid: phoneNumberIsValid,
+    hasError: phoneNumberHasError,
+    valueChangeHandler: phoneNumberChangeHandler,
+    inputBlurHandler: phoneNumberBlurHandler,
+  } = useInput(textNotEmpty, userData.phone_number);
+
+  // const {
+  //   value: emailValue,
+  //   isValid: emailIsValid,
+  //   hasError: emailHasError,
+  //   valueChangeHandler: emailChangeHandler,
+  //   inputBlurHandler: emailBlurHandler,
+  // } = useInput(textNotEmpty, userData.email);
 
   const { value: genderValue, valueChangeHandler: genderChangeHandler } =
-    useInput(selectIsValid);
+    useInput(selectIsValid, userData.user_gender);
 
   const {
     value: fitnessLevelValue,
     valueChangeHandler: fitnessLevelChangeHandler,
   } = useInput(selectIsValid, userData.user_fitness_level);
 
+  const { value: passionsValue, valueChangeHandler: passionsChangeHandler } =
+    useInput(textNotEmpty, userData.user_passions);
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
+    console.log(fitnessLevelValue);
+    console.log(genderValue);
+
     const user = {
       id: userData.id,
-      email: emailValue,
+      // email: emailValue,
       first_name: firstNameValue,
       last_name: lastNameValue,
       user_company: companyValue,
       user_fitness_level: fitnessLevelValue,
       user_gender: genderValue,
+      phone_number: phoneNumberValue,
+      age: parseInt(ageValue),
+      user_passions: passionsValue
     };
 
-    // Write hook to create user update
     updateProfile(user);
   };
 
@@ -114,9 +123,13 @@ const UpdateProfileForm = ({ user: userData }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const emailClasses = emailHasError
+  const phoneNumberClasses = phoneNumberHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
+
+  // const emailClasses = emailHasError
+  //   ? `${classes.formControl} ${classes.invalid}`
+  //   : classes.formControl;
 
   const formIsValid = true;
 
@@ -150,10 +163,16 @@ const UpdateProfileForm = ({ user: userData }) => {
               <p className={classes.errorText}>please enter your last name</p>
             )}
           </div>
-
           <div className={classes.formControl}>
             <label>Age</label>
-            <input type="number" min={18} max={100} />
+            <input
+              type="number"
+              min={18}
+              max={100}
+              value={ageValue}
+              onChange={ageChangeHandler}
+              onBlur={ageBlurHandler}
+            />
           </div>
           <div className={`${classes.formControl} ${classes.customSelect}`}>
             <label
@@ -184,11 +203,22 @@ const UpdateProfileForm = ({ user: userData }) => {
               </p>
             )}
           </div>
-          <div className={classes.formControl}>
+          <div className={phoneNumberClasses}>
             <label htmlFor="phone_number">Phone Number</label>
-            <input type="text" id="phone_number" />
+            <input
+              type="text"
+              id="phone_number"
+              value={phoneNumberValue}
+              onChange={phoneNumberChangeHandler}
+              onBlur={phoneNumberBlurHandler}
+            />
+            {phoneNumberHasError && (
+              <p className={classes.errorText}>
+                Please enter a valid Chinese phone number
+              </p>
+            )}
           </div>
-          <div className={emailClasses}>
+          {/* <div className={emailClasses}>
             <label htmlFor="email">{t("e_mail")}</label>
             <input
               type="email"
@@ -202,7 +232,7 @@ const UpdateProfileForm = ({ user: userData }) => {
                 please enter a valid e-mail address
               </p>
             )}
-          </div>
+          </div> */}
           <div className={classes.formControl}>
             <label htmlFor="fitness_level">Fitness Level</label>
             <select
@@ -219,7 +249,12 @@ const UpdateProfileForm = ({ user: userData }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="passions">Tell us about your passions</label>
-            <textarea />
+            <textarea
+              id="passions"
+              rows={10}
+              value={passionsValue}
+              onChange={passionsChangeHandler}
+            />
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small">
