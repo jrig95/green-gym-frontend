@@ -127,6 +127,7 @@ const Navbar = () => {
             <NavLink onClick={handleClick} style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
+            <Button onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
           </div>
         )}
         <LanguageToggle />

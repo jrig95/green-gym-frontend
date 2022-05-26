@@ -87,24 +87,11 @@ body {
   .swiper-pagination {
     position: absolute;
     top: 12rem;
-    right: 5.5rem;
+    right: 4.25rem;
     width: auto !important;
     left: auto !important;
     margin: 0;
   }
-
-
-  /* .swiper-pagination-bullet {
-    padding: 5px 10px;
-    margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 1rem) !important;
-    border-radius: 0;
-    width: .1rem !important;
-    height: .7rem !important;
-    text-align: center;
-    color: #000;
-    opacity: 1 !important;
-    background: var(--blue) !important;
-  } */
 
 
 }
