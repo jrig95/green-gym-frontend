@@ -1,7 +1,7 @@
 import classes from "./WorkoutDayTracker.module.css";
 import Card from "../UI/Card";
 
-const WorkoutDayTracker = () => {
+const WorkoutDayTracker = ({ programTitle }) => {
 
   const currentDayClasses = `${classes.day} ${classes.dayCurrent}`
   const currentDayNumberClasses = `${classes.dayNumber} ${classes.dayNumberCurrent}`
@@ -12,7 +12,7 @@ const WorkoutDayTracker = () => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.programName}>Program Name</h1>
+      <h1 className={classes.programName}>{programTitle}</h1>
       <Card className={classes.tracker}>
         <Card className={classes.day}>
           <p className={classes.dayNumber}>Day 1/7</p>
