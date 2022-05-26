@@ -82,12 +82,12 @@
   .formControl textarea,
   .formControl select {
     font: inherit;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border: 1px solid #ccc;
     border-radius: .25rem;
     box-sizing: border-box;
     width: 100%;
-    max-width: 18rem;
+    max-width: 17rem;
   }
 
   .title {
@@ -95,7 +95,7 @@
   }
 
   .formControl label {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin: 0 0 .25rem 0;
   }
 
@@ -107,8 +107,9 @@
 
   .formActions button {
     padding: 0.25rem 0.5rem;
-    min-width: 8rem;
+    min-width: 7rem;
     margin: 0 0 0 0;
+    font-size: 1rem;
   }
 
 }
