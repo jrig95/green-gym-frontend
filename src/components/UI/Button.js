@@ -1,7 +1,11 @@
 import classes from "./Button.module.css";
 
-const Button = ({ children, type, disabled, color, size, onClick }) => {
+const Button = ({ children, type, disabled, color, size, onClick, className }) => {
   let buttonClasses = `${classes.button}`;
+
+  if (className) {
+    buttonClasses = `${classes.button} ${className}`;
+  }
 
   if (size === "small") {
     buttonClasses += ` ${classes.buttonSmall}`;

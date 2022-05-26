@@ -22,6 +22,8 @@ const UpdateProfileForm = ({ user: userData }) => {
     // Get Translation hook
   const { t } = useTranslation();
 
+  console.log(userData);
+
   const {
     value: firstNameValue,
     isValid: firtNameIsValid,
@@ -62,13 +64,13 @@ const UpdateProfileForm = ({ user: userData }) => {
     inputBlurHandler: phoneNumberBlurHandler,
   } = useInput(textNotEmpty, userData.phone_number);
 
-  const {
-    value: emailValue,
-    isValid: emailIsValid,
-    hasError: emailHasError,
-    valueChangeHandler: emailChangeHandler,
-    inputBlurHandler: emailBlurHandler,
-  } = useInput(textNotEmpty, userData.email);
+  // const {
+  //   value: emailValue,
+  //   isValid: emailIsValid,
+  //   hasError: emailHasError,
+  //   valueChangeHandler: emailChangeHandler,
+  //   inputBlurHandler: emailBlurHandler,
+  // } = useInput(textNotEmpty, userData.email);
 
   const { value: genderValue, valueChangeHandler: genderChangeHandler } =
     useInput(selectIsValid, userData.user_gender);
@@ -84,23 +86,22 @@ const UpdateProfileForm = ({ user: userData }) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    console.log(phoneNumberValue);
-    console.log(passionsValue);
+    console.log(fitnessLevelValue);
+    console.log(genderValue);
 
     const user = {
       id: userData.id,
-      email: emailValue,
+      // email: emailValue,
       first_name: firstNameValue,
       last_name: lastNameValue,
       user_company: companyValue,
       user_fitness_level: fitnessLevelValue,
       user_gender: genderValue,
       phone_number: phoneNumberValue,
-      age: ageValue,
+      age: parseInt(ageValue),
       user_passions: passionsValue
     };
 
-    // Write hook to create user update
     updateProfile(user);
   };
 
@@ -126,9 +127,9 @@ const UpdateProfileForm = ({ user: userData }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const emailClasses = emailHasError
-    ? `${classes.formControl} ${classes.invalid}`
-    : classes.formControl;
+  // const emailClasses = emailHasError
+  //   ? `${classes.formControl} ${classes.invalid}`
+  //   : classes.formControl;
 
   const formIsValid = true;
 
@@ -217,7 +218,7 @@ const UpdateProfileForm = ({ user: userData }) => {
               </p>
             )}
           </div>
-          <div className={emailClasses}>
+          {/* <div className={emailClasses}>
             <label htmlFor="email">{t("e_mail")}</label>
             <input
               type="email"
@@ -231,7 +232,7 @@ const UpdateProfileForm = ({ user: userData }) => {
                 please enter a valid e-mail address
               </p>
             )}
-          </div>
+          </div> */}
           <div className={classes.formControl}>
             <label htmlFor="fitness_level">Fitness Level</label>
             <select

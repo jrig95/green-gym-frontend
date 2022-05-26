@@ -72,6 +72,10 @@
   display: none;
 }
 
+.logout {
+  min-width: 1rem !important;
+}
+
 @media (min-width: 769px) {
   .hidden {
       display: none;
