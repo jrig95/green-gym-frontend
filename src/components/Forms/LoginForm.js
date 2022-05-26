@@ -1,3 +1,5 @@
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserLogin } from "../User/hooks/use-user-login";
 import { Link } from "react-router-dom";
@@ -11,6 +13,7 @@ import LoginFormCard from "./LoginFormCard";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
   const { mutate:userLogin, isSuccess: loginIsSuccess} = useUserLogin();
 
   const textNotEmpty = (value) => value.trim() !== "";
@@ -46,9 +49,17 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (loginIsSuccess) {
-      navigate("/activities");
+      console.log(authCtx.isAdmin);
+
+      if (authCtx.isAdmin) {
+        navigate("/members");
+      }
+
+      if (!authCtx.isAdmin) {
+        navigate("/activities");
+      }
     }
-  }, [loginIsSuccess])
+  }, [loginIsSuccess, authCtx])
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`

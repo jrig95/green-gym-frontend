@@ -63,6 +63,13 @@ const Navbar = () => {
             <NavLink style={isActive} to="rewards">
               {t("nav_bar_rewards")}
             </NavLink>
+            <Button
+              className={classes.logout}
+              onClick={logoutHandler}
+              size="small"
+            >
+              {t("nav_bar_logout")}
+            </Button>
           </div>
         )}
         {userLoggedIn && (
@@ -79,7 +86,13 @@ const Navbar = () => {
             <NavLink style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
-            <Button className={classes.logout} onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
+            <Button
+              className={classes.logout}
+              onClick={logoutHandler}
+              size="small"
+            >
+              {t("nav_bar_logout")}
+            </Button>
           </div>
         )}
         <LanguageToggle />
@@ -89,7 +102,7 @@ const Navbar = () => {
       <div className={!nav ? classes.hidden : classes.mobileMenu}>
         {loggedOut && (
           <div className={classes.links}>
-            <Link  className={classes.login} onClick={handleClick} to="login">
+            <Link className={classes.login} onClick={handleClick} to="login">
               Login
             </Link>
             <Link onClick={handleClick} to="signup">
@@ -127,7 +140,9 @@ const Navbar = () => {
             <NavLink onClick={handleClick} style={isActive} to="profile">
               {t("nav_bar_profile")}
             </NavLink>
-            <Button onClick={logoutHandler} size="small">{t("nav_bar_logout")}</Button>
+            <Button onClick={logoutHandler} size="small">
+              {t("nav_bar_logout")}
+            </Button>
           </div>
         )}
         <LanguageToggle />

@@ -44,7 +44,7 @@ function App() {
           path="profile/change-password"
           element={<ProfileResetPasswordPage />}
         />
-        {!authCtx.isLoggedIn && (
+        {!authCtx.isLoggedIn && !authCtx.isAdmin && (
           <Fragment>
             <Route path="programs" element={<LandingPage />} />
             <Route path="programs/:programId" element={<LandingPage />} />
@@ -59,7 +59,6 @@ function App() {
             <Route path="profile/update" element={<LandingPage />} />
           </Fragment>
         )}
-
 
         {authCtx.isLoggedIn && (
           <Fragment>
@@ -78,6 +77,12 @@ function App() {
         )}
         {authCtx.isAdmin && (
           <Fragment>
+            <Route path="programs" element={<ProgramsPage />} />
+            <Route path="programs/:programId" element={<ProgramPage />} />
+            <Route
+              path="programs/:programId/purchase"
+              element={<PurchasePage />}
+            />
             <Route path="programs/add-program" element={<AddProgramPage />} />
             <Route
               path="programs/add-program/add-workout"
@@ -86,6 +91,7 @@ function App() {
             <Route path="add-workout" element={<AddWorkoutPage />} />
             <Route path="members" element={<MembersPage />} />
             <Route path="members/:memberId" element={<MemberPage />} />
+            <Route path="rewards" element={<RewardsPage />} />
             <Route path="library" element={<LibraryItemsPage />} />
             <Route path="library/:libraryId" element={<LibraryItemPage />} />
           </Fragment>
