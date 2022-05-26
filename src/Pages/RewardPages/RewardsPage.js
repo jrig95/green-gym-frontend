@@ -17,8 +17,6 @@ const RewardsPage = () => {
   const deleteReward = useDeleteReward();
   const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-  console.log(userData.photo_url);
-
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
@@ -32,14 +30,21 @@ const RewardsPage = () => {
 
   const { data: rewardData } = useRewards();
 
-  const programTitle = userData.programs[0].program_title
-  const programId = userData.programs[0].id;
+  let programTitle;
+  let programId;
+
+  if (!admin) {
+    programTitle = userData.programs[0].program_title;
+    programId = userData.programs[0].id;
+  }
 
   const programRewardsArray = rewardData.filter(
     (reward) => parseInt(reward.program_id) === programId
   );
   // Create an array based on rewards that do not have a program_id
-  const rewardsArray = rewardData.filter((reward) => reward.program_id === null);
+  const rewardsArray = rewardData.filter(
+    (reward) => reward.program_id === null
+  );
 
   const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
     setClaimedRewardTitle(rewardTitle);
@@ -119,7 +124,7 @@ const RewardsPage = () => {
             reward_name: reward.reward_name,
           })
         }
-        onUpdate={() => console.log('edit')}
+        onUpdate={() => console.log("edit")}
       />
     );
   });
@@ -151,7 +156,9 @@ const RewardsPage = () => {
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
-            <h1 className={classes.programRewardsTitle}>Rewards for {programTitle}</h1>
+            <h1 className={classes.programRewardsTitle}>
+              Rewards for {programTitle}
+            </h1>
             <div className={classes.programRewardsGrid}>{programRewards}</div>
             <h1 className={classes.rewardsTitle}>General Rewards</h1>
           </div>
