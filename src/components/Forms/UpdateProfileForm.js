@@ -19,14 +19,12 @@ const UpdateProfileForm = ({ user: userData }) => {
   const { mutate: updateProfile, isSuccess: updateProfileIsSuccess } =
     useUpdatePorfile();
 
-    // Get Translation hook
+  // Get Translation hook
   const { t } = useTranslation();
-
-  console.log(userData);
 
   const {
     value: firstNameValue,
-    isValid: firtNameIsValid,
+    // isValid: firtNameIsValid,
     hasError: firstNameHasError,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
@@ -34,7 +32,7 @@ const UpdateProfileForm = ({ user: userData }) => {
 
   const {
     value: lastNameValue,
-    isValid: lastNameIsValid,
+    // isValid: lastNameIsValid,
     hasError: lastNameHasError,
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
@@ -42,15 +40,15 @@ const UpdateProfileForm = ({ user: userData }) => {
 
   const {
     value: ageValue,
-    isValid: ageIsValid,
-    hasError: ageHasError,
+    // isValid: ageIsValid,
+    // hasError: ageHasError,
     valueChangeHandler: ageChangeHandler,
     inputBlurHandler: ageBlurHandler,
   } = useInput(isANumber, userData.age);
 
   const {
     value: companyValue,
-    isValid: companyIsValid,
+    // isValid: companyIsValid,
     hasError: companyHasError,
     valueChangeHandler: companyChangeHandler,
     inputBlurHandler: companyBlurHandler,
@@ -58,19 +56,19 @@ const UpdateProfileForm = ({ user: userData }) => {
 
   const {
     value: phoneNumberValue,
-    isValid: phoneNumberIsValid,
+    // isValid: phoneNumberIsValid,
     hasError: phoneNumberHasError,
     valueChangeHandler: phoneNumberChangeHandler,
     inputBlurHandler: phoneNumberBlurHandler,
   } = useInput(textNotEmpty, userData.phone_number);
 
-  // const {
-  //   value: emailValue,
-  //   isValid: emailIsValid,
-  //   hasError: emailHasError,
-  //   valueChangeHandler: emailChangeHandler,
-  //   inputBlurHandler: emailBlurHandler,
-  // } = useInput(textNotEmpty, userData.email);
+  const {
+    value: emailValue,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+  } = useInput(textNotEmpty, userData.email);
 
   const { value: genderValue, valueChangeHandler: genderChangeHandler } =
     useInput(selectIsValid, userData.user_gender);
@@ -91,7 +89,7 @@ const UpdateProfileForm = ({ user: userData }) => {
 
     const user = {
       id: userData.id,
-      // email: emailValue,
+      email: emailValue,
       first_name: firstNameValue,
       last_name: lastNameValue,
       user_company: companyValue,
@@ -99,7 +97,7 @@ const UpdateProfileForm = ({ user: userData }) => {
       user_gender: genderValue,
       phone_number: phoneNumberValue,
       age: parseInt(ageValue),
-      user_passions: passionsValue
+      user_passions: passionsValue,
     };
 
     updateProfile(user);
@@ -109,7 +107,9 @@ const UpdateProfileForm = ({ user: userData }) => {
     if (updateProfileIsSuccess) {
       navigate("/profile");
     }
-  }, [updateProfileIsSuccess]);
+    console.log(genderValue);
+    console.log(fitnessLevelValue);
+  }, [updateProfileIsSuccess, genderValue, fitnessLevelValue]);
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -127,9 +127,9 @@ const UpdateProfileForm = ({ user: userData }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  // const emailClasses = emailHasError
-  //   ? `${classes.formControl} ${classes.invalid}`
-  //   : classes.formControl;
+  const emailClasses = emailHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
 
   const formIsValid = true;
 
@@ -175,14 +175,13 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
           </div>
           <div className={`${classes.formControl} ${classes.customSelect}`}>
-            <label
+            <label htmlFor="gender">Gender</label>
+            <select
+              name="gender"
+              id="gender"
               value={genderValue}
               onChange={genderChangeHandler}
-              htmlFor="gender"
             >
-              Gender
-            </label>
-            <select name="gender" id="gender">
               <option>Selecet...</option>
               <option>Male</option>
               <option>Female</option>
@@ -218,7 +217,7 @@ const UpdateProfileForm = ({ user: userData }) => {
               </p>
             )}
           </div>
-          {/* <div className={emailClasses}>
+          <div className={emailClasses}>
             <label htmlFor="email">{t("e_mail")}</label>
             <input
               type="email"
@@ -232,7 +231,7 @@ const UpdateProfileForm = ({ user: userData }) => {
                 please enter a valid e-mail address
               </p>
             )}
-          </div> */}
+          </div>
           <div className={classes.formControl}>
             <label htmlFor="fitness_level">Fitness Level</label>
             <select
