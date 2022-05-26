@@ -8,7 +8,9 @@ import { userBaseUrl } from "../../../axiosInstance/user-constants";
 import { queryKeys } from "../../../react-query/constants";
 
 const createUserLogin = async (user) => {
-  const { data: response , headers } = await axios.post(`${userBaseUrl}/login`, { user: user });
+  const { data: response, headers } = await axios.post(`${userBaseUrl}/login`, {
+    user: user,
+  });
 
   return { response, headers };
 };
@@ -22,15 +24,19 @@ export const useUserLogin = () => {
     (user) => createUserLogin(user),
     {
       onSuccess: (data) => {
+        console.log(data);
+        const expirationTime = new Date(new Date().getTime() + 1800000);
         const userData = {
           token: data.headers.authorization,
           userId: data.response.data.id,
-          admin: data.response.data.admin
-        }
+          admin: data.response.data.admin,
+          expirationTime: expirationTime.toISOString(),
+        };
 
         authCtx.login(userData);
       },
       onError: (error) => {
+        console.log(error.messsage);
         const title =
           error instanceof Error
             ? error.response.data
