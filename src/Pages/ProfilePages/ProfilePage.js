@@ -20,22 +20,22 @@ const DUMMY_DATA = {
 const ProfilePage = () => {
   const authCtx = useContext(AuthContext);
 
-  const { data: user, isLoading } = useUser(authCtx.userId);
+  const { data: userData, isLoading } = useUser(authCtx.userId);
 
   console.log()
 
   if (isLoading) return <p>Loading...</p>;
 
-  const fullName = createFullName(user.first_name, user.last_name);
+  const fullName = createFullName(userData.first_name, userData.last_name);
 
   return (
     <>
       <ProfileBanner
         title="My Profile"
-        calories={toString(user.user_total_calories)}
-        points={user.user_points}
+        calories={userData.user_total_calories}
+        points={userData.user_points}
         name={fullName}
-        image={DUMMY_DATA.user_one.image}
+        image={userData.photo_url}
       />
       <div className={classes.profileCardContainer}>
         <ProfileCard />
