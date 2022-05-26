@@ -16,11 +16,12 @@
 
 @media only screen and (min-width: 320px) and (max-width: 615px) {
   .container {
-    width: 21.5rem;
+    width: 18.5rem;
+
   }
 
   .container h3 {
-    width: 17rem;
+    width: 16rem;
     font-size: 1.25rem;
   }
 }
