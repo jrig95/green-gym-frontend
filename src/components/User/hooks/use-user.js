@@ -15,7 +15,7 @@ const getUser = async (id) => {
 export const useUser = (id) => {
   const { addError } = useAPIError();
   const fallback = [];
-  const { data, isLoading } = useQuery(queryKeys.user, () => getUser(id), {
+  const { data = fallback, isLoading } = useQuery(queryKeys.user, () => getUser(id), {
     onError: (error) => {
       const title =
         error instanceof Error

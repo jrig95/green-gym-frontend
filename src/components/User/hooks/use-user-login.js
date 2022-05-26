@@ -26,6 +26,7 @@ export const useUserLogin = () => {
       onSuccess: (data) => {
         console.log(data);
         const expirationTime = new Date(new Date().getTime() + 1800000);
+        
         const userData = {
           token: data.headers.authorization,
           userId: data.response.data.id,
