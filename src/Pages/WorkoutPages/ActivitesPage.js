@@ -1,39 +1,21 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 
-import WorkoutDayTracker from "../../components/Workout/WorkoutDayTracker";
+import Workout from "../../components/Workout/Workout";
+import AuthContext from "../../context/AuthContext";
+import { useUser } from "../../components/User/hooks/use-user";
 import Banner from "../../components/Layout/Banner";
-import classes from "./ActivitiesPage.module.css";
-import DailyCheckInCard from "../../components/Workout/DailyCheckInCard";
-import DailyWorkoutCard from "../../components/Workout/DailyWorkoutCard";
-import DailyChallengeCard from "../../components/Workout/DailyChallengeCard";
 
 const ActivitiesPage = () => {
-  const [checkInIsComplete, setCheckInIsComplete] = useState(false);
-  const [challengeIsComplete, setChallengeIsComplete] = useState(false);
-  
-  const checkInCompleteHandler = () => {
-    setCheckInIsComplete(true);
-  }
-  
-  const challengeCompleteHandler = () => {
-    setChallengeIsComplete(true)
-  };
+  const authCtx = useContext(AuthContext);
+  // get the user
+  const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-  useEffect(() => {
-    // console.log(challengeIsComplete);
-  }, [challengeIsComplete])
+  if (userIsLoading) return <p>Loading...</p>
 
   return (
     <Fragment>
       <Banner title="My Activites" />
-      <div className={classes.workoutDayTrackerContainer}>
-        <WorkoutDayTracker />
-      </div>
-      <div className={classes.cardsContainer}>
-        <DailyCheckInCard getCompleted={checkInCompleteHandler}/>
-        <DailyWorkoutCard />
-        <DailyChallengeCard getCompleted={challengeCompleteHandler} />
-      </div>
+      <Workout userData={userData}/>
     </Fragment>
   );
 };
