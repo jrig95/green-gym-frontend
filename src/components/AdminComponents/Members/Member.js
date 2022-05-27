@@ -3,10 +3,12 @@ import { useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { BsSquare } from "react-icons/bs";
 
+import { createFullName } from "../../../utils/create-full-name";
+import { slugify } from "./../../../utils/slugify";
 import Card from "../../UI/Card";
 import classes from "./Member.module.css";
 
-const Member = () => {
+const Member = ({ member }) => {
   const [memberIsSelected, setMemberIsSelected] = useState(false);
 
   const selectMemberHandler = () => {
@@ -17,21 +19,25 @@ const Member = () => {
     ? `${classes.card} ${classes.cardIsSelected}`
     : classes.card;
 
+  // TODO: Create a slug from first name and id
+  const fullName = createFullName(member.first_name, member.last_name);
+  const slug = `${slugify(fullName)}-${member.id}`;
+  
   return (
     <Card className={memberClasses}>
-      <Link to="1">
+      <Link to={`${slug}`}>
         <div className={classes.linkContainer}>
           <p>
-            First Name: <b>Darren</b>
+            First Name: <b>{member.first_name}</b>
           </p>
           <p>
-            Last Name: <b>Lewis</b>
+            Last Name: <b>{member.last_name}</b>
           </p>
           <p>
-            Company: <b>Green Gym</b>
+            Company: <b>{member.user_company}</b>
           </p>
           <p>
-            E-Mail: <b>darren@lewis.com</b>
+            E-Mail: <b>{member.email}</b>
           </p>
         </div>
       </Link>

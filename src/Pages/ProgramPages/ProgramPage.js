@@ -12,7 +12,7 @@ const ProgramPage = () => {
   const params = useParams();
 
   // Get the Id from the slug using routes
-  const programId = getIdFromSlug(params);
+  const programId = getIdFromSlug(params.programId);
 
   // API call
   const { data, isLoading } = useProgram(programId);
