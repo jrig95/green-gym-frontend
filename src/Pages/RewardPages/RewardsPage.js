@@ -11,11 +11,14 @@ import ClaimReward from "../../components/Reward/ClaimReward";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteReward from "../../components/Reward/DeleteReward";
 import { useUser } from "../../components/User/hooks/use-user";
+import Banner from "../../components/Layout/Banner";
 
 const RewardsPage = () => {
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
   const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
+
+  const noProgram = userData.programs.length === 0;
 
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
@@ -33,7 +36,7 @@ const RewardsPage = () => {
   let programTitle;
   let programId;
 
-  if (!admin) {
+  if (!admin && !noProgram) {
     programTitle = userData.programs[0].program_title;
     programId = userData.programs[0].id;
   }
@@ -83,6 +86,8 @@ const RewardsPage = () => {
     deleteReward(id);
     hideDeleteRewardHandler();
   };
+
+  // return no program page here
 
   const programRewards = programRewardsArray.map((reward) => {
     return (
@@ -143,7 +148,7 @@ const RewardsPage = () => {
           onClaim={claimRewardHandler}
         />
       )}
-      {!admin && (
+      {!admin && !noProgram && (
         <ProfileBanner
           title="My Rewards"
           image={userData.photo_url}
@@ -152,6 +157,7 @@ const RewardsPage = () => {
           calories={userData.user_total_calories}
         />
       )}
+      {noProgram && <Banner title="Rewards" />}
       {admin && <AdminBanner rewards />}
       {programRewards.length > 0 && (
         <Fragment>
