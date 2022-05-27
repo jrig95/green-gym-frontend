@@ -50,3 +50,26 @@
 .percentageNext {
   color: var(--grey);
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .container {
+      width: 100vw;
+    }
+
+  .programName {
+      text-align: center;
+      font-size: 1.25rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
+  .day p {
+  text-align: center;
+}
+
+.tracker {
+  background-color: var(--grey) !important;
+  padding: 0.5rem 0.25rem;
+  display: flex;
+  margin: 1rem;
+}
+}

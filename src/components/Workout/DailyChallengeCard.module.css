@@ -1,5 +1,5 @@
 .container {
-  min-width: 24rem;
+  width: 24rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,47 @@
 .checkedIn svg {
   font-size: 8rem;
   color: var(--green) !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .container {
+    width: 18rem;
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 1rem 1rem 1rem;
+    margin-bottom: 9rem;
+  }
+
+  .title {
+    min-height: 4rem;
+  }
+
+  .title h1 {
+    font-size: 1.5rem;
+  }
+
+  .buttonContainer {
+    margin: 0;
+    font-size: 6rem;
+    color: var(--grey)
+  }
+
+  .button button {
+    cursor: pointer;
+    background-color: var(--green);
+    color: var(--white);
+    padding: 1rem 1rem;
+    min-width: 10rem;
+    border-radius: 0.25rem;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .icon svg{
+    padding-bottom: .5rem;
+    font-size: 6rem;
+  }
 }
