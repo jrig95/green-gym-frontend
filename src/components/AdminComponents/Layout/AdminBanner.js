@@ -10,14 +10,14 @@ import { useState } from "react";
 import AddLibraryItem from "../Library/AddLibraryItem";
 import AddReward from "../../Reward/AddReward";
 
-const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
+const AdminBanner = ({ programs, members, rewards, searchBar, library, searchParam }) => {
   const [addUserToProgramIsShown, setAddUserToProgramIsShown] = useState(false);
   const [addLibraryItemIsShown, setAddLibraryItemIsShown] = useState(false);
   const [addRewardIsShown, setAddRewardIsShown] = useState(false);
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(searchValue);
+    searchParam(searchValue);
     resetSearch();
   };
 
@@ -90,7 +90,12 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
               onChange={searchChangeHandler}
             />
           </form>
-          <Button className={classes.searchSubmitButton} onClick={searchSubmitHandler} size="small" color="blue">
+          <Button
+            className={classes.searchSubmitButton}
+            onClick={searchSubmitHandler}
+            size="small"
+            color="blue"
+          >
             search
           </Button>
         </div>
