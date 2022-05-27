@@ -1,6 +1,7 @@
 import classes from "./Workout.module.css";
 import { Fragment, useState } from "react";
 
+import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 import DailyCheckInCard from "./DailyCheckInCard";
 import DailyWorkoutCard from "./DailyWorkoutCard";
@@ -8,13 +9,30 @@ import DailyChallengeCard from "./DailyChallengeCard";
 import WorkoutDayTracker from "./WorkoutDayTracker";
 
 const Workout = ({ userData }) => {
-  console.log(userData.programs[0].program_title);
-  console.log(userData.program_trackers[0].id);
+  const programId = userData.programs[0].id;
 
   // TODO: Add use Program tracker to find the tracker for this program
-  const { data: programTrackerData } = useGetProgramTracker(userData.program_trackers[0].id);
+  const { data: programTrackerData, isLoading: programTrackerIsLoading } =
+    useGetProgramTracker(userData.program_trackers[0].id);
 
-  console.log(programTrackerData);
+  // TODO: Get the Program
+  const { data: programData, isLoading: programIsLoading } =
+    useProgram(programId);
+
+  let dailyWorkout;
+  let dailyWorkoutTracker;
+
+  if (!programIsLoading && !programTrackerIsLoading) {
+    // dailyWorkout = programData.daily_workouts[0];
+    // dailyWorkoutTracker = programTrackerData
+
+    console.log(programData.daily_workouts[0], "PROGRAM DATA");
+    console.log(
+      programTrackerData.daily_workout_trackers[0],
+      "PROGRAM TRACKER"
+    );
+  }
+
   const [checkInIsComplete, setCheckInIsComplete] = useState(false);
   const [challengeIsComplete, setChallengeIsComplete] = useState(false);
 
@@ -29,6 +47,8 @@ const Workout = ({ userData }) => {
     // Query call to update the challenge
   };
 
+  if (programIsLoading && programTrackerIsLoading) return <p>Loading...</p>;
+
   return (
     <Fragment>
       <div className={classes.workoutDayTrackerContainer}>
@@ -36,7 +56,10 @@ const Workout = ({ userData }) => {
       </div>
       <div className={classes.cardsContainer}>
         <DailyCheckInCard getCompleted={checkInCompleteHandler} />
-        <DailyWorkoutCard />
+        <DailyWorkoutCard
+          dailyWorkout={dailyWorkout}
+          dailyWorkoutTracker={dailyWorkoutTracker}
+        />
         <DailyChallengeCard getCompleted={challengeCompleteHandler} />
       </div>
     </Fragment>
