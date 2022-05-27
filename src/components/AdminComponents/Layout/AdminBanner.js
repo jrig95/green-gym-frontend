@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 
+import { textNotEmpty } from "../../../utils/input-from-validations";
+import useInput from "../../Forms/Hooks/use-input";
 import AddUserToProgram from "../Members/AddUserToProgram";
 import Button from "../../UI/Button";
 import classes from "./AdminBanner.module.css";
@@ -15,6 +17,8 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
 
   const searchSubmitHandler = (event) => {
     event.preventDefault();
+    console.log(searchValue);
+    resetSearch();
   };
 
   const showAddUserToProgramHandler = () => {
@@ -40,6 +44,12 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
   const hideAddRewardHandler = () => {
     setAddRewardIsShown(false);
   };
+
+  const {
+    value: searchValue,
+    valueChangeHandler: searchChangeHandler,
+    reset: resetSearch,
+  } = useInput(textNotEmpty);
 
   return (
     <div className={classes.banner}>
@@ -74,8 +84,15 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library }) => {
         <div className={classes.inputContainer}>
           <form onSubmit={searchSubmitHandler}>
             <BsSearch />
-            <input type="text" />
+            <input
+              type="text"
+              value={searchValue}
+              onChange={searchChangeHandler}
+            />
           </form>
+          <Button className={classes.searchSubmitButton} onClick={searchSubmitHandler} size="small" color="blue">
+            search
+          </Button>
         </div>
       )}
     </div>

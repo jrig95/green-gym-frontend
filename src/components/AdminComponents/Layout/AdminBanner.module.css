@@ -30,6 +30,7 @@ input {
 .inputContainer {
   position: relative;
   margin-right: auto;
+  display: flex;
 }
 
 .inputContainer svg {
@@ -54,4 +55,9 @@ input {
   outline: none;
   border-color: var(--green);
   background-color: var(--white);
+}
+
+.searchSubmitButton {
+  min-width: 0;
+  margin: 0 0 0 1rem;
 }
