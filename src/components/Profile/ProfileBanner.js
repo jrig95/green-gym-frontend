@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { HiCamera } from "react-icons/hi";
 
+import UpdateProfileImage from "./UpdateProfileImage";
 import classes from "./ProfileBanner.module.css";
 import TreesPlanted from "./TreesPlanted";
 
@@ -13,8 +14,7 @@ const ProfileBanner = ({
   rewards,
   points,
 }) => {
-
-  console.log(calories);
+  const [updateProfileImageIsShown, setUpdateProfileImageIsShown] = useState(false);
 
   let caloriesNum = 0;
   let caloriesBurned = "";
@@ -29,6 +29,15 @@ const ProfileBanner = ({
     stringifiedPoints = points.toLocaleString("en-US");
   }
 
+  const showUpdateProfileImageHandler = () => {
+    setUpdateProfileImageIsShown(true);
+  };
+
+  const hideUpdateProfileImageHandler = () => {
+    setUpdateProfileImageIsShown(false);
+  };
+
+
   return (
     <div className={classes.container}>
       <div className={classes.banner}>
@@ -42,13 +51,14 @@ const ProfileBanner = ({
       <div className={classes.imageContainer}>
         <img src={image} alt={name} />
         {/* clicking this link should add an image to a users profile */}
-        {/* {update && (
+        {updateProfileImageIsShown && <UpdateProfileImage onClose={hideUpdateProfileImageHandler}/>}
+        {update && (
           <div className={classes.cameraIcon}>
-            <div onClick={() => console.log('click')}>
+            <div onClick={showUpdateProfileImageHandler}>
               <HiCamera />
             </div>
           </div>
-        )} */}
+        )}
         <h2 className={classes.name}>{name}</h2>
         {rewards && (
           <h3 className={classes.points}>
