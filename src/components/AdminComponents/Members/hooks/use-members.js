@@ -6,7 +6,6 @@ import useAPIError from "../../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getMembers = async (searchParams) => {
-  console.log(searchParams);
   if (searchParams !== "") {
     const { data } = await axios(`${baseUrl}/users?query=${searchParams}`);
 
