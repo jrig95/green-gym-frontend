@@ -12,3 +12,21 @@
   font-size: 3.5rem;
   color: var(--white);
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 6rem;
+    margin: 4rem 0 0 0;
+    background-color: var(--green);
+  }
+
+  .banner h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+    padding: 2rem;
+  }
+}
