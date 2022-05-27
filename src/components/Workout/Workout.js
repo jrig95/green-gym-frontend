@@ -20,17 +20,19 @@ const Workout = ({ userData }) => {
     useProgram(programId);
 
   let dailyWorkout;
+  let dailyWorkoutId;
   let dailyWorkoutTracker;
+  let dailyWorkoutTrackerId;
 
   if (!programIsLoading && !programTrackerIsLoading) {
     // dailyWorkout = programData.daily_workouts[0];
     // dailyWorkoutTracker = programTrackerData
-
-    console.log(programData.daily_workouts[0], "PROGRAM DATA");
-    console.log(
-      programTrackerData.daily_workout_trackers[0],
-      "PROGRAM TRACKER"
-    );
+    dailyWorkout = programData.daily_workouts[0];
+    dailyWorkoutId = programData.daily_workouts[0].id;
+    dailyWorkoutTracker = programTrackerData.daily_workout_trackers[0];
+    dailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[0].id;
+    console.log(dailyWorkoutId, "PROGRAM DATA");
+    console.log(dailyWorkoutTrackerId, "PROGRAM TRACKER");
   }
 
   const [checkInIsComplete, setCheckInIsComplete] = useState(false);
@@ -55,12 +57,19 @@ const Workout = ({ userData }) => {
         <WorkoutDayTracker programTitle={userData.programs[0].program_title} />
       </div>
       <div className={classes.cardsContainer}>
-        <DailyCheckInCard getCompleted={checkInCompleteHandler} />
+        <DailyCheckInCard
+          dailyWorkoutTracker={dailyWorkoutTracker}
+          getCompleted={checkInCompleteHandler}
+        />
         <DailyWorkoutCard
           dailyWorkout={dailyWorkout}
           dailyWorkoutTracker={dailyWorkoutTracker}
         />
-        <DailyChallengeCard getCompleted={challengeCompleteHandler} />
+        <DailyChallengeCard
+          dailyWorkout={dailyWorkout}
+          dailyWorkoutTracker={dailyWorkoutTracker}
+          getCompleted={challengeCompleteHandler}
+        />
       </div>
     </Fragment>
   );
