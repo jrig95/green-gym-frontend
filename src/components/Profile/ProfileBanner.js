@@ -42,13 +42,13 @@ const ProfileBanner = ({
       <div className={classes.imageContainer}>
         <img src={image} alt={name} />
         {/* clicking this link should add an image to a users profile */}
-        {update && (
+        {/* {update && (
           <div className={classes.cameraIcon}>
             <div onClick={() => console.log('click')}>
               <HiCamera />
             </div>
           </div>
-        )}
+        )} */}
         <h2 className={classes.name}>{name}</h2>
         {rewards && (
           <h3 className={classes.points}>
