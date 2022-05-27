@@ -1,42 +1,42 @@
 import Card from "../../UI/Card";
 import classes from "./MemberCard.module.css";
 
-const MemberCard = () => {
+const MemberCard = ({ user }) => {
   return (
     <Card className={classes.card}>
       <div className={classes.profilePictureContainer}>
         <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-          alt=""
+          src={user.photo_url}
+          alt={`${user.first_name}'s photo`}
         />
       </div>
       <div className={classes.userDetailsContainer}>
         <h2>
-          <b>First Name: </b>Darren
+          <b>First Name: </b>{user.first_name}
         </h2>
         <h2>
-          <b>Last Name: </b>Lewis
+          <b>Last Name: </b>{user.last_name}
         </h2>
         <h2>
-          <b>E-Mail: </b>darren@lewis.com
+          <b>E-Mail: </b>{user.email}
         </h2>
         <h2>
-          <b>Age: </b>32
+          <b>Age: </b>{user.age}
         </h2>
         <h2>
-          <b>Fitness Level: </b>Intermediate
+          <b>Fitness Level: </b>{user.user_fitness_level}
         </h2>
         <h2>
-          <b>Passions: </b>I love to play football and I run a lot
+          <b>Passions: </b>{user.user_passions}
         </h2>
         <h2>
-          <b>Calories: </b>123,421
+          <b>Calories: </b>{user.user_total_calories}
         </h2>
         <h2>
-          <b>Signed Up: </b>1 years, 2 months ago
+          <b>Signed Up: </b>{user.created_at}
         </h2>
         <h2>
-          <b>Last Logged In: </b>1 day ago
+          <b>Last Logged In: </b>{user.last_sign_in_at}
         </h2>
       </div>
     </Card>

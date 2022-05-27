@@ -1,5 +1,5 @@
-export const getIdFromSlug = (params) => {
-  const programId = params.programId.split("-").slice(-1)[0];
+export const getIdFromSlug = (string) => {
+  const id = string.split("-").slice(-1)[0];
 
-  return programId;
+  return id;
 }
