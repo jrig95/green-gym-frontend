@@ -34,3 +34,25 @@
 .setsRow {
   font-weight: 700;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .card {
+      width: 18rem;
+    }
+
+    .exerciseRow h3{
+      font-size: 1rem;
+    }
+
+    .exerciseHeader,
+    .exerciseRow {
+      font-size: .9rem;
+      padding-left: .2rem;
+    }
+
+    .setsHeader,
+    .setsRow {
+      width: 10.5rem;
+      font-size: .9rem;
+    }
+}
