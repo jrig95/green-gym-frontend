@@ -7,10 +7,17 @@ import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getMembers = async (searchParams) => {
   console.log(searchParams);
+  if (searchParams !== "") {
+    const { data } = await axios(`${baseUrl}/users?query=${searchParams}`);
 
-  const { data } = await axios(`${baseUrl}/users`);
+    return data;
+  }
 
-  return data;
+  if (searchParams === "") {
+    const { data } = await axios(`${baseUrl}/users`);
+
+    return data;
+  }
 };
 
 export const useGetMembers = (searchParams) => {

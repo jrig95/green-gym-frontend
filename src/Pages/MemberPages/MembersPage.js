@@ -8,7 +8,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import Sort from "../../components/AdminComponents/Members/Sort";
 
 const MembersPage = () => {
-  const [searchParam, setSearchParam] = useState(null);
+  const [searchParam, setSearchParam] = useState("");
 
   const getSearchParamHandler = (data) => {
     setSearchParam(data);
