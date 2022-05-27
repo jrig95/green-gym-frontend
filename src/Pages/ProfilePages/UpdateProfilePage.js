@@ -31,7 +31,7 @@ const UpdateProfilePage = () => {
         title="My Profile"
         // calories={DUMMY_DATA.user_one.calories}
         name={fullName}
-        image={DUMMY_DATA.user_one.image}
+        image={userData.photo_url}
         update={true}
       />
       <div className={classes.updateProfileFormContainer}>
