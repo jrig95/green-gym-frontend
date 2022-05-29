@@ -19,10 +19,14 @@ const Workout = ({ userData }) => {
   const { data: programData, isLoading: programIsLoading } =
     useProgram(programId);
 
+    console.log(programData);
+
   let dailyWorkout;
   let dailyWorkoutId;
   let dailyWorkoutTracker;
   let dailyWorkoutTrackerId;
+  let programImage;
+  let programTitle;
 
   if (!programIsLoading && !programTrackerIsLoading) {
     // dailyWorkout = programData.daily_workouts[0];
@@ -31,8 +35,8 @@ const Workout = ({ userData }) => {
     dailyWorkoutId = programData.daily_workouts[0].id;
     dailyWorkoutTracker = programTrackerData.daily_workout_trackers[0];
     dailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[0].id;
-    console.log(dailyWorkoutId, "PROGRAM DATA");
-    console.log(dailyWorkoutTrackerId, "PROGRAM TRACKER");
+    programImage = programData.photo_url;
+    programTitle = programData.program_title;
   }
 
   const [checkInIsComplete, setCheckInIsComplete] = useState(false);
@@ -49,7 +53,7 @@ const Workout = ({ userData }) => {
     // Query call to update the challenge
   };
 
-  if (programIsLoading && programTrackerIsLoading) return <p>Loading...</p>;
+  if (programIsLoading || programTrackerIsLoading) return <p>Loading...</p>;
 
   return (
     <Fragment>
@@ -63,7 +67,11 @@ const Workout = ({ userData }) => {
         />
         <DailyWorkoutCard
           dailyWorkout={dailyWorkout}
+          dailyWorkoutId={dailyWorkoutId}
+          dailyWorkoutTrackerId={dailyWorkoutTrackerId}
           dailyWorkoutTracker={dailyWorkoutTracker}
+          programImage={programImage}
+          programTitle={programTitle}
         />
         <DailyChallengeCard
           dailyWorkout={dailyWorkout}

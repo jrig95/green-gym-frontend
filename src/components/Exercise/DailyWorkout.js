@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { getIdsFromSlug } from "../../utils/get-ids-from-slug";
+import { useParams } from "react-router-dom";
 import { useExercises } from "./hooks/use-exercises";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyWorkout.module.css";
@@ -13,6 +15,14 @@ import videoFour from "../../assets/exercise_video_4.mp4";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
 const DailyWorkout = () => {
+  const params = useParams();
+
+  const ids = getIdsFromSlug(params.workoutId);
+
+  console.log(ids);
+
+
+
   // Hook to get the workout.
   const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises();
 
