@@ -1,5 +1,5 @@
 .container {
-  min-width: 24rem;
+  width: 24rem;
   /* height: 19rem; */
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
 }
 
 .icon {
-  min-height: 10rem;
+  height: 10rem;
 }
 
 .button {
@@ -30,7 +30,8 @@
 .buttonContainer svg {
   margin: 0;
   font-size: 8rem;
-  color: var(--grey)
+  color: var(--grey);
+  padding-bottom: 5rem;
 }
 
 .notCheckedIn svg {
@@ -47,3 +48,45 @@
   color: var(--green) !important;
 }
 
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .container {
+  width: 18rem;
+  height: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 1rem 2rem 1rem;
+}
+
+.title {
+  min-height: 4rem;
+  margin: 0 0 1rem 0;
+}
+
+.title h1{
+  font-size: 1.5rem;
+}
+
+.buttonContainer svg {
+  margin: 0;
+  font-size: 6rem;
+  color: var(--grey);
+  padding: 0;
+}
+
+.buttonContainer button{
+    cursor: pointer;
+    background-color: var(--green);
+    color: var(--white);
+    padding: 1rem 1rem;
+    min-width: 10rem;
+    border-radius: 0.25rem;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.icon {
+ padding-bottom: .5rem;
+}
+}
