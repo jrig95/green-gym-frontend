@@ -19,8 +19,6 @@ const Workout = ({ userData }) => {
   const { data: programData, isLoading: programIsLoading } =
     useProgram(programId);
 
-    console.log(programData);
-
   let dailyWorkout;
   let dailyWorkoutId;
   let dailyWorkoutTracker;

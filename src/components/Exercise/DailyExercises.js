@@ -26,6 +26,7 @@ const DailyExercises = () => {
   const [showRestScreen, setShowRestScreen] = useState(false);
   const [startWorkout, setStartWorkout] = useState(false);
   const [workoutIsFinish, setWorkoutIsFinished] = useState(false);
+  const [firstVideoCompleted, setFirstVideoCompleted] = useState(false);
 
   // return an array of videos
   // itterate over each video
@@ -34,6 +35,7 @@ const DailyExercises = () => {
     const timeRemaining = timer * 1000;
     setvideoIndex((prevIndex) => prevIndex + 1);
     setShowRestScreen(true);
+    setFirstVideoCompleted(true);
 
     setTimeout(() => {
       setShowRestScreen(false);
@@ -43,16 +45,18 @@ const DailyExercises = () => {
 
   let videoUls = [];
 
-  const videos = [videoOne, videoTwo, videoThree, videoFour];
-
   const exerciseLength = exerciseData.length;
   const workoutFinish = exerciseLength === videoIndex;
 
 
   // this should be a loading spinner
   if (exerciseIsLoading) return <p>Loading...</p>
+  
+  let rest;
 
-  const rest = <RestCard timer={parseInt(exerciseData[videoIndex].exercise_rest_time)} />;
+  if (firstVideoCompleted) {
+    rest = <RestCard timer={parseInt(exerciseData[videoIndex - 1].exercise_rest_time)} />;
+  }
 
   const currentVideo = (
     <ExerciseVideo
