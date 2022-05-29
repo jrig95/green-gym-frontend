@@ -6,12 +6,12 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const getExercises = async (prodramId, workoutId) => {
-  // const { data } = await axios(
-  //   `${baseUrl}/programs/${prodramId}/daily_workouts/${workoutId}`
-  // );
   const { data } = await axios(
-    `${baseUrl}/programs/509/daily_workouts/7957/exercises`
+    `${baseUrl}/programs/${prodramId}/daily_workouts/${workoutId}/exercises`
   );
+  // const { data } = await axios(
+  //   `${baseUrl}/programs/509/daily_workouts/7957/exercises`
+  // );
 
   return data;
 };

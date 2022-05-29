@@ -6,17 +6,13 @@ import classes from "./DailyExercises.module.css";
 import RestCard from "./WorkOutUI/RestCard";
 import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
-import videoOne from "../../assets/exercise_video_1.mp4";
-import videoTwo from "../../assets/exercise_video_2.mp4";
-import videoThree from "../../assets/exercise_video_3.mp4";
-import videoFour from "../../assets/exercise_video_4.mp4";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
-const DailyExercises = () => {
+const DailyExercises = ({userData, programId, programTackerId, workoutId, workoutTrackerId}) => {
   
 
   // Hook to get the workout.
-  const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises();
+  const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises(programId, workoutId);
 
   console.log(exerciseData);
 
