@@ -11,6 +11,23 @@
     width: 100vw;
 }
 
+@media only screen and (min-width: 618px) and (max-width: 1200px) {
+  .workoutDayTrackerContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .cardsContainer {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 0 auto;
+      width: 100vw;
+      align-items: center;
+    }
+}
+
 @media only screen and (min-width: 320px) and (max-width: 617px) {
   .workoutDayTrackerContainer {
       display: flex;
