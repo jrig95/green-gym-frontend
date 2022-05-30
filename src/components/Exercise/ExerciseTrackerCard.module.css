@@ -23,9 +23,12 @@
 .workRow,
 .restHeader,
 .restRow,
-.questionHeader,
-.questionContainer {
+.questionHeader {
   width: 8.5rem;
+}
+
+.questionContainer {
+  width: 6.5rem;
 }
 
 .workRow,
@@ -51,4 +54,43 @@
   color: white;
   font-weight: 700;
   font-size: 1.2rem;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.addButton button {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.addButtonActive button {
+  background-color: var(--blue);
+}
+
+.addButton button:hover {
+  background-color: var(--green-hover);
+}
+
+.addButton button:disabled,
+.addButton button:disabled:hover,
+.addButton button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 0 0;
 }

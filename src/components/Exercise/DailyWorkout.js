@@ -1,99 +1,70 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-import { useExercises } from "./hooks/use-exercises";
-import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
+import AuthContext from "../../context/AuthContext";
+import { useUser } from "../User/hooks/use-user";
+import DailyExercises from "./DailyExercises";
+import { getIdsFromSlug } from "../../utils/get-ids-from-slug";
+import { useParams } from "react-router-dom";
 import classes from "./DailyWorkout.module.css";
-import RestCard from "./WorkOutUI/RestCard";
-import Button from "../UI/Button";
-import ExerciseVideo from "./ExerciseVideo";
-import videoOne from "../../assets/exercise_video_1.mp4";
-import videoTwo from "../../assets/exercise_video_2.mp4";
-import videoThree from "../../assets/exercise_video_3.mp4";
-import videoFour from "../../assets/exercise_video_4.mp4";
-import ExerciseTrackerCard from "./ExerciseTrackerCard";
+import { useProgram } from "../Program/hooks/use-program";
+import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
-const DailyWorkout = () => {
-  // Hook to get the workout.
-  const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises();
+const DailyWorkout = ({userData, ids }) => {
+  // const authCtx = useContext(AuthContext);
+  // const params = useParams();
 
-  console.log(exerciseData);
+  // const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-  // have a set state for index - start at 0
-  const [videoIndex, setvideoIndex] = useState(0);
-  const [exerciseIndex, setExerciseIndex] = useState(0);
-  const [showRestScreen, setShowRestScreen] = useState(false);
-  const [startWorkout, setStartWorkout] = useState(false);
-  const [workoutIsFinish, setWorkoutIsFinished] = useState(false);
+  // const ids = getIdsFromSlug(params.workoutId);
 
-  // return an array of videos
-  // itterate over each video
-  // on end load a picture for n seconds then play next video
-  const currentVideoEndedHandler = (timer) => {
-    const timeRemaining = timer * 1000;
-    setvideoIndex((prevIndex) => prevIndex + 1);
-    setShowRestScreen(true);
+  // TODO: Add program id to authCtx and get the id from context.
 
-    setTimeout(() => {
-      setShowRestScreen(false);
-      setExerciseIndex((prevIndex) => prevIndex + 1);
-    }, timeRemaining);
-  };
+  // TODO: get the programId
+  const programId = userData.programs[0].id;
+  // TODO: get the programe tacker id
+  const programTackerId = userData.program_trackers[0].id;
 
-  let videoUls = [];
+  // TODO: Get workout from backend
+  const workoutId = ids.workoutId;
+  // TODO: Get workout tracker from backend
+  const workoutTrackerId = ids.workoutTrackerId;
 
-  const videos = [videoOne, videoTwo, videoThree, videoFour];
+  // User id has the program id - get from here
+  const { data: programData, isLoading: programDataIsLaoding } =
+    useProgram(programId);
+  const { data: programTrackerData, isLoading: programTrackerIsLoading } =
+    useGetProgramTracker(programTackerId);
+  // user id has the program_tracker id - get from here.
 
-  const exerciseLength = exerciseData.length;
-  const workoutFinish = exerciseLength === videoIndex;
+  // declare current day using let
+  // add is loading with programData and programTackerData
+  // if not loading save currenty day
+  let currentDay;
+  let currentDailyWorkoutTrackerId;
+  let currentDailyWorkoutId;
 
+  if (!programTrackerIsLoading && !programDataIsLaoding) {
+    currentDay = programTrackerData.current_day;
+    currentDailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[currentDay].id;
+    currentDailyWorkoutId = programData.daily_workouts[currentDay].id;
+  }
 
-  // this should be a loading spinner
-  if (exerciseIsLoading) return <p>Loading...</p>
+  // use to call both
+  // from the program find out the current day number
+  // use this number to find the position inthe array of both the program and programs tracker daily workouts
+  // safe both of these and send them to the next page.
 
-  const rest = <RestCard timer={parseInt(exerciseData[videoIndex].exercise_rest_time)} />;
-
-  const currentVideo = (
-    <ExerciseVideo
-      videoUrl={exerciseData[videoIndex].video_url}
-      onEnded={() => currentVideoEndedHandler(parseInt(exerciseData[videoIndex].exercise_rest_time))}
-    />
-  );
-
-  const onStartWorkoutHandler = () => {
-    setStartWorkout(true);
-  };
-
-  const onFinishWorkoutHandler = () => {
-    setWorkoutIsFinished(true);
-  };
-
-  const workoutVideo = (
-    <div className={classes.videoContainer}>
-      {!showRestScreen ? currentVideo : rest}
-    </div>
-  );
-
-  const startWorkoutButton = (
-    <div className={classes.startWorkoutCardContainer}>
-      <StartWorkoutCard onStartWorkout={onStartWorkoutHandler} />
-    </div>
-  );
-
-  const workoutFinishedCard = <div>Workout Finished</div>;
+  if (programDataIsLaoding || programTrackerIsLoading) return <p>Loading...</p>;
 
   return (
     <div>
-      {startWorkout && workoutVideo}
-      {!startWorkout && startWorkoutButton}
-      {workoutIsFinish && workoutFinishedCard}
-      <ExerciseTrackerCard
-        exerciseIndex={exerciseIndex}
-        exercises={exerciseData}
-        isLoading={exerciseIsLoading}
+      <DailyExercises
+        userData={userData}
+        programId={programId}
+        programTackerId={programTackerId}
+        workoutId={currentDailyWorkoutId}
+        workoutTrackerId={currentDailyWorkoutTrackerId}
       />
-      <div className={classes.buttonContainer}>
-        <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
-      </div>
     </div>
   );
 };

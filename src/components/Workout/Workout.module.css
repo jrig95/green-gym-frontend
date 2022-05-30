@@ -1,9 +1,11 @@
+
 .workoutDayTrackerContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 5rem;
 }
 
+.finishDayButtonContainer,
 .cardsContainer {
     display: flex;
     /* margin: 4rem 10rem 0 10rem; */

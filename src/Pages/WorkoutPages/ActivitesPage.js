@@ -11,8 +11,6 @@ const ActivitiesPage = () => {
   // get the user
   const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-  
-  
 
   if (userIsLoading) return <p>Loading...</p>
 
