@@ -1,7 +1,7 @@
 .card {
   display: flex;
-  min-height: 8rem;
-  min-width: 24rem;
+  height: 8rem;
+  width: 24rem;
   justify-content: space-between;
 }
 
@@ -12,7 +12,7 @@
 .imageContainer img {
   width: 8rem;
   height: 8rem;
-  object-fit: cover;
+  object-fit: inherit;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
@@ -53,4 +53,22 @@
 .iconBin {
   margin: 0 0 0 0.25rem;
   transition: all 0.3s;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .card {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 20rem;
+    width: 15rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .imageContainer img {
+  width: 15rem;
+  height: 14rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
 }
