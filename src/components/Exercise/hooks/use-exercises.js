@@ -9,9 +9,6 @@ const getExercises = async (prodramId, workoutId) => {
   const { data } = await axios(
     `${baseUrl}/programs/${prodramId}/daily_workouts/${workoutId}/exercises`
   );
-  // const { data } = await axios(
-  //   `${baseUrl}/programs/509/daily_workouts/7957/exercises`
-  // );
 
   return data;
 };

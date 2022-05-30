@@ -14,7 +14,9 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
   // Hook to get the workout.
   const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises(programId, workoutId);
 
-  console.log(exerciseData);
+  // TODO: Get the current exercise tracker array
+  
+  // console.log(exerciseData);
 
   // have a set state for index - start at 0
   const [videoIndex, setvideoIndex] = useState(0);

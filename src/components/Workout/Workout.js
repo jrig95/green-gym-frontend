@@ -19,6 +19,7 @@ const Workout = ({ userData }) => {
   const { data: programData, isLoading: programIsLoading } =
     useProgram(programId);
 
+  let currentDay;
   let dailyWorkout;
   let dailyWorkoutId;
   let dailyWorkoutTracker;
@@ -26,13 +27,19 @@ const Workout = ({ userData }) => {
   let programImage;
   let programTitle;
 
+  console.log(programTrackerData.current_day);
+
   if (!programIsLoading && !programTrackerIsLoading) {
     // dailyWorkout = programData.daily_workouts[0];
     // dailyWorkoutTracker = programTrackerData
-    dailyWorkout = programData.daily_workouts[0];
-    dailyWorkoutId = programData.daily_workouts[0].id;
-    dailyWorkoutTracker = programTrackerData.daily_workout_trackers[0];
-    dailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[0].id;
+    // dayNumber = programData.day_number;
+    // Get the current day from the programTrackerData
+    currentDay = programTrackerData.current_day;
+    // Use current day as index
+    dailyWorkout = programData.daily_workouts[currentDay];
+    dailyWorkoutId = programData.daily_workouts[currentDay].id;
+    dailyWorkoutTracker = programTrackerData.daily_workout_trackers[currentDay];
+    dailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[currentDay].id;
     programImage = programData.photo_url;
     programTitle = programData.program_title;
   }
