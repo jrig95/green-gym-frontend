@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import Button from "../UI/Button";
@@ -20,6 +21,7 @@ const ExerciseTrackerCard = ({
   const [numberOfExercisesComplete, setNumberOfExercisesComplete] = useState(0);
   const [formIsComplete, setFormIsCompelte] = useState(true);
   const updateExercise = useUpdateExercise();
+  const navigate = useNavigate();
 
   const addRepsToArrayHandler = (data) => {
     setRepsArray((array) => [...array, data]);
@@ -41,6 +43,9 @@ const ExerciseTrackerCard = ({
       updateExercise(exercise_trakcer);
     });
     // need program_tracker_id, daily_workout_tracker_id and exercise_trakcer_id (this is already in array)
+
+    // navigate back to activites page
+    navigate("/activities");
   };
 
   useEffect(() => {
@@ -53,8 +58,6 @@ const ExerciseTrackerCard = ({
 
   const exerciseTrackerCardRows = exercises.map((exercise, index) => {
     let isActive = false;
-
-    console.log(exerciseIndex);
 
     if (exerciseIndex < exercises.length) {
       isActive = exercise.id === exercises[exerciseIndex].id;

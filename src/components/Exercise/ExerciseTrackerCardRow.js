@@ -9,6 +9,8 @@ const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive, getRepsData, 
     ? `${classes.row} ${classes.rowActive}`
     : classes.row;
 
+  const buttonClasses = rowActive ? `${classes.addButton} ${classes.addButtonActive}` : classes.addButton;
+
   // Get the value the user inputs here. Send it back up to daily exericses.
 
   const { value: repsValue, valueChangeHandler: repsChangeHandler } = useInput(
@@ -45,7 +47,7 @@ const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive, getRepsData, 
           />
         </form>
       </div>
-      <div className={classes.addButton}>
+      <div className={buttonClasses}>
         <button onClick={addExerciseRepsValueHandler} disabled={exerciseIsAdded}>Add</button>
       </div>
     </div>

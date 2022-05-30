@@ -72,6 +72,10 @@
   width: 100%;
 }
 
+.addButtonActive button {
+  background-color: var(--blue);
+}
+
 .addButton button:hover {
   background-color: var(--green-hover);
 }

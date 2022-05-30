@@ -23,8 +23,6 @@ const DailyExercises = ({
     workoutId
   );
 
-  console.log(exerciseData, "exerciseData"); 
-
   // Hook to get the exercise tracker
   const { data: exerciseTrackersData } = useExerciseTrackers(
     programTackerId,

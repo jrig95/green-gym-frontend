@@ -28,8 +28,6 @@ const Workout = ({ userData }) => {
   let programImage;
   let programTitle;
 
-  console.log(programTrackerData.current_day);
-
   if (!programIsLoading && !programTrackerIsLoading) {
     // dailyWorkout = programData.daily_workouts[0];
     // dailyWorkoutTracker = programTrackerData
@@ -51,6 +49,7 @@ const Workout = ({ userData }) => {
   const checkInCompleteHandler = () => {
     setCheckInIsComplete(true);
     // Query call to update the challenge
+    
   };
 
   const challengeCompleteHandler = () => {
