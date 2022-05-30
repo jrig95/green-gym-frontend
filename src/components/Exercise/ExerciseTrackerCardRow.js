@@ -3,7 +3,7 @@ import { isANumber } from "../../utils/input-from-validations";
 import useInput from "../Forms/Hooks/use-input";
 import classes from "./ExerciseTrackerCard.module.css";
 
-const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive, getRepsData, exerciseTrackerId }) => {
+const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive, getRepsData, exerciseTrackerId, increaseNumberOfExercisesComplete }) => {
   const [exerciseIsAdded, setExerciseIsAdded] = useState(false);
   const rowClasses = rowActive
     ? `${classes.row} ${classes.rowActive}`
@@ -26,6 +26,7 @@ const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive, getRepsData, 
 
     getRepsData(reps);
     setExerciseIsAdded(true);
+    increaseNumberOfExercisesComplete();
   };
 
   return (

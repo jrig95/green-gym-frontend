@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import Button from "../UI/Button";
@@ -14,9 +14,11 @@ const ExerciseTrackerCard = ({
   exerciseTrackers,
   isLoading,
   programTackerId,
-  workoutTrackerId
+  workoutTrackerId,
 }) => {
   const [repsArray, setRepsArray] = useState([]);
+  const [numberOfExercisesComplete, setNumberOfExercisesComplete] = useState(0);
+  const [formIsComplete, setFormIsCompelte] = useState(true);
   const updateExercise = useUpdateExercise();
 
   const addRepsToArrayHandler = (data) => {
@@ -26,27 +28,37 @@ const ExerciseTrackerCard = ({
   const onFinishWorkoutHandler = () => {
     // TODO: Sort array so that it is in order of id number.
     const sortedRepsArray = repsArray.sort((a, b) => a.id - b.id);
-    console.log(sortedRepsArray, "sorted reps");
-
     // Itterate over the respArray and do mutate for each item in the array
     sortedRepsArray.map((rep) => {
       const exercise_trakcer = {
         id: rep.id,
         program_tracker_id: programTackerId,
         daily_workout_tracker_id: workoutTrackerId,
-        number_of_reps: rep.number_of_reps
-      }
+        number_of_reps: rep.number_of_reps,
+      };
 
       // call mutate here
-      updateExercise(exercise_trakcer)
+      updateExercise(exercise_trakcer);
     });
     // need program_tracker_id, daily_workout_tracker_id and exercise_trakcer_id (this is already in array)
   };
+
+  useEffect(() => {
+    console.log(numberOfExercisesComplete);
+
+    if (numberOfExercisesComplete === exerciseTrackers.length) {
+      setFormIsCompelte(false);
+    }
+  }, [numberOfExercisesComplete])
 
   if (isLoading) return <p>Loading...</p>;
 
   const exerciseTrackerCardRows = exercises.map((exercise, index) => {
     const isActive = exercise.id === exercises[exerciseIndex].id;
+
+    const exerciseIsComplete = () => {
+      setNumberOfExercisesComplete((prevNum) => prevNum += 1);
+    }
 
     return (
       <ExerciseTrackerCardRow
@@ -57,6 +69,7 @@ const ExerciseTrackerCard = ({
         rest={exercise.exercise_rest_time}
         rowActive={isActive}
         getRepsData={addRepsToArrayHandler}
+        increaseNumberOfExercisesComplete={exerciseIsComplete}
       />
     );
   });
@@ -81,7 +94,7 @@ const ExerciseTrackerCard = ({
         {exerciseTrackerCardRows}
       </Card>
       <div className={classes.buttonContainer}>
-        <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
+        <Button disabled={formIsComplete} onClick={onFinishWorkoutHandler}>{formIsComplete ? "Keep going!" : "Finish Workout"}</Button>
       </div>
     </Fragment>
   );
