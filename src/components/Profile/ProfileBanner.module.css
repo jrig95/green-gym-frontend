@@ -54,3 +54,42 @@
   font-weight: 400;
   text-align: center;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 6rem;
+    margin: 4rem 0 0 0;
+    background-color: var(--green);
+    margin-bottom: 7rem;
+  }
+
+  .banner h1 {
+    font-size: 1.5rem;
+    color: var(--white);
+    padding-bottom: .75rem;
+  }
+
+  .imageContainer {
+    position: absolute;
+    top: 3rem;
+    left: 0.5rem;
+  }
+
+  .imageContainer img {
+    height: 6rem;
+    width: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .points {
+    font-weight: 400;
+    text-align: center;
+    font-size: 1rem;
+    margin: 0 auto;
+  }
+}
