@@ -6,17 +6,16 @@ import DailyExercises from "./DailyExercises";
 import { getIdsFromSlug } from "../../utils/get-ids-from-slug";
 import { useParams } from "react-router-dom";
 import classes from "./DailyWorkout.module.css";
-import { IoConstructOutline } from "react-icons/io5";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
-const DailyWorkout = () => {
-  const authCtx = useContext(AuthContext);
-  const params = useParams();
+const DailyWorkout = ({userData, ids }) => {
+  // const authCtx = useContext(AuthContext);
+  // const params = useParams();
 
-  const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
+  // const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-  const ids = getIdsFromSlug(params.workoutId);
+  // const ids = getIdsFromSlug(params.workoutId);
 
   // TODO: Add program id to authCtx and get the id from context.
 
@@ -44,7 +43,7 @@ const DailyWorkout = () => {
   let currentDailyWorkoutTrackerId;
   let currentDailyWorkoutId;
 
-  if (!programTrackerIsLoading) {
+  if (!programTrackerIsLoading && !programDataIsLaoding) {
     currentDay = programTrackerData.current_day;
     currentDailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[currentDay].id;
     currentDailyWorkoutId = programData.daily_workouts[currentDay].id;
@@ -55,7 +54,7 @@ const DailyWorkout = () => {
   // use this number to find the position inthe array of both the program and programs tracker daily workouts
   // safe both of these and send them to the next page.
 
-  if (userIsLoading) return <p>Loading...</p>;
+  if (programDataIsLaoding || programTrackerIsLoading) return <p>Loading...</p>;
 
   return (
     <div>

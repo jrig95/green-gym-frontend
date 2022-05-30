@@ -44,8 +44,6 @@ const ExerciseTrackerCard = ({
   };
 
   useEffect(() => {
-    console.log(numberOfExercisesComplete);
-
     if (numberOfExercisesComplete === exerciseTrackers.length) {
       setFormIsCompelte(false);
     }
