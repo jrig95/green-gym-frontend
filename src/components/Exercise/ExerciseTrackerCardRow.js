@@ -1,8 +1,20 @@
+import { isANumber } from "../../utils/input-from-validations";
+import useInput from "../Forms/Hooks/use-input";
 import classes from "./ExerciseTrackerCard.module.css";
 
 const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive }) => {
+  const rowClasses = rowActive
+    ? `${classes.row} ${classes.rowActive}`
+    : classes.row;
 
-  const rowClasses = rowActive ? `${classes.row} ${classes.rowActive}` : classes.row;
+  // Get the value the user inputs here. Send it back up to daily exericses.
+
+  const { value: repsValue, valueChangeHandler: repsChangeHandler } = useInput(
+    isANumber,
+    0
+  );
+
+  const addExerciseRepsValueHandler = () => {};
 
   return (
     <div className={rowClasses}>
@@ -11,8 +23,17 @@ const ExerciseTrackerCardRow = ({ exercise, work, rest, rowActive }) => {
       <p className={classes.restRow}>{rest} secs</p>
       <div className={classes.questionContainer}>
         <form>
-          <input type="number" min={0} placeholder={0}/>
+          <input
+            value={repsValue}
+            onChange={repsChangeHandler}
+            type="number"
+            min={0}
+            placeholder={0}
+          />
         </form>
+      </div>
+      <div className={classes.addButton}>
+        <button onClick={addExerciseRepsValueHandler}>Add</button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import { useExercises } from "./hooks/use-exercises";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyExercises.module.css";
@@ -15,7 +16,8 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
   const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises(programId, workoutId);
 
   // TODO: Get the current exercise tracker array
-  
+  const updateExercise = useUpdateExercise();
+
   // console.log(exerciseData);
 
   // have a set state for index - start at 0
