@@ -11,5 +11,6 @@ export const queryKeys = {
   libraryItem: "library_item",
   user: "user",
   members: "members",
-  program_tracker: "program_tracker"
+  program_tracker: "program_tracker",
+  exercise_trackers: "exercise_trackers"
 };

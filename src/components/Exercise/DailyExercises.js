@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useExerciseTrackers } from "./hooks/use-exercise-trackers";
 import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import { useExercises } from "./hooks/use-exercises";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
@@ -14,6 +15,9 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
 
   // Hook to get the workout.
   const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises(programId, workoutId);
+
+  // Hook to get the exercise tracker
+  const { data: exerciseTrackersData } = useExerciseTrackers(programTackerId, workoutTrackerId);
 
   // TODO: Get the current exercise tracker array
   const updateExercise = useUpdateExercise();
@@ -95,6 +99,7 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
       <ExerciseTrackerCard
         exerciseIndex={exerciseIndex}
         exercises={exerciseData}
+        exerciseTrackers={exerciseTrackersData}
         isLoading={exerciseIsLoading}
         // onFinishWorkout={onFinishWorkoutHandler}
       />
