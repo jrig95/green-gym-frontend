@@ -4,6 +4,7 @@ import { useExerciseTrackers } from "./hooks/use-exercise-trackers";
 import { useExercises } from "./hooks/use-exercises";
 import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyExercises.module.css";
+import WorkoutFinishedCard from "./WorkOutUI/WorkoutFinishedCard";
 import RestCard from "./WorkOutUI/RestCard";
 import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
@@ -120,13 +121,13 @@ const DailyExercises = ({
     </div>
   );
 
-  const workoutFinishedCard = <div>Workout Finished</div>;
+  // const workoutFinishedCard = <div>Workout Finished</div>;
 
   return (
     <div>
-      {startWorkout && workoutVideo}
+      {startWorkout && !workoutFinish && workoutVideo}
       {!startWorkout && startWorkoutButton}
-      {workoutIsFinish && workoutFinishedCard}
+      {workoutFinish && <WorkoutFinishedCard />}
       <ExerciseTrackerCard
         exerciseIndex={exerciseIndex}
         exercises={exerciseData}
