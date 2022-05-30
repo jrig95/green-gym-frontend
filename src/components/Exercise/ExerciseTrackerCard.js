@@ -1,22 +1,45 @@
+import { Fragment, useState } from "react";
+
+import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import Button from "../UI/Button";
 import classes from "./ExerciseTrackerCard.module.css";
 import Card from "../UI/Card";
 import ExerciseTrackerCardRow from "./ExerciseTrackerCardRow";
-import { Fragment, useState } from "react";
 
 // import data from "../../program.json";
 
-const ExerciseTrackerCard = ({ exerciseIndex, exercises, exerciseTrackers, isLoading }) => {
+const ExerciseTrackerCard = ({
+  exerciseIndex,
+  exercises,
+  exerciseTrackers,
+  isLoading,
+  programTackerId,
+  workoutTrackerId
+}) => {
   const [repsArray, setRepsArray] = useState([]);
+  const updateExercise = useUpdateExercise();
 
   const addRepsToArrayHandler = (data) => {
     setRepsArray((array) => [...array, data]);
   };
 
   const onFinishWorkoutHandler = () => {
-    console.log(repsArray);
+    // TODO: Sort array so that it is in order of id number.
+    const sortedRepsArray = repsArray.sort((a, b) => a.id - b.id);
+    console.log(sortedRepsArray, "sorted reps");
 
     // Itterate over the respArray and do mutate for each item in the array
+    sortedRepsArray.map((rep) => {
+      const exercise_trakcer = {
+        id: rep.id,
+        program_tracker_id: programTackerId,
+        daily_workout_tracker_id: workoutTrackerId,
+        number_of_reps: rep.number_of_reps
+      }
+
+      // call mutate here
+      updateExercise(exercise_trakcer)
+    });
     // need program_tracker_id, daily_workout_tracker_id and exercise_trakcer_id (this is already in array)
   };
 

@@ -5,8 +5,8 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateExercise = async (exercise) => {
-  await axios.post(
-    `${baseUrl}/program_trackers/${exercise.program_tracker_id}/daily_workout_trackers/${exercise.daily_workout_tracker_it}/exercise_trackers/${exercise.id}`,
+  await axios.patch(
+    `${baseUrl}/program_trackers/${exercise.program_tracker_id}/daily_workout_trackers/${exercise.daily_workout_tracker_id}/exercise_trackers/${exercise.id}`,
     exercise
   );
 };
