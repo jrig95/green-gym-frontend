@@ -34,6 +34,38 @@
   margin: 1rem;
 }
 
+@media only screen and (min-width: 618px) and (max-width: 1200px) {
+  .container {
+      width: 24rem;
+      height: 24rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 1rem 0 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .title h1{
+      font-size: 2.5rem;
+    }
+
+    .title {
+    min-height: 4rem;
+    margin: 0 auto;
+  }
+
+  .container img {
+    width: 24rem;
+    height: 12rem;
+    object-fit: cover;
+  }
+
+  .buttonContainer button{
+    margin-top: 3rem;
+    font-size: 1.5rem;
+  }
+}
+
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
 .container {
