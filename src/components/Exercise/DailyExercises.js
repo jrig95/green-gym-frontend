@@ -96,10 +96,11 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
         exerciseIndex={exerciseIndex}
         exercises={exerciseData}
         isLoading={exerciseIsLoading}
+        // onFinishWorkout={onFinishWorkoutHandler}
       />
-      <div className={classes.buttonContainer}>
+      {/* <div className={classes.buttonContainer}>
         <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
-      </div>
+      </div> */}
     </div>
   );
 };

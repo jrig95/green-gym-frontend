@@ -1,10 +1,22 @@
+import Button from "../UI/Button";
 import classes from "./ExerciseTrackerCard.module.css";
 import Card from "../UI/Card";
 import ExerciseTrackerCardRow from "./ExerciseTrackerCardRow";
+import { Fragment, useState } from "react";
 
 // import data from "../../program.json";
 
 const ExerciseTrackerCard = ({ exerciseIndex, exercises, isLoading }) => {
+  const [repsArray, setRepsArray] = useState([]);
+
+  const addRepsToArrayHandler = (data) => {
+    setRepsArray((array) => [...array, data]);
+  };
+
+  const onFinishWorkoutHandler = () => {
+    console.log(repsArray);
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
   const exerciseTrackerCardRows = exercises.map((exercise) => {
@@ -17,28 +29,34 @@ const ExerciseTrackerCard = ({ exerciseIndex, exercises, isLoading }) => {
         work={exercise.exercise_work_time}
         rest={exercise.exercise_rest_time}
         rowActive={isActive}
+        getRepsData={addRepsToArrayHandler}
       />
     );
   });
 
   return (
-    <Card className={classes.card}>
-      <div className={classes.header}>
-        <div className={classes.exerciseHeader}>
-          <p>Exercise</p>
+    <Fragment>
+      <Card className={classes.card}>
+        <div className={classes.header}>
+          <div className={classes.exerciseHeader}>
+            <p>Exercise</p>
+          </div>
+          <div className={classes.workHeader}>
+            <p>Work</p>
+          </div>
+          <div className={classes.restHeader}>
+            <p>Rest</p>
+          </div>
+          <div className={classes.questionHeader}>
+            <p>How Many?</p>
+          </div>
         </div>
-        <div className={classes.workHeader}>
-          <p>Work</p>
-        </div>
-        <div className={classes.restHeader}>
-          <p>Rest</p>
-        </div>
-        <div className={classes.questionHeader}>
-          <p>How Many?</p>
-        </div>
+        {exerciseTrackerCardRows}
+      </Card>
+      <div className={classes.buttonContainer}>
+        <Button onClick={onFinishWorkoutHandler}>Finish Workout</Button>
       </div>
-      {exerciseTrackerCardRows}
-    </Card>
+    </Fragment>
   );
 };
 

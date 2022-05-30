@@ -129,7 +129,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
     
-    console.log(lastProgramData.id, "last program id in form submit - creating workout")
+    // console.log(lastProgramData.id, "last program id in form submit - creating workout")
     const daily_workout = {
       program_id: lastProgramData.id,
       day_number: dayNumber,
@@ -154,7 +154,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log("success");
+      // console.log("success");
       addExercisesHandler();
       onAddWorkout();
     }
