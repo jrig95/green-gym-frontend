@@ -52,7 +52,13 @@ const ExerciseTrackerCard = ({
   if (isLoading) return <p>Loading...</p>;
 
   const exerciseTrackerCardRows = exercises.map((exercise, index) => {
-    const isActive = exercise.id === exercises[exerciseIndex].id;
+    let isActive = false;
+
+    console.log(exerciseIndex);
+
+    if (exerciseIndex < exercises.length) {
+      isActive = exercise.id === exercises[exerciseIndex].id;
+    }
 
     const exerciseIsComplete = () => {
       setNumberOfExercisesComplete((prevNum) => prevNum += 1);

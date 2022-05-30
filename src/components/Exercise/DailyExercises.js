@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useExerciseTrackers } from "./hooks/use-exercise-trackers";
 import { useExercises } from "./hooks/use-exercises";
@@ -9,14 +9,26 @@ import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
-const DailyExercises = ({userData, programId, programTackerId, workoutId, workoutTrackerId}) => {
-  
-
+const DailyExercises = ({
+  userData,
+  programId,
+  programTackerId,
+  workoutId,
+  workoutTrackerId,
+}) => {
   // Hook to get the workout.
-  const { data: exerciseData, isLoading: exerciseIsLoading} = useExercises(programId, workoutId);
+  const { data: exerciseData, isLoading: exerciseIsLoading } = useExercises(
+    programId,
+    workoutId
+  );
+
+  console.log(exerciseData, "exerciseData"); 
 
   // Hook to get the exercise tracker
-  const { data: exerciseTrackersData } = useExerciseTrackers(programTackerId, workoutTrackerId);
+  const { data: exerciseTrackersData } = useExerciseTrackers(
+    programTackerId,
+    workoutTrackerId
+  );
 
   // console.log(exerciseData);
 
@@ -45,25 +57,48 @@ const DailyExercises = ({userData, programId, programTackerId, workoutId, workou
 
   let videoUls = [];
 
+ 
+
+  // useEffect(() => {
+  //   console.log(workoutFinish, "workoutFinish");
+  //   console.log(exerciseData.length, "exerciseData.length");
+  //   console.log(videoIndex, "video index");
+  // }, [videoIndex]);
+
+  // this should be a loading spinner
+  if (exerciseIsLoading) return <p>Loading...</p>;
+
+  let rest;
+
   const exerciseLength = exerciseData.length;
   const workoutFinish = exerciseLength === videoIndex;
 
-
-  // this should be a loading spinner
-  if (exerciseIsLoading) return <p>Loading...</p>
-  
-  let rest;
-
   if (firstVideoCompleted) {
-    rest = <RestCard timer={parseInt(exerciseData[videoIndex - 1].exercise_rest_time)} />;
+    rest = (
+      <RestCard
+        timer={parseInt(exerciseData[videoIndex - 1].exercise_rest_time)}
+      />
+    );
   }
 
-  const currentVideo = (
-    <ExerciseVideo
-      videoUrl={exerciseData[videoIndex].video_url}
-      onEnded={() => currentVideoEndedHandler(parseInt(exerciseData[videoIndex].exercise_rest_time))}
-    />
-  );
+  // Add error handler if video index
+  let currentVideo;
+
+  // FOR TEST PURPOSES CAN DELTE
+
+  // Won't load if page refresh
+  if (exerciseData.length > videoIndex) {
+    currentVideo = (
+      <ExerciseVideo
+        videoUrl={exerciseData[videoIndex].video_url}
+        onEnded={() =>
+          currentVideoEndedHandler(
+            parseInt(exerciseData[videoIndex].exercise_rest_time)
+          )
+        }
+      />
+    );
+  }
 
   const onStartWorkoutHandler = () => {
     setStartWorkout(true);

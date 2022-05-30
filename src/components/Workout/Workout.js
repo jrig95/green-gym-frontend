@@ -1,6 +1,7 @@
 import classes from "./Workout.module.css";
 import { Fragment, useState } from "react";
 
+import Button from "../UI/Button";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 import DailyCheckInCard from "./DailyCheckInCard";
@@ -58,6 +59,11 @@ const Workout = ({ userData }) => {
     // Query call to update the challenge
   };
 
+  const finishDayHandler = () => {
+    console.log('working')
+    // API call to update current day + 1
+  };
+
   if (programIsLoading || programTrackerIsLoading) return <p>Loading...</p>;
 
   return (
@@ -83,6 +89,9 @@ const Workout = ({ userData }) => {
           dailyWorkoutTracker={dailyWorkoutTracker}
           getCompleted={challengeCompleteHandler}
         />
+      </div>
+      <div className={classes.finishDayButtonContainer}>
+        <Button onClick={finishDayHandler}>Finish Day</Button>
       </div>
     </Fragment>
   );
