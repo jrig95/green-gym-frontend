@@ -24,7 +24,7 @@ export const useUpdateProgramTracker = () => {
           error instanceof Error ? error.message : "error connecting to server";
         addError(title, error.status);
       },
-      onSuccess: (data) => {
+      onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.program, queryKeys.program_tracker]);
       }
     }

@@ -6,14 +6,14 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
-  const [challengeIsCompleted, setChallengeIsCompleted] = useState(dwtChallengeCompleted);
+  const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
 
   const challengeCompletedHandler = () => {
     setChallengeIsCompleted(true);
     getCompleted(true);
   };
 
-  const iconClasses = challengeIsCompleted
+  const iconClasses = dwtChallengeCompleted || challengeIsCompleted
     ? `${classes.icon} ${classes.checkedIn}`
     : classes.icon;
 
@@ -29,7 +29,7 @@ const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
         <GiBiceps />
       </div>
       <div className={classes.button}>
-        <Button onClick={challengeCompletedHandler} disabled={challengeIsCompleted}>Do it</Button>
+        <Button onClick={challengeCompletedHandler} disabled={dwtChallengeCompleted || challengeIsCompleted}>Do it</Button>
       </div>
     </Card>
   );

@@ -16,10 +16,10 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
   const currentDay = programTrackerData.current_day;
-  const dwtDailyCheckInCompleted =
-    programTrackerData.daily_workout_trackers[currentDay].dwt_check_in;
-  const dwtChallengeCompleted =
-    programTrackerData.daily_workout_trackers[currentDay].dwt_daily_challenge;
+  // const dwtDailyCheckInCompleted =
+  //   programTrackerData.daily_workout_trackers[currentDay].dwt_check_in;
+  // const dwtChallengeCompleted =
+  //   programTrackerData.daily_workout_trackers[currentDay].dwt_daily_challenge;
   const dailyWorkout = programData.daily_workouts[currentDay];
   const dailyWorkoutId = programData.daily_workouts[currentDay].id;
   const dailyWorkoutTracker =
@@ -30,39 +30,40 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   const programImage = programData.photo_url;
   const programTitle = programData.program_title;
 
-  console.log(dailyWorkoutTrackerId);
-  // API Call using this id.
+  // Get Daily Workout Tracker
   const {data: dailyWorkoutTrackerData } = useDailyWorkoutTracker(programTrackerId, dailyWorkoutTrackerId);
 
   console.log(dailyWorkoutTrackerData);
-  
 
 
-  const [checkInIsComplete, setCheckInIsComplete] = useState(
-    dwtDailyCheckInCompleted
-  );
-  const [challengeIsComplete, setChallengeIsComplete] = useState(
-    dwtChallengeCompleted
-  );
+  const dwtDailyCheckInCompleted = dailyWorkoutTrackerData.dwt_check_in;
+  const dwtChallengeCompleted = dailyWorkoutTrackerData.dwt_daily_challenge;
+
+  console.log(dwtChallengeCompleted)
+
+
+  // const [checkInIsComplete, setCheckInIsComplete] = useState(
+  //   dwtDailyCheckInCompleted
+  // );
+  // const [challengeIsComplete, setChallengeIsComplete] = useState(
+  //   dwtChallengeCompleted
+  // );
 
   const checkInCompleteHandler = () => {
-    setCheckInIsComplete(true);
-    // Query call to update the challenge
-
-    // Need - program tracker id
-    // Need - daily workout tracker id
 
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
       program_tracker_id: programTrackerId,
       dwt_check_in: true,
     };
-
+  
     updateDailyWorkoutTracker(daily_workout_tracker);
+    refetchProgramData();
+    refetchProgramTrackerData();
   };
 
   const challengeCompleteHandler = () => {
-    setChallengeIsComplete(true);
+    // setChallengeIsComplete(true);
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
       program_tracker_id: programTrackerId,
@@ -71,25 +72,36 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
 
     // Query call to update the challenge
     updateDailyWorkoutTracker(daily_workout_tracker);
+    refetchProgramData();
+    refetchProgramTrackerData();
   };
 
   const finishDayHandler = () => {
-    // API call to update current day + 1
-    // create object with programtrackerid and workoutTrackerId
-    // find current day
-    // write a use update program tracker
 
-    const daily_workout_tracker = {
+    const program_tracker = {
       id: programTrackerId,
-      current_day: currentDay + 1
+      current_day: currentDay + 1,
+      completed: true,
     }
 
-    updateProgramTracker(daily_workout_tracker);
+    const daily_workout_tracker = {
+      id: dailyWorkoutTrackerId,
+      program_tracker_id: programTrackerId,
+      completed: true,
+    };
+
+
+    updateProgramTracker(program_tracker);
+    updateDailyWorkoutTracker(daily_workout_tracker);
+    
+    // TODO: Workout how to refresh page to show day change.
     refetchProgramTrackerData();
     refetchProgramData();
     // refetch activites page
     navigate("/activities");
   };
+
+  const dayFinished = dwtDailyCheckInCompleted && dwtChallengeCompleted;
 
   return (
     <Fragment>
@@ -115,7 +127,7 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
         />
       </div>
       <div className={classes.finishDayButtonContainer}>
-        <Button onClick={finishDayHandler}>Finish Day</Button>
+        <Button onClick={finishDayHandler} disabled={!dayFinished}>Finish Day</Button>
       </div>
     </Fragment>
   );

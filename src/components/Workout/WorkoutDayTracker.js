@@ -8,11 +8,15 @@ const WorkoutDayTracker = ({
   programLength,
   currentDay,
 }) => {
-  const { data: fiveDayArrayData, isLoading: fiveDayArrayIsLoading } =
+  const { data: fiveDayArrayData, isLoading: fiveDayArrayIsLoading, refetch: refetchFiveDayArray } =
     useFiveDayArray(programTrackerId);
   // TODO: Get program length
 
   if (fiveDayArrayIsLoading) return <p>Loading...</p>;
+
+  const refetchFiveDayArrayHandler = () => {
+    refetchFiveDayArray();
+  };
 
   const fiveDayArray = fiveDayArrayData.five_day_array.map((day) => {
     const percentComplete = parseInt(

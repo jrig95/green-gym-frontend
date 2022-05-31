@@ -16,12 +16,12 @@ const getFiveDayArray = async (programTrackerId) => {
 export const useFiveDayArray = (programTrackerId) => {
   const { addError } = useAPIError();
   const fallback = [];
-  const { data = fallback, isLoading } = useQuery(queryKeys.five_day_array, () => getFiveDayArray(programTrackerId), {
+  const { data = fallback, isLoading, refetch } = useQuery(queryKeys.five_day_array, () => getFiveDayArray(programTrackerId), {
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     }
   });
 
-  return { data, isLoading }
+  return { data, isLoading, refetch }
 };

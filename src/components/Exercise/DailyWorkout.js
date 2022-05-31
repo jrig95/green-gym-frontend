@@ -22,7 +22,7 @@ const DailyWorkout = ({userData, ids }) => {
   // TODO: get the programId
   const programId = userData.programs[0].id;
   // TODO: get the programe tacker id
-  const programTackerId = userData.program_trackers[0].id;
+  const programTrackerId = userData.program_trackers[0].id;
 
   // TODO: Get workout from backend
   const workoutId = ids.workoutId;
@@ -33,7 +33,7 @@ const DailyWorkout = ({userData, ids }) => {
   const { data: programData, isLoading: programDataIsLaoding } =
     useProgram(programId);
   const { data: programTrackerData, isLoading: programTrackerIsLoading } =
-    useGetProgramTracker(programTackerId);
+    useGetProgramTracker(programTrackerId);
   // user id has the program_tracker id - get from here.
 
   // declare current day using let
@@ -61,7 +61,7 @@ const DailyWorkout = ({userData, ids }) => {
       <DailyExercises
         userData={userData}
         programId={programId}
-        programTackerId={programTackerId}
+        programTrackerId={programTrackerId}
         workoutId={currentDailyWorkoutId}
         workoutTrackerId={currentDailyWorkoutTrackerId}
       />
