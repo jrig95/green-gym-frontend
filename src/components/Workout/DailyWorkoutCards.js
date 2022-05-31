@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
 import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
-import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
 import DailyCheckInCard from "./DailyCheckInCard";
@@ -16,7 +15,6 @@ const DailyWorkoutCards = ({
   refetchProgramData,
   refetchProgramTrackerData,
 }) => {
-  const navigate = useNavigate();
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
@@ -74,6 +72,7 @@ const DailyWorkoutCards = ({
 
   useEffect(() => {
     if (dayIsFinished) {
+      console.log('day is finished')
       refetchProgramData();
       refetchProgramTrackerData();
       refetchDailyWorkoutTracker();

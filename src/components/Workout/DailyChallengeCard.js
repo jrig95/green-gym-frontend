@@ -13,9 +13,11 @@ const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
     getCompleted(true);
   };
 
-  const iconClasses = dwtChallengeCompleted || challengeIsCompleted
+  const iconClasses = dwtChallengeCompleted
     ? `${classes.icon} ${classes.checkedIn}`
     : classes.icon;
+
+  const buttonMessage = dwtChallengeCompleted ? "Done it!" : "Do it!";
 
   return (
     <Card className={classes.container}>
@@ -29,7 +31,12 @@ const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
         <GiBiceps />
       </div>
       <div className={classes.button}>
-        <Button onClick={challengeCompletedHandler} disabled={dwtChallengeCompleted || challengeIsCompleted}>Do it</Button>
+        <Button
+          onClick={challengeCompletedHandler}
+          disabled={dwtChallengeCompleted}
+        >
+          {buttonMessage}
+        </Button>
       </div>
     </Card>
   );

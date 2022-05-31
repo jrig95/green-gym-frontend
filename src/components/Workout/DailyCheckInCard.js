@@ -13,7 +13,7 @@ const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
     getCompleted(true);
   };
 
-  const checkInClasses = dwtDailyCheckInCompleted
+  const checkInClasses = dwtDailyCheckInCompleted || checkedIn
     ? `${classes.buttonContainer} ${classes.checkedIn}`
     : classes.buttonContainer;
 
@@ -27,8 +27,8 @@ const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
           <BsCheckCircle />
         </div>
         <div className={classes.button}>
-          <Button onClick={checkInHandler} disabled={dwtDailyCheckInCompleted}>
-            {checkedIn ? "Checked In!" : "Check in"}
+          <Button onClick={checkInHandler} disabled={dwtDailyCheckInCompleted || checkedIn}>
+            {dwtDailyCheckInCompleted ? "Checked In!" : "Check in"}
           </Button>
         </div>
       </div>
