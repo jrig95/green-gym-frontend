@@ -14,13 +14,13 @@ const getProgramTracker = async (id) => {
 export const useGetProgramTracker = (id) => {
   const { addError } = useAPIError();
   const fallback = [];
-  const { data = fallback, isLoading } = useQuery(queryKeys.program_tracker, () => getProgramTracker(id), {
+  const { data = fallback, isLoading, refetch } = useQuery(queryKeys.program_tracker, () => getProgramTracker(id), {
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     }
   });
   
-  return { data, isLoading }
+  return { data, isLoading, refetch }
 };
 

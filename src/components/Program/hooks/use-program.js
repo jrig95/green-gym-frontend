@@ -20,6 +20,7 @@ export const useProgram = (id) => {
     isError,
     error,
     isLoading,
+    refetch
   } = useQuery(queryKeys.program, () => getProgram(id), {
     onError: (error) => {
       const title =
@@ -27,5 +28,5 @@ export const useProgram = (id) => {
         addError(title, error.status);
     },
   });
-  return { data, isError, error, isLoading };
+  return { data, isError, error, isLoading, refetch };
 };

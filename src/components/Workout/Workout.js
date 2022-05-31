@@ -12,12 +12,18 @@ const Workout = ({ userData }) => {
   const programId = userData.programs[0].id;
 
   // TODO: Add use Program tracker to find the tracker for this program
-  const { data: programTrackerData, isLoading: programTrackerIsLoading } =
-    useGetProgramTracker(userData.program_trackers[0].id);
+  const {
+    data: programTrackerData,
+    isLoading: programTrackerIsLoading,
+    refetch: refetchProgramTrackerData,
+  } = useGetProgramTracker(userData.program_trackers[0].id);
 
   // TODO: Get the Program
-  const { data: programData, isLoading: programIsLoading } =
-    useProgram(programId);
+  const {
+    data: programData,
+    isLoading: programIsLoading,
+    refetch: refetchProgramData,
+  } = useProgram(programId);
 
   if (programIsLoading || programTrackerIsLoading) return <p>Loading...</p>;
 
@@ -26,7 +32,12 @@ const Workout = ({ userData }) => {
       <div className={classes.workoutDayTrackerContainer}>
         <WorkoutDayTracker programTitle={userData.programs[0].program_title} />
       </div>
-      <DailyWorkoutCards programTrackerData={programTrackerData} programData={programData} />
+      <DailyWorkoutCards
+        programTrackerData={programTrackerData}
+        programData={programData}
+        refetchProgramData={refetchProgramData}
+        refetchProgramTrackerData={refetchProgramTrackerData}
+      />
     </Fragment>
   );
 };

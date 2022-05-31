@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+import { QueryClient, useMutation, useQueryClient } from "react-query";
 
+import { queryKeys } from "../../../react-query/constants";
 import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
@@ -13,6 +14,7 @@ const updateProgramTracker = async (programTracker) => {
 };
 
 export const useUpdateProgramTracker = () => {
+  const queryClient = useQueryClient();
   const { addError } = useAPIError();
   const { mutate } = useMutation(
     (programTracker) => updateProgramTracker(programTracker),
@@ -23,7 +25,7 @@ export const useUpdateProgramTracker = () => {
         addError(title, error.status);
       },
       onSuccess: (data) => {
-        console.log(data)
+        queryClient.invalidateQueries([queryKeys.program, queryKeys.program_tracker]);
       }
     }
   );

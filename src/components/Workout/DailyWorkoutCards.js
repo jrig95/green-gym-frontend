@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
 import DailyCheckInCard from "./DailyCheckInCard";
@@ -8,7 +9,8 @@ import { useUpdateProgramTracker } from "../Exercise/hooks/use-update-program-tr
 import { useUpdateDailyWorkoutTracker } from "../Exercise/hooks/use-update-workout-tracker";
 import classes from "./DailyWorkoutCards.module.css";
 
-const DailyWorkoutCards = ({ programTrackerData, programData }) => {
+const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData, refetchProgramTrackerData }) => {
+  const navigate = useNavigate();
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
@@ -79,6 +81,10 @@ const DailyWorkoutCards = ({ programTrackerData, programData }) => {
     }
 
     updateProgramTracker(daily_workout_tracker);
+    refetchProgramTrackerData();
+    refetchProgramData();
+    // refetch activites page
+    navigate("/activities");
   };
 
   return (
