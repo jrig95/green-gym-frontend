@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,17 @@ import { useUpdateProgramTracker } from "../Exercise/hooks/use-update-program-tr
 import { useUpdateDailyWorkoutTracker } from "../Exercise/hooks/use-update-workout-tracker";
 import classes from "./DailyWorkoutCards.module.css";
 
-const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData, refetchProgramTrackerData }) => {
+const DailyWorkoutCards = ({
+  programTrackerData,
+  programData,
+  refetchProgramData,
+  refetchProgramTrackerData,
+}) => {
   const navigate = useNavigate();
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
+
+  const [dayIsFinished, setDayIsFinished] = useState(false);
 
   const currentDay = programTrackerData.current_day;
   // const dwtDailyCheckInCompleted =
@@ -31,16 +38,16 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   const programTitle = programData.program_title;
 
   // Get Daily Workout Tracker
-  const {data: dailyWorkoutTrackerData } = useDailyWorkoutTracker(programTrackerId, dailyWorkoutTrackerId);
+  const { data: dailyWorkoutTrackerData, refetch: refetchDailyWorkoutTracker } =
+    useDailyWorkoutTracker(programTrackerId, dailyWorkoutTrackerId);
 
   console.log(dailyWorkoutTrackerData);
 
-
   const dwtDailyCheckInCompleted = dailyWorkoutTrackerData.dwt_check_in;
   const dwtChallengeCompleted = dailyWorkoutTrackerData.dwt_daily_challenge;
+  const dwtExercisesCompleted = dailyWorkoutTrackerData.exercises_completed;
 
-  console.log(dwtChallengeCompleted)
-
+  console.log(dwtChallengeCompleted);
 
   // const [checkInIsComplete, setCheckInIsComplete] = useState(
   //   dwtDailyCheckInCompleted
@@ -49,18 +56,29 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   //   dwtChallengeCompleted
   // );
 
-  const checkInCompleteHandler = () => {
+  // Have a use effect that automatically refetched data.
+  // what changes that would anable the useEffect to fire.
 
+  const checkInCompleteHandler = () => {
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
       program_tracker_id: programTrackerId,
       dwt_check_in: true,
     };
-  
+
     updateDailyWorkoutTracker(daily_workout_tracker);
     refetchProgramData();
     refetchProgramTrackerData();
+    refetchDailyWorkoutTracker();
   };
+
+  useEffect(() => {
+    if (dayIsFinished) {
+      refetchProgramData();
+      refetchProgramTrackerData();
+      refetchDailyWorkoutTracker();
+    }
+  }, [dayIsFinished]);
 
   const challengeCompleteHandler = () => {
     // setChallengeIsComplete(true);
@@ -71,18 +89,19 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
     };
 
     // Query call to update the challenge
+
     updateDailyWorkoutTracker(daily_workout_tracker);
     refetchProgramData();
     refetchProgramTrackerData();
+    refetchDailyWorkoutTracker();
   };
 
   const finishDayHandler = () => {
-
     const program_tracker = {
       id: programTrackerId,
       current_day: currentDay + 1,
       completed: true,
-    }
+    };
 
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
@@ -90,18 +109,19 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
       completed: true,
     };
 
-
     updateProgramTracker(program_tracker);
     updateDailyWorkoutTracker(daily_workout_tracker);
-    
+
     // TODO: Workout how to refresh page to show day change.
+    refetchDailyWorkoutTracker();
     refetchProgramTrackerData();
     refetchProgramData();
-    // refetch activites page
-    navigate("/activities");
+    setDayIsFinished(true);
   };
 
-  const dayFinished = dwtDailyCheckInCompleted && dwtChallengeCompleted;
+  // All must be true to be able to slect finish day
+  const dayFinished =
+    dwtDailyCheckInCompleted && dwtChallengeCompleted && dwtExercisesCompleted;
 
   return (
     <Fragment>
@@ -118,6 +138,7 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
           dailyWorkoutTracker={dailyWorkoutTracker}
           programImage={programImage}
           programTitle={programTitle}
+          dwtExercisesCompleted={dwtExercisesCompleted}
         />
         <DailyChallengeCard
           dwtChallengeCompleted={dwtChallengeCompleted}
@@ -127,7 +148,9 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
         />
       </div>
       <div className={classes.finishDayButtonContainer}>
-        <Button onClick={finishDayHandler} disabled={!dayFinished}>Finish Day</Button>
+        <Button onClick={finishDayHandler} disabled={!dayFinished}>
+          Finish Day
+        </Button>
       </div>
     </Fragment>
   );

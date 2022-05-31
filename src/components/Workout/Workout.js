@@ -44,6 +44,7 @@ const Workout = ({ userData }) => {
         programTrackerData={programTrackerData}
         programData={programData}
         refetchProgramData={refetchProgramData}
+        refetchProgramTrackerData={refetchProgramTrackerData}
       />
     </Fragment>
   );
