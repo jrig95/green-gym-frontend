@@ -14,9 +14,6 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
-  console.log(programTrackerData);
-  console.log(programData);
-
   const currentDay = programTrackerData.current_day;
   const dwtDailyCheckInCompleted =
     programTrackerData.daily_workout_trackers[currentDay].dwt_check_in;
@@ -31,6 +28,9 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   const programTrackerId = programTrackerData.id;
   const programImage = programData.photo_url;
   const programTitle = programData.program_title;
+
+  console.log(dailyWorkoutTrackerId);
+  // API Call using this id.
 
   const [checkInIsComplete, setCheckInIsComplete] = useState(
     dwtDailyCheckInCompleted

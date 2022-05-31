@@ -1,20 +1,57 @@
+import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import classes from "./WorkoutDayTracker.module.css";
 import Card from "../UI/Card";
 
-const WorkoutDayTracker = ({ programTitle }) => {
+const WorkoutDayTracker = ({
+  programTitle,
+  programTrackerId,
+  programLength,
+  currentDay
+}) => {
+  const { data: fiveDayArrayData, isLoading: fiveDayArrayIsLoading } =
+    useFiveDayArray(programTrackerId);
 
-  const currentDayClasses = `${classes.day} ${classes.dayCurrent}`
-  const currentDayNumberClasses = `${classes.dayNumber} ${classes.dayNumberCurrent}`
-  const currentPercentageClasses = `${classes.percentage} ${classes.percentageCurrent}`
+  console.log(fiveDayArrayData.five_day_array);
 
-  const nextDayNumberClasses = `${classes.dayNumber} ${classes.dayNumberNext}`
-  const nextPercentageClasses = `${classes.percentage} ${classes.percentageNext}`
+  // TODO: Get program length
+
+  if (fiveDayArrayIsLoading) return <p>Loading...</p>;
+
+  const fiveDayArray = fiveDayArrayData.five_day_array.map((day) => {
+    console.log(day);
+    const percentComplete = parseInt((day.percentage_complete * 100).toFixed(2));
+
+    console.log(percentComplete);
+
+    let dayClasses = `${classes.day}`
+    let dayNumberClasses = `${classes.dayNumber}`
+    let dayPercentageClasses = `${classes.percentage}`
+
+    if ((currentDay + 1) === day.dwt_day_number) {
+      dayClasses = `${classes.day} ${classes.dayCurrent}`;
+      dayNumberClasses = `${classes.dayNumber} ${classes.dayNumberCurrent}`;
+      dayPercentageClasses = `${classes.percentage} ${classes.percentageCurrent}`;
+    }
+
+    if ((currentDay + 1) < day.dwt_day_number) {
+      dayNumberClasses = `${classes.dayNumber} ${classes.dayNumberNext}`;
+      dayPercentageClasses = `${classes.percentage} ${classes.percentageNext}`;
+    }
+
+    return (
+      <Card key={day.id} className={dayClasses}>
+        <p className={dayNumberClasses}>Day {day.dwt_day_number}/{programLength}</p>
+        <p className={dayPercentageClasses}>{percentComplete}%</p>
+      </Card>
+    );
+  });
 
   return (
     <div className={classes.container}>
       <h1 className={classes.programName}>{programTitle}</h1>
       <Card className={classes.tracker}>
-        <Card className={classes.day}>
+        {fiveDayArray}
+        {/* <Card className={classes.day}>
           <p className={classes.dayNumber}>Day 1/7</p>
           <p className={classes.percentage}>100%</p>
         </Card>
@@ -33,7 +70,7 @@ const WorkoutDayTracker = ({ programTitle }) => {
         <Card className={classes.day}>
           <p className={nextDayNumberClasses}>Day 1/7</p>
           <p className={nextPercentageClasses}>0%</p>
-        </Card>
+        </Card> */}
       </Card>
     </div>
   );

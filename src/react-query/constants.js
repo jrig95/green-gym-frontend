@@ -12,5 +12,6 @@ export const queryKeys = {
   user: "user",
   members: "members",
   program_tracker: "program_tracker",
-  exercise_trackers: "exercise_trackers"
+  exercise_trackers: "exercise_trackers",
+  five_day_array: "five_day_array"
 };

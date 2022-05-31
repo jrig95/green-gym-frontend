@@ -46,6 +46,8 @@ const ExerciseTrackerCard = ({
 
     // navigate back to activites page
     navigate("/activities");
+
+    // UPDATE -> Workout_complete: true
   };
 
   useEffect(() => {
