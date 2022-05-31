@@ -13,5 +13,6 @@ export const queryKeys = {
   members: "members",
   program_tracker: "program_tracker",
   exercise_trackers: "exercise_trackers",
+  workout_tracker: "workout_tracker",
   five_day_array: "five_day_array"
 };

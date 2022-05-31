@@ -18,7 +18,7 @@ export const useExerciseTrackers = (programTrackerId, workoutTrackerId) => {
   const fallback = [];
   const { data = fallback, isError, error, isLoading } = useQuery(queryKeys.exercise_trackers, () => getExerciseTrackers(programTrackerId, workoutTrackerId), {
     onError: (error) => {
-      const title = error instanceof Error ? error.message : "error connecitng to server";
+      const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
     }
   });

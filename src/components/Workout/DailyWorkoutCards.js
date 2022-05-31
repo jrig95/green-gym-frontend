@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 
+import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
@@ -31,6 +32,11 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
 
   console.log(dailyWorkoutTrackerId);
   // API Call using this id.
+  const {data: dailyWorkoutTrackerData } = useDailyWorkoutTracker(programTrackerId, dailyWorkoutTrackerId);
+
+  console.log(dailyWorkoutTrackerData);
+  
+
 
   const [checkInIsComplete, setCheckInIsComplete] = useState(
     dwtDailyCheckInCompleted
@@ -68,12 +74,10 @@ const DailyWorkoutCards = ({ programTrackerData, programData, refetchProgramData
   };
 
   const finishDayHandler = () => {
-    console.log("working");
     // API call to update current day + 1
     // create object with programtrackerid and workoutTrackerId
     // find current day
     // write a use update program tracker
-    console.log(currentDay + 1);
 
     const daily_workout_tracker = {
       id: programTrackerId,

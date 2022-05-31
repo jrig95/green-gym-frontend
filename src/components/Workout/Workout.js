@@ -2,12 +2,10 @@ import classes from "./Workout.module.css";
 import { Fragment } from "react";
 
 import DailyWorkoutCards from "./DailyWorkoutCards";
-import Button from "../UI/Button";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
 import WorkoutDayTracker from "./WorkoutDayTracker";
-import { GiConsoleController } from "react-icons/gi";
 
 const Workout = ({ userData }) => {
   const programId = userData.programs[0].id;
