@@ -5,8 +5,8 @@ import classes from "./DailyCheckInCard.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 
-const DailyCheckInCard = ({ getCompleted }) => {
-  const [checkedIn, setCheckedIn] = useState(false);
+const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
+  const [checkedIn, setCheckedIn] = useState(dwtDailyCheckInCompleted);
 
   const checkInHandler = (event) => {
     setCheckedIn(true);

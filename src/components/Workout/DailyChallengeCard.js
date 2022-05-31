@@ -5,8 +5,8 @@ import classes from "./DailyChallengeCard.module.css";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
-const DailyChallengeCard = ({ getCompleted }) => {
-  const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
+const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
+  const [challengeIsCompleted, setChallengeIsCompleted] = useState(dwtChallengeCompleted);
 
   const challengeCompletedHandler = () => {
     setChallengeIsCompleted(true);
