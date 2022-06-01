@@ -5,7 +5,7 @@ import classes from "./DailyChallengeCard.module.css";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
-const DailyChallengeCard = ({ getCompleted }) => {
+const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted }) => {
   const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
 
   const challengeCompletedHandler = () => {
@@ -13,9 +13,11 @@ const DailyChallengeCard = ({ getCompleted }) => {
     getCompleted(true);
   };
 
-  const iconClasses = challengeIsCompleted
+  const iconClasses = dwtChallengeCompleted
     ? `${classes.icon} ${classes.checkedIn}`
     : classes.icon;
+
+  const buttonMessage = dwtChallengeCompleted ? "Done it!" : "Do it!";
 
   return (
     <Card className={classes.container}>
@@ -29,7 +31,12 @@ const DailyChallengeCard = ({ getCompleted }) => {
         <GiBiceps />
       </div>
       <div className={classes.button}>
-        <Button onClick={challengeCompletedHandler} disabled={challengeIsCompleted}>Do it</Button>
+        <Button
+          onClick={challengeCompletedHandler}
+          disabled={dwtChallengeCompleted}
+        >
+          {buttonMessage}
+        </Button>
       </div>
     </Card>
   );

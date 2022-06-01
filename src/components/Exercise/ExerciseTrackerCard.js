@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUpdateDailyWorkoutTracker } from "./hooks/use-update-workout-tracker";
 import { useUpdateExercise } from "./hooks/use-update-exercise-tracker";
 import Button from "../UI/Button";
 import classes from "./ExerciseTrackerCard.module.css";
@@ -14,9 +15,10 @@ const ExerciseTrackerCard = ({
   exercises,
   exerciseTrackers,
   isLoading,
-  programTackerId,
+  programTrackerId,
   workoutTrackerId,
 }) => {
+  const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
   const [repsArray, setRepsArray] = useState([]);
   const [numberOfExercisesComplete, setNumberOfExercisesComplete] = useState(0);
   const [formIsComplete, setFormIsCompelte] = useState(true);
@@ -34,7 +36,7 @@ const ExerciseTrackerCard = ({
     sortedRepsArray.map((rep) => {
       const exercise_trakcer = {
         id: rep.id,
-        program_tracker_id: programTackerId,
+        program_tracker_id: programTrackerId,
         daily_workout_tracker_id: workoutTrackerId,
         number_of_reps: rep.number_of_reps,
       };
@@ -43,6 +45,14 @@ const ExerciseTrackerCard = ({
       updateExercise(exercise_trakcer);
     });
     // need program_tracker_id, daily_workout_tracker_id and exercise_trakcer_id (this is already in array)
+    // UPDATE -> Workout_complete: true
+    const daily_workout_tracker = {
+      id: workoutTrackerId,
+      program_tracker_id: programTrackerId,
+      exercises_completed: true,
+    };
+    
+    updateDailyWorkoutTracker(daily_workout_tracker)
 
     // navigate back to activites page
     navigate("/activities");

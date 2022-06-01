@@ -13,7 +13,7 @@ import ExerciseTrackerCard from "./ExerciseTrackerCard";
 const DailyExercises = ({
   userData,
   programId,
-  programTackerId,
+  programTrackerId,
   workoutId,
   workoutTrackerId,
 }) => {
@@ -25,7 +25,7 @@ const DailyExercises = ({
 
   // Hook to get the exercise tracker
   const { data: exerciseTrackersData } = useExerciseTrackers(
-    programTackerId,
+    programTrackerId,
     workoutTrackerId
   );
 
@@ -130,7 +130,7 @@ const DailyExercises = ({
         exerciseIndex={exerciseIndex}
         exercises={exerciseData}
         exerciseTrackers={exerciseTrackersData}
-        programTackerId={programTackerId}
+        programTrackerId={programTrackerId}
         workoutTrackerId={workoutTrackerId}
         isLoading={exerciseIsLoading}
       />

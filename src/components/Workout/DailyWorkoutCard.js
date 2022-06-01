@@ -11,10 +11,16 @@ const DailyWorkoutCard = ({
   programTitle,
   dailyWorkoutId,
   dailyWorkoutTrackerId,
+  dwtExercisesCompleted,
 }) => {
   const slug = slugify(
     `${programTitle}-day-${dailyWorkout.day_number}-${dailyWorkoutId}-${dailyWorkoutTrackerId}`
   );
+
+  // Conditionally display a message. But this always seems to be false
+  const buttonMessage = dwtExercisesCompleted ? "Workout Finished" : "Today's Workout";
+  const blueButton = dwtExercisesCompleted ? "blue" : "";
+
   return (
     <Card className={classes.container}>
       <div className={classes.title}>
@@ -25,7 +31,7 @@ const DailyWorkoutCard = ({
       </div>
       <div className={classes.buttonContainer}>
         <Link to={`/activities/${slug}`}>
-          <Button>Today's Workout</Button>
+          <Button color={blueButton}>{buttonMessage}</Button>
         </Link>
       </div>
     </Card>

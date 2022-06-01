@@ -5,7 +5,7 @@ import classes from "./DailyCheckInCard.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 
-const DailyCheckInCard = ({ getCompleted }) => {
+const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
   const [checkedIn, setCheckedIn] = useState(false);
 
   const checkInHandler = (event) => {
@@ -13,7 +13,7 @@ const DailyCheckInCard = ({ getCompleted }) => {
     getCompleted(true);
   };
 
-  const checkInClasses = checkedIn
+  const checkInClasses = dwtDailyCheckInCompleted || checkedIn
     ? `${classes.buttonContainer} ${classes.checkedIn}`
     : classes.buttonContainer;
 
@@ -27,8 +27,8 @@ const DailyCheckInCard = ({ getCompleted }) => {
           <BsCheckCircle />
         </div>
         <div className={classes.button}>
-          <Button onClick={checkInHandler} disabled={checkedIn}>
-            {checkedIn ? "Checked In!" : "Check in"}
+          <Button onClick={checkInHandler} disabled={dwtDailyCheckInCompleted || checkedIn}>
+            {dwtDailyCheckInCompleted ? "Checked In!" : "Check in"}
           </Button>
         </div>
       </div>
