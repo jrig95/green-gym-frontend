@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
 import Button from "../UI/Button";
@@ -17,16 +18,29 @@ const DailyWorkoutCards = ({
   refetchProgramTrackerData,
   refetchFiveDayArray
 }) => {
+  const navigate = useNavigate();
+
+  
+
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
   const [dayIsFinished, setDayIsFinished] = useState(false);
 
+  // On the last day of a program. This line breaks everything.
   const currentDay = programTrackerData.current_day;
-  // const dwtDailyCheckInCompleted =
-  //   programTrackerData.daily_workout_trackers[currentDay].dwt_check_in;
-  // const dwtChallengeCompleted =
-  //   programTrackerData.daily_workout_trackers[currentDay].dwt_daily_challenge;
+
+  // if (currentDay === (programData.daily_workouts.length)) {
+  //   console.log(currentDay);
+  //   console.log(programData.daily_workouts.length);
+  //   navigate("/programs");
+  // }
+
+  // console.log(currentDay);
+  // console.log(programData.daily_workouts.length);
+
+  // Add a condtion on finish day to check if program is complete.
+
   const dailyWorkout = programData.daily_workouts[currentDay];
   const dailyWorkoutId = programData.daily_workouts[currentDay].id;
   const dailyWorkoutTracker =
@@ -41,13 +55,13 @@ const DailyWorkoutCards = ({
   const { data: dailyWorkoutTrackerData, refetch: refetchDailyWorkoutTracker } =
     useDailyWorkoutTracker(programTrackerId, dailyWorkoutTrackerId);
 
-  console.log(dailyWorkoutTrackerData);
+  // console.log(dailyWorkoutTrackerData);
 
   const dwtDailyCheckInCompleted = dailyWorkoutTrackerData.dwt_check_in;
   const dwtChallengeCompleted = dailyWorkoutTrackerData.dwt_daily_challenge;
   const dwtExercisesCompleted = dailyWorkoutTrackerData.exercises_completed;
 
-  console.log(dwtChallengeCompleted);
+  // console.log(dwtChallengeCompleted);
 
   // const [checkInIsComplete, setCheckInIsComplete] = useState(
   //   dwtDailyCheckInCompleted
@@ -99,7 +113,7 @@ const DailyWorkoutCards = ({
     const program_tracker = {
       id: programTrackerId,
       current_day: currentDay + 1,
-      completed: true,
+      // completed: true,
     };
 
     const daily_workout_tracker = {
@@ -116,6 +130,16 @@ const DailyWorkoutCards = ({
     refetchProgramTrackerData();
     refetchProgramData();
     setDayIsFinished(true);
+
+    // TODO: Add codition to check if it is the final day.
+    console.log(currentDay);
+    console.log(programData.daily_workouts.length);
+
+    // Fi program length - 1 is the same as current day.
+    // Redirect user to another page.
+    if (currentDay === (programData.daily_workouts.length + 1)) {
+      navigate("/");
+    }
   };
 
   // All must be true to be able to slect finish day

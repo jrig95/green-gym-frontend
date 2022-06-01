@@ -13,6 +13,18 @@
     width: 100vw;
 }
 
+.workoutFinishedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workoutFinishedMessages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media only screen and (min-width: 618px) and (max-width: 1200px) {
   .workoutDayTrackerContainer {
       display: flex;

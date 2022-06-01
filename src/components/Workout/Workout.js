@@ -7,12 +7,11 @@ import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
 import WorkoutDayTracker from "./WorkoutDayTracker";
+import { GiConsoleController } from "react-icons/gi";
 
 const Workout = ({ userData }) => {
   const programId = userData.programs[0].id;
-  const programTrackerNewId = userData.program_trackers[0].id
-
-  console.log(programTrackerNewId);
+  const programTrackerNewId = userData.program_trackers[0].id;
 
   // TODO: Add use Program tracker to find the tracker for this program
   const {
@@ -33,13 +32,31 @@ const Workout = ({ userData }) => {
     isLoading: fiveDayArrayIsLoading,
     refetch: refetchFiveDayArray,
   } = useFiveDayArray(programTrackerNewId);
-  
 
-  if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading) return <p>Loading...</p>;
+  if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading)
+    return <p>Loading...</p>;
 
   const programLength = programData.daily_workouts.length;
   const programTrackerId = programTrackerData.id;
   const currentDay = programTrackerData.current_day;
+
+  if (programLength === currentDay)
+    return (
+      <div className={classes.workoutFinishedContainer}>
+        <div className={classes.workoutDayTrackerContainer}>
+          <WorkoutDayTracker
+            programTitle={userData.programs[0].program_title}
+            fiveDayArrayData={fiveDayArrayData}
+            programLength={programLength}
+            currentDay={currentDay}
+          />
+        </div>
+        <div className={classes.workoutFinishedMessages}>
+          <h1>Workout Complete. Congratulations!!</h1>
+          <h2>Claim some rewards.</h2>
+        </div>
+      </div>
+    );
 
   return (
     <Fragment>
