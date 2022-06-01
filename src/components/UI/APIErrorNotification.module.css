@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-@keyframes slide-up {
+/* @keyframes slide-up {
   from {
     opacity: 0;
     transition: translateY(3rem);
@@ -21,4 +21,4 @@
     transition: translateY(0);
   }
   
-}
+} */
