@@ -12,7 +12,6 @@ const APIErrorNotification = () => {
 
   useEffect(() => {
     if (error) {
-      console.log("error happening!!")
       const wait = setTimeout(() => {
         removeError();
       }, 5000);
