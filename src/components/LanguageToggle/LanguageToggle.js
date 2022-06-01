@@ -8,16 +8,11 @@ const LanguageToggle = () => {
   // Get language code from cookie
   // set is English based on cooked language code
 
-  // console.log((jsCookie.get('i18next') === 'en'), 'line 11');
-
   const [isEnglish, setIsEnglish] = useState((jsCookie.get('i18next') === 'en'));
 
-  // console.log(isEnglish, "isEnglish")
 
   const changeLanguageHandler = () => {
     setIsEnglish((prevIsEnglish) => !prevIsEnglish);
-    // const newCode = isEnglish ? "en" : "cn";
-    // i18next.changeLanguage(newCode);
   };
 
   useEffect(() => {
