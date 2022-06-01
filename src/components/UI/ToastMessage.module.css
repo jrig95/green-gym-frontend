@@ -10,7 +10,7 @@
   background-color: lightpink;
   padding: 1rem;
   cursor: pointer;
-  animation: slide-up 300ms ease-out forwards;
+  animation: slide-up 5000ms ease-out forwards;
 }
 .container {
   width: 100vw;
@@ -28,8 +28,18 @@
     opacity: 0;
     transform: translateY(4rem);
   }
-  100% {
+  10% {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(4rem);
   }
 }

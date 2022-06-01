@@ -12,11 +12,12 @@ const APIErrorNotification = () => {
 
   useEffect(() => {
     if (error) {
+      console.log("error happening!!")
       const wait = setTimeout(() => {
         removeError();
-      }, 3000);
+      }, 5000);
 
-      return clearTimeout(wait);
+      return () => clearTimeout(wait);
     }
   }, [error]);
 
