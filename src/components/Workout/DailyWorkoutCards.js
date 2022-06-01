@@ -110,11 +110,11 @@ const DailyWorkoutCards = ({
   };
 
   const finishDayHandler = () => {
-    const program_tracker = {
-      id: programTrackerId,
-      current_day: currentDay + 1,
-      // completed: true,
-    };
+    // const program_tracker = {
+    //   id: programTrackerId,
+    //   current_day: currentDay + 1,
+    //   // completed: true,
+    // };
 
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
@@ -122,7 +122,8 @@ const DailyWorkoutCards = ({
       completed: true,
     };
 
-    updateProgramTracker(program_tracker);
+    // updateProgramTracker(program_tracker);
+
     updateDailyWorkoutTracker(daily_workout_tracker);
 
     // TODO: Workout how to refresh page to show day change.

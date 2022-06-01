@@ -7,10 +7,9 @@ import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateProgramTracker = async (programTracker) => {
   console.log(programTracker);
-  await axios.patch(
-    `${baseUrl}/program_trackers/${programTracker.id}`,
-    programTracker
-  );
+  await axios.patch(`${baseUrl}/program_trackers/${programTracker.id}`, {
+    current_day: programTracker.current_day,
+  });
 };
 
 export const useUpdateProgramTracker = () => {
@@ -25,8 +24,11 @@ export const useUpdateProgramTracker = () => {
         addError(title, error.status);
       },
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.program, queryKeys.program_tracker]);
-      }
+        queryClient.invalidateQueries([
+          queryKeys.program,
+          queryKeys.program_tracker,
+        ]);
+      },
     }
   );
 
