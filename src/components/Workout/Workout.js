@@ -1,6 +1,7 @@
 import classes from "./Workout.module.css";
 import { Fragment } from "react";
 
+import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import DailyWorkoutCards from "./DailyWorkoutCards";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
@@ -9,6 +10,9 @@ import WorkoutDayTracker from "./WorkoutDayTracker";
 
 const Workout = ({ userData }) => {
   const programId = userData.programs[0].id;
+  const programTrackerNewId = userData.program_trackers[0].id
+
+  console.log(programTrackerNewId);
 
   // TODO: Add use Program tracker to find the tracker for this program
   const {
@@ -24,7 +28,14 @@ const Workout = ({ userData }) => {
     refetch: refetchProgramData,
   } = useProgram(programId);
 
-  if (programIsLoading || programTrackerIsLoading) return <p>Loading...</p>;
+  const {
+    data: fiveDayArrayData,
+    isLoading: fiveDayArrayIsLoading,
+    refetch: refetchFiveDayArray,
+  } = useFiveDayArray(programTrackerNewId);
+  
+
+  if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading) return <p>Loading...</p>;
 
   const programLength = programData.daily_workouts.length;
   const programTrackerId = programTrackerData.id;
@@ -35,7 +46,7 @@ const Workout = ({ userData }) => {
       <div className={classes.workoutDayTrackerContainer}>
         <WorkoutDayTracker
           programTitle={userData.programs[0].program_title}
-          programTrackerId={programTrackerId}
+          fiveDayArrayData={fiveDayArrayData}
           programLength={programLength}
           currentDay={currentDay}
         />
@@ -43,6 +54,8 @@ const Workout = ({ userData }) => {
       <DailyWorkoutCards
         programTrackerData={programTrackerData}
         programData={programData}
+        fiveDayArrayData={fiveDayArrayData}
+        refetchFiveDayArray={refetchFiveDayArray}
         refetchProgramData={refetchProgramData}
         refetchProgramTrackerData={refetchProgramTrackerData}
       />

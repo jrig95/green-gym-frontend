@@ -1,22 +1,26 @@
 import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import classes from "./WorkoutDayTracker.module.css";
 import Card from "../UI/Card";
+import { useEffect } from "react";
 
 const WorkoutDayTracker = ({
   programTitle,
-  programTrackerId,
+  fiveDayArrayData,
   programLength,
   currentDay,
 }) => {
-  const { data: fiveDayArrayData, isLoading: fiveDayArrayIsLoading, refetch: refetchFiveDayArray } =
-    useFiveDayArray(programTrackerId);
-  // TODO: Get program length
+  // const {
+  //   data: fiveDayArrayData,
+  //   isLoading: fiveDayArrayIsLoading,
+  //   refetch: refetchFiveDayArray,
+  // } = useFiveDayArray(programTrackerId);
+  // // TODO: Get program length
 
-  if (fiveDayArrayIsLoading) return <p>Loading...</p>;
+  // if (fiveDayArrayIsLoading) return <p>Loading...</p>;
 
-  const refetchFiveDayArrayHandler = () => {
-    refetchFiveDayArray();
-  };
+  // const refetchFiveDayArrayHandler = () => {
+  //   refetchFiveDayArray();
+  // };
 
   const fiveDayArray = fiveDayArrayData.five_day_array.map((day) => {
     const percentComplete = parseInt(

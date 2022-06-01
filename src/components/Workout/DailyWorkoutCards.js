@@ -12,8 +12,10 @@ import classes from "./DailyWorkoutCards.module.css";
 const DailyWorkoutCards = ({
   programTrackerData,
   programData,
+  fiveDayArrayData,
   refetchProgramData,
   refetchProgramTrackerData,
+  refetchFiveDayArray
 }) => {
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
@@ -71,13 +73,11 @@ const DailyWorkoutCards = ({
   };
 
   useEffect(() => {
-    if (dayIsFinished) {
-      console.log('day is finished')
-      refetchProgramData();
-      refetchProgramTrackerData();
-      refetchDailyWorkoutTracker();
-    }
-  }, [dayIsFinished]);
+    refetchProgramData();
+    refetchProgramTrackerData();
+    refetchDailyWorkoutTracker();
+    refetchFiveDayArray();
+  }, [dailyWorkoutTrackerData, programData, programTrackerData, fiveDayArrayData]);
 
   const challengeCompleteHandler = () => {
     // setChallengeIsComplete(true);
