@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import React, { useState, useContext } from "react";
 
+import LoadingSpinner from "../UI/LoadingSpinner";
 import { useUserLogout } from "../User/hooks/use-user-logout";
 import AuthContext from "../../context/AuthContext";
 import Button from "../UI/Button";
@@ -37,8 +38,13 @@ const Navbar = () => {
   return (
     <div className={classes.container}>
       <Link to="/">
-        <h1>Green Gym</h1>
+        <div className={classes.logoContainer}>
+          <h1>Green Gym</h1>
+        </div>
       </Link>
+      <div className={classes.loadingSpinner}>
+        <LoadingSpinner />
+      </div>
       {adminLoggedIn && <h2 className={classes.admin}>Admin</h2>}
       <div className={classes.linksContainer}>
         {loggedOut && (
