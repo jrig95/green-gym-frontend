@@ -11,13 +11,6 @@ import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
 const DailyWorkout = ({userData, ids }) => {
-  // const authCtx = useContext(AuthContext);
-  // const params = useParams();
-
-  // const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
-
-  // const ids = getIdsFromSlug(params.workoutId);
-
   // TODO: Add program id to authCtx and get the id from context.
 
   // TODO: get the programId
@@ -49,11 +42,6 @@ const DailyWorkout = ({userData, ids }) => {
     currentDailyWorkoutTrackerId = programTrackerData.daily_workout_trackers[currentDay].id;
     currentDailyWorkoutId = programData.daily_workouts[currentDay].id;
   }
-
-  // use to call both
-  // from the program find out the current day number
-  // use this number to find the position inthe array of both the program and programs tracker daily workouts
-  // safe both of these and send them to the next page.
 
   if (programDataIsLaoding || programTrackerIsLoading) return <LoadingSpinner />;
 
