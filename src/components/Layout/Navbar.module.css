@@ -76,6 +76,10 @@
   min-width: 1rem !important;
 }
 
+.logoContainer {
+  margin: 0 1rem 0 0;
+}
+
 @media (min-width: 1000px) {
   .hidden {
       display: none;
