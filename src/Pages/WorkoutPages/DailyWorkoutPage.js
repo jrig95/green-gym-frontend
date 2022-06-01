@@ -1,5 +1,6 @@
 import { Fragment, useContext } from "react";
 
+import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 import { getIdsFromSlug } from "../../utils/get-ids-from-slug";
 import { useUser } from "../../components/User/hooks/use-user";
 import { useParams } from "react-router-dom";
@@ -16,7 +17,7 @@ const DailyWorkoutPage = () => {
 
   const ids = getIdsFromSlug(params.workoutId);
 
-  if (userIsLoading) return <p>Loading....</p> 
+  if (userIsLoading) return <LoadingSpinnerLarge />
 
   return (
     <Fragment>
