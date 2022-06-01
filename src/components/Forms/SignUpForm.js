@@ -7,13 +7,14 @@ import classes from "./SignUpForm.module.css";
 import SignUpFormCard from "./SignUpFormCard";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
+import { useEffect } from "react";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const textNotEmpty = (value) => value.trim() !== "";
-  const userSignup = useUserSignup();
+  const { mutate: userSignup, isSuccess: signUpIsSuccess } = useUserSignup();
 
   const {
     value: firstNameValue,
@@ -80,9 +81,13 @@ const SignUpForm = () => {
     resetCompany();
     resetEmail();
     resetPassword();
-
-    navigate("/");
   };
+
+  useEffect(() => {
+    if (signUpIsSuccess) {
+      navigate("/activities")
+    }
+  }, [signUpIsSuccess])
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`

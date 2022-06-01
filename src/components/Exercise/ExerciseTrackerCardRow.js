@@ -44,7 +44,7 @@ const ExerciseTrackerCardRow = ({
     const reps = {
       id: exerciseTrackerId,
       number_of_reps: repsValue,
-    };
+    };       
 
     getRepsData(reps);
     setExerciseIsAdded(true);
