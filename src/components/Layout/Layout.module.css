@@ -3,11 +3,6 @@
   min-height: 100vh;
 }
 
-.outerContainer {
-  display: flex;
-  justify-content: center;
-}
-
 .loadingSpinnerContainer {
   position: relative;
 }

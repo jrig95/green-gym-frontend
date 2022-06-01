@@ -1,5 +1,6 @@
-import { Fragment, useEffect, useState, useContext } from "react";
+import { Fragment, useContext } from "react";
 
+import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 import NoProgram from "../../components/Program/NoProgram";
 import Workout from "../../components/Workout/Workout";
 import AuthContext from "../../context/AuthContext";
@@ -11,8 +12,7 @@ const ActivitiesPage = () => {
   // get the user
   const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
 
-
-  if (userIsLoading) return <p>Loading...</p>
+  if (userIsLoading) return <LoadingSpinnerLarge />
 
   const noProgram = userData.programs.length === 0;
 

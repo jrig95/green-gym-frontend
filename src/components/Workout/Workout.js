@@ -1,13 +1,13 @@
 import classes from "./Workout.module.css";
 import { Fragment } from "react";
 
+import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
 import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import DailyWorkoutCards from "./DailyWorkoutCards";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
 import WorkoutDayTracker from "./WorkoutDayTracker";
-import { GiConsoleController } from "react-icons/gi";
 
 const Workout = ({ userData }) => {
   const programId = userData.programs[0].id;
@@ -34,7 +34,7 @@ const Workout = ({ userData }) => {
   } = useFiveDayArray(programTrackerNewId);
 
   if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading)
-    return <p>Loading...</p>;
+    return <LoadingSpinnerLarge />;
 
   const programLength = programData.daily_workouts.length;
   const programTrackerId = programTrackerData.id;

@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 
+import LoadingSpinner from "../UI/LoadingSpinner";
 import AuthContext from "../../context/AuthContext";
 import { useUser } from "../User/hooks/use-user";
 import DailyExercises from "./DailyExercises";
@@ -54,7 +55,7 @@ const DailyWorkout = ({userData, ids }) => {
   // use this number to find the position inthe array of both the program and programs tracker daily workouts
   // safe both of these and send them to the next page.
 
-  if (programDataIsLaoding || programTrackerIsLoading) return <p>Loading...</p>;
+  if (programDataIsLaoding || programTrackerIsLoading) return <LoadingSpinner />;
 
   return (
     <div>
