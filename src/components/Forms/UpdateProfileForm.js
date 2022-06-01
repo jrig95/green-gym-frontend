@@ -84,9 +84,6 @@ const UpdateProfileForm = ({ user: userData }) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    console.log(fitnessLevelValue);
-    console.log(genderValue);
-
     const user = {
       id: userData.id,
       email: emailValue,
@@ -107,8 +104,6 @@ const UpdateProfileForm = ({ user: userData }) => {
     if (updateProfileIsSuccess) {
       navigate("/profile");
     }
-    console.log(genderValue);
-    console.log(fitnessLevelValue);
   }, [updateProfileIsSuccess, genderValue, fitnessLevelValue]);
 
   const firstNameClasses = firstNameHasError
