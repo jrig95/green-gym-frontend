@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import LoadingSpinnerButton from "../UI/LoadingSpinnerButton";
+import { useIsFetching } from "react-query";
 import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
 import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
@@ -19,8 +21,7 @@ const DailyWorkoutCards = ({
   refetchFiveDayArray
 }) => {
   const navigate = useNavigate();
-
-  
+  const isFetching = useIsFetching();
 
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
@@ -29,17 +30,6 @@ const DailyWorkoutCards = ({
 
   // On the last day of a program. This line breaks everything.
   const currentDay = programTrackerData.current_day;
-
-  // if (currentDay === (programData.daily_workouts.length)) {
-  //   console.log(currentDay);
-  //   console.log(programData.daily_workouts.length);
-  //   navigate("/programs");
-  // }
-
-  // console.log(currentDay);
-  // console.log(programData.daily_workouts.length);
-
-  // Add a condtion on finish day to check if program is complete.
 
   const dailyWorkout = programData.daily_workouts[currentDay];
   const dailyWorkoutId = programData.daily_workouts[currentDay].id;
@@ -172,8 +162,8 @@ const DailyWorkoutCards = ({
         />
       </div>
       <div className={classes.finishDayButtonContainer}>
-        <Button onClick={finishDayHandler} disabled={!dayFinished}>
-          Finish Day
+        <Button onClick={finishDayHandler} disabled={!dayFinished || isFetching}>
+          {isFetching ? <LoadingSpinnerButton /> : "Finish Day"}
         </Button>
       </div>
     </Fragment>

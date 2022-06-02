@@ -39,7 +39,7 @@ const Workout = ({ userData }) => {
   const programLength = programData.daily_workouts.length;
   const programTrackerId = programTrackerData.id;
   const currentDay = programTrackerData.current_day;
-
+  
   if (programLength === currentDay)
     return (
       <div className={classes.workoutFinishedContainer}>
