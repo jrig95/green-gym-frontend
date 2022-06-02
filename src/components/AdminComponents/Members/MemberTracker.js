@@ -1,3 +1,4 @@
+import { useIsFetching } from "react-query";
 import { useProgram } from "../../Program/hooks/use-program";
 import LoadingSpinnerLarge from "../../UI/LoadingSpinnerLarge";
 import { useGetProgramTracker } from "../../Trackers/hooks/use-program-tracker";
@@ -5,6 +6,7 @@ import MemberTrackerCard from "./MemberTrackerCard";
 import { Fragment } from "react";
 
 const MemberTracker = ({ trackerId, programId }) => {
+  const isFetching = useIsFetching();
   console.log(trackerId);
   const { data: trackerData, isLoading: trackerIsLoading } =
     useGetProgramTracker(trackerId);
@@ -13,6 +15,9 @@ const MemberTracker = ({ trackerId, programId }) => {
     useProgram(programId);
 
   if (trackerIsLoading || programIsLoading) return <LoadingSpinnerLarge />;
+  if (isFetching) return <LoadingSpinnerLarge />
+
+
 
   const clientTrackingInformation = programData.daily_workouts.map(
     (dailyWorkout, index) => {
