@@ -18,9 +18,22 @@ const MemberPage = () => {
 
   if (userIsLoading) return <LoadingSpinnerLarge />
   
+  const noProgram = <p>User has not yet started a program.</p>
+
+  if (userData.programs.length === 0) return (
+    <Fragment>
+      <AdminBanner />
+      <div className={classes.container}>
+        <MemberCard user={userData}/>
+        {noProgram}
+      </div>
+    </Fragment>
+  );
+  
   const programTitle = userData.programs[0].program_title;
   const porgramId = userData.programs[0].id
   const trackerId = userData.program_trackers[0].id;
+
   
   return (
     <Fragment>
