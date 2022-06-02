@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import LoadingSpinnerButton from "../UI/LoadingSpinnerButton";
+import { useIsFetching } from "react-query";
 import { useDailyWorkoutTracker } from "../Exercise/hooks/use-workout-tracker";
 import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
@@ -19,6 +21,7 @@ const DailyWorkoutCards = ({
   refetchFiveDayArray
 }) => {
   const navigate = useNavigate();
+  const isFetching = useIsFetching();
 
   
 
@@ -172,8 +175,8 @@ const DailyWorkoutCards = ({
         />
       </div>
       <div className={classes.finishDayButtonContainer}>
-        <Button onClick={finishDayHandler} disabled={!dayFinished}>
-          Finish Day
+        <Button onClick={finishDayHandler} disabled={!dayFinished || isFetching}>
+          {isFetching ? <LoadingSpinnerButton /> : "Finish Day"}
         </Button>
       </div>
     </Fragment>
