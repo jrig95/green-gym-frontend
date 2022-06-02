@@ -16,7 +16,6 @@ const MemberPage = () => {
 
   const { data: userData, isLoading: userIsLoading } = useUser(memberId);
 
-  
   if (userIsLoading) return <LoadingSpinnerLarge />
   
   const programTitle = userData.programs[0].program_title;

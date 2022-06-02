@@ -14,12 +14,12 @@ const MemberTracker = ({ trackerId, programId }) => {
 
   if (trackerIsLoading || programIsLoading) return <LoadingSpinnerLarge />;
 
-  // console.log(trackerData.daily_workout_trackers, "tracker");
-  // console.log(programData.daily_workouts, "program");
-
   const clientTrackingInformation = programData.daily_workouts.map(
     (dailyWorkout, index) => {
       const exerciseTrackers = trackerData.daily_workout_trackers[index]
+
+      if (!exerciseTrackers) return <p>Info not found. Please refresh and try again.</p>
+
       return (
         <Fragment key={index}>
           <h2>Day {dailyWorkout.day_number}</h2>
