@@ -23,8 +23,6 @@ const DailyWorkoutCards = ({
   const navigate = useNavigate();
   const isFetching = useIsFetching();
 
-  
-
   const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
@@ -32,17 +30,6 @@ const DailyWorkoutCards = ({
 
   // On the last day of a program. This line breaks everything.
   const currentDay = programTrackerData.current_day;
-
-  // if (currentDay === (programData.daily_workouts.length)) {
-  //   console.log(currentDay);
-  //   console.log(programData.daily_workouts.length);
-  //   navigate("/programs");
-  // }
-
-  // console.log(currentDay);
-  // console.log(programData.daily_workouts.length);
-
-  // Add a condtion on finish day to check if program is complete.
 
   const dailyWorkout = programData.daily_workouts[currentDay];
   const dailyWorkoutId = programData.daily_workouts[currentDay].id;
