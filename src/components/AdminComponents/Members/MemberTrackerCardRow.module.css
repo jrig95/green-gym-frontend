@@ -19,7 +19,9 @@
   margin-left: 1rem;
 }
 
-
+.exerciseNotComplete {
+  color: var(--grey) !important;
+}
 
 .reps,
 .workHeader,
