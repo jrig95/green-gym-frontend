@@ -17,6 +17,7 @@ const AddUserToProgram = ({ onClose, getProgramId }) => {
 
   const addUserToProgramHandler = () => {
     getProgramId(programValue);
+    onClose();
   };
 
   return (

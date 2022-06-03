@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
+import AddedMembersToProgramMessage from "../../components/AdminComponents/Members/AddedMembersToProgramMessage";
 import NoMembersWarning from "../../components/AdminComponents/Members/NoMembersWarning";
 import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 import { useGetMembers } from "../../components/AdminComponents/Members/hooks/use-members";
@@ -27,12 +28,8 @@ const MembersPage = () => {
     setAddMembersList(data);
   };
 
-  const showNoMembersWarningHandler = () => {
-    setAddMembersList(true);
-  }
-
   const hideNoMembersWarningHandler = () => {
-    setNoMembersIsShown(true);
+    setNoMembersIsShown(false);
   };
 
   // Write a warning modal that fires if admin has not added users.
@@ -48,11 +45,16 @@ const MembersPage = () => {
         console.log("Add Users to Program")
         setProgramId(null);
       } else {
-        setAddMembersList(true);
+        setNoMembersIsShown(true);
         setProgramId(null);
       }
     }
   }, [addMemebersList, programId])
+
+
+  // Create another modal that shows on success. Show have a list of users and Program name.
+  // pass the programId via props and call backend for program details
+  // list of memebers should include full names.
 
   // Write add members to program handler
   // On click of add button retreive the members array from the MembersList component
@@ -77,6 +79,7 @@ const MembersPage = () => {
       />
       <div className={classes.container}>
         {noMembersIsShown && <NoMembersWarning onClose={hideNoMembersWarningHandler}/>}
+        {/* <AddedMembersToProgramMessage /> */}
         <Sort />
         <MembersList members={membersData} programId={programId} fetchAddMembersList={fetchAddMembersListHandler}/>
       </div>
