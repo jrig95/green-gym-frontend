@@ -8,12 +8,16 @@ import { slugify } from "./../../../utils/slugify";
 import Card from "../../UI/Card";
 import classes from "./Member.module.css";
 
-const Member = ({ member }) => {
+const Member = ({ member, getMemberId  }) => {
   const [memberIsSelected, setMemberIsSelected] = useState(false);
 
   const selectMemberHandler = () => {
     setMemberIsSelected((prevState) => !prevState);
+    const memeber = { id: member.id}
+    getMemberId(memeber)
   };
+
+
 
   const memberClasses = memberIsSelected
     ? `${classes.card} ${classes.cardIsSelected}`

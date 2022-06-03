@@ -10,7 +10,7 @@ import { useState } from "react";
 import AddLibraryItem from "../Library/AddLibraryItem";
 import AddReward from "../../Reward/AddReward";
 
-const AdminBanner = ({ programs, members, rewards, searchBar, library, searchParam }) => {
+const AdminBanner = ({ programs, members, rewards, searchBar, library, searchParam, addUserProgramId }) => {
   const [addUserToProgramIsShown, setAddUserToProgramIsShown] = useState(false);
   const [addLibraryItemIsShown, setAddLibraryItemIsShown] = useState(false);
   const [addRewardIsShown, setAddRewardIsShown] = useState(false);
@@ -57,7 +57,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
         <AddLibraryItem onClose={hideAddLibraryItemHandler} />
       )}
       {addUserToProgramIsShown && (
-        <AddUserToProgram onClose={hideAddUserToProgramHandler} />
+        <AddUserToProgram onClose={hideAddUserToProgramHandler} getProgramId={(programId) => addUserProgramId(programId)}/>
       )}
       {members && (
         <Button color="blue" onClick={showAddUserToProgramHandler}>
