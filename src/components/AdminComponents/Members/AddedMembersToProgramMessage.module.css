@@ -1,7 +1,10 @@
 .messageContainer {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 .buttonContainer {
-  
+  margin: 1rem 0 0 0;
 }
