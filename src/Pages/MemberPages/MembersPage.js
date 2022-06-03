@@ -14,20 +14,35 @@ const MembersPage = () => {
   const [addMemebersList, setAddMembersList] = useState([]);
 
   const getSearchParamHandler = (data) => {
-    setProgramId(data);
+    setSearchParam(data);
   };
 
   const getAddUserProgramId = (data) => {
-    console.log(data);
+    setProgramId(data);
   };
 
   const fetchAddMembersListHandler = (data) => {
     setAddMembersList(data);
   };
 
+  // Write a warning modal that fires if admin has not added users.
+  // write a confrimation modal that shows list of users that have been added to the program.
+  // Get a list of user names and program name.
+
   useEffect(() => {
     console.log(addMemebersList);
-  }, [addMemebersList])
+
+    if (programId != null) {
+      console.log(programId);
+      if (addMemebersList.length != 0) {
+        console.log("Add Users to Program")
+        setProgramId(null);
+      } else {
+        console.log("Please select user before adding to program")
+        setProgramId(null);
+      }
+    }
+  }, [addMemebersList, programId])
 
   // Write add members to program handler
   // On click of add button retreive the members array from the MembersList component
