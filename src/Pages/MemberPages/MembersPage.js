@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
+import NoMembersWarning from "../../components/AdminComponents/Members/NoMembersWarning";
 import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 import { useGetMembers } from "../../components/AdminComponents/Members/hooks/use-members";
 import Modal from "../../components/UI/Modal";
@@ -9,6 +10,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import Sort from "../../components/AdminComponents/Members/Sort";
 
 const MembersPage = () => {
+  const [noMembersIsShown, setNoMembersIsShown] = useState(false);
   const [searchParam, setSearchParam] = useState("");
   const [programId, setProgramId] = useState(null);
   const [addMemebersList, setAddMembersList] = useState([]);
@@ -25,6 +27,14 @@ const MembersPage = () => {
     setAddMembersList(data);
   };
 
+  const showNoMembersWarningHandler = () => {
+    setAddMembersList(true);
+  }
+
+  const hideNoMembersWarningHandler = () => {
+    setNoMembersIsShown(true);
+  };
+
   // Write a warning modal that fires if admin has not added users.
   // write a confrimation modal that shows list of users that have been added to the program.
   // Get a list of user names and program name.
@@ -38,7 +48,7 @@ const MembersPage = () => {
         console.log("Add Users to Program")
         setProgramId(null);
       } else {
-        console.log("Please select user before adding to program")
+        setAddMembersList(true);
         setProgramId(null);
       }
     }
@@ -66,6 +76,7 @@ const MembersPage = () => {
         addUserProgramId={getAddUserProgramId}
       />
       <div className={classes.container}>
+        {noMembersIsShown && <NoMembersWarning onClose={hideNoMembersWarningHandler}/>}
         <Sort />
         <MembersList members={membersData} programId={programId} fetchAddMembersList={fetchAddMembersListHandler}/>
       </div>
