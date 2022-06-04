@@ -1,17 +1,21 @@
+import LoadingSpinnerLarge from "../../UI/LoadingSpinnerLarge";
+import { useIsFetching } from "react-query";
 import Card from "../../UI/Card";
 import MemberTrackerCardRow from "./MemberTrackerCardRow";
 import classes from "./MemberTrackerCard.module.css";
 
 const MemberTrackerCard = ({exercises, exerciseTrackers}) => {
-
+  const isFetching = useIsFetching();
   // console.log(exerciseTrackers);
   // console.log(exercises);
+
+  if (isFetching) return <LoadingSpinnerLarge />
   
   const exerciseRows = exercises.map((exercise, index) => {
+
+    
+
     const reps = exerciseTrackers[index].number_of_reps
-
-    // if (!reps) return <p>Cannot find reps for this user. Please refresh.</p>
-
     return (
       <MemberTrackerCardRow
         key={exercise.id}

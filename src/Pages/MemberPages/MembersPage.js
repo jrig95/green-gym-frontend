@@ -1,16 +1,17 @@
 import { Fragment, useEffect, useState } from "react";
 
+import { useAddMemeberToProgram } from "../../components/AdminComponents/Members/hooks/use-add-memeber-to-program";
 import AddedMembersToProgramMessage from "../../components/AdminComponents/Members/AddedMembersToProgramMessage";
 import NoMembersWarning from "../../components/AdminComponents/Members/NoMembersWarning";
 import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 import { useGetMembers } from "../../components/AdminComponents/Members/hooks/use-members";
-import Modal from "../../components/UI/Modal";
 import MembersList from "../../components/AdminComponents/Members/MembersList";
 import classes from "./MembersPage.module.css";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import Sort from "../../components/AdminComponents/Members/Sort";
 
 const MembersPage = () => {
+  const addMemberToProgram = useAddMemeberToProgram();
   const [
     addMemebersToProgramMessageIsShown,
     setAddMemberToProgramMessageIsShown,
@@ -46,8 +47,21 @@ const MembersPage = () => {
 
   useEffect(() => {
     if (programId != null) {
-      if (addMemebersList.length != 0) {
-        console.log("Add Users to Program");
+      if (addMemebersList.length !== 0) {
+        addMemebersList.forEach((member) => {
+          // const formData = new FormData();
+
+          // formData.append("program_tracker[user_id]", member.id)
+          // formData.append("program_tracker[program_id]", programId)
+
+          const program_tracker = {
+            user_id: member.id,
+            program_id: programId
+          }
+
+          addMemberToProgram(program_tracker)
+        })
+
         setAddMemberToProgramMessageIsShown(true);
         setProgramId(null);
       } else {
