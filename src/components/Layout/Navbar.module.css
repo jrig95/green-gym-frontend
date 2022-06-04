@@ -68,6 +68,7 @@
 /* .hamburger {
   display: none;
 } */
+
 .hidden {
   display: none;
 }
@@ -78,6 +79,10 @@
 
 .logoContainer {
   margin: 0 1rem 0 0;
+}
+
+.loadingSpinner {
+  margin: 0 0 0 1rem;
 }
 
 @media (min-width: 1000px) {

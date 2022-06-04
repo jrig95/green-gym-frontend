@@ -42,10 +42,10 @@ const Navbar = () => {
           <h1>Green Gym</h1>
         </div>
       </Link>
+      {adminLoggedIn && <h2 className={classes.admin}>Admin</h2>}
       <div className={classes.loadingSpinner}>
         <LoadingSpinner />
       </div>
-      {adminLoggedIn && <h2 className={classes.admin}>Admin</h2>}
       <div className={classes.linksContainer}>
         {loggedOut && (
           <div className={classes.links}>
