@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import UpdateLibraryItem from "../../components/AdminComponents/Library/UpdateLibraryItem";
 import { useDeleteLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-delete-library-item";
@@ -9,8 +9,9 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import classes from "./LibraryItemsPage.module.css";
 
 const LibraryItemsPage = () => {
+  const [searchParams, setSearchParams] = useState("")
   const deleteLibraryItem = useDeleteLibraryItem();
-  const { data } = useLibraryItems();
+  const { data, refetch: refetchLibraryItems } = useLibraryItems(searchParams);
 
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
@@ -23,13 +24,13 @@ const LibraryItemsPage = () => {
   });
 
   const deleteLibraryItemHandler = () => {
-    // console.log(
-    //   `Delete Library item ${libraryItemDetails.title} with ID: ${libraryItemDetails.id}`
-    // );
-
     deleteLibraryItem(libraryItemDetails.id);
 
     setDeleteLibraryItemIsShown(false);
+  };
+
+  const getSearchParamsHandler = (data) => {
+    setSearchParams(data);
   };
 
   const updateLibraryItemHandler = () => {
@@ -53,6 +54,10 @@ const LibraryItemsPage = () => {
   const hideUpdateLibraryItemHandler = () => {
     setUpdateLibraryItemIsShown(false);
   };
+
+  useEffect(() => {
+    refetchLibraryItems()
+  }, [searchParams])
 
   const libraryItems = data.map((libraryItem) => {
     return (
@@ -83,7 +88,7 @@ const LibraryItemsPage = () => {
           onDelete={deleteLibraryItemHandler}
         />
       )}
-      <AdminBanner searchBar library />
+      <AdminBanner searchBar library searchParam={getSearchParamsHandler} />
       <div className={classes.gridContainer}>
         <div className={classes.libraryItemCardGrid}>{libraryItems}</div>
       </div>
