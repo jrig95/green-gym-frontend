@@ -13,12 +13,14 @@
   display: flex;
 }
 
+.repsHeader,
 .exerciseHeader,
 .exerciseRow {
   width: 23rem;
   margin-left: 1rem;
 }
 
+.repsHeader,
 .workHeader,
 .workRow,
 .restHeader,
@@ -26,6 +28,7 @@
   width: 8.5rem;
 }
 
+.repsHeader,
 .workRow,
 .restRow {
   font-weight: 700;

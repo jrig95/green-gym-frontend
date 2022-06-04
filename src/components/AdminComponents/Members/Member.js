@@ -8,11 +8,16 @@ import { slugify } from "./../../../utils/slugify";
 import Card from "../../UI/Card";
 import classes from "./Member.module.css";
 
-const Member = ({ member }) => {
+const Member = ({ member, getMemberId }) => {
   const [memberIsSelected, setMemberIsSelected] = useState(false);
+
+  const fullName = createFullName(member.first_name, member.last_name);
+  const slug = `${slugify(fullName)}-${member.id}`;
 
   const selectMemberHandler = () => {
     setMemberIsSelected((prevState) => !prevState);
+    const memeber = { id: member.id, name: fullName };
+    getMemberId(memeber);
   };
 
   const memberClasses = memberIsSelected
@@ -20,9 +25,7 @@ const Member = ({ member }) => {
     : classes.card;
 
   // TODO: Create a slug from first name and id
-  const fullName = createFullName(member.first_name, member.last_name);
-  const slug = `${slugify(fullName)}-${member.id}`;
-  
+
   return (
     <Card className={memberClasses}>
       <Link to={`${slug}`}>

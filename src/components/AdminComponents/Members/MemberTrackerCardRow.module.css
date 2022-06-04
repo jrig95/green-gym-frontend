@@ -15,18 +15,30 @@
 
 .exerciseHeader,
 .exerciseRow {
-  width: 23rem;
+  width: 18rem;
   margin-left: 1rem;
 }
 
+.exerciseNotComplete {
+  color: var(--grey) !important;
+}
+
+.reps,
 .workHeader,
 .workRow,
 .restHeader,
 .restRow {
-  width: 8.5rem;
+  width: 6.5rem;
 }
 
+.reps
 .workRow,
 .restRow {
   font-weight: 700;
+}
+
+.reps,
+.workRow,
+.restRow {
+  margin-left: 1rem;
 }
