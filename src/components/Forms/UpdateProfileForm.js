@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useUpdatePorfile } from "../User/hooks/use-update-profile";
+import { useUpdateProfile } from "../User/hooks/use-update-profile";
 import {
   textNotEmpty,
   selectIsValid,
@@ -17,7 +17,7 @@ const UpdateProfileForm = ({ user: userData }) => {
   const navigate = useNavigate();
 
   const { mutate: updateProfile, isSuccess: updateProfileIsSuccess } =
-    useUpdatePorfile();
+    useUpdateProfile();
 
   // Get Translation hook
   const { t } = useTranslation();

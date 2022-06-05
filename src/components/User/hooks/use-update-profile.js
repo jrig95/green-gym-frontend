@@ -8,7 +8,7 @@ const updateProfile = async (user) => {
   await axios.patch(`${baseUrl}/users/${user.id}`, { user: user });
 };
 
-export const useUpdatePorfile = () => {
+export const useUpdateProfile = () => {
   const { addError } = useAPIError();
   const { mutate, isSuccess } = useMutation((user) => updateProfile(user), {
     onError: (error) => {
