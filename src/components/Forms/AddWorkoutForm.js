@@ -12,11 +12,13 @@ import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
-  const { mutate: createWorkout, isSuccess: createWorkoutIsSuccess } = useCreateWorkout();
+  const { mutate: createWorkout, isSuccess: createWorkoutIsSuccess } =
+    useCreateWorkout();
   const createExerciseOverview = useCreateExerciseOverview();
   const createExercise = useCreateExercise();
   // how to get this once. then keep it the same.
-  const { data: lastProgramData, refetch: refetchLastProgram } = useLastProgram();
+  const { data: lastProgramData, refetch: refetchLastProgram } =
+    useLastProgram();
   const { data: lastWorkoutData } = useLastWorkout();
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
@@ -120,10 +122,9 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
   // This can't be constantly refetching
   useEffect(() => {
-    refetchLastProgram();
-  }, [])
-
-  
+    console.log(lastProgramData);
+    // const interval = setInterval(refetchLastProgram(), 5000);
+  }, [lastProgramData]);
 
   const formSubmitHandler = async () => {
     const daily_workout = {
@@ -142,7 +143,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const data = await createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
-    console.log(data);
+    console.log(data, "line 145");
     // 1. Itterate through the exercise overview array.
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
@@ -167,7 +168,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const sortedExerciseArray = exerciseArray.sort(
       (a, b) => a.exerciseNumber - b.exerciseNumber
     );
-
 
     const workoutId = lastWorkoutData.id + 1;
     const programId = lastProgramData.id;
@@ -200,11 +200,11 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
         exercise_rest_time: exerciseItem.restTime,
         calories_per_exercise: parseInt(exerciseItem.calories),
         exercise_question: exerciseItem.question,
-      }
+      };
 
       // Post call to create exercise
       createExercise(exercise);
-    })
+    });
   };
 
   // get the last id for the daily workout
