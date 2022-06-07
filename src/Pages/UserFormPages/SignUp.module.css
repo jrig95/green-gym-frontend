@@ -1,0 +1,9 @@
+.signUpContrainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.haveAccountMessage {
+  color: var(--white);
+}

@@ -4,7 +4,7 @@ import { Fragment, useContext } from "react";
 import AuthContext from "./context/AuthContext";
 import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
-// import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
+import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 import Login from "./Pages/UserFormPages/Login";
 // import ResetPassword from "./Pages/UserFormPages/ResetPassword";
 import SignUp from "./Pages/UserFormPages/SignUp";
@@ -40,6 +40,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="forgot-password" element={<ForgotPassword />}/>
         <Route
           path="profile/change-password"
           element={<ProfileResetPasswordPage />}
