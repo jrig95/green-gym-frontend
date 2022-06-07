@@ -5,6 +5,7 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getLibraryItems = async (searchParams) => {
+  console.log(searchParams);
   if (searchParams !== "") {
     const { data } = await axios(
       `${baseUrl}/library_items?query=${searchParams}`
@@ -21,6 +22,10 @@ const getLibraryItems = async (searchParams) => {
 };
 
 export const useLibraryItems = (searchParams) => {
+  if (searchParams === undefined) {
+    searchParams = ""
+  }
+
   const fallback = [];
   const {
     data = fallback,

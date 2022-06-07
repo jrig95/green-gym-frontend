@@ -12,11 +12,13 @@ import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import { useEffect, useState } from "react";
 
 const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
-  const { mutate: createWorkout, isSuccess } = useCreateWorkout();
+  const { mutate: createWorkout, isSuccess: createWorkoutIsSuccess } =
+    useCreateWorkout();
   const createExerciseOverview = useCreateExerciseOverview();
   const createExercise = useCreateExercise();
   // how to get this once. then keep it the same.
-  const { data: lastProgramData, refetch: refetchLastProgram } = useLastProgram();
+  const { data: lastProgramData, refetch: refetchLastProgram } =
+    useLastProgram();
   const { data: lastWorkoutData } = useLastWorkout();
 
   const [exerciseOverviewArray, setExerciseOverviewArray] = useState([]);
@@ -118,18 +120,13 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     event.preventDefault();
   };
 
-  refetchLastProgram();
+  // This can't be constantly refetching
+  useEffect(() => {
+    console.log(lastProgramData);
+    // const interval = setInterval(refetchLastProgram(), 5000);
+  }, [lastProgramData]);
 
-  const formSubmitHandler = () => {
-    const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
-      (a, b) => a.exerciseNumber - b.exerciseNumber
-    );
-
-    const sortedExerciseArray = exerciseArray.sort(
-      (a, b) => a.exerciseNumber - b.exerciseNumber
-    );
-    
-    // console.log(lastProgramData.id, "last program id in form submit - creating workout")
+  const formSubmitHandler = async () => {
     const daily_workout = {
       program_id: lastProgramData.id,
       day_number: dayNumber,
@@ -143,36 +140,44 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
     // 1. Send the workout data to the back end - find out what data is the work in the schema
     //  a. Go and create the use hook that will do this job first.
-    createWorkout(daily_workout);
+    const data = await createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
-
+    console.log(data, "line 145");
     // 1. Itterate through the exercise overview array.
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (createWorkoutIsSuccess) {
       // console.log("success");
       addExercisesHandler();
       onAddWorkout();
     }
-  }, [isSuccess]);
+  }, [createWorkoutIsSuccess]);
 
   // If isSuccess
 
   // another function to add the overviews and exercises.
   const addExercisesHandler = () => {
+    const sortedExerciseOverviewArray = exerciseOverviewArray.sort(
+      (a, b) => a.exerciseNumber - b.exerciseNumber
+    );
+
+    const sortedExerciseArray = exerciseArray.sort(
+      (a, b) => a.exerciseNumber - b.exerciseNumber
+    );
+
     const workoutId = lastWorkoutData.id + 1;
     const programId = lastProgramData.id;
 
-    console.log(workoutId, "workout id inHandler");
-    console.log(programId, "program id inHandler");
+    // console.log(workoutId, "workout id inHandler");
+    // console.log(programId, "program id inHandler");
 
-    exerciseOverviewArray.map((exerciseOverview) => {
-      console.log(workoutId, "workout id in exercise overviews");
-      console.log(programId, "workout id in exercise overviews");
+    sortedExerciseOverviewArray.map((exerciseOverview) => {
+      // console.log(workoutId, "workout id in exercise overviews");
+      // console.log(programId, "workout id in exercise overviews");
       const exercise_overview = {
         program_id: programId,
         daily_workout_id: workoutId,
@@ -183,9 +188,9 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExerciseOverview(exercise_overview);
     });
 
-    exerciseArray.map((exerciseItem) => {
-      console.log(workoutId, "workout id in exercises");
-      console.log(programId, "workout id in exercises");
+    sortedExerciseArray.map((exerciseItem) => {
+      // console.log(workoutId, "workout id in exercises");
+      // console.log(programId, "workout id in exercises");
       const exercise = {
         program_id: programId,
         daily_workout_id: workoutId,
@@ -195,11 +200,11 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
         exercise_rest_time: exerciseItem.restTime,
         calories_per_exercise: parseInt(exerciseItem.calories),
         exercise_question: exerciseItem.question,
-      }
+      };
 
       // Post call to create exercise
       createExercise(exercise);
-    })
+    });
   };
 
   // get the last id for the daily workout

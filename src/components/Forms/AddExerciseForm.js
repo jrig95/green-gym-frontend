@@ -12,7 +12,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
 
   // get all the library items
   const { data: libraryData } = useLibraryItems();
-
+  
   const textNotEmpty = (value) => value !== "";
 
   const selectIsValid = (value) => {
