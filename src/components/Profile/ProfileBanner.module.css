@@ -55,6 +55,32 @@
   text-align: center;
 }
 
+@media only screen and (min-width: 617px) and (max-width: 1200px) {
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 9rem;
+    margin: 4rem 0 0 0;
+    background-color: var(--green);
+    margin-bottom: 7rem;
+  }
+
+    .imageContainer {
+      position: absolute;
+      top: 3.5rem;
+      left: 1rem;
+    }
+
+    .imageContainer img {
+      height: 10rem;
+      width: 10rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+}
+
 @media only screen and (min-width: 320px) and (max-width: 617px) {
   .banner {
     display: flex;
@@ -75,13 +101,13 @@
 
   .imageContainer {
     position: absolute;
-    top: 3rem;
+    top: 4rem;
     left: 0.5rem;
   }
 
   .imageContainer img {
-    height: 6rem;
-    width: 6rem;
+    height: 4rem;
+    width: 4rem;
     object-fit: cover;
     border-radius: 50%;
   }

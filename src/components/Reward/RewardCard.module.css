@@ -58,17 +58,40 @@
 @media only screen and (min-width: 320px) and (max-width: 617px) {
   .card {
     display: flex;
-    flex-direction: column-reverse;
-    height: 20rem;
-    width: 15rem;
+    height: 8rem;
+    width: 18rem;
     justify-content: space-between;
     align-items: center;
   }
 
   .imageContainer img {
-  width: 15rem;
-  height: 14rem;
+  width: 8rem;
+  height: 8rem;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
+}
+
+.textContainer button{
+  cursor: pointer;
+    background-color: var(--green);
+    color: var(--white);
+    padding: .5rem 2rem;
+    min-width: 8rem;
+    border-radius: 0.25rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.title{
+  margin: 0;
+  color: var(--green);
+  font-size: 1rem;
+  padding-bottom: .5rem;
+}
+
+.points {
+  margin: 0;
+  padding-bottom: .5rem;
 }
 }
