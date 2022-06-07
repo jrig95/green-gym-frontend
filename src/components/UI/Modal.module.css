@@ -21,10 +21,33 @@
   animation: slide-down 300ms ease-out forwards;
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 767px) and (max-width: 1000px) {
   .modal {
-    width: 40rem;
-    left: calc(50% - 20rem);
+      position: fixed;
+      top: 20vh;
+      left: 5%;
+      width: 86%;
+      background-color: var(--white);
+      padding: 1rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+      z-index: 30;
+      animation: Modal_slide-down__tDgXQ 300ms ease-out forwards;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 766px) {
+  .modal {
+    position: fixed;
+    top: 20vh;
+    left: 5%;
+    width: 80%;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+    z-index: 30;
+    animation: Modal_slide-down__tDgXQ 300ms ease-out forwards;
   }
 }
 
