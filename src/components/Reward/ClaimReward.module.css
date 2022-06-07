@@ -4,10 +4,44 @@
 }
 
 .textContainer {
-  text-align: center;  
+  text-align: center;
   margin-bottom: 2rem;
 }
 
 .rewardName {
   color: var(--green)
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1000px) {
+  .textContainer {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .textContainer h2 {
+      font-size: 1.5rem;
+    }
+
+    .buttonContainer button {
+      padding: 0.5rem 1rem;
+      min-width: 15rem;
+      font-size: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 766px) {
+  .textContainer {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .textContainer h2{
+      font-size: 1.25rem;
+    }
+
+    .buttonContainer button{
+      padding: 0.5rem 1rem;
+      min-width: 7rem;
+      font-size: 1rem;
+    }
 }
