@@ -4,6 +4,7 @@
   align-items: center;
 }
 
+.forgotPassword,
 .noAccountMessage {
   color: var(--white);
 }
