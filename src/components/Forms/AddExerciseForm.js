@@ -12,7 +12,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
 
   // get all the library items
   const { data: libraryData } = useLibraryItems();
-
+  
   const textNotEmpty = (value) => value !== "";
 
   const selectIsValid = (value) => {
@@ -134,6 +134,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     });
 
   const libraryItemOptions = libraryData.map((libraryItem) => {
+    console.log(libraryItem);
     return (
       <option
         key={libraryItem.id}
