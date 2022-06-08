@@ -78,7 +78,6 @@ const ProgramPage = () => {
         <div className={classes.exerciseCardContainer}>
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
-        {/* {newProgramWorkouts} */}
         <div className={classes.purchaseContainer}>
           <h3>Price: ¥{programData.price}</h3>
           <Link to="purchase">

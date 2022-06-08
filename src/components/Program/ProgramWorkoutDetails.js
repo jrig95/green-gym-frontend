@@ -25,8 +25,6 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   // TODO: Create modal to update all aspects in this form.
   // TODO: Create modal to update the workout
 
-  // TODO: User clocks on update day
-
   const showUpdateWorkoutHandler = () => {
     setUpdateWorkingIsShown(true);
   };

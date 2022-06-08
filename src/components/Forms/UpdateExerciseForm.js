@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useUpdateExerciseInProgram } from "../Exercise/hooks/use-update-exercise-in-program";
 import Button from "../UI/Button";
