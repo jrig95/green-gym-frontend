@@ -11,6 +11,7 @@ const ExerciseCard = ({ exercises, admin }) => {
         work={exercise.exercise_work_time}
         rest={exercise.exercise_rest_time}
         admin={admin}
+        exercise={exercise}
       />
     );
   });

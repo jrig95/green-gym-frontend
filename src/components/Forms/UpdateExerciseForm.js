@@ -6,7 +6,7 @@ import AdminFormCard from "../Forms/AdminFormCard";
 import classes from "./Form.module.css";
 import { useLibraryItems } from "../AdminComponents/Library/Hooks/use-library-items";
 
-const UpdateExerciseForm = () => {
+const UpdateExerciseForm = ({ exercise, onClose }) => {
   const [exerciseIsSubmitted, setExerciseIsSubmitted] = useState(false);
   const [exerciseTitlePlaceholder, setExerciseTitlePlaceholder] =
     useState("Title");
@@ -14,6 +14,8 @@ const UpdateExerciseForm = () => {
 
   // get all the library items
   const { data: libraryData } = useLibraryItems();
+
+  console.log(exercise);
 
   const textNotEmpty = (value) => value !== "";
 
@@ -26,21 +28,31 @@ const UpdateExerciseForm = () => {
     return !isNaN(number);
   };
 
-  const getExerciseDataHandler = () => {
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
     const updateQuestionValue = questioValue === "yes" ? true : false;
 
-    // const exercise = {
-    //   exerciseNumber,
-    //   title: exerciseTitleValue,
-    //   workTime: workTimeValue,
-    //   restTime: restTimeValue,
-    //   calories: caloriesValue,
-    //   question: updateQuestionValue,
-    //   libraryItem: libraryItemValue,
-    // };
+    let newLibraryItemId;
+
+    if (libraryItemValue === "") {
+      newLibraryItemId = exercise.library_item.id;
+    } else {
+      newLibraryItemId = parseInt(libraryItemValue);
+    }
+
+    const newExercise = {
+      id: exercise.id,
+      exercise_title: exerciseTitleValue,
+      exercise_work_time: workTimeValue,
+      exercise_rest_time: restTimeValue,
+      calories_per_exercise: caloriesValue,
+      exercise_question: updateQuestionValue,
+      library_item_id: newLibraryItemId,
+    };
 
     // getExerciseData(exercise);
-    setExerciseIsSubmitted(true);
+    // setExerciseIsSubmitted(true);
   };
 
   const {
@@ -50,7 +62,7 @@ const UpdateExerciseForm = () => {
     valueChangeHandler: exerciseTitleChangeHandler,
     inputBlurHandler: exerciseTitleBlurHandler,
     reset: resetExerciseTitle,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, exercise.exercise_title);
 
   const {
     value: workTimeValue,
@@ -59,7 +71,7 @@ const UpdateExerciseForm = () => {
     valueChangeHandler: workTimeChangeHandler,
     inputBlurHandler: workTimeBlurHandler,
     reset: resetWorkTime,
-  } = useInput(selectIsValid);
+  } = useInput(selectIsValid, exercise.exercise_work_time);
 
   const {
     value: restTimeValue,
@@ -68,7 +80,7 @@ const UpdateExerciseForm = () => {
     valueChangeHandler: restTimeChangeHandler,
     inputBlurHandler: restTimeBlurHandler,
     reset: resetRestTime,
-  } = useInput(selectIsValid);
+  } = useInput(selectIsValid, exercise.exercise_rest_time);
 
   const {
     value: libraryItemValue,
@@ -86,7 +98,9 @@ const UpdateExerciseForm = () => {
     valueChangeHandler: caloriesChangeHandler,
     inputBlurHandler: caloriesBlurHandler,
     reset: resetCalories,
-  } = useInput(isANumber);
+  } = useInput(isANumber, exercise.calories_per_exercise);
+
+  const getQuestionValue = exercise.exercise_question ? "yes" : "no";
 
   const {
     value: questioValue,
@@ -95,13 +109,12 @@ const UpdateExerciseForm = () => {
     valueChangeHandler: questionChangeHandler,
     inputBlurHandler: questionBlurHandler,
     reset: resetQuestion,
-  } = useInput(selectIsValid);
+  } = useInput(selectIsValid, getQuestionValue);
 
   const formIsValid =
     exerciseTitleIsValid &&
     workTimeIsValid &&
-    restTimeIsValid &&
-    libraryItemIsValid;
+    restTimeIsValid
 
   useEffect(() => {
     if (exerciseIsSubmitted) {
@@ -109,16 +122,6 @@ const UpdateExerciseForm = () => {
       setCaloriesPlaceholder(caloriesValue);
     }
   }, [exerciseIsSubmitted]);
-
-  const exerciseTitleValueTernery = exerciseIsSubmitted
-    ? ""
-    : exerciseTitleValue;
-
-  const workTimeValueTernery = exerciseIsSubmitted ? "" : workTimeValue;
-  const restTimeValueTernery = exerciseIsSubmitted ? "" : restTimeValue;
-  const libraryItemValueTernery = exerciseIsSubmitted ? "" : libraryItemValue;
-  const caloriesValueTernery = exerciseIsSubmitted ? "" : caloriesValue;
-  const questionValueTernery = exerciseIsSubmitted ? "" : questioValue;
 
   const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
     .filter((num) => num % 5 === 0)
@@ -148,20 +151,16 @@ const UpdateExerciseForm = () => {
     );
   });
 
-  const submittedClasses = exerciseIsSubmitted
-    ? `${classes.formGrid} ${classes.titlesGrey}`
-    : classes.formGrid;
-
   return (
     <AdminFormCard title="Update Exercise">
-      <form>
+      <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
             <label htmlFor={`exercise`}>Title</label>
             <input
               type="text"
               id={`exercise`}
-              value={exerciseTitleValueTernery}
+              value={exerciseTitleValue}
               placeholder={exerciseTitlePlaceholder}
               onChange={exerciseTitleChangeHandler}
               onBlur={exerciseTitleBlurHandler}
@@ -175,7 +174,7 @@ const UpdateExerciseForm = () => {
             <select
               name={`exercise_work_time`}
               id={`exercise_work_time`}
-              value={workTimeValueTernery}
+              value={workTimeValue}
               onChange={workTimeChangeHandler}
               onBlur={workTimeBlurHandler}
               placeholder="test"
@@ -195,7 +194,7 @@ const UpdateExerciseForm = () => {
             <select
               name={`exercise_rest_time`}
               id={`exercise_rest_time`}
-              value={restTimeValueTernery}
+              value={restTimeValue}
               onChange={restTimeChangeHandler}
               onBlur={restTimeBlurHandler}
             >
@@ -214,7 +213,7 @@ const UpdateExerciseForm = () => {
             <input
               type="number"
               id={`exercise_calories`}
-              value={caloriesValueTernery}
+              value={caloriesValue}
               placeholder={caloriesPlaceholder}
               onChange={caloriesChangeHandler}
               onBlur={caloriesBlurHandler}
@@ -228,7 +227,7 @@ const UpdateExerciseForm = () => {
             <select
               name={`exercise_rest_time`}
               id={`exercise_rest_time`}
-              value={questionValueTernery}
+              value={questioValue}
               onChange={questionChangeHandler}
               onBlur={questionBlurHandler}
             >
@@ -258,7 +257,7 @@ const UpdateExerciseForm = () => {
             <select
               name={`exercise_library_item`}
               id={`exercise_library_item`}
-              value={libraryItemValueTernery}
+              value={libraryItemValue}
               onChange={libraryItemChangeHandler}
               onBlur={libraryItemBlurHandler}
             >
@@ -273,7 +272,7 @@ const UpdateExerciseForm = () => {
             </select>
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">
+            <Button color="blue" size="small" onClick={() => onClose()}>
               Cancel
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>

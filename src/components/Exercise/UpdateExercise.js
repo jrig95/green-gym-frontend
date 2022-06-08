@@ -2,10 +2,12 @@ import Modal from "../UI/Modal";
 import UpdateExerciseForm from "../Forms/UpdateExerciseForm";
 import classes from "./UpdateExercise.module.css";
 
-const UpdateExercise = () => {
+const UpdateExercise = ({ onClose, exercise }) => {
+  // TODO:
+
   return (
-    <Modal>
-      <UpdateExerciseForm />
+    <Modal onClose={onClose}>
+      <UpdateExerciseForm onClose={onClose} exercise={exercise} />
     </Modal>
   );
 };
