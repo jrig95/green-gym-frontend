@@ -13,8 +13,6 @@ const UpdateExerciseOverviewForm = ({ onClose, exercise, programId }) => {
   } = useUpdateExerciseOverview();
   const textNotEmpty = (value) => value !== "";
 
-  console.log(exercise);
-
   const numberIsValid = (value) => {
     const number = parseInt(value);
     const isNumber = !isNaN(number);

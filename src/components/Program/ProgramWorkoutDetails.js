@@ -37,6 +37,13 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
 
   return (
     <div className={classes.workoutCard}>
+      {admin && (
+        <div className={classes.updateWorkoutButtonContainer}>
+          <Button color="blue" size="small" onClick={showUpdateWorkoutHandler}>
+            Update Day {workoutData.day_number}
+          </Button>
+        </div>
+      )}
       {updateWorkoutIsShown && (
         <UpdateWorkout
           programId={programId}
@@ -69,11 +76,6 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
             dailyWorkoutId={dailyWorkoutId}
           />
         </div>
-      )}
-      {admin && (
-        <Button color="blue" size="small" onClick={showUpdateWorkoutHandler}>
-          Update Day {workoutData.day_number}
-        </Button>
       )}
     </div>
   );

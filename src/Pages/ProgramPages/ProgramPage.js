@@ -59,15 +59,19 @@ const ProgramPage = () => {
     <Fragment>
       <Banner title={programData.program_title} />
       <div className={classes.container}>
-        {updateProgramIsShown && <UpdateProgram
-          programData={programData}
-          programIsLoading={programIsLoading}
-          onClose={hideUpdateProgramHandler}
-        />}
+        {updateProgramIsShown && (
+          <UpdateProgram
+            programData={programData}
+            programIsLoading={programIsLoading}
+            onClose={hideUpdateProgramHandler}
+          />
+        )}
         {admin && (
-          <Button color="blue" onClick={showUpdateProgramHandler}>
-            Update Program
-          </Button>
+          <div className={classes.updateButtonContainer}>
+            <Button color="blue" onClick={showUpdateProgramHandler}>
+              Update Program
+            </Button>
+          </div>
         )}
         <div className={classes.descriptionContainer}>
           <div className={classes.description}>
