@@ -1,10 +1,16 @@
+import { useState } from "react";
+
+import UpdateWorkout from "../Workout/UpdateWorkout";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { useWorkout } from "../Exercise/hooks/use-workout";
 import classes from "./ProgramWorkoutDetails.module.css";
 import ExerciseOverviewCard from "../Exercise/ExerciseOverviewCard";
 import ExerciseCard from "../Exercise/ExerciseCard";
+import Button from "../UI/Button";
 
 const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
+  const [updateWorkoutIsShown, setUpdateWorkingIsShown] = useState(false);
+
   // TODO: use programId to find dailyworkouts
   const { data: workoutData, isLoading: workoutIsLoading } = useWorkout(
     programId,
@@ -17,11 +23,28 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   // IF admin -> exercise_overviews and exercises
 
   // TODO: Create modal to update all aspects in this form.
+  // TODO: Create modal to update the workout
+
+  // TODO: User clocks on update day
+
+  const showUpdateWorkoutHandler = () => {
+    setUpdateWorkingIsShown(true);
+    console.log(workoutData.day_number);
+  };
+
+  const hideUpdateWorkoutHandler = () => {
+    setUpdateWorkingIsShown(false);
+  };
 
   if (workoutIsLoading) return <LoadingSpinner />;
 
   return (
     <div className={classes.workoutCard}>
+      {updateWorkoutIsShown && <UpdateWorkout
+        workoutData={workoutData}
+        workoutIsLoading={workoutIsLoading}
+        onClose={hideUpdateWorkoutHandler}
+      />}
       <h2>Day {workoutData.day_number}</h2>
       <p>{workoutData.description}</p>
       {!admin && (
@@ -34,6 +57,11 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
           <h3>Exercises</h3>
           <ExerciseCard exercises={workoutData.exercises} />
         </div>
+      )}
+      {admin && (
+        <Button color="blue" size="small" onClick={showUpdateWorkoutHandler}>
+          Update Day {workoutData.day_number}
+        </Button>
       )}
     </div>
   );
