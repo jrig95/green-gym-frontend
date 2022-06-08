@@ -2,6 +2,7 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import { useWorkout } from "../Exercise/hooks/use-workout";
 import classes from "./ProgramWorkoutDetails.module.css";
 import ExerciseOverviewCard from "../Exercise/ExerciseOverviewCard";
+import ExerciseCard from "../Exercise/ExerciseCard";
 
 const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   // TODO: use programId to find dailyworkouts
@@ -23,7 +24,17 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
     <div className={classes.workoutCard}>
       <h2>Day {workoutData.day_number}</h2>
       <p>{workoutData.description}</p>
-      <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+      {!admin && (
+        <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+      )}
+      {admin && (
+        <div>
+          <h3>Exercise Overviews</h3>
+          <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+          <h3>Exercises</h3>
+          <ExerciseCard exercises={workoutData.exercises} />
+        </div>
+      )}
     </div>
   );
 };
