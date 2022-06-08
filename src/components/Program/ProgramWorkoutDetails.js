@@ -59,6 +59,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
           <ExerciseOverviewCard
             exercises={workoutData.exercise_overviews}
             admin={admin}
+            programId={programId}
           />
           <h3>Exercises</h3>
           <ExerciseCard

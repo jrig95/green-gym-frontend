@@ -1,16 +1,19 @@
 import { useEffect } from "react";
 
+import { useUpdateExerciseOverview } from "../Exercise/hooks/use-update-exercise-overview";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AdminFormCard from "../Forms/AdminFormCard";
 import classes from "./Form.module.css";
 
-const UpdateExerciseOverviewForm = ({ onClose }) => {
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
-  };
-
+const UpdateExerciseOverviewForm = ({ onClose, exercise, programId }) => {
+  const {
+    mutate: updateExerciseOverview,
+    isSuccess: updateExerciseOverviewIsSuccess,
+  } = useUpdateExerciseOverview();
   const textNotEmpty = (value) => value !== "";
+
+  console.log(exercise);
 
   const numberIsValid = (value) => {
     const number = parseInt(value);
@@ -29,8 +32,7 @@ const UpdateExerciseOverviewForm = ({ onClose }) => {
     hasError: exerciseTitleHasError,
     valueChangeHandler: exerciseTitleChangeHandler,
     inputBlurHandler: exerciseTitleBlurHandler,
-    reset: resetExerciseTitle,
-  } = useInput(textNotEmpty);
+  } = useInput(textNotEmpty, exercise.overview_exercise_title);
 
   const {
     value: numberOfSetsValue,
@@ -38,8 +40,27 @@ const UpdateExerciseOverviewForm = ({ onClose }) => {
     hasError: numberOfSetsHasError,
     valueChangeHandler: numberOfSetsChangeHandler,
     inputBlurHandler: numberOfSetsBlurHandler,
-    reset: resetNumberOfSets,
-  } = useInput(numberIsValid);
+  } = useInput(numberIsValid, exercise.number_of_sets);
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const exercise_overview = {
+      id: exercise.id,
+      daily_workout_id: exercise.daily_workout_id,
+      program_id: programId,
+      overview_exercise_title: exerciseTitleValue,
+      number_of_sets: numberOfSetsValue,
+    };
+
+    updateExerciseOverview(exercise_overview);
+  };
+
+  useEffect(() => {
+    if (updateExerciseOverviewIsSuccess) {
+      onClose();
+    }
+  }, [updateExerciseOverviewIsSuccess])
 
   const exerciseTitleClasses = exerciseTitleHasError
     ? `${classes.formControl} ${classes.invalid}`

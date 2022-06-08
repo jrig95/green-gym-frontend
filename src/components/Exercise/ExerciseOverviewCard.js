@@ -2,14 +2,15 @@ import classes from "./ExerciseOverviewCard.module.css";
 import Card from "../UI/Card";
 import ExerciseOverviewRow from "./ExerciseOverviewRow";
 
-const ExerciseOverviewCard = ({ exercises, admin }) => {
+const ExerciseOverviewCard = ({ exercises, admin, programId }) => {
   const exerciseRows = exercises.map((exercise) => {
     return (
       <ExerciseOverviewRow
         key={exercise.id}
-        exercise={exercise.overview_exercise_title}
+        exercise={exercise}
         sets={exercise.number_of_sets}
         admin={admin}
+        programId={programId}
       />
     );
   });
