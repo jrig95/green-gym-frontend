@@ -6,6 +6,7 @@ const ExerciseCard = ({ exercises }) => {
   const exerciseRows = exercises.map((exercise) => {
     return (
       <ExerciseRow
+        key={exercise.id}
         name={exercise.exercise_title}
         work={exercise.exercise_work_time}
         rest={exercise.exercise_rest_time}
