@@ -3,7 +3,7 @@ import { RiEdit2Fill } from "react-icons/ri";
 import UpdateExercise from "./UpdateExercise";
 import { useState } from "react";
 
-const ExerciseRow = ({ name, work, rest, admin, exercise }) => {
+const ExerciseRow = ({ name, work, rest, admin, exercise, programId, dailyWorkoutId }) => {
   const [updateExerciseIsShown, setUpdateExerciseIsShown] = useState(false);
 
   // ProgramID / WorkoutID / exerciseId
@@ -33,6 +33,8 @@ const ExerciseRow = ({ name, work, rest, admin, exercise }) => {
         <UpdateExercise
           exercise={exercise}
           onClose={hideUpdateExerciseHandler}
+          programId={programId}
+          dailyWorkoutId={dailyWorkoutId}
         />
       )}
     </div>

@@ -2,7 +2,7 @@ import classes from "./ExerciseCard.module.css";
 import Card from "../UI/Card";
 import ExerciseRow from "./ExerciseRow";
 
-const ExerciseCard = ({ exercises, admin }) => {
+const ExerciseCard = ({ exercises, admin, programId, dailyWorkoutId }) => {
   const exerciseRows = exercises.map((exercise) => {
     return (
       <ExerciseRow
@@ -12,6 +12,8 @@ const ExerciseCard = ({ exercises, admin }) => {
         rest={exercise.exercise_rest_time}
         admin={admin}
         exercise={exercise}
+        programId={programId}
+        dailyWorkoutId={dailyWorkoutId}
       />
     );
   });

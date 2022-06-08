@@ -63,7 +63,12 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
             admin={admin}
           />
           <h3>Exercises</h3>
-          <ExerciseCard exercises={workoutData.exercises} admin={admin} />
+          <ExerciseCard
+            exercises={workoutData.exercises}
+            admin={admin}
+            programId={programId}
+            dailyWorkoutId={dailyWorkoutId}
+          />
         </div>
       )}
       {admin && (

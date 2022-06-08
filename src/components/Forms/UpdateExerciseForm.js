@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 
+import { useUpdateExerciseInProgram } from "../Exercise/hooks/use-update-exercise-in-program";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import AdminFormCard from "../Forms/AdminFormCard";
 import classes from "./Form.module.css";
 import { useLibraryItems } from "../AdminComponents/Library/Hooks/use-library-items";
 
-const UpdateExerciseForm = ({ exercise, onClose }) => {
-  const [exerciseIsSubmitted, setExerciseIsSubmitted] = useState(false);
-  const [exerciseTitlePlaceholder, setExerciseTitlePlaceholder] =
-    useState("Title");
-  const [caloriesPlaceholder, setCaloriesPlaceholder] = useState(0);
-
+const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) => {
+  const { mutate: updateExercise, isSuccess: updateExerciseIsSuccess } = useUpdateExerciseInProgram();
+  
   // get all the library items
   const { data: libraryData } = useLibraryItems();
 
@@ -26,33 +24,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
   const isANumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
-  };
-
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
-
-    const updateQuestionValue = questioValue === "yes" ? true : false;
-
-    let newLibraryItemId;
-
-    if (libraryItemValue === "") {
-      newLibraryItemId = exercise.library_item.id;
-    } else {
-      newLibraryItemId = parseInt(libraryItemValue);
-    }
-
-    const newExercise = {
-      id: exercise.id,
-      exercise_title: exerciseTitleValue,
-      exercise_work_time: workTimeValue,
-      exercise_rest_time: restTimeValue,
-      calories_per_exercise: caloriesValue,
-      exercise_question: updateQuestionValue,
-      library_item_id: newLibraryItemId,
-    };
-
-    // getExerciseData(exercise);
-    // setExerciseIsSubmitted(true);
   };
 
   const {
@@ -111,17 +82,47 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
     reset: resetQuestion,
   } = useInput(selectIsValid, getQuestionValue);
 
+  
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const updateQuestionValue = questioValue === "yes" ? true : false;
+
+    let newLibraryItemId;
+
+    if (libraryItemValue === "") {
+      newLibraryItemId = exercise.library_item.id;
+    } else {
+      newLibraryItemId = parseInt(libraryItemValue);
+    }
+
+    const newExercise = {
+      programId,
+      dailyworkoutId,
+      id: exercise.id,
+      exercise_title: exerciseTitleValue,
+      exercise_work_time: workTimeValue,
+      exercise_rest_time: restTimeValue,
+      calories_per_exercise: caloriesValue,
+      exercise_question: updateQuestionValue,
+      library_item_id: newLibraryItemId,
+    };
+
+    // getExerciseData(exercise);
+    // setExerciseIsSubmitted(true);
+    updateExercise(newExercise)
+  };
+
+  useEffect(() => {
+    if (updateExerciseIsSuccess) {
+      onClose();
+    }
+  }, [updateExerciseIsSuccess])
+
   const formIsValid =
     exerciseTitleIsValid &&
     workTimeIsValid &&
     restTimeIsValid
-
-  useEffect(() => {
-    if (exerciseIsSubmitted) {
-      setExerciseTitlePlaceholder(exerciseTitleValue);
-      setCaloriesPlaceholder(caloriesValue);
-    }
-  }, [exerciseIsSubmitted]);
 
   const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
     .filter((num) => num % 5 === 0)
@@ -130,8 +131,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
         <option
           key={num}
           value={num}
-          disabled={exerciseIsSubmitted}
-          hidden={exerciseIsSubmitted}
         >
           {num} secs
         </option>
@@ -143,8 +142,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
       <option
         key={libraryItem.id}
         value={libraryItem.id}
-        disabled={exerciseIsSubmitted}
-        hidden={exerciseIsSubmitted}
       >
         {libraryItem.title}
       </option>
@@ -161,7 +158,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
               type="text"
               id={`exercise`}
               value={exerciseTitleValue}
-              placeholder={exerciseTitlePlaceholder}
               onChange={exerciseTitleChangeHandler}
               onBlur={exerciseTitleBlurHandler}
             />
@@ -181,8 +177,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
             >
               <option
                 value="default"
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 select...
               </option>
@@ -200,8 +194,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
             >
               <option
                 value="default"
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 select...
               </option>
@@ -214,7 +206,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
               type="number"
               id={`exercise_calories`}
               value={caloriesValue}
-              placeholder={caloriesPlaceholder}
               onChange={caloriesChangeHandler}
               onBlur={caloriesBlurHandler}
             />
@@ -233,20 +224,14 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
             >
               <option
                 value="default"
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 select...
               </option>
               <option
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 yes
               </option>
               <option
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 no
               </option>
@@ -263,8 +248,6 @@ const UpdateExerciseForm = ({ exercise, onClose }) => {
             >
               <option
                 value="default"
-                disabled={exerciseIsSubmitted}
-                hidden={exerciseIsSubmitted}
               >
                 select...
               </option>
