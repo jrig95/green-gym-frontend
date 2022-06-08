@@ -27,7 +27,7 @@ export const useUpdateExerciseInProgram = () => {
   const queryClient = useQueryClient();
   const { mutate, isSuccess } = useMutation((exerciseData) => updateExerciseInProgram(exerciseData), {
     onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.exercises]);
+      queryClient.invalidateQueries([queryKeys.workout]);
     },
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";

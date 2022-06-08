@@ -7,13 +7,17 @@ import AdminFormCard from "../Forms/AdminFormCard";
 import classes from "./Form.module.css";
 import { useLibraryItems } from "../AdminComponents/Library/Hooks/use-library-items";
 
-const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) => {
-  const { mutate: updateExercise, isSuccess: updateExerciseIsSuccess } = useUpdateExerciseInProgram();
-  
+const UpdateExerciseForm = ({
+  exercise,
+  onClose,
+  programId,
+  dailyworkoutId,
+}) => {
+  const { mutate: updateExercise, isSuccess: updateExerciseIsSuccess } =
+    useUpdateExerciseInProgram();
+
   // get all the library items
   const { data: libraryData } = useLibraryItems();
-
-  console.log(exercise);
 
   const textNotEmpty = (value) => value !== "";
 
@@ -82,7 +86,6 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
     reset: resetQuestion,
   } = useInput(selectIsValid, getQuestionValue);
 
-  
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -110,28 +113,23 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
 
     // getExerciseData(exercise);
     // setExerciseIsSubmitted(true);
-    updateExercise(newExercise)
+    updateExercise(newExercise);
   };
 
   useEffect(() => {
     if (updateExerciseIsSuccess) {
       onClose();
     }
-  }, [updateExerciseIsSuccess])
+  }, [updateExerciseIsSuccess]);
 
   const formIsValid =
-    exerciseTitleIsValid &&
-    workTimeIsValid &&
-    restTimeIsValid
+    exerciseTitleIsValid && workTimeIsValid && restTimeIsValid;
 
   const restAndWorkOptions = Array.from({ length: 60 }, (_, i) => i + 1)
     .filter((num) => num % 5 === 0)
     .map((num) => {
       return (
-        <option
-          key={num}
-          value={num}
-        >
+        <option key={num} value={num}>
           {num} secs
         </option>
       );
@@ -139,10 +137,7 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
 
   const libraryItemOptions = libraryData.map((libraryItem) => {
     return (
-      <option
-        key={libraryItem.id}
-        value={libraryItem.id}
-      >
+      <option key={libraryItem.id} value={libraryItem.id}>
         {libraryItem.title}
       </option>
     );
@@ -175,11 +170,7 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
               onBlur={workTimeBlurHandler}
               placeholder="test"
             >
-              <option
-                value="default"
-              >
-                select...
-              </option>
+              <option value="default">select...</option>
               {restAndWorkOptions}
             </select>
           </div>
@@ -192,11 +183,7 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
               onChange={restTimeChangeHandler}
               onBlur={restTimeBlurHandler}
             >
-              <option
-                value="default"
-              >
-                select...
-              </option>
+              <option value="default">select...</option>
               {restAndWorkOptions}
             </select>
           </div>
@@ -222,19 +209,9 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
               onChange={questionChangeHandler}
               onBlur={questionBlurHandler}
             >
-              <option
-                value="default"
-              >
-                select...
-              </option>
-              <option
-              >
-                yes
-              </option>
-              <option
-              >
-                no
-              </option>
+              <option value="default">select...</option>
+              <option>yes</option>
+              <option>no</option>
             </select>
           </div>
           <div className={classes.formControl}>
@@ -246,11 +223,7 @@ const UpdateExerciseForm = ({ exercise, onClose, programId, dailyworkoutId }) =>
               onChange={libraryItemChangeHandler}
               onBlur={libraryItemBlurHandler}
             >
-              <option
-                value="default"
-              >
-                select...
-              </option>
+              <option value="default">select...</option>
               {libraryItemOptions}
             </select>
           </div>
