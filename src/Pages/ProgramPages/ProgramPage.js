@@ -8,7 +8,7 @@ import { useProgram } from "../../components/Program/hooks/use-program";
 import Button from "../../components/UI/Button";
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
-import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
+// import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import UpdateProgram from "../../components/Program/UpdateProgram";
 
 const ProgramPage = () => {

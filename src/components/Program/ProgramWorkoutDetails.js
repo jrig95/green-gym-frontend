@@ -29,7 +29,6 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
 
   const showUpdateWorkoutHandler = () => {
     setUpdateWorkingIsShown(true);
-    console.log(workoutData.day_number);
   };
 
   const hideUpdateWorkoutHandler = () => {
@@ -40,22 +39,31 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
 
   return (
     <div className={classes.workoutCard}>
-      {updateWorkoutIsShown && <UpdateWorkout
-        workoutData={workoutData}
-        workoutIsLoading={workoutIsLoading}
-        onClose={hideUpdateWorkoutHandler}
-      />}
+      {updateWorkoutIsShown && (
+        <UpdateWorkout
+          programId={programId}
+          workoutData={workoutData}
+          workoutIsLoading={workoutIsLoading}
+          onClose={hideUpdateWorkoutHandler}
+        />
+      )}
       <h2>Day {workoutData.day_number}</h2>
       <p>{workoutData.description}</p>
       {!admin && (
-        <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+        <ExerciseOverviewCard
+          exercises={workoutData.exercise_overviews}
+          admin={admin}
+        />
       )}
       {admin && (
         <div>
           <h3>Exercise Overviews</h3>
-          <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+          <ExerciseOverviewCard
+            exercises={workoutData.exercise_overviews}
+            admin={admin}
+          />
           <h3>Exercises</h3>
-          <ExerciseCard exercises={workoutData.exercises} />
+          <ExerciseCard exercises={workoutData.exercises} admin={admin} />
         </div>
       )}
       {admin && (
