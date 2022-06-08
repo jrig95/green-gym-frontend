@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 
+import { useUpdateProgram } from "../Program/hooks/use-update-program";
 import classes from "./Form.module.css";
 import FormCard from "./AdminFormCard";
 import Button from '../UI/Button';
@@ -7,11 +8,20 @@ import useInput from './Hooks/use-input';
 
 const UpdateProgramForm = ({ programData, onClose }) => {
   // TODO: Create useUpdateProgram hook
+  const updateProgram = useUpdateProgram();
+
 
   // const createProgram = useCreateProgram();
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
+    const program = {
+      id: programData.id,
+      program_title: programNameValue,
+      program_description: descriptionValue,
+      price: priceValue
+    }
 
     const formData = new FormData();
 
@@ -23,6 +33,9 @@ const UpdateProgramForm = ({ programData, onClose }) => {
     // programatic navigation to the add workout page.
     // need to pass the number of days here
     // CLOSE MODAL ON COMPLETION
+    updateProgram(program);
+
+    onClose();
   };
 
   const textNotEmpty = (value) => value !== "";

@@ -44,9 +44,9 @@ const ProgramPage = () => {
 
   if (!programIsLoading) {
     programWorkouts = programData.daily_workouts.map((workout) => {
-      console.log(workout.id);
       return (
         <ProgramWorkoutDetails
+          key={workout.id}
           programId={programId}
           dailyWorkoutId={workout.id}
           admin={admin}
@@ -66,7 +66,7 @@ const ProgramPage = () => {
         />}
         {admin && (
           <Button color="blue" onClick={showUpdateProgramHandler}>
-            Edit Program
+            Update Program
           </Button>
         )}
         <div className={classes.descriptionContainer}>

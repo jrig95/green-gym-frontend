@@ -4,8 +4,6 @@ import Modal from "../UI/Modal";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const UpdateProgram = ({ programData, programIsLoading, onClose }) => {
-
-
   if (programIsLoading)
     return (
       <Modal>
@@ -15,7 +13,7 @@ const UpdateProgram = ({ programData, programIsLoading, onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <UpdateProgramForm programData={programData} onClose={onClose}/>
+      <UpdateProgramForm programData={programData} onClose={onClose} />
     </Modal>
   );
 };
