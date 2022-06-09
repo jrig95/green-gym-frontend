@@ -42,6 +42,9 @@ const AddRewardForm = ({ onClose }) => {
     reset: restPoints,
   } = useInput(isNumber);
 
+  const { value: programValue, valueChangeHandler: programChangeHandler } =
+    useInput(textNotEmpty);
+
   const addRewardHandler = (event) => {
     event.preventDefault();
 
@@ -49,6 +52,10 @@ const AddRewardForm = ({ onClose }) => {
     formData.append("reward[reward_name]", titleValue);
     formData.append("reward[reward_points]", pointsValue);
     formData.append("reward[photo]", selectedImageFile);
+
+    if (programValue != "") {
+      formData.append("reward[program_id]", programValue);
+    }
 
     createReward(formData);
 
@@ -70,8 +77,6 @@ const AddRewardForm = ({ onClose }) => {
   };
 
   if (programsAreLoading) return <LoadingSpinnerLarge />;
-
-  console.log(programsData);
 
   const programOptions = programsData.map((program) => {
     return (
@@ -129,8 +134,12 @@ const AddRewardForm = ({ onClose }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
-            <select id="program">
-              <option>none</option>
+            <select
+              id="program"
+              value={programValue}
+              onChange={programChangeHandler}
+            >
+              <option value="default">none</option>
               {programOptions}
             </select>
           </div>
