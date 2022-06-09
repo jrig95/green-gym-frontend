@@ -11,7 +11,7 @@ import {
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import FormCard from "./FormCard";
-import classes from "./updateProfileForm.module.css";
+import classes from "./UpdateProfileForm.module.css";
 
 const UpdateProfileForm = ({ user: userData }) => {
   const navigate = useNavigate();
