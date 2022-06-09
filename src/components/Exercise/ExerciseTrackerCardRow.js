@@ -6,6 +6,7 @@ import classes from "./ExerciseTrackerCard.module.css";
 
 const ExerciseTrackerCardRow = ({
   exercise,
+  exerciseQuestion,
   work,
   rest,
   rowActive,
@@ -30,12 +31,12 @@ const ExerciseTrackerCardRow = ({
     // console.log(!isNaN(number));
     // console.log(number > 0);
     return !isNaN(number) && number > 0;
-  } 
+  };
 
   const {
     value: repsValue,
     valueChangeHandler: repsChangeHandler,
-    isValid: repsIsValid
+    isValid: repsIsValid,
   } = useInput(repIsANumber, 0);
 
   const addExerciseRepsValueHandler = () => {
@@ -44,7 +45,7 @@ const ExerciseTrackerCardRow = ({
     const reps = {
       id: exerciseTrackerId,
       number_of_reps: repsValue,
-    };       
+    };
 
     getRepsData(reps);
     setExerciseIsAdded(true);
@@ -56,25 +57,29 @@ const ExerciseTrackerCardRow = ({
       <p className={classes.exerciseRow}>{exercise}</p>
       <p className={classes.workRow}>{work} secs</p>
       <p className={classes.restRow}>{rest} secs</p>
-      <div className={classes.questionContainer}>
-        <form>
-          <input
-            value={repsValue}
-            onChange={repsChangeHandler}
-            type="number"
-            min={0}
-            placeholder={0}
-          />
-        </form>
-      </div>
-      <div className={buttonClasses}>
-        <button
-          onClick={addExerciseRepsValueHandler}
-          disabled={exerciseIsAdded || !repsIsValid}
-        >
-          Add
-        </button>
-      </div>
+      {exerciseQuestion && (
+        <>
+          <div className={classes.questionContainer}>
+            <form>
+              <input
+                value={repsValue}
+                onChange={repsChangeHandler}
+                type="number"
+                min={0}
+                placeholder={0}
+              />
+            </form>
+          </div>
+          <div className={buttonClasses}>
+            <button
+              onClick={addExerciseRepsValueHandler}
+              disabled={exerciseIsAdded || !repsIsValid}
+            >
+              Add
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
