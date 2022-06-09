@@ -1,11 +1,16 @@
+import { usePrograms } from "../Program/hooks/use-programs";
 import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
+import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
 
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
+
+  // TODO: get all programs
+  const { data: programsData, isLoading: programsAreLoading } = usePrograms();
 
   // use state to managed edited value
 
@@ -37,6 +42,9 @@ const AddRewardForm = ({ onClose }) => {
     reset: restPoints,
   } = useInput(isNumber);
 
+  const { value: programValue, valueChangeHandler: programChangeHandler } =
+    useInput(textNotEmpty);
+
   const addRewardHandler = (event) => {
     event.preventDefault();
 
@@ -44,6 +52,10 @@ const AddRewardForm = ({ onClose }) => {
     formData.append("reward[reward_name]", titleValue);
     formData.append("reward[reward_points]", pointsValue);
     formData.append("reward[photo]", selectedImageFile);
+
+    if (programValue != "") {
+      formData.append("reward[program_id]", programValue);
+    }
 
     createReward(formData);
 
@@ -63,6 +75,16 @@ const AddRewardForm = ({ onClose }) => {
   const fileSelectHander = (event) => {
     setSelecetedImageFile(event.target.files[0]);
   };
+
+  if (programsAreLoading) return <LoadingSpinnerLarge />;
+
+  const programOptions = programsData.map((program) => {
+    return (
+      <option key={program.id} value={program.id}>
+        {program.program_title}
+      </option>
+    );
+  });
 
   return (
     <div>
@@ -112,9 +134,13 @@ const AddRewardForm = ({ onClose }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
-            <select id="program">
-              <option>none</option>
-              <option>1</option>
+            <select
+              id="program"
+              value={programValue}
+              onChange={programChangeHandler}
+            >
+              <option value="default">none</option>
+              {programOptions}
             </select>
           </div>
           <div className={classes.formActions}>
