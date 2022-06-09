@@ -14,3 +14,17 @@
   font-weight: 400;
   color: var(--blue);
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .card {
+    width: 15rem;
+    padding: 1rem;
+    background-color: var(--haze-white);
+  }
+
+  .title {
+    text-align: center;
+    margin: 0.5rem 0 2rem 0;
+    font-size: 1.5rem;
+  }
+}

@@ -11,7 +11,7 @@ import {
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import FormCard from "./FormCard";
-import classes from "./Form.module.css";
+import classes from "./updateProfileForm.module.css";
 
 const UpdateProfileForm = ({ user: userData }) => {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ const UpdateProfileForm = ({ user: userData }) => {
       age: parseInt(ageValue),
       user_passions: passionsValue,
     };
-    
+
     updateProfile(user);
   };
 

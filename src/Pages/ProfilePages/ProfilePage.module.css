@@ -3,3 +3,12 @@
   justify-content: center;
   margin: 2rem 0 0 0;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 766px) {
+  .profileCardContainer {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 0 0;
+      padding-top: 5rem;
+    }
+}
