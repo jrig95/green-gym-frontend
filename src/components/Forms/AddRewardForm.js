@@ -1,11 +1,16 @@
+import { usePrograms } from "../Program/hooks/use-programs";
 import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
+import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
 
 const AddRewardForm = ({ onClose }) => {
   const createReward = useCreateReward();
+
+  // TODO: get all programs
+  const { data: programsData, isLoading: programsAreLoading } = usePrograms();
 
   // use state to managed edited value
 
@@ -64,6 +69,18 @@ const AddRewardForm = ({ onClose }) => {
     setSelecetedImageFile(event.target.files[0]);
   };
 
+  if (programsAreLoading) return <LoadingSpinnerLarge />;
+
+  console.log(programsData);
+
+  const programOptions = programsData.map((program) => {
+    return (
+      <option key={program.id} value={program.id}>
+        {program.program_title}
+      </option>
+    );
+  });
+
   return (
     <div>
       <h1 className={classes.title}>Add Reward</h1>
@@ -114,7 +131,7 @@ const AddRewardForm = ({ onClose }) => {
             <label htmlFor="points">Program (optional)</label>
             <select id="program">
               <option>none</option>
-              <option>1</option>
+              {programOptions}
             </select>
           </div>
           <div className={classes.formActions}>
