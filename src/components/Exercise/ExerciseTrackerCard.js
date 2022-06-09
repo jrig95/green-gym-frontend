@@ -81,6 +81,7 @@ const ExerciseTrackerCard = ({
       <ExerciseTrackerCardRow
         key={exercise.id}
         exercise={exercise.exercise_title}
+        exerciseQuestion={exercise.exercise_question}
         exerciseTrackerId={exerciseTrackers[index].id}
         work={exercise.exercise_work_time}
         rest={exercise.exercise_rest_time}
