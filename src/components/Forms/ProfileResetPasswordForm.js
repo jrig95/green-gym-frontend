@@ -4,7 +4,7 @@ import { useIsFetching, useIsMutating } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import { useUpdateProfile } from "../User/hooks/use-update-profile";
-import classes from "./Form.module.css";
+import classes from "./ProfileResetPasswordForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./FormCard";
