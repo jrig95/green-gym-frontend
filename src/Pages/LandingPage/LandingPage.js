@@ -2,10 +2,10 @@ import AuthContext from "../../context/AuthContext";
 import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import classes from "./LandingPage.module.css";
-import { useTranslation } from "react-i18next";
 import Background from "../../components/Layout/Background";
 import CarouselMain from "../../components/UI/CarouselMain";
 import Button from "../../components/UI/Button";
+import { useTranslation } from "react-i18next";
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const LandingPage = () => {
         <div className={classes.buttonsContainer}>
           {!authCtx.isLoggedIn && (
             <Fragment>
-              <Button color="white">Find Out More</Button>
+              <Button color="white">{t("landing_page_find_out_more")}</Button>
               <Link to="signup">
                 <Button>Join Green Gym</Button>
               </Link>
