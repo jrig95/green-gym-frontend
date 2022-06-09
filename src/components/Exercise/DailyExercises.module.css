@@ -1,5 +1,4 @@
 .videoContainer {
-  min-height: 28rem;
   display: flex;
   justify-content: center;
   margin: 1rem 0 2rem 0;
@@ -14,4 +13,17 @@
 .startWorkoutCardContainer {
   min-height: 28rem;
   margin: 1rem 0 2rem 0;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 766px) {
+  .startWorkoutCardContainer {
+    min-height: 19rem;
+    margin: 1rem 0 2rem 0;
+  }
+
+  .videoContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}
 }
