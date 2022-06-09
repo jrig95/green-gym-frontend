@@ -43,7 +43,7 @@ export const AuthContextProvider = ({ children }) => {
   if (tokenData) {
     initialToken = tokenData.token;
   }
-  
+
   // get tokens
   const rawUserId = localStorage.getItem("userId");
   const rawAdmin = localStorage.getItem("admin");
@@ -88,7 +88,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("userId", userIdString);
 
     const remainingTime = calculateRemainingTime(expirationTime);
- 
+
     logoutTimer = setTimeout(logoutHandler, remainingTime);
   };
 
@@ -96,7 +96,7 @@ export const AuthContextProvider = ({ children }) => {
     if (tokenData) {
       logoutTimer = setTimeout(logoutHandler, tokenData.duration);
     }
-  }, [tokenData, logoutHandler])
+  }, [tokenData, logoutHandler]);
 
   const contextValue = {
     token: token,

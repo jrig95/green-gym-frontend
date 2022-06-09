@@ -1,12 +1,14 @@
 import { useLocation } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
+import { useNavigate } from "react-router-dom";
 import classes from "./AddWorkout.module.css";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import AddWorkoutForm from "../../components/Forms/AddWorkoutForm";
 import AdminFormTemplate from "./AdminFormTemplate";
 
 const AddWorkoutPage = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { pageNumber } = state;
 
@@ -21,6 +23,12 @@ const AddWorkoutPage = () => {
   };
 
   const renderForms = currentArrayIndex <= numberOfWorkoutsArray.length;
+
+  useEffect(() => {
+    if (!renderForms) {
+      navigate("/programs");
+    }
+  }, [renderForms])
 
   const addWorkoutForms = numberOfWorkoutsArray.map((num) => {
     if (currentArrayIndex === num) {
