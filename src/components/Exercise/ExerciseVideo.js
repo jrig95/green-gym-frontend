@@ -9,7 +9,8 @@ const ExerciseVideo = ({ videoUrl, onEnded }) => {
     <div className={classes.container}>
       <ReactPlayer
         playing={true}
-        width={`${videoWidth}px`}
+        width="100%"
+        height="100%"
         style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.26)" }}
         className={classes.video}
         url={videoUrl}

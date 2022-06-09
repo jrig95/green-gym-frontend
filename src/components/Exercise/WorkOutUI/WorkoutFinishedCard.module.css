@@ -12,3 +12,20 @@
 .title {
   font-size: 3rem;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 766px) {
+  .container {
+    background-color: var(--green) !important;
+    min-height: 16rem;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .title {
+  font-size: 2rem;
+}
+}
