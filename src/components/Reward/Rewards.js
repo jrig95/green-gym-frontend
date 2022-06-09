@@ -17,11 +17,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
 
-
-  console.log(noProgram);
-  console.log(!admin);
   // const noProgram = userData.programs.length === 0;
-
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);

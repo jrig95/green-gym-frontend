@@ -1,14 +1,15 @@
+import { useUpdateWorkout } from "../Exercise/hooks/use-update-workout";
 import Button from "../UI/Button";
 import AdminFormCard from "../../components/Forms/AdminFormCard";
 import classes from "./Form.module.css";
 import useInput from "./Hooks/use-input";
+import { useEffect } from 'react';
 
-const UpdateWorkoutForm = ({ onClose, workoutData }) => {
+const UpdateWorkoutForm = ({ onClose, workoutData, programId }) => {
   // how to get this once. then keep it the same.
+  const { mutate:updateWorkout, isSuccess: updateWorkoutIsSuccess } = useUpdateWorkout();
 
   const textNotEmpty = (value) => value !== "";
-
-  console.log(workoutData);
 
   const {
     value: descriptionValue,
@@ -16,7 +17,6 @@ const UpdateWorkoutForm = ({ onClose, workoutData }) => {
     hasError: descriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-    rest: resetDescription,
   } = useInput(textNotEmpty, workoutData.description);
 
   const {
@@ -25,7 +25,6 @@ const UpdateWorkoutForm = ({ onClose, workoutData }) => {
     hasError: dailyChallengeHasError,
     valueChangeHandler: dailyChallengeChangeHandler,
     inputBlurHandler: dailyChallengeBlurHandler,
-    reset: resetDailyChallenge,
   } = useInput(textNotEmpty, workoutData.daily_challenge_title);
 
   const {
@@ -34,19 +33,27 @@ const UpdateWorkoutForm = ({ onClose, workoutData }) => {
     hasError: dailyChallengeDescriptionHasError,
     valueChangeHandler: dailyChallengeDescriptionChangeHandler,
     inputBlurHandler: dailyChallengeDescriptionBlurHandler,
-    reset: restDailyChallengeDescription,
   } = useInput(textNotEmpty, workoutData.daily_challenge_description);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+    
     const daily_workout = {
+      programId: programId,
+      id: workoutData.id,
       description: descriptionValue,
       daily_challenge_title: dailyChallengeValue,
       daily_challenge_description: dailyChallengeDescriptionValue,
     };
 
-    console.log(daily_workout);
+    updateWorkout(daily_workout);
   };
+
+  useEffect(() => {
+    if (updateWorkoutIsSuccess) {
+      onClose();
+    }
+  }, [updateWorkoutIsSuccess])
 
   const descriptionClasses = descriptionHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -114,7 +121,7 @@ const UpdateWorkoutForm = ({ onClose, workoutData }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" disabled={!formIsValid}>
+            <Button size="small" disabled={!formIsValid} onClick={formSubmitHandler}>
               Add
             </Button>
           </div>

@@ -8,7 +8,7 @@ import { useProgram } from "../../components/Program/hooks/use-program";
 import Button from "../../components/UI/Button";
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
-import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
+// import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import UpdateProgram from "../../components/Program/UpdateProgram";
 
 const ProgramPage = () => {
@@ -59,15 +59,19 @@ const ProgramPage = () => {
     <Fragment>
       <Banner title={programData.program_title} />
       <div className={classes.container}>
-        {updateProgramIsShown && <UpdateProgram
-          programData={programData}
-          programIsLoading={programIsLoading}
-          onClose={hideUpdateProgramHandler}
-        />}
+        {updateProgramIsShown && (
+          <UpdateProgram
+            programData={programData}
+            programIsLoading={programIsLoading}
+            onClose={hideUpdateProgramHandler}
+          />
+        )}
         {admin && (
-          <Button color="blue" onClick={showUpdateProgramHandler}>
-            Update Program
-          </Button>
+          <div className={classes.updateButtonContainer}>
+            <Button color="blue" onClick={showUpdateProgramHandler}>
+              Update Program
+            </Button>
+          </div>
         )}
         <div className={classes.descriptionContainer}>
           <div className={classes.description}>
@@ -78,7 +82,6 @@ const ProgramPage = () => {
         <div className={classes.exerciseCardContainer}>
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
-        {/* {newProgramWorkouts} */}
         <div className={classes.purchaseContainer}>
           <h3>Price: ¥{programData.price}</h3>
           <Link to="purchase">

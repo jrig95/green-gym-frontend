@@ -25,11 +25,8 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   // TODO: Create modal to update all aspects in this form.
   // TODO: Create modal to update the workout
 
-  // TODO: User clocks on update day
-
   const showUpdateWorkoutHandler = () => {
     setUpdateWorkingIsShown(true);
-    console.log(workoutData.day_number);
   };
 
   const hideUpdateWorkoutHandler = () => {
@@ -40,28 +37,45 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
 
   return (
     <div className={classes.workoutCard}>
-      {updateWorkoutIsShown && <UpdateWorkout
-        workoutData={workoutData}
-        workoutIsLoading={workoutIsLoading}
-        onClose={hideUpdateWorkoutHandler}
-      />}
+      {admin && (
+        <div className={classes.updateWorkoutButtonContainer}>
+          <Button color="blue" size="small" onClick={showUpdateWorkoutHandler}>
+            Update Day {workoutData.day_number}
+          </Button>
+        </div>
+      )}
+      {updateWorkoutIsShown && (
+        <UpdateWorkout
+          programId={programId}
+          workoutData={workoutData}
+          workoutIsLoading={workoutIsLoading}
+          onClose={hideUpdateWorkoutHandler}
+        />
+      )}
       <h2>Day {workoutData.day_number}</h2>
       <p>{workoutData.description}</p>
       {!admin && (
-        <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+        <ExerciseOverviewCard
+          exercises={workoutData.exercise_overviews}
+          admin={admin}
+        />
       )}
       {admin && (
         <div>
           <h3>Exercise Overviews</h3>
-          <ExerciseOverviewCard exercises={workoutData.exercise_overviews} />
+          <ExerciseOverviewCard
+            exercises={workoutData.exercise_overviews}
+            admin={admin}
+            programId={programId}
+          />
           <h3>Exercises</h3>
-          <ExerciseCard exercises={workoutData.exercises} />
+          <ExerciseCard
+            exercises={workoutData.exercises}
+            admin={admin}
+            programId={programId}
+            dailyWorkoutId={dailyWorkoutId}
+          />
         </div>
-      )}
-      {admin && (
-        <Button color="blue" size="small" onClick={showUpdateWorkoutHandler}>
-          Update Day {workoutData.day_number}
-        </Button>
       )}
     </div>
   );

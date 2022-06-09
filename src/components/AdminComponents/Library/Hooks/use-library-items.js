@@ -5,7 +5,6 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getLibraryItems = async (searchParams) => {
-  console.log(searchParams);
   if (searchParams !== "") {
     const { data } = await axios(
       `${baseUrl}/library_items?query=${searchParams}`

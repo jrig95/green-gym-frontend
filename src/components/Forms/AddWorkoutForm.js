@@ -143,7 +143,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     const data = await createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
-    console.log(data, "line 145");
+    // console.log(data, "line 145");
     // 1. Itterate through the exercise overview array.
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
