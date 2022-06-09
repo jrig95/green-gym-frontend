@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import React, { useState, useContext } from "react";
 
@@ -11,6 +11,7 @@ import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const userLogout = useUserLogout();
   const authCtx = useContext(AuthContext);
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ const Navbar = () => {
     console.log("logout");
     userLogout(authCtx.token);
     authCtx.logout();
+    navigate("/");
   };
 
   const isActive = ({ isActive }) => (isActive ? activeStyle : undefined);
