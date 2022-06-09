@@ -12,3 +12,36 @@
 .subheader {
   margin: 1rem 0 2rem 0;
 }
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .container {
+      margin: 4rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+    margin: 0;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .subheader {
+    margin: 1rem 0 2rem 0;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .container button{
+    cursor: pointer;
+    background-color: var(--green);
+    color: var(--white);
+    padding: 1rem 1rem;
+    min-width: 9rem;
+    border-radius: 0.25rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}

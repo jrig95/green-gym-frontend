@@ -1,4 +1,4 @@
-import classes from "./Form.module.css";
+import classes from "./ForgotPasswordForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from '../UI/Button';
 import FormCard from "./FormCard";
