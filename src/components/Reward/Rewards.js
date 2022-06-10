@@ -32,8 +32,6 @@ const Rewards = ({ userData, admin, noProgram }) => {
 
   const { data: rewardData } = useRewards();
 
-  console.log(userData.user_points);
-
   let programTitle;
   let programId;
 
@@ -66,17 +64,12 @@ const Rewards = ({ userData, admin, noProgram }) => {
     setClaimedRewardMessageIsShown(true);
 
     // Here we need to send an email to the Admin to notify them that a reward has been claimed.
-    console.log(
-      `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
-    );
-
     const reward_tracker = {
       user_id: userData.id,
       reward_id: reward.id,
     };
 
     console.log(reward_tracker);
-
     // TODO: Add post requestion with user id and rewards id
   };
 
@@ -189,7 +182,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
         <ClaimReward
           rewardTitle={claimedRewardTitle}
           rewardPoints={claimedRewardPoints}
-          userPoints={23400}
+          userPoints={userData.user_points}
           onClose={hideClaimRewardHandler}
           onClaim={claimRewardHandler}
         />
