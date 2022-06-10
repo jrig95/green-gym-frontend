@@ -12,7 +12,6 @@ import AdminBanner from "../AdminComponents/Layout/AdminBanner";
 import DeleteReward from "./DeleteReward";
 import Banner from "../Layout/Banner";
 
-
 const Rewards = ({ userData, admin, noProgram }) => {
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
@@ -28,6 +27,8 @@ const Rewards = ({ userData, admin, noProgram }) => {
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
 
   const { data: rewardData } = useRewards();
+
+  console.log(userData.user_points);
 
   let programTitle;
   let programId;
@@ -130,6 +131,29 @@ const Rewards = ({ userData, admin, noProgram }) => {
     );
   });
 
+  const adminRewards = rewardData.map((reward) => {
+    return (
+      <RewardCard
+        key={reward.id}
+        id={reward.id}
+        admin={admin}
+        title={reward.reward_name}
+        points={reward.reward_points}
+        image={reward.photo_url}
+        onClaimReward={() =>
+          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+        }
+        onDelete={() => {
+          showDeleteRewardHandler({
+            id: reward.id,
+            reward_name: reward.reward_name,
+          });
+        }}
+        onUpdate={() => console.log("edit")}
+      />
+    );
+  });
+
   return (
     <Fragment>
       {claimedRewardMessageIsShown && (
@@ -174,7 +198,9 @@ const Rewards = ({ userData, admin, noProgram }) => {
         />
       )}
       <div className={classes.container}>
-        <div className={classes.rewardsGrid}>{rewards}</div>
+        <div className={classes.rewardsGrid}>
+          {admin ? adminRewards : rewards}
+        </div>
       </div>
     </Fragment>
   );
