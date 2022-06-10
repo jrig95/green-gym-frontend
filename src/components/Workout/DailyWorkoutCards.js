@@ -18,7 +18,7 @@ const DailyWorkoutCards = ({
   fiveDayArrayData,
   refetchProgramData,
   refetchProgramTrackerData,
-  refetchFiveDayArray
+  refetchFiveDayArray,
 }) => {
   const navigate = useNavigate();
   const isFetching = useIsFetching();
@@ -81,7 +81,12 @@ const DailyWorkoutCards = ({
     refetchProgramTrackerData();
     refetchDailyWorkoutTracker();
     refetchFiveDayArray();
-  }, [dailyWorkoutTrackerData, programData, programTrackerData, fiveDayArrayData]);
+  }, [
+    dailyWorkoutTrackerData,
+    programData,
+    programTrackerData,
+    fiveDayArrayData,
+  ]);
 
   const challengeCompleteHandler = () => {
     // setChallengeIsComplete(true);
@@ -128,9 +133,14 @@ const DailyWorkoutCards = ({
 
     // Fi program length - 1 is the same as current day.
     // Redirect user to another page.
-    if (currentDay === (programData.daily_workouts.length + 1)) {
+    if (currentDay === programData.daily_workouts.length + 1) {
       navigate("/");
     }
+  };
+
+  const dailyChallenge = {
+    title: dailyWorkout.daily_challenge_title,
+    description: dailyWorkout.daily_challenge_description,
   };
 
   // All must be true to be able to slect finish day
@@ -156,13 +166,16 @@ const DailyWorkoutCards = ({
         />
         <DailyChallengeCard
           dwtChallengeCompleted={dwtChallengeCompleted}
-          dailyWorkout={dailyWorkout}
           dailyWorkoutTracker={dailyWorkoutTracker}
           getCompleted={challengeCompleteHandler}
+          dailyChallenge={dailyChallenge}
         />
       </div>
       <div className={classes.finishDayButtonContainer}>
-        <Button onClick={finishDayHandler} disabled={!dayFinished || isFetching}>
+        <Button
+          onClick={finishDayHandler}
+          disabled={!dayFinished || isFetching}
+        >
           {isFetching ? <LoadingSpinnerButton /> : "Finish Day"}
         </Button>
       </div>
