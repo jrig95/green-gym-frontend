@@ -22,6 +22,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
   } = useCreateRewardTracker();
 
   // const noProgram = userData.programs.length === 0;
+  const [userPoints, setUserPoints] = useState(userData.user_points)
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
@@ -65,18 +66,19 @@ const Rewards = ({ userData, admin, noProgram }) => {
   };
 
   const claimRewardHandler = () => {
-    // setClaimRewardIsShown(false);
-    // setClaimedRewardMessageIsShown(true);
-
     // Here we need to send an email to the Admin to notify them that a reward has been claimed.
     const reward_tracker = {
       user_id: userData.id,
       reward_id: reward.id,
     };
 
-    console.log(reward_tracker);
+    // console.log(reward.reward_points);
+    setUserPoints((prevPoints) => prevPoints -= reward.reward_points);
+    // Post requestion with user id and rewards id
     createRewardTracker(reward_tracker);
-    // TODO: Add post requestion with user id and rewards id
+    // TODO: Add isMutation to modal
+    // TODO: Refresh user points.
+    // Can I do that via the front end
   };
 
   const hideClaimedRewardMessageHandler = () => {
@@ -205,7 +207,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
           title="My Rewards"
           image={userData.photo_url}
           rewards={true}
-          points={userData.user_points}
+          points={userPoints}
           calories={userData.user_total_calories}
         />
       )}
