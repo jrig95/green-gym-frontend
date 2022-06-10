@@ -1,7 +1,9 @@
+import { useIsMutating } from "react-query";
 import { Fragment } from "react";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import classes from "./ClaimReward.module.css";
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const ClaimReward = ({
   rewardTitle,
@@ -10,7 +12,7 @@ const ClaimReward = ({
   onClose,
   onClaim,
 }) => {
-  console.log(rewardTitle, "line 6 - ClaimReward");
+  const isMutating = useIsMutating();
 
   const parseRewardPoints = parseInt(rewardPoints);
   const parseUserPoints = parseInt(userPoints);
@@ -31,7 +33,7 @@ const ClaimReward = ({
           Cancel
         </Button>
         <Button size="small" onClick={onClaim}>
-          Claim
+          {isMutating ? <LoadingSpinnerButton /> : "Claim"}
         </Button>
       </div>
     </Fragment>
@@ -43,7 +45,7 @@ const ClaimReward = ({
         <h2>I'm sorry. You don't have enough points for this prize</h2>
       </div>
       <div className={classes.buttonContainer}>
-        <Button size="small" onClick={onClose}>
+        <Button size="small" onClick={onClose} disabled={isMutating}>
           Confirm
         </Button>
       </div>

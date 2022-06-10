@@ -1,5 +1,6 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 
+import { useCreateRewardTracker } from "./hooks/use-create-reward-tracker";
 import AuthContext from "../../context/AuthContext";
 import { useDeleteReward } from "./hooks/use-delete-reward";
 import { useRewards } from "./hooks/use-rewards";
@@ -15,20 +16,27 @@ import Banner from "../Layout/Banner";
 const Rewards = ({ userData, admin, noProgram }) => {
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
+  const {
+    mutate: createRewardTracker,
+    isSuccess: createRewardTrackerIsSuccess,
+  } = useCreateRewardTracker();
 
   // const noProgram = userData.programs.length === 0;
+  const [userPoints, setUserPoints] = useState(userData.user_points)
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
     useState(false);
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
-  const [reward, setReward] = useState({ id: 0, reward_name: "" });
+  const [reward, setReward] = useState({
+    id: 0,
+    reward_name: "",
+    reward_points: 0,
+  });
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
 
   const { data: rewardData } = useRewards();
-
-  console.log(userData.user_points);
 
   let programTitle;
   let programId;
@@ -46,9 +54,10 @@ const Rewards = ({ userData, admin, noProgram }) => {
     (reward) => reward.program_id === null
   );
 
-  const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
-    setClaimedRewardTitle(rewardTitle);
-    setClaimedRewardPoints(rewardPoints);
+  const showClaimRewardHandler = (reward) => {
+    setReward(reward);
+    setClaimedRewardTitle(reward.reward_title);
+    setClaimedRewardPoints(reward.reward_points);
     setClaimRewardIsShown(true);
   };
 
@@ -57,13 +66,19 @@ const Rewards = ({ userData, admin, noProgram }) => {
   };
 
   const claimRewardHandler = () => {
-    setClaimRewardIsShown(false);
-    setClaimedRewardMessageIsShown(true);
-
     // Here we need to send an email to the Admin to notify them that a reward has been claimed.
-    console.log(
-      `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
-    );
+    const reward_tracker = {
+      user_id: userData.id,
+      reward_id: reward.id,
+    };
+
+    // console.log(reward.reward_points);
+    setUserPoints((prevPoints) => prevPoints -= reward.reward_points);
+    // Post requestion with user id and rewards id
+    createRewardTracker(reward_tracker);
+    // TODO: Add isMutation to modal
+    // TODO: Refresh user points.
+    // Can I do that via the front end
   };
 
   const hideClaimedRewardMessageHandler = () => {
@@ -84,6 +99,13 @@ const Rewards = ({ userData, admin, noProgram }) => {
     hideDeleteRewardHandler();
   };
 
+  useEffect(() => {
+    if (createRewardTrackerIsSuccess) {
+      setClaimRewardIsShown(false);
+      setClaimedRewardMessageIsShown(true);
+    }
+  }, [createRewardTrackerIsSuccess]);
+
   // return no program page here
 
   const programRewards = programRewardsArray.map((reward) => {
@@ -96,7 +118,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() =>
           showDeleteRewardHandler({
@@ -118,7 +144,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() =>
           showDeleteRewardHandler({
@@ -141,7 +171,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() => {
           showDeleteRewardHandler({
@@ -163,7 +197,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
         <ClaimReward
           rewardTitle={claimedRewardTitle}
           rewardPoints={claimedRewardPoints}
-          userPoints={23400}
+          userPoints={userData.user_points}
           onClose={hideClaimRewardHandler}
           onClaim={claimRewardHandler}
         />
@@ -173,7 +207,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
           title="My Rewards"
           image={userData.photo_url}
           rewards={true}
-          points={userData.user_points}
+          points={userPoints}
           calories={userData.user_total_calories}
         />
       )}
