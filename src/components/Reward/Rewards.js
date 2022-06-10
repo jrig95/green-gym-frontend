@@ -1,5 +1,6 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect } from "react";
 
+import { useCreateRewardTracker } from "./hooks/use-create-reward-tracker";
 import AuthContext from "../../context/AuthContext";
 import { useDeleteReward } from "./hooks/use-delete-reward";
 import { useRewards } from "./hooks/use-rewards";
@@ -15,6 +16,10 @@ import Banner from "../Layout/Banner";
 const Rewards = ({ userData, admin, noProgram }) => {
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
+  const {
+    mutate: createRewardTracker,
+    isSuccess: createRewardTrackerIsSuccess,
+  } = useCreateRewardTracker();
 
   // const noProgram = userData.programs.length === 0;
   const [claimedRewardMessageIsShown, setClaimedRewardMessageIsShown] =
@@ -60,8 +65,8 @@ const Rewards = ({ userData, admin, noProgram }) => {
   };
 
   const claimRewardHandler = () => {
-    setClaimRewardIsShown(false);
-    setClaimedRewardMessageIsShown(true);
+    // setClaimRewardIsShown(false);
+    // setClaimedRewardMessageIsShown(true);
 
     // Here we need to send an email to the Admin to notify them that a reward has been claimed.
     const reward_tracker = {
@@ -70,6 +75,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
     };
 
     console.log(reward_tracker);
+    createRewardTracker(reward_tracker);
     // TODO: Add post requestion with user id and rewards id
   };
 
@@ -90,6 +96,13 @@ const Rewards = ({ userData, admin, noProgram }) => {
     deleteReward(id);
     hideDeleteRewardHandler();
   };
+
+  useEffect(() => {
+    if (createRewardTrackerIsSuccess) {
+      setClaimRewardIsShown(false);
+      setClaimedRewardMessageIsShown(true);
+    }
+  }, [createRewardTrackerIsSuccess]);
 
   // return no program page here
 
