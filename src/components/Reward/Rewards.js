@@ -28,6 +28,8 @@ const Rewards = ({ userData, admin, noProgram }) => {
 
   const { data: rewardData } = useRewards();
 
+  console.log(userData.user_points);
+
   let programTitle;
   let programId;
 

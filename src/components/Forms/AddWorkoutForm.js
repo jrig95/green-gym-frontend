@@ -122,8 +122,10 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
   // This can't be constantly refetching
   useEffect(() => {
-    console.log(lastProgramData);
-    // const interval = setInterval(refetchLastProgram(), 5000);
+    const interval = setTimeout(() => {
+      refetchLastProgram()
+    }, 5000);
+    return () => clearTimeout(interval);
   }, [lastProgramData]);
 
   const formSubmitHandler = async () => {
@@ -140,7 +142,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
     // 1. Send the workout data to the back end - find out what data is the work in the schema
     //  a. Go and create the use hook that will do this job first.
-    const data = await createWorkout(daily_workout);
+    await createWorkout(daily_workout);
     // 2. Make this an await event.
     // 3. test to make sure this works before doing the below work.
     // console.log(data, "line 145");
@@ -151,7 +153,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
 
   useEffect(() => {
     if (createWorkoutIsSuccess) {
-      // console.log("success");
+      console.log("success");
       addExercisesHandler();
       onAddWorkout();
     }
