@@ -22,7 +22,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
   const [claimRewardIsShown, setClaimRewardIsShown] = useState(false);
   const [claimedRewardTitle, setClaimedRewardTitle] = useState("");
   const [claimedRewardPoints, setClaimedRewardPoints] = useState("");
-  const [reward, setReward] = useState({ id: 0, reward_name: "" });
+  const [reward, setReward] = useState({
+    id: 0,
+    reward_name: "",
+    reward_points: 0,
+  });
 
   const [deleteRewardIsShown, setDeleteRewardIsShown] = useState(false);
 
@@ -46,9 +50,10 @@ const Rewards = ({ userData, admin, noProgram }) => {
     (reward) => reward.program_id === null
   );
 
-  const showClaimRewardHandler = (rewardTitle, rewardPoints) => {
-    setClaimedRewardTitle(rewardTitle);
-    setClaimedRewardPoints(rewardPoints);
+  const showClaimRewardHandler = (reward) => {
+    setReward(reward);
+    setClaimedRewardTitle(reward.reward_title);
+    setClaimedRewardPoints(reward.reward_points);
     setClaimRewardIsShown(true);
   };
 
@@ -64,6 +69,15 @@ const Rewards = ({ userData, admin, noProgram }) => {
     console.log(
       `The user has claimed ${claimedRewardTitle} for ${claimedRewardPoints}`
     );
+
+    const reward_tracker = {
+      user_id: userData.id,
+      reward_id: reward.id,
+    };
+
+    console.log(reward_tracker);
+
+    // TODO: Add post requestion with user id and rewards id
   };
 
   const hideClaimedRewardMessageHandler = () => {
@@ -96,7 +110,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() =>
           showDeleteRewardHandler({
@@ -118,7 +136,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() =>
           showDeleteRewardHandler({
@@ -141,7 +163,11 @@ const Rewards = ({ userData, admin, noProgram }) => {
         points={reward.reward_points}
         image={reward.photo_url}
         onClaimReward={() =>
-          showClaimRewardHandler(reward.reward_name, reward.reward_points)
+          showClaimRewardHandler({
+            id: reward.id,
+            reward_title: reward.reward_name,
+            reward_points: reward.reward_points,
+          })
         }
         onDelete={() => {
           showDeleteRewardHandler({
