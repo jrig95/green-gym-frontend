@@ -10,11 +10,10 @@ import FormCard from "./FormCard";
 import { useEffect } from "react";
 import LoginFormCard from "./LoginFormCard";
 
-
 const LoginForm = () => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const { mutate:userLogin, isSuccess: loginIsSuccess} = useUserLogin();
+  const { mutate: userLogin, isSuccess: loginIsSuccess } = useUserLogin();
 
   const textNotEmpty = (value) => value.trim() !== "";
 
@@ -41,16 +40,14 @@ const LoginForm = () => {
 
     const user = {
       email: emailValue,
-      password: passwordValue
-    }
+      password: passwordValue,
+    };
 
-    userLogin(user);  
+    userLogin(user);
   };
 
   useEffect(() => {
     if (loginIsSuccess) {
-      console.log(authCtx.isAdmin);
-
       if (authCtx.isAdmin) {
         navigate("/members");
       }
@@ -59,7 +56,7 @@ const LoginForm = () => {
         navigate("/activities");
       }
     }
-  }, [loginIsSuccess, authCtx])
+  }, [loginIsSuccess, authCtx]);
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`

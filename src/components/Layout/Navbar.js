@@ -20,7 +20,6 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     // Call a logout function here.
-    console.log("logout");
     userLogout(authCtx.token);
     authCtx.logout();
     navigate("/");

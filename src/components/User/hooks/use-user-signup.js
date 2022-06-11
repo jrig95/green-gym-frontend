@@ -37,8 +37,6 @@ export const useUserSignup = () => {
         authCtx.login(userData);
       },
       onError: (error) => {
-        console.log(error);
-        console.log(error.response.data.status.message);
         const title =
           error instanceof Error
             ? error.response.data.status.message

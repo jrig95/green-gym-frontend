@@ -13,8 +13,6 @@ const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted, dailyChalleng
     getCompleted(true);
   };
 
-  console.log(dailyChallenge);
-
   const iconClasses = dwtChallengeCompleted
     ? `${classes.icon} ${classes.checkedIn}`
     : classes.icon;

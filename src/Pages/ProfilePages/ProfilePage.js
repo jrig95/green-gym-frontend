@@ -22,8 +22,6 @@ const ProfilePage = () => {
 
   const { data: userData, isLoading } = useUser(authCtx.userId);
 
-  console.log()
-
   if (isLoading) return <p>Loading...</p>;
 
   const fullName = createFullName(userData.first_name, userData.last_name);
