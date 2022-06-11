@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useMutation } from "react-query";
+import { useContext } from "react";
 
 import { userBaseUrl } from "../../../axiosInstance/user-constants";
-// import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../../context/AuthContext";
 import useAPIError from "../../../common/hooks/use-API-error";
 
 const userLogout = async (token) => {
-  console.log(token);
   await axios.delete(`${userBaseUrl}/logout`, {
     headers: {
       Authorization: token,
@@ -15,10 +15,11 @@ const userLogout = async (token) => {
 };
 
 export const useUserLogout = () => {
+  const authCtx = useContext(AuthContext);
   const { addError } = useAPIError();
   const { mutate } = useMutation((token) => userLogout(token), {
     onSuccess: () => {
-      console.log("logged out");
+      authCtx.logout();
     },
     onError: (error) => {
       const title =

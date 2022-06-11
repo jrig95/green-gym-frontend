@@ -15,17 +15,17 @@ const LanguageToggle = () => {
   };
 
   useEffect(() => {
-    const newCode = isEnglish ? "en" : "cn";
+    const newCode = isEnglish ? "cn" : "en";
     i18next.changeLanguage(newCode);
   }, [isEnglish]);
 
   const buttonClasses = isEnglish
-    ? `${classes.button} ${classes.buttonGrey}`
-    : `${classes.button}`;
-  const toggleGreen = isEnglish ? "#aeaeae" : "#55ca8a";
+    ? `${classes.button}`
+    : `${classes.button} ${classes.buttonGrey}`;
+  const toggleGreen = isEnglish ? "#55ca8a" : "#aeaeae";
   const toggleMoveCircle = isEnglish
-    ? `${classes.circle} ${classes.circleRight}`
-    : `${classes.circle} ${classes.circleLeft}`;
+    ? `${classes.circle} ${classes.circleLeft}`
+    : `${classes.circle} ${classes.circleRight}`;
 
   return (
     <button

@@ -48,7 +48,6 @@ const ProfileResetPasswordForm = () => {
     event.preventDefault();
 
     if (newPasswordValue === confirmPasswordValue) {
-      console.log("submit");
       const user = {
         id: userId,
         password: newPasswordValue,

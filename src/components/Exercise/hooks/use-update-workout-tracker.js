@@ -6,7 +6,6 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const udpateDailyWorkoutTracker = async (dailyWorkoutTracker) => {
-  console.log(dailyWorkoutTracker);
   await axios.patch(
     `${baseUrl}/program_trackers/${dailyWorkoutTracker.program_tracker_id}/daily_workout_trackers/${dailyWorkoutTracker.id}`,
     dailyWorkoutTracker
