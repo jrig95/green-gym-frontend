@@ -4,8 +4,11 @@ import { GiBiceps } from "react-icons/gi";
 import classes from "./DailyChallengeCard.module.css";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
+import { useTranslation } from "react-i18next";
+
 
 const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted, dailyChallenge }) => {
+  const { t } = useTranslation();
   const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
 
   const challengeCompletedHandler = () => {
@@ -17,7 +20,12 @@ const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted, dailyChalleng
     ? `${classes.icon} ${classes.checkedIn}`
     : classes.icon;
 
-  const buttonMessage = dwtChallengeCompleted ? "Done it!" : "Do it!";
+  const doneIt = t("daily_challenge_card_done_it")
+  const doIt = t("daily_challenge_card_do_it")
+  // const buttonMessage = dwtChallengeCompleted ? "Done it!" : "Do it!";
+  const buttonMessage = dwtChallengeCompleted ? doneIt : doIt;
+
+
 
   return (
     <Card className={classes.container}>

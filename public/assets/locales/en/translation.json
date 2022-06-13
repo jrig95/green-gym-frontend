@@ -8,8 +8,14 @@
   "company": "Company",
   "e_mail": "E-Mail",
   "password": "Password",
+  "cancel": "Cancel",
+  "submit": "Submit",
   "carousel_card_one_title": "Green Gym",
   "carousel_card_one_body": "The more active our members are, the more we will give back to the environment.",
+  "carousel_card_two_title": "Make a difference",
+  "carousel_card_two_body": "To yourself and the world",
+  "carousel_card_three_title": "Plant a tree",
+  "carousel_card_three_body": "Plant lasting change in your life and the world",
   "nav_bar_programs": "Programs",
   "nav_bar_my_activites": "My Activities",
   "nav_bar_rewards": "Rewards",
@@ -19,5 +25,12 @@
   "nav_bar_already_a_member": "Already a member? Login",
   "nav_bar_create_a_profile": "Create a Profile",
   "nav_bar_logout": "Log out",
-  "landing_page_find_out_more": "Find Out More"
+  "landing_page_find_out_more": "Find Out More",
+  "landing_page_join_green_gym": "Join Green Gym",
+  "not_found_page_title": "Oh no...",
+  "not_found_page_not_found": "page not found",
+  "activities_page_my_activites": "My Activites",
+  "daily_check_in_card_daily_check_in": "Daily Check In",
+  "daily_challenge_card_done_it": "Do it!",
+  "daily_challenge_card_do_it": "Done it!"
 }

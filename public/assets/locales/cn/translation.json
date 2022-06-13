@@ -1,7 +1,7 @@
 {
   "welcome_to_green_gym" : "欢迎",
-  "main_title" : "We're a wellness platform",
-  "sub_title" : "\"Commited To Improving Planetary Health\"",
+  "main_title" : " 翻译 We're a wellness platform",
+  "sub_title" : "\" 翻译 Commited To Improving Planetary Health\"",
   "sign_up": "注册",
   "first_name": "名",
   "last_name": "姓",
@@ -11,5 +11,27 @@
   "cancel": "取消",
   "submit": "提交",
   "carousel_card_one_title": "绿色健身房",
-  "carousel_card_one_body": "我们的会员越活跃，我们就越会回馈环境。"
+  "carousel_card_one_body": "我们的会员越活跃，我们就越会回馈环境。",
+  "carousel_card_two_title": " 翻译 Make a difference",
+  "carousel_card_two_body": "翻译 To yourself and the world",
+  "carousel_card_three_title": "翻译 Plant a tree",
+  "carousel_card_three_body": "翻译 Plant lasting change in your life and the world",
+  "nav_bar_programs": "翻译 Programs",
+  "nav_bar_my_activites": "翻译 My Activities",
+  "nav_bar_rewards": "翻译 Rewards",
+  "nav_bar_profile": "翻译 Profile",
+  "nav_bar_members": "翻译 Members",
+  "nav_bar_library": "翻译 Library",
+  "nav_bar_already_a_member": "翻译 Already a member? Login",
+  "nav_bar_create_a_profile": "翻译 Create a Profile",
+  "nav_bar_logout": "翻译 Log out",
+  "landing_page_find_out_more": "翻译 Find out More",
+  "landing_page_join_green_gym": "翻译 Join Green Gym",
+  "not_found_page_title": "翻译 Oh no...",
+  "not_found_page_not_found": "翻译 page not found",
+  "activities_page_my_activites": "翻译 My Activites",
+  "daily_check_in_card_daily_check_in": "翻译 Daily Check In",
+  "daily_challenge_card_done_it": "翻译Do it!",
+  "daily_challenge_card_do_it": "翻译Done it!"
+
 }

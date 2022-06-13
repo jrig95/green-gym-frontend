@@ -4,8 +4,10 @@ import { useState } from "react";
 import classes from "./DailyCheckInCard.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
+import { useTranslation } from "react-i18next";
 
 const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
+  const { t } = useTranslation();
   const [checkedIn, setCheckedIn] = useState(false);
 
   const checkInHandler = (event) => {
@@ -20,7 +22,8 @@ const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
   return (
     <Card className={classes.container}>
       <div className={classes.title}>
-        <h1>Daily Check In</h1>
+        {/* <h1>Daily Check In</h1> */}
+        <h1>{t("daily_check_in_card_daily_check_in")}</h1>
       </div>
       <div className={checkInClasses}>
         <div className={classes.icon}>

@@ -23,7 +23,7 @@ const LandingPage = () => {
             <Fragment>
               <Button color="white">{t("landing_page_find_out_more")}</Button>
               <Link to="signup">
-                <Button>Join Green Gym</Button>
+                <Button>{t("landing_page_join_green_gym")}</Button>
               </Link>
             </Fragment>
           )}
