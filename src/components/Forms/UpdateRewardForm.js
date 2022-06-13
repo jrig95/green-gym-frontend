@@ -1,15 +1,20 @@
+import { useIsMutating } from "react-query";
+import { useState, useRef, useEffect } from "react";
+
 import { usePrograms } from "../Program/hooks/use-programs";
 import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useState, useRef } from "react";
 import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const UpdateRewardForm = ({ onClose, reward }) => {
+  const isMutating = useIsMutating();
+
   const { data: programsData, isLoading: programsAreLoading } = usePrograms();
 
-  const updateReward = useUpdateReward();
+  const { mutate:updateReward, isSuccess: updateRewardIsSuccess} = useUpdateReward();
 
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const imageRef = useRef();
@@ -61,9 +66,13 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     };
 
     updateReward(updatedReward)
-
-    onClose();
   };
+
+  useEffect(() => {
+    if (updateRewardIsSuccess) {
+      onClose();
+    }
+  }, [updateRewardIsSuccess])
 
   const fileSelectHandler = (event) => {
     setSelectedImageFile(event.target.files[0]);
@@ -150,8 +159,8 @@ const UpdateRewardForm = ({ onClose, reward }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit" disabled={!formIsValid}>
-              Update
+            <Button size="small" type="submit" disabled={!formIsValid || isMutating}>
+              {isMutating ? <LoadingSpinnerButton /> : "Update"}
             </Button>
           </div>
         </div>
