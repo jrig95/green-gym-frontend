@@ -2,8 +2,12 @@ import { useUpdateLibraryItem } from "../AdminComponents/Library/Hooks/use-updat
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
+import { useState, useRef } from 'react';
 
 const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
+  const [selectedVideoFile, setSelectedVideoFile] = useState();
+  const videoRef = useRef();
+
   const updateLibraryItem = useUpdateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
@@ -23,14 +27,26 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
 
-    const library_item = {
+    const formData = new FormData();
+
+    formData.append("library_item[title]", titleValue);
+
+    if (selectedVideoFile != null) {
+      formData.append("library_item[video]", selectedVideoFile);
+    }
+
+    const updatedLibraryItem = {
       id: libraryItem.id,
-      title: titleValue,
+      library_item: formData,
     };
 
-    updateLibraryItem(library_item);
+    updateLibraryItem(updatedLibraryItem);
 
     onClose();
+  };
+
+  const fileSelectHandler = (event) => {
+    setSelectedVideoFile(event.target.files[0]);
   };
 
   return (
@@ -50,6 +66,18 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
             {titleHasError && (
               <p className={classes.errorText}>Must have a title</p>
             )}
+          </div>
+          <div className={classes.formControl}>
+            <label htmlFor="video">Video</label>
+            <input
+              style={{display: 'none'}}
+              type="file"
+              id="video"
+              accept="video/*"
+              onChange={fileSelectHandler}
+              ref={videoRef}
+            />
+            <Button size="small" onClick={() => videoRef.current.click()}>Add Video</Button>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
