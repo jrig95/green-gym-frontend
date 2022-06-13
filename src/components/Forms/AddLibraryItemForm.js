@@ -46,6 +46,8 @@ const AddLibraryItemForm = ({ onClose }) => {
     setSelectedVideoFile(event.target.files[0]);
   };
 
+  const formIsValid = titleIsValid
+
   return (
     <div>
       <h1 className={classes.title}>Add Library Item</h1>
@@ -80,7 +82,7 @@ const AddLibraryItemForm = ({ onClose }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={!formIsValid}>
               Submit
             </Button>
           </div>
