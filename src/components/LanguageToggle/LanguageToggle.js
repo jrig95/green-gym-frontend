@@ -13,11 +13,11 @@ const LanguageToggle = () => {
     i18next.changeLanguage(newCode);
   };
 
-  const buttonClasses = isEnglish
+  const buttonClasses = !isEnglish
     ? `${classes.button}`
     : `${classes.button} ${classes.buttonGrey}`;
-  const toggleGreen = isEnglish ? "#55ca8a" : "#aeaeae";
-  const toggleMoveCircle = isEnglish
+  const toggleGreen = !isEnglish ? "#55ca8a" : "#aeaeae";
+  const toggleMoveCircle = !isEnglish
     ? `${classes.circle} ${classes.circleLeft}`
     : `${classes.circle} ${classes.circleRight}`;
 

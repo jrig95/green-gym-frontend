@@ -100,6 +100,10 @@ const UpdateProfileForm = ({ user: userData }) => {
     updateProfile(user);
   };
 
+  const cancelUpdateProfileHandler = () => {
+    navigate("/profile");
+  };
+
   useEffect(() => {
     if (updateProfileIsSuccess) {
       navigate("/profile");
@@ -251,7 +255,7 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">
+            <Button color="blue" size="small" onClick={cancelUpdateProfileHandler}>
               {t("cancel")}
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
