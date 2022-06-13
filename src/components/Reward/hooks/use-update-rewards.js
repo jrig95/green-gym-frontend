@@ -6,7 +6,10 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateReward = async (reward) => {
-  await axios.patch(`${baseUrl}/rewards/${reward.id}`, reward);
+  console.log(reward);
+  await axios.patch(`${baseUrl}/rewards/${reward.id}`, {
+    reward: reward.reward,
+  });
 };
 
 export const useUpdateReward = () => {

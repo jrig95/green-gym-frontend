@@ -1,6 +1,5 @@
 import { slugify } from "../../utils/slugify";
 import { Link } from "react-router-dom";
-import { BsFillGearFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 
 import classes from "./ProgramCard.module.css";
@@ -29,9 +28,6 @@ const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
     <Card className={classes.card}>
       {admin && (
         <div className={classes.icons}>
-          <div className={classes.iconGear}>
-            <BsFillGearFill />
-          </div>
           <div className={classes.iconBin} onClick={onDelete}>
             <AiFillDelete />
           </div>

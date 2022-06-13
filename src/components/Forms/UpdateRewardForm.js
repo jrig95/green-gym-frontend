@@ -1,22 +1,26 @@
+import { usePrograms } from "../Program/hooks/use-programs";
 import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
+import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
 
 const UpdateRewardForm = ({ onClose, reward }) => {
+  const { data: programsData, isLoading: programsAreLoading } = usePrograms();
+
   const updateReward = useUpdateReward();
 
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const imageRef = useRef();
-  
+
   // Get programs
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
-  
+
   const {
     value: titleValue,
     isValid: titleIsValid,
@@ -33,6 +37,9 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     inputBlurHandler: pointsBlurHandler,
   } = useInput(isNumber, reward.reward_points);
 
+  const { value: programValue, valueChangeHandler: programChangeHandler } =
+    useInput(textNotEmpty);
+
   const updateRewardHandler = (event) => {
     event.preventDefault();
 
@@ -40,22 +47,20 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     formData.append("reward[reward_name]", titleValue);
     formData.append("reward[reward_points]", pointsValue);
 
+    if (programValue != "") {
+      formData.append("reward[]program_id", programValue);
+    }
+
     if (selectedImageFile != null) {
       formData.append("reward[photo]", selectedImageFile);
-    };
-
-   
-
-    console.log(selectedImageFile);
-
+    }
 
     const updatedReward = {
       id: reward.id,
-      reward_name: titleValue,
-      reward_points: pointsValue
-    }
+      reward: formData,
+    };
 
-    // updateReward(updatedReward)
+    updateReward(updatedReward)
 
     onClose();
   };
@@ -73,6 +78,16 @@ const UpdateRewardForm = ({ onClose, reward }) => {
   const pointsClasses = pointsHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
+
+  if (programsAreLoading) return <LoadingSpinnerLarge />;
+
+  const programOptions = programsData.map((program) => {
+    return (
+      <option key={program.id} value={program.id}>
+        {program.program_title}
+      </option>
+    );
+  });
 
   return (
     <div>
@@ -122,9 +137,13 @@ const UpdateRewardForm = ({ onClose, reward }) => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
-            <select id="program">
-              <option>none</option>
-              <option>1</option>
+            <select
+              id="program"
+              value={programValue}
+              onChange={programChangeHandler}
+            >
+              <option value="default">none</option>
+              {programOptions}
             </select>
           </div>
           <div className={classes.formActions}>
