@@ -40,7 +40,7 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     formData.append("reward[reward_name]", titleValue);
     formData.append("reward[reward_points]", pointsValue);
 
-    if ('something') {
+    if (selectedImageFile != null) {
       formData.append("reward[photo]", selectedImageFile);
     };
 
