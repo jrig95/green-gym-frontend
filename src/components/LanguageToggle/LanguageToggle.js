@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import i18next from "i18next";
 import jsCookie from "js-cookie";
 
@@ -7,17 +6,12 @@ import classes from "./LanguageToggle.module.css";
 const LanguageToggle = () => {
   // Get language code from cookie
   // set is English based on cooked language code
-
-  const [isEnglish, setIsEnglish] = useState(jsCookie.get("i18next") === "en");
+  const isEnglish = jsCookie.get("i18next") === "en";
 
   const changeLanguageHandler = () => {
-    setIsEnglish((prevIsEnglish) => !prevIsEnglish);
-  };
-
-  useEffect(() => {
     const newCode = isEnglish ? "cn" : "en";
     i18next.changeLanguage(newCode);
-  }, [isEnglish]);
+  };
 
   const buttonClasses = isEnglish
     ? `${classes.button}`
