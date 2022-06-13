@@ -5,8 +5,11 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const updateReward = async (reward) => {
-  await axios.patch(`${baseUrl}/rewards/${reward.id}`, reward);
+const updateReward = async (updatedReward) => {
+  await axios.patch(
+    `${baseUrl}/rewards/${updatedReward.id}`,
+    updatedReward.rewardData
+  );
 };
 
 export const useUpdateReward = () => {

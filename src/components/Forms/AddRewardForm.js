@@ -72,7 +72,7 @@ const AddRewardForm = ({ onClose }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const fileSelectHander = (event) => {
+  const fileSelectHandler = (event) => {
     setSelecetedImageFile(event.target.files[0]);
   };
 
@@ -125,7 +125,7 @@ const AddRewardForm = ({ onClose }) => {
               type="file"
               id="image"
               accept="image/jpeg image/png"
-              onChange={fileSelectHander}
+              onChange={fileSelectHandler}
               ref={imageRef}
             />
             <Button size="small" onClick={() => imageRef.current.click()}>
