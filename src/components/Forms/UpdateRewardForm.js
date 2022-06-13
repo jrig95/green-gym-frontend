@@ -2,10 +2,15 @@ import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
+import { useState, useRef } from 'react';
 
 const UpdateRewardForm = ({ onClose, reward }) => {
   const updateReward = useUpdateReward();
 
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  const imageRef = useRef();
+  
+  // Get programs
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
@@ -18,7 +23,6 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHandler,
-    reset: resetTitle,
   } = useInput(textNotEmpty, reward.reward_name);
 
   const {
@@ -27,11 +31,23 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     hasError: pointsHasError,
     valueChangeHandler: pointsChangeHandler,
     inputBlurHandler: pointsBlurHandler,
-    reset: resetPoints,
   } = useInput(isNumber, reward.reward_points);
 
   const updateRewardHandler = (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("reward[reward_name]", titleValue);
+    formData.append("reward[reward_points]", pointsValue);
+
+    if ('something') {
+      formData.append("reward[photo]", selectedImageFile);
+    };
+
+   
+
+    console.log(selectedImageFile);
+
 
     const updatedReward = {
       id: reward.id,
@@ -39,9 +55,13 @@ const UpdateRewardForm = ({ onClose, reward }) => {
       reward_points: pointsValue
     }
 
-    updateReward(updatedReward)
+    // updateReward(updatedReward)
 
     onClose();
+  };
+
+  const fileSelectHandler = (event) => {
+    setSelectedImageFile(event.target.files[0]);
   };
 
   const formIsValid = titleIsValid && pointsIsValid;
@@ -86,20 +106,20 @@ const UpdateRewardForm = ({ onClose, reward }) => {
               <p className={classes.errorText}>Must include points</p>
             )}
           </div>
-          {/* <div className={classes.formControl}>
+          <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
             <input
               style={{ display: "none" }}
               type="file"
               id="image"
               accept="image/jpeg image/png"
-              onChange={fileSelectHander}
+              onChange={fileSelectHandler}
               ref={imageRef}
             />
             <Button size="small" onClick={() => imageRef.current.click()}>
               Add Image
             </Button>
-          </div> */}
+          </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
             <select id="program">
