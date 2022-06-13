@@ -6,13 +6,16 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const updateLibraryItem = async (updatedLibraryItem) => {
-  await axios.patch(`${baseUrl}/library_items/${updatedLibraryItem.id}`, updatedLibraryItem.library_item);
+  await axios.patch(
+    `${baseUrl}/library_items/${updatedLibraryItem.id}`,
+    updatedLibraryItem.library_item
+  );
 };
 
 export const useUpdateLibraryItem = () => {
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutate } = useMutation(
+  const { mutate, isSuccess } = useMutation(
     (libraryItem) => updateLibraryItem(libraryItem),
     {
       onSuccess: () => {
@@ -26,5 +29,5 @@ export const useUpdateLibraryItem = () => {
     }
   );
 
-  return mutate;
+  return { mutate, isSuccess };
 };

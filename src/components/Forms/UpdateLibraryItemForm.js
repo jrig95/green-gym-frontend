@@ -1,14 +1,19 @@
+import { useIsMutating } from "react-query";
+import { useEffect } from 'react';
+import { useState, useRef } from 'react';
+
 import { useUpdateLibraryItem } from "../AdminComponents/Library/Hooks/use-update-library-items";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useState, useRef } from 'react';
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
+  const isMutating = useIsMutating();
   const [selectedVideoFile, setSelectedVideoFile] = useState();
   const videoRef = useRef();
 
-  const updateLibraryItem = useUpdateLibraryItem();
+  const { mutate: updateLibraryItem, isSuccess: updateLibraryItemIsSuccess} = useUpdateLibraryItem();
   const textNotEmpty = (value) => value !== "";
 
   const {
@@ -41,9 +46,13 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
     };
 
     updateLibraryItem(updatedLibraryItem);
-
-    onClose();
   };
+
+  useEffect(() => {
+    if (updateLibraryItemIsSuccess) {
+      onClose();
+    }
+  }, [updateLibraryItemIsSuccess])
 
   const fileSelectHandler = (event) => {
     setSelectedVideoFile(event.target.files[0]);
@@ -83,8 +92,8 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit" disabled={titleHasError}>
-              Update
+            <Button size="small" type="submit" disabled={titleHasError || isMutating}>
+              {isMutating ? <LoadingSpinnerButton /> : "Update"}
             </Button>
           </div>
         </div>
