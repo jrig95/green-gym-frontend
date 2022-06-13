@@ -55,7 +55,7 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit">
+            <Button size="small" type="submit" disabled={titleHasError}>
               Update
             </Button>
           </div>
