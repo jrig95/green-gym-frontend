@@ -5,14 +5,17 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const updateReward = async (reward) => {
-  await axios.patch(`${baseUrl}/rewards/${reward.id}`, reward);
+const updateReward = async (updatedReward) => {
+  await axios.patch(
+    `${baseUrl}/rewards/${updatedReward.id}`,
+    updatedReward.rewardData
+  );
 };
 
 export const useUpdateReward = () => {
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutate } = useMutation((reward) => updateReward(reward), {
+  const { mutate, isSuccess } = useMutation((reward) => updateReward(reward), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.rewards]);
     },
@@ -23,5 +26,5 @@ export const useUpdateReward = () => {
     },
   });
 
-  return mutate;
+  return { mutate, isSuccess };
 };

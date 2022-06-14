@@ -12,7 +12,7 @@ const createRewards = async (reward) => {
 export const useCreateReward = () => {
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutate } = useMutation((reward) => createRewards(reward), {
+  const { mutate, isSuccess } = useMutation((reward) => createRewards(reward), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.rewards]);
     },
@@ -23,5 +23,5 @@ export const useCreateReward = () => {
     },
   });
 
-  return mutate;
+  return { mutate, isSuccess };
 };

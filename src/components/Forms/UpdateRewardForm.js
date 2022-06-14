@@ -1,24 +1,37 @@
+import { useIsMutating } from "react-query";
+import { useState, useRef, useEffect } from "react";
+
+import { usePrograms } from "../Program/hooks/use-programs";
 import { useUpdateReward } from "../Reward/hooks/use-update-rewards";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
+import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const UpdateRewardForm = ({ onClose, reward }) => {
-  const updateReward = useUpdateReward();
+  const isMutating = useIsMutating();
 
+  const { data: programsData, isLoading: programsAreLoading } = usePrograms();
+
+  const { mutate:updateReward, isSuccess: updateRewardIsSuccess} = useUpdateReward();
+
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  const imageRef = useRef();
+
+  // Get programs
   const textNotEmpty = (value) => value !== "";
   const isNumber = (value) => {
     const number = parseInt(value);
     return !isNaN(number);
   };
-  
+
   const {
     value: titleValue,
     isValid: titleIsValid,
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHandler,
-    reset: resetTitle,
   } = useInput(textNotEmpty, reward.reward_name);
 
   const {
@@ -27,21 +40,42 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     hasError: pointsHasError,
     valueChangeHandler: pointsChangeHandler,
     inputBlurHandler: pointsBlurHandler,
-    reset: resetPoints,
   } = useInput(isNumber, reward.reward_points);
+
+  const { value: programValue, valueChangeHandler: programChangeHandler } =
+    useInput(textNotEmpty);
 
   const updateRewardHandler = (event) => {
     event.preventDefault();
 
-    const updatedReward = {
-      id: reward.id,
-      reward_name: titleValue,
-      reward_points: pointsValue
+    const formData = new FormData();
+    formData.append("reward[reward_name]", titleValue);
+    formData.append("reward[reward_points]", pointsValue);
+
+    if (programValue != "") {
+      formData.append("reward[program_id]", programValue);
     }
 
-    updateReward(updatedReward)
+    if (selectedImageFile != null) {
+      formData.append("reward[photo]", selectedImageFile);
+    }
 
-    onClose();
+    const updatedReward = {
+      id: reward.id,
+      rewardData: formData,
+    };
+
+    updateReward(updatedReward)
+  };
+
+  useEffect(() => {
+    if (updateRewardIsSuccess) {
+      onClose();
+    }
+  }, [updateRewardIsSuccess])
+
+  const fileSelectHandler = (event) => {
+    setSelectedImageFile(event.target.files[0]);
   };
 
   const formIsValid = titleIsValid && pointsIsValid;
@@ -53,6 +87,16 @@ const UpdateRewardForm = ({ onClose, reward }) => {
   const pointsClasses = pointsHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
+
+  if (programsAreLoading) return <LoadingSpinnerLarge />;
+
+  const programOptions = programsData.map((program) => {
+    return (
+      <option key={program.id} value={program.id}>
+        {program.program_title}
+      </option>
+    );
+  });
 
   return (
     <div>
@@ -86,33 +130,37 @@ const UpdateRewardForm = ({ onClose, reward }) => {
               <p className={classes.errorText}>Must include points</p>
             )}
           </div>
-          {/* <div className={classes.formControl}>
+          <div className={classes.formControl}>
             <label htmlFor="image">Cover Image</label>
             <input
               style={{ display: "none" }}
               type="file"
               id="image"
               accept="image/jpeg image/png"
-              onChange={fileSelectHander}
+              onChange={fileSelectHandler}
               ref={imageRef}
             />
             <Button size="small" onClick={() => imageRef.current.click()}>
               Add Image
             </Button>
-          </div> */}
+          </div>
           <div className={classes.formControl}>
             <label htmlFor="points">Program (optional)</label>
-            <select id="program">
-              <option>none</option>
-              <option>1</option>
+            <select
+              id="program"
+              value={programValue}
+              onChange={programChangeHandler}
+            >
+              <option value="default">none</option>
+              {programOptions}
             </select>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit" disabled={!formIsValid}>
-              Update
+            <Button size="small" type="submit" disabled={!formIsValid || isMutating}>
+              {isMutating ? <LoadingSpinnerButton /> : "Update"}
             </Button>
           </div>
         </div>

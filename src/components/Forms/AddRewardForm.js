@@ -1,13 +1,18 @@
+import { useIsMutating } from "react-query";
+import { useRef, useState, useEffect } from "react";
+
 import { usePrograms } from "../Program/hooks/use-programs";
 import { useCreateReward } from "../Reward/hooks/use-create-reward";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useRef, useState } from "react";
 import LoadingSpinnerLarge from "../UI/LoadingSpinnerLarge";
+import LoadingSpinnerButton from "../UI/LoadingSpinnerButton";
 
 const AddRewardForm = ({ onClose }) => {
-  const createReward = useCreateReward();
+  const isMutating = useIsMutating();
+  const { mutate: createReward, isSuccess: createRewardIsSuccess } =
+    useCreateReward();
 
   // TODO: get all programs
   const { data: programsData, isLoading: programsAreLoading } = usePrograms();
@@ -58,9 +63,13 @@ const AddRewardForm = ({ onClose }) => {
     }
 
     createReward(formData);
-
-    onClose();
   };
+
+  useEffect(() => {
+    if (createRewardIsSuccess) {
+      onClose();
+    }
+  }, [createRewardIsSuccess]);
 
   const formIsValid = titleIsValid && pointsIsValid;
 
@@ -72,7 +81,7 @@ const AddRewardForm = ({ onClose }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const fileSelectHander = (event) => {
+  const fileSelectHandler = (event) => {
     setSelecetedImageFile(event.target.files[0]);
   };
 
@@ -125,7 +134,7 @@ const AddRewardForm = ({ onClose }) => {
               type="file"
               id="image"
               accept="image/jpeg image/png"
-              onChange={fileSelectHander}
+              onChange={fileSelectHandler}
               ref={imageRef}
             />
             <Button size="small" onClick={() => imageRef.current.click()}>
@@ -147,8 +156,12 @@ const AddRewardForm = ({ onClose }) => {
             <Button color="blue" size="small" onClick={onClose}>
               Cancel
             </Button>
-            <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+            <Button
+              size="small"
+              type="submit"
+              disabled={!formIsValid || isMutating}
+            >
+              {isMutating ? <LoadingSpinnerButton /> : "Submit"}
             </Button>
           </div>
         </div>
