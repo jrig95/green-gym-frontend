@@ -7,7 +7,6 @@ import { Fragment } from "react";
 
 const MemberTracker = ({ trackerId, programId }) => {
   const isFetching = useIsFetching();
-  console.log(trackerId);
   const { data: trackerData, isLoading: trackerIsLoading } =
     useGetProgramTracker(trackerId);
 

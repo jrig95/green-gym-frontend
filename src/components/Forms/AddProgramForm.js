@@ -93,6 +93,10 @@ const AddProgramForm = () => {
     setSelecetedImageFile(event.target.files[0]);
   };
 
+  const closeFormHandler = () => {
+    navigate("/programs")
+  };
+
   const programNameClasses = programNameHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
@@ -193,7 +197,7 @@ const AddProgramForm = () => {
             )}
           </div>
           <div className={classes.formActions}>
-            <Button color="blue" size="small">
+            <Button color="blue" size="small" onClick={closeFormHandler}>
               Cancel
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
