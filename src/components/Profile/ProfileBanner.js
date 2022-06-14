@@ -4,6 +4,8 @@ import { HiCamera } from "react-icons/hi";
 import UpdateProfileImage from "./UpdateProfileImage";
 import classes from "./ProfileBanner.module.css";
 import TreesPlanted from "./TreesPlanted";
+import { useTranslation } from "react-i18next";
+
 
 const ProfileBanner = ({
   title,
@@ -14,6 +16,7 @@ const ProfileBanner = ({
   rewards,
   points,
 }) => {
+  const { t } = useTranslation();
   const [updateProfileImageIsShown, setUpdateProfileImageIsShown] = useState(false);
 
   let caloriesNum = 0;
@@ -44,7 +47,7 @@ const ProfileBanner = ({
         <h1>{title || "Profile Banner"}</h1>
         {!!calories && (
           <p className={classes.caloriesText}>
-            {caloriesBurned} calories burned
+            {caloriesBurned} {t("profile_banner_calories_burned")}
           </p>
         )}
       </div>

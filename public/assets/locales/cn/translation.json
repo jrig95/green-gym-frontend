@@ -32,6 +32,33 @@
   "activities_page_my_activites": "翻译 My Activites",
   "daily_check_in_card_daily_check_in": "翻译 Daily Check In",
   "daily_challenge_card_done_it": "翻译Do it!",
-  "daily_challenge_card_do_it": "翻译Done it!"
+  "daily_challenge_card_do_it": "翻译Done it!",
+  "daily_checked_in_card_checked_in": "翻译 Checked In!",
+  "daily_checked_in_card_check_in": "翻译 Check in",
+  "daily_workout_card_daily_workout": "翻译 Daily Workout: Day ",
+  "daily_workout_card_workout_finished": "翻译 Workout Finished",
+  "daily_workout_card_todays_workout": "翻译 Today's Workout",
+  "workout_day_tracker_day": "翻译 Day",
+  "daily_workout_cards_finish_day": "翻译 Finish Day",
+  "sign_up_already_have_an_account": "翻译 Already have an account? Log in.",
+  "log_in_dont_have_an_account": "翻译 Don't have an account? Create one now.",
+  "log_in_forgot_your_password": "翻译 Forgot your password?",
+  "log_in_form_email": "翻译 E-mail",
+  "log_in_please_enter_a_valid_email": "翻译 please enter a valid e-mail address",
+  "log_in_form_password": "翻译 Password",
+  "log_in_password_must_be_longer_than_8": "翻译 password must be longer than 8 characters",
+  "log_in_cancel": "翻译 Cancel",
+  "log_in_submit": "翻译 Submit",
+  "log_in_login": "翻译 Login",
+  "profile_page_my_profile": "翻译 My Profile",
+  "profile_page_loading": "翻译 Loading...",
+  "profile_banner_calories_burned": "翻译 calories burned",
+  "profile_card_update_profile": "翻译 Update Profile",
+  "profile_card_change_password": "翻译 Change Password",
+  "trees_planted_trees_planted": "翻译 trees planted",
+  "trees_planted_tree_planted": "翻译 tree planted"
+
+
+
 
 }

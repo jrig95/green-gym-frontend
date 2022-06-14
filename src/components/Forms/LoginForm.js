@@ -9,8 +9,11 @@ import Button from "../UI/Button";
 import FormCard from "./FormCard";
 import { useEffect } from "react";
 import LoginFormCard from "./LoginFormCard";
+import { useTranslation } from "react-i18next";
+
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const { mutate: userLogin, isSuccess: loginIsSuccess } = useUserLogin();
@@ -69,11 +72,12 @@ const LoginForm = () => {
   const formIsValid = emailIsValid & passwordIsValid;
 
   return (
-    <LoginFormCard title="Login">
+    <LoginFormCard title={t("log_in_login")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={emailClasses}>
-            <label htmlFor="email">E-Mail</label>
+            <label htmlFor="email">{t("log_in_form_email")}</label>
+
             <input
               type="email"
               id="email"
@@ -83,12 +87,12 @@ const LoginForm = () => {
             />
             {emailHasError && (
               <p className={classes.errorText}>
-                please enter a valid e-mail address
+                {t("log_in_please_enter_a_valid_email")}
               </p>
             )}
           </div>
           <div className={passwordClasses}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("log_in_form_password")}</label>
             <input
               type="password"
               id="password"
@@ -98,18 +102,18 @@ const LoginForm = () => {
             />
             {passwordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                {t("log_in_password_must_be_longer_than_8")}
               </p>
             )}
           </div>
           <div className={classes.formActions}>
             <Link to="/">
               <Button color="blue" size="small">
-                Cancel
+                {t("log_in_cancel")}
               </Button>
             </Link>
             <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+              {t("log_in_submit")}
             </Button>
           </div>
         </div>
