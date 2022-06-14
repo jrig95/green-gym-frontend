@@ -11,6 +11,7 @@ const Footer = () => {
           <BsFacebook />
           <IoLogoWechat />
         </div>
+        <div>沪ICP备2022015857号</div>
       </div>
     </div>
   );

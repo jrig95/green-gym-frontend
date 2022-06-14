@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import { useCreateProgram } from "../Program/hooks/use-create-program";
 import FormCard from "./FormCard";
-import classes from "./Form.module.css";
+import classes from "./AddProgramForm.module.css";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 
