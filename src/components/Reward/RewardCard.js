@@ -6,6 +6,8 @@ import Card from "../UI/Card";
 import classes from "./RewardCard.module.css";
 import { BsFillGearFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
+
 
 const RewardCard = ({
   admin,
@@ -16,6 +18,7 @@ const RewardCard = ({
   onClaimReward,
   onDelete,
 }) => {
+  const { t } = useTranslation();
   const [updateRewardIsShown, setUpdateRewardIsShown] = useState(false);
   const stringifiedPoints = parseInt(points).toLocaleString("en-US");
 
@@ -44,10 +47,10 @@ const RewardCard = ({
 
         <h3 className={classes.title}>{title}</h3>
         <p className={classes.points}>
-          <b>Cost:</b> {stringifiedPoints} pts
+          <b>{t("reward_card_cost")}</b> {stringifiedPoints} {t("reward_card_pts")}
         </p>
         <Button onClick={onClaimReward} size="small">
-          Redeem
+          {t("reward_card_redeem")}
         </Button>
       </div>
       <div className={classes.imageContainer}>

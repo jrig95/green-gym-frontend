@@ -1,4 +1,4 @@
-import { Link, useNavigate, useNavigationType } from "react-router-dom"; 
+import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { useUserSignup } from "../User/hooks/use-user-signup";
@@ -130,7 +130,7 @@ const SignUpForm = () => {
               onBlur={firstNameBlurHandler}
             />
             {firstNameHasError && (
-              <p className={classes.errorText}>please enter your first name</p>
+              <p className={classes.errorText}> {t("sign_up_form_please_enter_your_first_name")}</p>
             )}
           </div>
           <div className={secondNameClasses}>
@@ -143,7 +143,7 @@ const SignUpForm = () => {
               onBlur={lastNameBlurHandler}
             />
             {lastNameHasError && (
-              <p className={classes.errorText}>please enter your second name</p>
+              <p className={classes.errorText}>{t("sign_up_form_please_enter_your_second_name")}</p>
             )}
           </div>
           <div className={companyClasses}>
@@ -157,7 +157,7 @@ const SignUpForm = () => {
             />
             {companyHasError && (
               <p className={classes.errorText}>
-                please enter your company name
+                {t("sign_up_form_please_enter_your_company_name")}
               </p>
             )}
           </div>
@@ -172,7 +172,7 @@ const SignUpForm = () => {
             />
             {emailHasError && (
               <p className={classes.errorText}>
-                please enter a valid e-mail address
+                {t("sign_up_form_please_enter_a_valid_email")}
               </p>
             )}
           </div>
@@ -187,7 +187,7 @@ const SignUpForm = () => {
             />
             {passwordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                {t("sign_up_form_longer_than_8")}
               </p>
             )}
           </div>

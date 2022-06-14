@@ -133,7 +133,7 @@ const UpdateProfileForm = ({ user: userData }) => {
   const formIsValid = true;
 
   return (
-    <FormCard title={"Update Profile"}>
+    <FormCard title={t("update_profile")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>
@@ -146,7 +146,7 @@ const UpdateProfileForm = ({ user: userData }) => {
               onBlur={firstNameBlurHandler}
             />
             {firstNameHasError && (
-              <p className={classes.errorText}>please enter your first name</p>
+              <p className={classes.errorText}>{t("please_enter_your_first_name")}</p>
             )}
           </div>
           <div className={secondNameClasses}>
@@ -159,11 +159,11 @@ const UpdateProfileForm = ({ user: userData }) => {
               onBlur={lastNameBlurHandler}
             />
             {lastNameHasError && (
-              <p className={classes.errorText}>please enter your last name</p>
+              <p className={classes.errorText}>{t("please_enter_your_second_name")}</p>
             )}
           </div>
           <div className={classes.formControl}>
-            <label>Age</label>
+            <label>{t("age")}</label>
             <input
               type="number"
               min={18}
@@ -174,16 +174,16 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
           </div>
           <div className={`${classes.formControl} ${classes.customSelect}`}>
-            <label htmlFor="gender">Gender</label>
+            <label htmlFor="gender">{t("gender")}</label>
             <select
               name="gender"
               id="gender"
               value={genderValue}
               onChange={genderChangeHandler}
             >
-              <option>Selecet...</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option>{t("gender_select")}</option>
+              <option>{t("male")}</option>
+              <option>{t("female")}</option>
             </select>
           </div>
           <div className={companyClasses}>
@@ -197,12 +197,12 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
             {companyHasError && (
               <p className={classes.errorText}>
-                please enter your company name
+                {t("please_enter_your_company_name")}
               </p>
             )}
           </div>
           <div className={phoneNumberClasses}>
-            <label htmlFor="phone_number">Phone Number</label>
+            <label htmlFor="phone_number">{t("phone_number")}</label>
             <input
               type="text"
               id="phone_number"
@@ -212,7 +212,7 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
             {phoneNumberHasError && (
               <p className={classes.errorText}>
-                Please enter a valid Chinese phone number
+                {t("please_enter_a_valid_number")}
               </p>
             )}
           </div>
@@ -227,26 +227,26 @@ const UpdateProfileForm = ({ user: userData }) => {
             />
             {emailHasError && (
               <p className={classes.errorText}>
-                please enter a valid e-mail address
+                {t("enter_a_valid_email")}
               </p>
             )}
           </div>
           <div className={classes.formControl}>
-            <label htmlFor="fitness_level">Fitness Level</label>
+            <label htmlFor="fitness_level">{t("fitness_level")}</label>
             <select
               value={fitnessLevelValue}
               onChange={fitnessLevelChangeHandler}
               name="fitness_level"
               id="fitness_level"
             >
-              <option>Select...</option>
-              <option>Beginner</option>
-              <option>Intermediate</option>
-              <option>Advanced</option>
+              <option>{t("fitness_select")}</option>
+              <option>{t("beginner")}</option>
+              <option>{t("intermediate")}</option>
+              <option>{t("advanced")}</option>
             </select>
           </div>
           <div className={classes.formControl}>
-            <label htmlFor="passions">Tell us about your passions</label>
+            <label htmlFor="passions">{t("passions")}</label>
             <textarea
               id="passions"
               rows={10}

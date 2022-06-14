@@ -5,8 +5,12 @@ import AuthContext from "../../context/AuthContext";
 import { Fragment } from "react";
 import classes from "./UpdateProfileImageForm.module.css";
 import Button from "../UI/Button";
+import { useTranslation } from "react-i18next";
+
 
 const UpdateProfileImageForm = ({ onClose }) => {
+  const { t } = useTranslation();
+
   // Get user id
   const authCtx = useContext(AuthContext);
   const userId = authCtx.userId;
@@ -42,7 +46,7 @@ const UpdateProfileImageForm = ({ onClose }) => {
 
   return (
     <Fragment>
-      <h1 className={classes.title}>Add Your Photo</h1>
+      <h1 className={classes.title}>{t("update_profile_image_form_add_your_photo")}</h1>
       <form onSubmit={submitFormHandler}>
         <div className={classes.controlGroup}>
           <div className={classes.formControl}>
@@ -56,15 +60,15 @@ const UpdateProfileImageForm = ({ onClose }) => {
               ref={imageRef}
             />
             <Button size="small" onClick={() => imageRef.current.click()}>
-              Add Image
+              {t("update_profile_image_form_add_image")}
             </Button>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
-              Cancel
+              {t("update_profile_image_form_cancel")}
             </Button>
             <Button size="small" type="submit" disabled={formNotValid}>
-              Submit
+              {t("update_profile_image_form_submit")}
             </Button>
           </div>
         </div>

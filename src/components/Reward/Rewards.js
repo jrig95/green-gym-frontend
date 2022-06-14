@@ -12,8 +12,11 @@ import ClaimReward from "./ClaimReward";
 import AdminBanner from "../AdminComponents/Layout/AdminBanner";
 import DeleteReward from "./DeleteReward";
 import Banner from "../Layout/Banner";
+import { useTranslation } from "react-i18next";
+
 
 const Rewards = ({ userData, admin, noProgram }) => {
+  const { t } = useTranslation();
   const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
   const {
@@ -204,23 +207,24 @@ const Rewards = ({ userData, admin, noProgram }) => {
       )}
       {!admin && !noProgram && (
         <ProfileBanner
-          title="My Rewards"
+          title={t("my_rewards")}
           image={userData.photo_url}
           rewards={true}
           points={userPoints}
           calories={userData.user_total_calories}
         />
       )}
-      {noProgram && !admin && <Banner title="Rewards" />}
+      {noProgram && !admin && <Banner title={t("no_program_user_rewards")}/>}
       {admin && <AdminBanner rewards />}
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
             <h1 className={classes.programRewardsTitle}>
-              Rewards for {programTitle}
+              {t("rewards_for")}
+              {programTitle}
             </h1>
             <div className={classes.programRewardsGrid}>{programRewards}</div>
-            <h1 className={classes.rewardsTitle}>General Rewards</h1>
+            <h1 className={classes.rewardsTitle}>{t("general_rewards")}</h1>
           </div>
         </Fragment>
       )}
