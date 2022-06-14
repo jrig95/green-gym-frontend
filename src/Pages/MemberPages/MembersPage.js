@@ -111,7 +111,7 @@ const MembersPage = () => {
             programId={programId}
           />
         )}
-        <Sort />
+        {/* <Sort /> */}
         <MembersList
           members={membersData}
           programId={programId}
