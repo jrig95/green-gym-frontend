@@ -56,10 +56,11 @@
   "profile_card_update_profile": "Update Profile",
   "profile_card_change_password": "Change Password",
   "trees_planted_trees_planted": "trees planted",
-  "trees_planted_tree_planted": "tree planted"
-
-
-
+  "trees_planted_tree_planted": "tree planted",
+  "sign_up_form_please_enter_your_first_name": "please enter your first name",
+  "sign_up_form_please_enter_your_second_name": "please enter your second name",
+  "sign_up_form_please_enter_your_company_name": "please enter your company name",
+  "sign_up_form_please_enter_a_valid_email": "please enter a valid e-mail address"
 
 
 }

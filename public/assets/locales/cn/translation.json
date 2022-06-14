@@ -56,7 +56,13 @@
   "profile_card_update_profile": "翻译 Update Profile",
   "profile_card_change_password": "翻译 Change Password",
   "trees_planted_trees_planted": "翻译 trees planted",
-  "trees_planted_tree_planted": "翻译 tree planted"
+  "trees_planted_tree_planted": "翻译 tree planted",
+  "sign_up_form_please_enter_your_first_name": "翻译 please enter your first name",
+  "sign_up_form_please_enter_your_second_name": "翻译 please enter your second name",
+  "sign_up_form_please_enter_your_company_name": "翻译 please enter your company name",
+  "sign_up_form_please_enter_a_valid_email": "翻译 please enter a valid e-mail address"
+
+
 
 
 
