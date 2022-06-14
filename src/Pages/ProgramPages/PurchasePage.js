@@ -16,12 +16,18 @@ const PurchasePage = () => {
         <h1>Purchase</h1>
         </div>
         <div className={classes.qr}>
-        <div>
+        <div className={classes.info}>
           <img src={Monica} alt="Monica Qr Code" />
+          <p>Phone Number: +86-138-1622-6626</p>
         </div>
-        <div>
+        <div className={classes.info}>
           <img src={Darren} alt="Darren Qr Code" />
+          <p>Phone Number: +86-185-2141-9237</p>
         </div>
+        {/* <div className={classes.info}>
+          <img src={GreenGym} alt="Official Account" />
+          <p>Wechat Official Account</p>
+        </div> */}
         </div>
       </div>
     </Fragment>

@@ -29,7 +29,7 @@
 .description {
   margin: 0.5rem 1rem 0.5rem 1rem;
   max-width: 300px;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   /* autoprefixer: off */
   -webkit-box-orient: vertical;
   /* autoprefixer: on */
@@ -95,6 +95,18 @@
     box-sizing: content-box;
     width: 100%;
     height: 7rem;
+  }
+
+  .description{
+     margin: 0.5rem 1rem 0.5rem 1rem;
+    max-width: 300px;
+    -webkit-line-clamp: 3;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
   }
 
   .title {

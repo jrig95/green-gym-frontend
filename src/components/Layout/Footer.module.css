@@ -4,6 +4,7 @@
   justify-content: center;
   height: 5.75rem;
   position: fixed;
+  text-align: center;
   left: 0;
   bottom: 0;
   width: 100vw;
@@ -30,7 +31,8 @@
 
 
 .logoContainer svg {
-  padding: 1rem;
+ padding: 1rem 1rem 0rem 1rem;
+ color: black;
 }
 
 .logoContainer svg:hover{
