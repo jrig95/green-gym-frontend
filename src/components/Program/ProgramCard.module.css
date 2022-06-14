@@ -28,6 +28,14 @@
 
 .description {
   margin: 0.5rem 1rem 0.5rem 1rem;
+  max-width: 300px;
+  -webkit-line-clamp: 3;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
 }
 
 .card:hover {

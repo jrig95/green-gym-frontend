@@ -2,4 +2,60 @@
   width: 100vw;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+    align-items: center;
+    padding-bottom: 10rem;
+}
+
+.qr{
+  display: flex;
+  align-items: center
+}
+
+img{
+  height: 30rem;
+  width: 30rem;
+}
+
+@media only screen and (min-width: 618px) and (max-width: 1000px) {
+  .container {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 10rem;
+    }
+
+    .qr{
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+      height: 20rem;
+      width: 20rem;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 617px) {
+  .container {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 10rem;
+    }
+
+    .qr{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+    img {
+      height: 15rem;
+      width: 15rem;
+    }
 }
