@@ -30,18 +30,30 @@ const Member = ({ member, getMemberId }) => {
     <Card className={memberClasses}>
       <Link to={`${slug}`}>
         <div className={classes.linkContainer}>
-          <p>
-            First Name: <b>{member.first_name}</b>
+          <div className={classes.column}>
+          <p >
+            First Name:
           </p>
-          <p>
-            Last Name: <b>{member.last_name}</b>
+          <p><b>{member.first_name}</b></p>
+          </div>
+          <div className={classes.column}>
+          <p className={classes.last_name}>
+            Last Name:
           </p>
+          <p className={classes.last_name}><b>{member.last_name}</b></p>
+          </div>
+          <div className={classes.column}>
           <p>
-            Company: <b>{member.user_company}</b>
+            Company:
           </p>
-          <p>
-            E-Mail: <b>{member.email}</b>
+          <p><b>{member.user_company}</b></p>
+          </div>
+          <div className={classes.column}>
+          <p className={classes.email}>
+            E-Mail:
           </p>
+          <p className={classes.email}><b>{member.email}</b></p>
+          </div>
         </div>
       </Link>
       <div className={classes.checkBox} onClick={selectMemberHandler}>
