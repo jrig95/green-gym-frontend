@@ -1,12 +1,28 @@
 {
   "welcome_to_green_gym" : "欢迎",
-  "main_title" : " 翻译 We're a wellness platform",
+  "main_title" : " 翻译 We're a Corporate Wellness & Team Building Platform",
   "sub_title" : "\" 翻译 Commited To Improving Planetary Health\"",
   "sign_up": "注册",
   "first_name": "名",
+  "please_enter_your_first_name": "翻译 please enter your first name",
   "last_name": "姓",
+  "please_enter_your_second_name": "翻译 please enter your second name",
+  "age": "翻译 Age",
+  "gender_select": "翻译 Gender",
+  "select": "翻译 Select",
+  "male": "翻译 Male",
+  "female": "翻译 Female",
   "company": "公司",
+  "please_enter_your_company_name": "翻译 please enter your company name",
+  "phone_number": "翻译 Phone Number",
+  "please_enter_a_valid_number": "翻译 Please enter a valid Chinese phone number",
   "e_mail": "邮箱",
+  "enter_a_valid_email": "翻译 please enter a valid e-mail address",
+  "fitness_level": "翻译 Fitness Level",
+  "beginner": "翻译 Beginner",
+  "intermediate": "翻译 Intermediate",
+  "advanced": "翻译 Advanced",
+  "passions": "翻译 Tell us about your passions",
   "password": "密码",
   "cancel": "取消",
   "submit": "提交",
@@ -31,8 +47,8 @@
   "not_found_page_not_found": "翻译 page not found",
   "activities_page_my_activites": "翻译 My Activites",
   "daily_check_in_card_daily_check_in": "翻译 Daily Check In",
-  "daily_challenge_card_done_it": "翻译Do it!",
-  "daily_challenge_card_do_it": "翻译Done it!",
+  "daily_challenge_card_done_it": "翻译 Done it!",
+  "daily_challenge_card_do_it": "翻译 Do it!",
   "daily_checked_in_card_checked_in": "翻译 Checked In!",
   "daily_checked_in_card_check_in": "翻译 Check in",
   "daily_workout_card_daily_workout": "翻译 Daily Workout: Day ",
@@ -60,10 +76,17 @@
   "sign_up_form_please_enter_your_first_name": "翻译 please enter your first name",
   "sign_up_form_please_enter_your_second_name": "翻译 please enter your second name",
   "sign_up_form_please_enter_your_company_name": "翻译 please enter your company name",
-  "sign_up_form_please_enter_a_valid_email": "翻译 please enter a valid e-mail address"
-
-
-
+  "sign_up_form_please_enter_a_valid_email": "翻译 please enter a valid e-mail address",
+  "sign_up_form_longer_than_8": "翻译 password must be longer than 8 characters",
+  "no_program_dont_have_a_program": "翻译 It looks like you don't have a program.",
+  "no_program_get_started": "翻译 Click the button to get started",
+  "no_program_select_program": "翻译 Select a Program",
+  "profile_banner_current_points": "翻译 Current Points:",
+  "update_profile_image_form_add_your_photo": "翻译 Add Your Photo",
+  "update_profile_image_form_add_image": "翻译 Add Image",
+  "update_profile_image_form_cancel": "翻译 Cancel",
+  "update_profile_image_form_submit": "翻译 Submit",
+  "update_profile_page_my_profile": "翻译 My Profile"
 
 
 

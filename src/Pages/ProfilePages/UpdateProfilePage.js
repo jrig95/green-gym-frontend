@@ -7,9 +7,13 @@ import { useUser } from "../../components/User/hooks/use-user";
 import ProfileBanner from "../../components/Profile/ProfileBanner";
 import UpdateProfileForm from "../../components/Forms/UpdateProfileForm";
 import classes from './UpdateProfilePage.module.css';
+import { useTranslation } from "react-i18next";
+
 
 
 const UpdateProfilePage = () => {
+  const { t } = useTranslation();
+
   const authCtx = useContext(AuthContext);
 
   const { data: userData, isLoading: userIsLoading } = useUser(authCtx.userId);
@@ -21,7 +25,7 @@ const UpdateProfilePage = () => {
   return (
     <>
       <ProfileBanner
-        title="My Profile"
+        title= {t("update_profile_page_my_profile")}
         // calories={DUMMY_DATA.user_one.calories}
         name={fullName}
         image={userData.photo_url}

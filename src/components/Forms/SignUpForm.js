@@ -187,7 +187,7 @@ const SignUpForm = () => {
             />
             {passwordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                {t("sign_up_form_longer_than_8")}
               </p>
             )}
           </div>
