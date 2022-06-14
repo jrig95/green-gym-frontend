@@ -4,7 +4,6 @@ import Banner from "../../components/Layout/Banner";
 import classes from "./PurchasePage.module.css";
 import Monica from '../../assets/monicaQr.jpg'
 import Darren from '../../assets/darrenQr.jpg'
-import GreenGym from '../../assets/green-gym.jpg'
 
 
 
@@ -25,10 +24,10 @@ const PurchasePage = () => {
           <img src={Darren} alt="Darren Qr Code" />
           <p>Phone Number: +86-185-2141-9237</p>
         </div>
-        <div className={classes.info}>
+        {/* <div className={classes.info}>
           <img src={GreenGym} alt="Official Account" />
           <p>Wechat Official Account</p>
-        </div>
+        </div> */}
         </div>
       </div>
     </Fragment>
