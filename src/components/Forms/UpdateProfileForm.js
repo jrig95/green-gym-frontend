@@ -133,7 +133,7 @@ const UpdateProfileForm = ({ user: userData }) => {
   const formIsValid = true;
 
   return (
-    <FormCard title={"Update Profile"}>
+    <FormCard title={t("update_profile")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={firstNameClasses}>

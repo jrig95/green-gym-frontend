@@ -9,8 +9,10 @@ import ProgramCard from "../../components/Program/ProgramCard";
 import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
+import { useTranslation } from "react-i18next";
 
 const ProgramsPage = () => {
+  const { t } = useTranslation();
   const authCtx = useContext(AuthContext);
   const [deleteProgramIsShown, setDeleteProgramIsShown] = useState(false);
   const [programDetails, setProgramDetails] = useState({
@@ -49,7 +51,7 @@ const ProgramsPage = () => {
           onDelete={deleteProgramHandler}
         />
       )}
-      {!admin && <Banner title="Our Programs" />}
+      {!admin && <Banner title={t("programs_page_our_programs")}/>}
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>

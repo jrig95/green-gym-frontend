@@ -3,6 +3,7 @@
   "main_title": "We're a Corporate Wellness & Team Building Platform",
   "sub_title": "\"Commited To Improving Planetary Health\"",
   "sign_up": "Sign Up",
+  "update_profile": "Update Profile",
   "first_name": "First Name",
   "please_enter_your_first_name": "please enter your first name",
   "last_name": "Last Name",
@@ -87,8 +88,21 @@
   "update_profile_image_form_add_image": "Add Image",
   "update_profile_image_form_cancel": "Cancel",
   "update_profile_image_form_submit": "Submit",
-  "update_profile_page_my_profile": "My Profile"
-
-
-
+  "update_profile_page_my_profile": "My Profile",
+  "programs_page_our_programs": "Our Programs",
+  "my_rewards": "My Rewards",
+  "no_program_user_rewards": "Rewards",
+  "rewards_for": "Rewards for ",
+  "general_rewards": "General Rewards",
+  "reward_card_cost": "Cost:",
+  "reward_card_pts": "pts",
+  "reward_card_redeem": "Redeem",
+  "reward_claimed_congrats": "Congratulations!",
+  "reward_claimed_message": "We will be in contact with you shortly to deliver your reward.",
+  "reward_claimed_confirm": "Confirm",
+  "claimed_reward_confirmation": "Are you sure you wish to claim this reward?",
+  "claimed_reward_you_will_have": "You will have ",
+  "claimed_reward_points_remaining": "points remaining",
+  "claimed_reward_cancel": "Cancel",
+  "claimed_reward_claim": "Claim"
 }

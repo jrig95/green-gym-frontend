@@ -9,8 +9,6 @@ import UpdateProfileForm from "../../components/Forms/UpdateProfileForm";
 import classes from './UpdateProfilePage.module.css';
 import { useTranslation } from "react-i18next";
 
-
-
 const UpdateProfilePage = () => {
   const { t } = useTranslation();
 
