@@ -2,6 +2,8 @@ import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import classes from "./WorkoutDayTracker.module.css";
 import Card from "../UI/Card";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 
 const WorkoutDayTracker = ({
   programTitle,
@@ -9,6 +11,8 @@ const WorkoutDayTracker = ({
   programLength,
   currentDay,
 }) => {
+  const { t } = useTranslation();
+
   // const {
   //   data: fiveDayArrayData,
   //   isLoading: fiveDayArrayIsLoading,
@@ -45,7 +49,7 @@ const WorkoutDayTracker = ({
     return (
       <Card key={day.id} className={dayClasses}>
         <p className={dayNumberClasses}>
-          Day {day.dwt_day_number}/{programLength}
+          {t("workout_day_tracker_day")} {day.dwt_day_number}/{programLength}
         </p>
         <p className={dayPercentageClasses}>{percentComplete}%</p>
       </Card>

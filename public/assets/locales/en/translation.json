@@ -1,6 +1,6 @@
 {
   "welcome_to_green_gym": "Welcome",
-  "main_title": "We're a wellness platform",
+  "main_title": "We're a Corporate Wellness & Team Building Platform",
   "sub_title": "\"Commited To Improving Planetary Health\"",
   "sign_up": "Sign Up",
   "first_name": "First Name",
@@ -32,5 +32,34 @@
   "activities_page_my_activites": "My Activites",
   "daily_check_in_card_daily_check_in": "Daily Check In",
   "daily_challenge_card_done_it": "Do it!",
-  "daily_challenge_card_do_it": "Done it!"
+  "daily_challenge_card_do_it": "Done it!",
+  "daily_checked_in_card_checked_in": "Checked In!",
+  "daily_checked_in_card_check_in": "Check in",
+  "daily_workout_card_daily_workout": "Daily Workout: Day ",
+  "daily_workout_card_workout_finished": "Workout Finished",
+  "daily_workout_card_todays_workout": "Today's Workout",
+  "workout_day_tracker_day": "Day",
+  "daily_workout_cards_finish_day": "Finish Day",
+  "sign_up_already_have_an_account": "Already have an account? Log in.",
+  "log_in_dont_have_an_account": "Don't have an account? Create one now.",
+  "log_in_forgot_your_password": "Forgot your password?",
+  "log_in_form_email": "E-mail",
+  "log_in_please_enter_a_valid_email": "please enter a valid e-mail address",
+  "log_in_form_password": "Password",
+  "log_in_password_must_be_longer_than_8": "password must be longer than 8 characters",
+  "log_in_cancel": "Cancel",
+  "log_in_submit": "Submit",
+  "log_in_login": "Login",
+  "profile_page_my_profile": "My Profile",
+  "profile_page_loading": "Loading...",
+  "profile_banner_calories_burned": "calories burned",
+  "profile_card_update_profile": "Update Profile",
+  "profile_card_change_password": "Change Password",
+  "trees_planted_trees_planted": "trees planted",
+  "trees_planted_tree_planted": "tree planted"
+
+
+
+
+
 }

@@ -11,6 +11,8 @@ import DailyChallengeCard from "./DailyChallengeCard";
 import { useUpdateProgramTracker } from "../Exercise/hooks/use-update-program-tracker";
 import { useUpdateDailyWorkoutTracker } from "../Exercise/hooks/use-update-workout-tracker";
 import classes from "./DailyWorkoutCards.module.css";
+import { useTranslation } from "react-i18next";
+
 
 const DailyWorkoutCards = ({
   programTrackerData,
@@ -20,6 +22,7 @@ const DailyWorkoutCards = ({
   refetchProgramTrackerData,
   refetchFiveDayArray,
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const isFetching = useIsFetching();
 
@@ -144,6 +147,7 @@ const DailyWorkoutCards = ({
   };
 
   // All must be true to be able to slect finish day
+  const finishDay = t("daily_workout_cards_finish_day")
   const dayFinished =
     dwtDailyCheckInCompleted && dwtChallengeCompleted && dwtExercisesCompleted;
 
@@ -176,7 +180,7 @@ const DailyWorkoutCards = ({
           onClick={finishDayHandler}
           disabled={!dayFinished || isFetching}
         >
-          {isFetching ? <LoadingSpinnerButton /> : "Finish Day"}
+          {isFetching ? <LoadingSpinnerButton /> : finishDay}
         </Button>
       </div>
     </Fragment>

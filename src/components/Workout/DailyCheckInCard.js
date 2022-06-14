@@ -19,10 +19,11 @@ const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
     ? `${classes.buttonContainer} ${classes.checkedIn}`
     : classes.buttonContainer;
 
+  const translateCheckedIn = t("daily_checked_in_card_checked_in")
+  const checkIn = t("daily_checked_in_card_check_in")
   return (
     <Card className={classes.container}>
       <div className={classes.title}>
-        {/* <h1>Daily Check In</h1> */}
         <h1>{t("daily_check_in_card_daily_check_in")}</h1>
       </div>
       <div className={checkInClasses}>
@@ -31,7 +32,7 @@ const DailyCheckInCard = ({ getCompleted, dwtDailyCheckInCompleted }) => {
         </div>
         <div className={classes.button}>
           <Button onClick={checkInHandler} disabled={dwtDailyCheckInCompleted || checkedIn}>
-            {dwtDailyCheckInCompleted ? "Checked In!" : "Check in"}
+            {dwtDailyCheckInCompleted ? translateCheckedIn : checkIn}
           </Button>
         </div>
       </div>
