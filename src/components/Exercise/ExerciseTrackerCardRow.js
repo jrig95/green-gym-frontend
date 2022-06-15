@@ -1,6 +1,4 @@
-import { type } from "@testing-library/user-event/dist/type";
-import { useEffect, useState } from "react";
-import { isANumber } from "../../utils/input-from-validations";
+import { useState } from "react";
 import useInput from "../Forms/Hooks/use-input";
 import classes from "./ExerciseTrackerCard.module.css";
 

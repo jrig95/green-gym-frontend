@@ -35,7 +35,6 @@ const AddRewardForm = ({ onClose }) => {
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHandler,
-    reset: restTitle,
   } = useInput(textNotEmpty);
 
   const {
@@ -44,7 +43,6 @@ const AddRewardForm = ({ onClose }) => {
     hasError: pointsHasError,
     valueChangeHandler: pointsChangeHandler,
     inputBlurHandler: pointsBlurHandler,
-    reset: restPoints,
   } = useInput(isNumber);
 
   const { value: programValue, valueChangeHandler: programChangeHandler } =
@@ -58,7 +56,7 @@ const AddRewardForm = ({ onClose }) => {
     formData.append("reward[reward_points]", pointsValue);
     formData.append("reward[photo]", selectedImageFile);
 
-    if (programValue != "") {
+    if (programValue !== "") {
       formData.append("reward[program_id]", programValue);
     }
 
@@ -69,7 +67,7 @@ const AddRewardForm = ({ onClose }) => {
     if (createRewardIsSuccess) {
       onClose();
     }
-  }, [createRewardIsSuccess]);
+  }, [createRewardIsSuccess, onClose]);
 
   const formIsValid = titleIsValid && pointsIsValid;
 

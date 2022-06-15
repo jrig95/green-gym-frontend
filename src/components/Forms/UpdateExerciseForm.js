@@ -36,54 +36,41 @@ const UpdateExerciseForm = ({
     hasError: exerciseTitleHasError,
     valueChangeHandler: exerciseTitleChangeHandler,
     inputBlurHandler: exerciseTitleBlurHandler,
-    reset: resetExerciseTitle,
   } = useInput(textNotEmpty, exercise.exercise_title);
 
   const {
     value: workTimeValue,
     isValid: workTimeIsValid,
-    hasError: workTimeHasError,
     valueChangeHandler: workTimeChangeHandler,
     inputBlurHandler: workTimeBlurHandler,
-    reset: resetWorkTime,
   } = useInput(selectIsValid, exercise.exercise_work_time);
 
   const {
     value: restTimeValue,
     isValid: restTimeIsValid,
-    hasError: restTimeHasError,
     valueChangeHandler: restTimeChangeHandler,
     inputBlurHandler: restTimeBlurHandler,
-    reset: resetRestTime,
   } = useInput(selectIsValid, exercise.exercise_rest_time);
 
   const {
     value: libraryItemValue,
-    isValid: libraryItemIsValid,
-    hasError: libraryItemHasError,
     valueChangeHandler: libraryItemChangeHandler,
     inputBlurHandler: libraryItemBlurHandler,
-    reset: resetLibraryItem,
   } = useInput(selectIsValid);
 
   const {
     value: caloriesValue,
-    isValid: caloriesIsValid,
     hasError: caloriesHasError,
     valueChangeHandler: caloriesChangeHandler,
     inputBlurHandler: caloriesBlurHandler,
-    reset: resetCalories,
   } = useInput(isANumber, exercise.calories_per_exercise);
 
   const getQuestionValue = exercise.exercise_question ? "yes" : "no";
 
   const {
     value: questioValue,
-    isValid: questionValid,
-    hasError: questionHasError,
     valueChangeHandler: questionChangeHandler,
     inputBlurHandler: questionBlurHandler,
-    reset: resetQuestion,
   } = useInput(selectIsValid, getQuestionValue);
 
   const formSubmitHandler = (event) => {
@@ -120,7 +107,7 @@ const UpdateExerciseForm = ({
     if (updateExerciseIsSuccess) {
       onClose();
     }
-  }, [updateExerciseIsSuccess]);
+  }, [updateExerciseIsSuccess, onClose]);
 
   const formIsValid =
     exerciseTitleIsValid && workTimeIsValid && restTimeIsValid;

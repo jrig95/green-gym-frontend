@@ -24,7 +24,7 @@ const StartWorkoutCard = ({ onStartWorkout }) => {
     if (countdown === 0) {
       onStartWorkout();
     }
-  }, [isGettingReady, countdown]);
+  }, [isGettingReady, countdown, onStartWorkout]);
 
   return (
     <Fragment>

@@ -8,7 +8,7 @@ import { useGetMembers } from "../../components/AdminComponents/Members/hooks/us
 import MembersList from "../../components/AdminComponents/Members/MembersList";
 import classes from "./MembersPage.module.css";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
-import Sort from "../../components/AdminComponents/Members/Sort";
+// import Sort from "../../components/AdminComponents/Members/Sort";
 
 const MembersPage = () => {
   const addMemberToProgram = useAddMemeberToProgram();
@@ -69,7 +69,7 @@ const MembersPage = () => {
         setProgramId(null);
       }
     }
-  }, [addMemebersList, programId]);
+  }, [addMemebersList, programId, addMemberToProgram]);
 
   // Create another modal that shows on success. Show have a list of users and Program name.
   // pass the programId via props and call backend for program details
@@ -87,7 +87,7 @@ const MembersPage = () => {
 
   useEffect(() => {
     refetchMembers();
-  }, [searchParam]);
+  }, [searchParam, refetchMembers]);
 
   // render loading
   if (isLoading) return <LoadingSpinnerLarge />;

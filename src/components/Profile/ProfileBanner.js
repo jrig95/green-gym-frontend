@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { HiCamera } from "react-icons/hi";
 
 import UpdateProfileImage from "./UpdateProfileImage";

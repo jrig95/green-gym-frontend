@@ -35,7 +35,7 @@ const DailyWorkoutCard = ({
 
       </div>
       <div className={classes.image}>
-        <img src={programImage} alt="Program Image" />
+        <img src={programImage} alt="Program" />
       </div>
       <div className={classes.buttonContainer}>
         <Link to={`/activities/${slug}`}>

@@ -1,7 +1,6 @@
-import { Fragment, useState, useContext, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 import { useCreateRewardTracker } from "./hooks/use-create-reward-tracker";
-import AuthContext from "../../context/AuthContext";
 import { useDeleteReward } from "./hooks/use-delete-reward";
 import { useRewards } from "./hooks/use-rewards";
 import RewardClaimedMessage from "./RewardClaimedMessage";
@@ -14,7 +13,6 @@ import DeleteReward from "./DeleteReward";
 import Banner from "../Layout/Banner";
 
 const Rewards = ({ userData, admin, noProgram }) => {
-  const authCtx = useContext(AuthContext);
   const deleteReward = useDeleteReward();
   const {
     mutate: createRewardTracker,

@@ -32,7 +32,6 @@ const ProfileResetPasswordForm = () => {
     hasError: newPasswordHasError,
     valueChangeHandler: newPasswordChangeHandler,
     inputBlurHandler: newPasswordBlurHandler,
-    reset: resetNewPassword,
   } = useInput(textNotEmpty);
 
   const {
@@ -41,7 +40,6 @@ const ProfileResetPasswordForm = () => {
     hasError: confirmPasswordHasError,
     valueChangeHandler: confirmPasswordChangeHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
-    reset: confirmResetPassword,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
@@ -72,7 +70,7 @@ const ProfileResetPasswordForm = () => {
     if (updateProfileIsSuccess) {
       navigateToProfileHandler();
     }
-  }, [updateProfileIsSuccess]);
+  }, [updateProfileIsSuccess, navigateToProfileHandler]);
 
   const newPasswordClasses = newPasswordHasError
     ? `${classes.formControl} ${classes.invalid}`

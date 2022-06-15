@@ -1,13 +1,10 @@
-import { useProgram } from "../../Program/hooks/use-program";
 import Button from "../../UI/Button";
 import Modal from "../../UI/Modal";
 import classes from "./AddedMembersToProgramMessage.module.css";
 
-const AddedMembersToProgramMessage = ({ onClose, memebers, programId }) => {
+const AddedMembersToProgramMessage = ({ onClose, memebers }) => {
   // const { data: programData, isLoading: programIsLoading } =
   //   useProgram(programId);
-
-  console.log(memebers);
   // console.log(programId);
 
   const memebersList = memebers.map((member) => {

@@ -14,7 +14,7 @@ const getDailyWorkoutTracker = async (programTrackerId, workoutTrackerId) => {
 export const useDailyWorkoutTracker = (programTrackerId, workoutTrackerId) => {
   const { addError } = useAPIError();
   const fallback = [];
-  const { data = fallback, isError, error, isLoading, refetch } = useQuery(queryKeys.workout_tracker, () => getDailyWorkoutTracker(programTrackerId, workoutTrackerId), {
+  const { data = fallback, isLoading, refetch } = useQuery(queryKeys.workout_tracker, () => getDailyWorkoutTracker(programTrackerId, workoutTrackerId), {
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);

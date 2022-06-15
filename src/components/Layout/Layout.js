@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import Navbar from "./Navbar";
 import classes from "./Layout.module.css";
 import Footer from "./Footer";
-import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Layout = ({ children }) => {
   return (

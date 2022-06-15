@@ -1,5 +1,3 @@
-import { useRef, useState } from "react";
-
 import { useUpdateProgram } from "../Program/hooks/use-update-program";
 import classes from "./Form.module.css";
 import FormCard from "./AdminFormCard";
@@ -51,7 +49,6 @@ const UpdateProgramForm = ({ programData, onClose }) => {
     hasError: programNameHasError,
     valueChangeHandler: programNameChangeHandler,
     inputBlurHandler: programNameBlurHandler,
-    reset: resetprogramName,
   } = useInput(textNotEmpty, programData.program_title);
 
   const {
@@ -60,16 +57,13 @@ const UpdateProgramForm = ({ programData, onClose }) => {
     hasError: descriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-    reset: resetDescription,
   } = useInput(textNotEmpty, programData.program_description);
 
   const {
     value: priceValue,
-    isValid: priceIsValid,
     hasError: priceHasError,
     valueChangeHandler: priceChangeHandler,
     inputBlurHandler: priceBlurHandler,
-    reset: restPrice,
   } = useInput(isNotANumber, programData.price);
 
 

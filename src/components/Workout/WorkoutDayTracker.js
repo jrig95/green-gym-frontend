@@ -1,7 +1,5 @@
-import { useFiveDayArray } from "../Trackers/hooks/use-five-day-array";
 import classes from "./WorkoutDayTracker.module.css";
 import Card from "../UI/Card";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 

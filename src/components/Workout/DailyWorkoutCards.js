@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LoadingSpinnerButton from "../UI/LoadingSpinnerButton";
@@ -8,11 +8,9 @@ import Button from "../UI/Button";
 import DailyWorkoutCard from "./DailyWorkoutCard";
 import DailyCheckInCard from "./DailyCheckInCard";
 import DailyChallengeCard from "./DailyChallengeCard";
-import { useUpdateProgramTracker } from "../Exercise/hooks/use-update-program-tracker";
 import { useUpdateDailyWorkoutTracker } from "../Exercise/hooks/use-update-workout-tracker";
 import classes from "./DailyWorkoutCards.module.css";
 import { useTranslation } from "react-i18next";
-
 
 const DailyWorkoutCards = ({
   programTrackerData,
@@ -26,10 +24,9 @@ const DailyWorkoutCards = ({
   const navigate = useNavigate();
   const isFetching = useIsFetching();
 
-  const updateProgramTracker = useUpdateProgramTracker();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
-  const [dayIsFinished, setDayIsFinished] = useState(false);
+  // const [dayIsFinished, setDayIsFinished] = useState(false);
 
   // On the last day of a program. This line breaks everything.
   const currentDay = programTrackerData.current_day;
@@ -89,6 +86,10 @@ const DailyWorkoutCards = ({
     programData,
     programTrackerData,
     fiveDayArrayData,
+    refetchProgramData,
+    refetchProgramTrackerData,
+    refetchDailyWorkoutTracker,
+    refetchFiveDayArray,
   ]);
 
   const challengeCompleteHandler = () => {
@@ -128,7 +129,7 @@ const DailyWorkoutCards = ({
     refetchDailyWorkoutTracker();
     refetchProgramTrackerData();
     refetchProgramData();
-    setDayIsFinished(true);
+    // setDayIsFinished(true);
 
     // TODO: Add codition to check if it is the final day.
     console.log(currentDay);
@@ -147,7 +148,7 @@ const DailyWorkoutCards = ({
   };
 
   // All must be true to be able to slect finish day
-  const finishDay = t("daily_workout_cards_finish_day")
+  const finishDay = t("daily_workout_cards_finish_day");
   const dayFinished =
     dwtDailyCheckInCompleted && dwtChallengeCompleted && dwtExercisesCompleted;
 

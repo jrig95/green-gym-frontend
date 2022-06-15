@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 import { useTranslation } from "react-i18next";
 
 
-const ProfileCard = ({}) => {
+const ProfileCard = () => {
   const { t } = useTranslation();
   return (
     <Card className={classes.card}>

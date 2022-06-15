@@ -18,7 +18,7 @@ const APIErrorNotification = () => {
 
       return () => clearTimeout(wait);
     }
-  }, [error]);
+  }, [error, removeError]);
 
   return (
     <Fragment>

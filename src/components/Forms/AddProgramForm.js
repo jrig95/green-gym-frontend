@@ -59,7 +59,6 @@ const AddProgramForm = () => {
     hasError: numberOfDaysHasError,
     valueChangeHandler: numberOfDaysChangeHandler,
     inputBlurHandler: numberOfDaysBlurHandler,
-    reset: resetNumberOfDays,
   } = useInput(isNotANumber);
 
   const {
@@ -68,25 +67,19 @@ const AddProgramForm = () => {
     hasError: descriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-    reset: resetDescription,
   } = useInput(textNotEmpty);
 
   const {
     value: priceValue,
-    isValid: priceIsValid,
     hasError: priceHasError,
     valueChangeHandler: priceChangeHandler,
     inputBlurHandler: priceBlurHandler,
-    reset: restPrice,
   } = useInput(isNotANumber);
 
   const {
     value: coverImageValue,
-    isValid: coverImageIsValid,
     hasError: coverImageHasError,
-    valueChangeHandler: coverImageChangeHandler,
     inputBlurHandler: coverImageBlurHandler,
-    reset: resetCoverImage,
   } = useInput(textNotEmpty);
 
   const fileSelectHandler = (event) => {

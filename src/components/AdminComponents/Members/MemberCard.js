@@ -7,7 +7,7 @@ const MemberCard = ({ user }) => {
       <div className={classes.profilePictureContainer}>
         <img
           src={user.photo_url}
-          alt={`${user.first_name}'s photo`}
+          alt={`${user.first_name}`}
         />
       </div>
       <div className={classes.userDetailsContainer}>

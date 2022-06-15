@@ -6,11 +6,9 @@ import { Link } from "react-router-dom";
 import classes from "./LoginForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
-import FormCard from "./FormCard";
 import { useEffect } from "react";
 import LoginFormCard from "./LoginFormCard";
 import { useTranslation } from "react-i18next";
-
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -26,7 +24,6 @@ const LoginForm = () => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput(textNotEmpty);
 
   const {
@@ -35,7 +32,6 @@ const LoginForm = () => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
@@ -59,7 +55,7 @@ const LoginForm = () => {
         navigate("/activities");
       }
     }
-  }, [loginIsSuccess, authCtx]);
+  }, [loginIsSuccess, authCtx, navigate]);
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`

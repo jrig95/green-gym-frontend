@@ -52,11 +52,11 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     formData.append("reward[reward_name]", titleValue);
     formData.append("reward[reward_points]", pointsValue);
 
-    if (programValue != "") {
+    if (programValue !== "") {
       formData.append("reward[program_id]", programValue);
     }
 
-    if (selectedImageFile != null) {
+    if (selectedImageFile !== null) {
       formData.append("reward[photo]", selectedImageFile);
     }
 
@@ -72,7 +72,7 @@ const UpdateRewardForm = ({ onClose, reward }) => {
     if (updateRewardIsSuccess) {
       onClose();
     }
-  }, [updateRewardIsSuccess])
+  }, [updateRewardIsSuccess, onClose])
 
   const fileSelectHandler = (event) => {
     setSelectedImageFile(event.target.files[0]);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
+import useAPIError from "../../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
@@ -24,6 +25,8 @@ export const useLibraryItems = (searchParams) => {
   if (searchParams === undefined) {
     searchParams = ""
   }
+  const { addError } = useAPIError();
+
 
   const fallback = [];
   const {
@@ -37,6 +40,7 @@ export const useLibraryItems = (searchParams) => {
       console.log(error);
       const title =
         error instanceof Error ? error.message : "error connecting to server";
+      addError(title, error.status);
     },
   });
 

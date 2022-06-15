@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useExerciseTrackers } from "./hooks/use-exercise-trackers";
 import { useExercises } from "./hooks/use-exercises";
@@ -6,7 +6,6 @@ import StartWorkoutCard from "./WorkOutUI/StartWorkoutCard";
 import classes from "./DailyExercises.module.css";
 import WorkoutFinishedCard from "./WorkOutUI/WorkoutFinishedCard";
 import RestCard from "./WorkOutUI/RestCard";
-import Button from "../UI/Button";
 import ExerciseVideo from "./ExerciseVideo";
 import ExerciseTrackerCard from "./ExerciseTrackerCard";
 
@@ -36,7 +35,7 @@ const DailyExercises = ({
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [showRestScreen, setShowRestScreen] = useState(false);
   const [startWorkout, setStartWorkout] = useState(false);
-  const [workoutIsFinish, setWorkoutIsFinished] = useState(false);
+  // const [workoutIsFinish, setWorkoutIsFinished] = useState(false);
   const [firstVideoCompleted, setFirstVideoCompleted] = useState(false);
 
   // return an array of videos
@@ -54,7 +53,7 @@ const DailyExercises = ({
     }, timeRemaining);
   };
 
-  let videoUls = [];
+  // let videoUls = [];
 
  
 
@@ -103,9 +102,9 @@ const DailyExercises = ({
     setStartWorkout(true);
   };
 
-  const onFinishWorkoutHandler = () => {
-    setWorkoutIsFinished(true);
-  };
+  // const onFinishWorkoutHandler = () => {
+  //   setWorkoutIsFinished(true);
+  // };
 
   const workoutVideo = (
     <div className={classes.videoContainer}>

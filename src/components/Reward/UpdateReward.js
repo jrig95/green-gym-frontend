@@ -1,4 +1,3 @@
-import { useReward } from "../Reward/hooks/use-reward";
 import UpdateRewardForm from "../Forms/UpdateRewardForm";
 import Modal from "../UI/Modal";
 
