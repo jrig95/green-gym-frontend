@@ -69,7 +69,7 @@ const ProfileResetPasswordForm = () => {
     if (updateProfileIsSuccess) {
       navigate("/profile");
     }
-  }, [updateProfileIsSuccess]);
+  }, [updateProfileIsSuccess, navigate]);
 
   const newPasswordClasses = newPasswordHasError
     ? `${classes.formControl} ${classes.invalid}`

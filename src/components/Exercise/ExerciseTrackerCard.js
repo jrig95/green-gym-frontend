@@ -62,7 +62,7 @@ const ExerciseTrackerCard = ({
     if (numberOfExercisesComplete === exerciseTrackers.length) {
       setFormIsCompelte(false);
     }
-  }, [numberOfExercisesComplete, setFormIsCompelte])
+  }, [numberOfExercisesComplete, setFormIsCompelte, exerciseTrackers.length])
 
   if (isLoading) return <p>Loading...</p>;
 
