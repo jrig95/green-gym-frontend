@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import classes from "./ExerciseVideo.module.css";
 
 const ExerciseVideo = ({ videoUrl, onEnded }) => {
-  const videoWidth = 640;
+  // const videoWidth = 640;
 
   return (
     <div className={classes.container}>

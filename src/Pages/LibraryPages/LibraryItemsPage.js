@@ -9,7 +9,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import classes from "./LibraryItemsPage.module.css";
 
 const LibraryItemsPage = () => {
-  const [searchParams, setSearchParams] = useState("")
+  const [searchParams, setSearchParams] = useState("");
   const deleteLibraryItem = useDeleteLibraryItem();
   const { data, refetch: refetchLibraryItems } = useLibraryItems(searchParams);
 
@@ -56,8 +56,8 @@ const LibraryItemsPage = () => {
   };
 
   useEffect(() => {
-    refetchLibraryItems()
-  }, [searchParams])
+    refetchLibraryItems();
+  }, [searchParams, refetchLibraryItems]);
 
   const libraryItems = data.map((libraryItem) => {
     return (

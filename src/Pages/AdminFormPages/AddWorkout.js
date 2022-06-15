@@ -28,7 +28,7 @@ const AddWorkoutPage = () => {
     if (!renderForms) {
       navigate("/programs");
     }
-  }, [renderForms])
+  }, [renderForms, navigate])
 
   const addWorkoutForms = numberOfWorkoutsArray.map((num) => {
     if (currentArrayIndex === num) {

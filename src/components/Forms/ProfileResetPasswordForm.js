@@ -32,7 +32,6 @@ const ProfileResetPasswordForm = () => {
     hasError: newPasswordHasError,
     valueChangeHandler: newPasswordChangeHandler,
     inputBlurHandler: newPasswordBlurHandler,
-    reset: resetNewPassword,
   } = useInput(textNotEmpty);
 
   const {
@@ -41,7 +40,6 @@ const ProfileResetPasswordForm = () => {
     hasError: confirmPasswordHasError,
     valueChangeHandler: confirmPasswordChangeHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
-    reset: confirmResetPassword,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
@@ -55,7 +53,6 @@ const ProfileResetPasswordForm = () => {
 
       updatePassword(user);
     } else {
-      console.log("Can't submit - display error");
       setPasswordsDoNotMatch(true);
     }
   };
@@ -70,9 +67,9 @@ const ProfileResetPasswordForm = () => {
 
   useEffect(() => {
     if (updateProfileIsSuccess) {
-      navigateToProfileHandler();
+      navigate("/profile");
     }
-  }, [updateProfileIsSuccess]);
+  }, [updateProfileIsSuccess, navigate]);
 
   const newPasswordClasses = newPasswordHasError
     ? `${classes.formControl} ${classes.invalid}`

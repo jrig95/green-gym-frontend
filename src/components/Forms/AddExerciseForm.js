@@ -1,7 +1,6 @@
 import { useLibraryItems } from "../AdminComponents/Library/Hooks/use-library-items";
 import { Fragment, useEffect, useState } from "react";
 import classes from "./AddExerciseForm.module.css";
-import AddExerciseOverviewForm from "./AddExerciseOverviewForm";
 import useInput from "./Hooks/use-input";
 
 const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
@@ -47,52 +46,40 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
     hasError: exerciseTitleHasError,
     valueChangeHandler: exerciseTitleChangeHandler,
     inputBlurHandler: exerciseTitleBlurHandler,
-    reset: resetExerciseTitle,
   } = useInput(textNotEmpty);
 
   const {
     value: workTimeValue,
     isValid: workTimeIsValid,
-    hasError: workTimeHasError,
     valueChangeHandler: workTimeChangeHandler,
     inputBlurHandler: workTimeBlurHandler,
-    reset: resetWorkTime,
   } = useInput(selectIsValid);
 
   const {
     value: restTimeValue,
     isValid: restTimeIsValid,
-    hasError: restTimeHasError,
     valueChangeHandler: restTimeChangeHandler,
     inputBlurHandler: restTimeBlurHandler,
-    reset: resetRestTime,
   } = useInput(selectIsValid);
 
   const {
     value: libraryItemValue,
     isValid: libraryItemIsValid,
-    hasError: libraryItemHasError,
     valueChangeHandler: libraryItemChangeHandler,
     inputBlurHandler: libraryItemBlurHandler,
-    reset: resetLibraryItem,
   } = useInput(selectIsValid);
 
   const {
     value: caloriesValue,
-    isValid: caloriesIsValid,
     hasError: caloriesHasError,
     valueChangeHandler: caloriesChangeHandler,
     inputBlurHandler: caloriesBlurHandler,
-    reset: resetCalories,
   } = useInput(isANumber);
 
   const {
     value: questioValue,
-    isValid: questionValid,
-    hasError: questionHasError,
     valueChangeHandler: questionChangeHandler,
     inputBlurHandler: questionBlurHandler,
-    reset: resetQuestion,
   } = useInput(selectIsValid);
 
   const formIsValid =
@@ -106,7 +93,7 @@ const AddExerciseForm = ({ exerciseNumber, getExerciseData }) => {
       setExerciseTitlePlaceholder(exerciseTitleValue);
       setCaloriesPlaceholder(caloriesValue);
     }
-  }, [exerciseIsSubmitted]);
+  }, [exerciseIsSubmitted, caloriesValue, exerciseTitleValue]);
 
   const exerciseTitleValueTernery = exerciseIsSubmitted
     ? ""

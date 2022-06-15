@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "react-query";
 import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
-import { queryClient } from "../../../react-query/queryClient";
 
 const updateExerciseInProgram = async (exerciseData) => {
   const exercise = {

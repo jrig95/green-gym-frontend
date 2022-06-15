@@ -18,11 +18,9 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
 
   const {
     value: titleValue,
-    isValid: titleIsValid,
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHander,
-    reset: resetTitle,
   } = useInput(textNotEmpty, libraryItem.title);
 
   const titleClasses = titleHasError
@@ -52,7 +50,7 @@ const UpdateLibraryItemForm = ({ libraryItem, onClose }) => {
     if (updateLibraryItemIsSuccess) {
       onClose();
     }
-  }, [updateLibraryItemIsSuccess])
+  }, [updateLibraryItemIsSuccess, onClose])
 
   const fileSelectHandler = (event) => {
     setSelectedVideoFile(event.target.files[0]);

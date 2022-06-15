@@ -1,4 +1,3 @@
-import { BsFacebook } from "react-icons/bs";
 import { IoLogoWechat } from "react-icons/io5";
 import { BsInstagram } from "react-icons/bs";
 import {BsLinkedin} from "react-icons/bs"

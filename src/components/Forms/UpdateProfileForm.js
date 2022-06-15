@@ -64,7 +64,7 @@ const UpdateProfileForm = ({ user: userData }) => {
 
   const {
     value: emailValue,
-    isValid: emailIsValid,
+    // isValid: emailIsValid,
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
@@ -108,7 +108,7 @@ const UpdateProfileForm = ({ user: userData }) => {
     if (updateProfileIsSuccess) {
       navigate("/profile");
     }
-  }, [updateProfileIsSuccess, genderValue, fitnessLevelValue]);
+  }, [updateProfileIsSuccess, genderValue, fitnessLevelValue, navigate]);
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`

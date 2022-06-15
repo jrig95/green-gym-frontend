@@ -37,7 +37,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     hasError: descriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-    rest: resetDescription,
   } = useInput(textNotEmpty);
 
   const {
@@ -46,7 +45,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     hasError: dailyChallengeHasError,
     valueChangeHandler: dailyChallengeChangeHandler,
     inputBlurHandler: dailyChallengeBlurHandler,
-    reset: resetDailyChallenge,
   } = useInput(textNotEmpty);
 
   const {
@@ -55,7 +53,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     hasError: dailyChallengeDescriptionHasError,
     valueChangeHandler: dailyChallengeDescriptionChangeHandler,
     inputBlurHandler: dailyChallengeDescriptionBlurHandler,
-    reset: restDailyChallengeDescription,
   } = useInput(textNotEmpty);
 
   const {
@@ -64,7 +61,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     hasError: numberOfTypesHasError,
     valueChangeHandler: numberOfTypesChangeHandler,
     inputBlurHandler: numberOfTypesBlurHandler,
-    reset: resetNumberOfTypes,
   } = useInput(isNotANumber);
 
   const {
@@ -73,7 +69,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     hasError: numberOfExercisesHasError,
     valueChangeHandler: numberOfExercisesChangeHandler,
     inputBlurHandler: numberOfExercisesBlurHandler,
-    reset: resetNumberOfExercises,
   } = useInput(isNotANumber);
 
   const overviewTimes = parseInt(numberOfTypesValue);
@@ -123,10 +118,10 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
   // This can't be constantly refetching
   useEffect(() => {
     const interval = setTimeout(() => {
-      refetchLastProgram()
+      refetchLastProgram();
     }, 5000);
     return () => clearTimeout(interval);
-  }, [lastProgramData]);
+  }, [lastProgramData, refetchLastProgram]);
 
   const formSubmitHandler = async () => {
     const daily_workout = {
@@ -150,14 +145,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     // 2. On each itteration create the exercise overview
     // How to get the workout ID?
   };
-
-  useEffect(() => {
-    if (createWorkoutIsSuccess) {
-      console.log("success");
-      addExercisesHandler();
-      onAddWorkout();
-    }
-  }, [createWorkoutIsSuccess]);
 
   // If isSuccess
 
@@ -208,7 +195,13 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExercise(exercise);
     });
   };
-
+  
+  useEffect(() => {
+    if (createWorkoutIsSuccess) {
+      addExercisesHandler();
+      onAddWorkout();
+    }
+  }, [createWorkoutIsSuccess, addExercisesHandler, onAddWorkout]);
   // get the last id for the daily workout
   // itteratte over the array and for each item post request.
 

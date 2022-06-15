@@ -1,8 +1,7 @@
-import { Link, useNavigate, useNavigationType } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import { useTranslation } from "react-i18next";
 
 import { useUserSignup } from "../User/hooks/use-user-signup";
-import FormCard from "./FormCard";
 import classes from "./SignUpForm.module.css";
 import SignUpFormCard from "./SignUpFormCard";
 import Button from "../UI/Button";
@@ -87,7 +86,7 @@ const SignUpForm = () => {
     if (signUpIsSuccess) {
       navigate("/activities")
     }
-  }, [signUpIsSuccess])
+  }, [signUpIsSuccess, navigate])
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`

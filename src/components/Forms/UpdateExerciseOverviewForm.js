@@ -58,7 +58,7 @@ const UpdateExerciseOverviewForm = ({ onClose, exercise, programId }) => {
     if (updateExerciseOverviewIsSuccess) {
       onClose();
     }
-  }, [updateExerciseOverviewIsSuccess])
+  }, [updateExerciseOverviewIsSuccess, onClose])
 
   const exerciseTitleClasses = exerciseTitleHasError
     ? `${classes.formControl} ${classes.invalid}`

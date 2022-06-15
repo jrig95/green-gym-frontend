@@ -4,8 +4,9 @@ import useInput from "./Hooks/use-input";
 
 const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
   const [overviewIsSubmitted, setOverviewIsSubmitted] = useState(false);
-  const [exerciseTitlePlaceHolder, setExerciseTitlePlaceHolder] = useState("Title")
-  const [numberOfRepsPlaceHolder, setNumberOfRepsPlaceHolder] = useState(0)
+  const [exerciseTitlePlaceHolder, setExerciseTitlePlaceHolder] =
+    useState("Title");
+  const [numberOfRepsPlaceHolder, setNumberOfRepsPlaceHolder] = useState(0);
 
   const textNotEmpty = (value) => value !== "";
 
@@ -55,16 +56,24 @@ const AddExerciseOverviewForm = ({ exerciseNumber, getOverviewData }) => {
     if (overviewIsSubmitted) {
       setExerciseTitlePlaceHolder(exerciseTitleValue);
       resetExerciseTitle();
-      setNumberOfRepsPlaceHolder(numberOfSetsValue)
+      setNumberOfRepsPlaceHolder(numberOfSetsValue);
       resetNumberOfSets();
     }
-  }, [overviewIsSubmitted]);
+  }, [
+    overviewIsSubmitted,
+    exerciseTitleValue,
+    numberOfSetsValue,
+    resetExerciseTitle,
+    resetNumberOfSets,
+  ]);
 
   const submittedClasses = overviewIsSubmitted
     ? `${classes.formGrid} ${classes.titlesGrey}`
     : classes.formGrid;
 
-  const exerciseTitleValueTernery = overviewIsSubmitted ? "" : exerciseTitleValue;
+  const exerciseTitleValueTernery = overviewIsSubmitted
+    ? ""
+    : exerciseTitleValue;
   const numberOfSetsValueTernery = overviewIsSubmitted ? "" : numberOfSetsValue;
 
   return (

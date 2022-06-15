@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { GiBiceps } from "react-icons/gi";
 
 import classes from "./DailyChallengeCard.module.css";
@@ -9,10 +9,10 @@ import { useTranslation } from "react-i18next";
 
 const DailyChallengeCard = ({ getCompleted, dwtChallengeCompleted, dailyChallenge }) => {
   const { t } = useTranslation();
-  const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
+  // const [challengeIsCompleted, setChallengeIsCompleted] = useState(false);
 
   const challengeCompletedHandler = () => {
-    setChallengeIsCompleted(true);
+    // setChallengeIsCompleted(true);
     getCompleted(true);
   };
 

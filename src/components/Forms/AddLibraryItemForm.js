@@ -1,7 +1,6 @@
 import { useCreateLibraryItem } from "../AdminComponents/Library/Hooks/use-create-library-item";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
-import FormCard from "./AdminFormCard";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
 
@@ -19,7 +18,6 @@ const AddLibraryItemForm = ({ onClose }) => {
     hasError: titleHasError,
     valueChangeHandler: titleChangeHandler,
     inputBlurHandler: titleBlurHander,
-    reset: resetTitle,
   } = useInput(textNotEmpty);
 
   const titleClasses = titleHasError

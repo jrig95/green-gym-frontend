@@ -53,7 +53,7 @@ const UpdateWorkoutForm = ({ onClose, workoutData, programId }) => {
     if (updateWorkoutIsSuccess) {
       onClose();
     }
-  }, [updateWorkoutIsSuccess])
+  }, [updateWorkoutIsSuccess, onClose])
 
   const descriptionClasses = descriptionHasError
     ? `${classes.formControl} ${classes.invalid}`

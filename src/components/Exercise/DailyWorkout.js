@@ -1,12 +1,5 @@
-import { useState, useContext } from "react";
-
 import LoadingSpinner from "../UI/LoadingSpinner";
-import AuthContext from "../../context/AuthContext";
-import { useUser } from "../User/hooks/use-user";
 import DailyExercises from "./DailyExercises";
-import { getIdsFromSlug } from "../../utils/get-ids-from-slug";
-import { useParams } from "react-router-dom";
-import classes from "./DailyWorkout.module.css";
 import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
@@ -19,9 +12,9 @@ const DailyWorkout = ({userData, ids }) => {
   const programTrackerId = userData.program_trackers[0].id;
 
   // TODO: Get workout from backend
-  const workoutId = ids.workoutId;
-  // TODO: Get workout tracker from backend
-  const workoutTrackerId = ids.workoutTrackerId;
+  // const workoutId = ids.workoutId;
+  // // TODO: Get workout tracker from backend
+  // const workoutTrackerId = ids.workoutTrackerId;
 
   // User id has the program id - get from here
   const { data: programData, isLoading: programDataIsLaoding } =

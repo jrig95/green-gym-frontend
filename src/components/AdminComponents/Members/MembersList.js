@@ -14,20 +14,22 @@ const MembersList = ({ members, programId, fetchAddMembersList }) => {
     const memberInArray = memberArray.find(
       (existingMemeber) => existingMemeber.id === newMember.id
     );
-    
+
     // Set condition to check memberInArray is defined
     if (memberInArray === undefined) {
       // Add user to the array
       setMemberArray((prevMembers) => [...prevMembers, newMember]);
     } else {
       // Remove user from the array.
-      setMemberArray((prevMembers) => prevMembers.filter((oldMember) => oldMember.id != newMember.id))
+      setMemberArray((prevMembers) =>
+        prevMembers.filter((oldMember) => oldMember.id !== newMember.id)
+      );
     }
   };
 
   useEffect(() => {
     fetchAddMembersList(memberArray);
-  }, [memberArray])
+  }, [memberArray, fetchAddMembersList]);
 
   const membersList = members.map((member) => {
     return (
