@@ -53,7 +53,6 @@ const ProfileResetPasswordForm = () => {
 
       updatePassword(user);
     } else {
-      console.log("Can't submit - display error");
       setPasswordsDoNotMatch(true);
     }
   };
@@ -68,9 +67,9 @@ const ProfileResetPasswordForm = () => {
 
   useEffect(() => {
     if (updateProfileIsSuccess) {
-      navigateToProfileHandler();
+      navigate("/profile");
     }
-  }, [updateProfileIsSuccess, navigateToProfileHandler]);
+  }, [updateProfileIsSuccess]);
 
   const newPasswordClasses = newPasswordHasError
     ? `${classes.formControl} ${classes.invalid}`

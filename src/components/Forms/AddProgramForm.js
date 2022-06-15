@@ -50,7 +50,6 @@ const AddProgramForm = () => {
     hasError: programNameHasError,
     valueChangeHandler: programNameChangeHandler,
     inputBlurHandler: programNameBlurHandler,
-    reset: resetprogramName,
   } = useInput(textNotEmpty);
 
   const {

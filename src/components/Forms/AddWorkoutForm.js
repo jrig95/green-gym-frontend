@@ -146,14 +146,6 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     // How to get the workout ID?
   };
 
-  useEffect(() => {
-    if (createWorkoutIsSuccess) {
-      console.log("success");
-      addExercisesHandler();
-      onAddWorkout();
-    }
-  }, [createWorkoutIsSuccess, addExercisesHandler, onAddWorkout]);
-
   // If isSuccess
 
   // another function to add the overviews and exercises.
@@ -203,7 +195,13 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExercise(exercise);
     });
   };
-
+  
+  useEffect(() => {
+    if (createWorkoutIsSuccess) {
+      addExercisesHandler();
+      onAddWorkout();
+    }
+  }, [createWorkoutIsSuccess, addExercisesHandler, onAddWorkout]);
   // get the last id for the daily workout
   // itteratte over the array and for each item post request.
 
