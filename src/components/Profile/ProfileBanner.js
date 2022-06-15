@@ -7,6 +7,7 @@ import TreesPlanted from "./TreesPlanted";
 import { useTranslation } from "react-i18next";
 
 
+
 const ProfileBanner = ({
   title,
   calories,
@@ -65,7 +66,7 @@ const ProfileBanner = ({
         <h2 className={classes.name}>{name}</h2>
         {rewards && (
           <h3 className={classes.points}>
-            <b>Current Points:</b> {stringifiedPoints}
+            <b>{t("profile_banner_current_points")}</b> {stringifiedPoints}
           </h3>
         )}
         {!update && !rewards && <TreesPlanted calories={caloriesNum} />}

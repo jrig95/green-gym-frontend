@@ -4,6 +4,8 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import classes from "./ClaimReward.module.css";
 import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
+import { useTranslation } from "react-i18next";
+
 
 const ClaimReward = ({
   rewardTitle,
@@ -12,6 +14,7 @@ const ClaimReward = ({
   onClose,
   onClaim,
 }) => {
+  const { t } = useTranslation();
   const isMutating = useIsMutating();
 
   const parseRewardPoints = parseInt(rewardPoints);
@@ -21,19 +24,20 @@ const ClaimReward = ({
 
   const enoughPoints = parseUserPoints > parseRewardPoints;
 
+  const claimedRewardClaim = t("claimed_reward_claim")
   const claimMessage = (
     <Fragment>
       <div className={classes.textContainer}>
-        <h2>Are you sure you wish to claim this reward?</h2>
+        <h2>{t("claimed_reward_confirmation")}</h2>
         <h2 className={classes.rewardName}>{rewardTitle}</h2>
-        <h2>You will have {strigifiedReamingPoints} points remaining</h2>
+        <h2>{t("claimed_reward_you_will_have")} {strigifiedReamingPoints} {t("claimed_reward_points_remaining")}</h2>
       </div>
       <div className={classes.buttonContainer}>
         <Button size="small" color="blue" onClick={onClose}>
-          Cancel
+          {t("claimed_reward_cancel")}
         </Button>
         <Button size="small" onClick={onClaim}>
-          {isMutating ? <LoadingSpinnerButton /> : "Claim"}
+          {isMutating ? <LoadingSpinnerButton /> : claimedRewardClaim}
         </Button>
       </div>
     </Fragment>
