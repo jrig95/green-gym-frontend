@@ -12,11 +12,12 @@ const ResetPasswordForm = () => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+    // TODO: Create a user with a password
+    // This creates an emails. If a user
   };
 
   const passwordClasses = passwordHasError

@@ -1,9 +1,15 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import classes from "./ForgotPasswordForm.module.css";
 import useInput from "./Hooks/use-input";
-import Button from '../UI/Button';
+import Button from "../UI/Button";
 import FormCard from "./FormCard";
+import { useResetPasswordToken } from "../User/hooks/use-reset-password-token";
 
 const ForgotPasswordForm = () => {
+  const navigate = useNavigate();
+  const { mutate: resetPasswordToken, isSuccess: resetPasswordTokenIsSuccess } =
+    useResetPasswordToken();
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -17,18 +23,34 @@ const ForgotPasswordForm = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+    // TODO: Create user with email
 
-    resetEmail();
+    const user = {
+      email: emailValue,
+    };
+
+    resetPasswordToken(user);
+    // resetEmail();
   };
 
+  useEffect(() => {
+    if (resetPasswordTokenIsSuccess) {
+      // This should redirect to a message telling the user to check their email.
+      navigate("/");
+    }
+  }, [resetPasswordTokenIsSuccess, navigate])
+
   const emailClasses = emailHasError
-  ? `${classes.formControl} ${classes.invalid}`
-  : classes.formControl;
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
 
   const formIsValid = emailIsValid;
 
   return (
-    <FormCard title="Forgot Password?" body="Enter the email you used to sign up">
+    <FormCard
+      title="Forgot Password?"
+      body="Enter the email you used to sign up"
+    >
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={emailClasses}>
@@ -58,7 +80,6 @@ const ForgotPasswordForm = () => {
       </form>
     </FormCard>
   );
-
 };
 
 export default ForgotPasswordForm;
