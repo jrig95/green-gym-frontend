@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import ResetPasswordMessage from "../User/ResetPasswordMessage";
 import classes from "./ForgotPasswordForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
@@ -7,6 +9,8 @@ import FormCard from "./FormCard";
 import { useResetPasswordToken } from "../User/hooks/use-reset-password-token";
 
 const ForgotPasswordForm = () => {
+  const [checkEmailMessageIsShown, setCheckEmailMessageIsShown] =
+    useState(false);
   const navigate = useNavigate();
   const { mutate: resetPasswordToken, isSuccess: resetPasswordTokenIsSuccess } =
     useResetPasswordToken();
@@ -18,7 +22,6 @@ const ForgotPasswordForm = () => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput(textNotEmpty);
 
   const formSubmitHandler = (event) => {
@@ -36,9 +39,9 @@ const ForgotPasswordForm = () => {
   useEffect(() => {
     if (resetPasswordTokenIsSuccess) {
       // This should redirect to a message telling the user to check their email.
-      navigate("/");
+      setCheckEmailMessageIsShown(true);
     }
-  }, [resetPasswordTokenIsSuccess, navigate])
+  }, [resetPasswordTokenIsSuccess, navigate]);
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -47,38 +50,41 @@ const ForgotPasswordForm = () => {
   const formIsValid = emailIsValid;
 
   return (
-    <FormCard
-      title="Forgot Password?"
-      body="Enter the email you used to sign up"
-    >
-      <form onSubmit={formSubmitHandler}>
-        <div className={classes.controlGroup}>
-          <div className={emailClasses}>
-            <label htmlFor="email">E-Mail</label>
-            <input
-              type="email"
-              id="email"
-              value={emailValue}
-              onChange={emailChangeHandler}
-              onBlur={emailBlurHandler}
-            />
-            {emailHasError && (
-              <p className={classes.errorText}>
-                please enter a valid e-mail address
-              </p>
-            )}
+    <Fragment>
+      {checkEmailMessageIsShown && <ResetPasswordMessage />}
+      <FormCard
+        title="Forgot Password?"
+        body="Enter the email you used to sign up"
+      >
+        <form onSubmit={formSubmitHandler}>
+          <div className={classes.controlGroup}>
+            <div className={emailClasses}>
+              <label htmlFor="email">E-Mail</label>
+              <input
+                type="email"
+                id="email"
+                value={emailValue}
+                onChange={emailChangeHandler}
+                onBlur={emailBlurHandler}
+              />
+              {emailHasError && (
+                <p className={classes.errorText}>
+                  please enter a valid e-mail address
+                </p>
+              )}
+            </div>
+            <div className={classes.formActions}>
+              <Button color="blue" size="small">
+                Cancel
+              </Button>
+              <Button size="small" type="submit" disabled={!formIsValid}>
+                Submit
+              </Button>
+            </div>
           </div>
-          <div className={classes.formActions}>
-            <Button color="blue" size="small">
-              Cancel
-            </Button>
-            <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
-            </Button>
-          </div>
-        </div>
-      </form>
-    </FormCard>
+        </form>
+      </FormCard>
+    </Fragment>
   );
 };
 
