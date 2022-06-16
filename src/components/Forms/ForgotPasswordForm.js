@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useIsMutating } from "react-query";
 
 import ResetPasswordMessage from "../User/ResetPasswordMessage";
 import classes from "./ForgotPasswordForm.module.css";
@@ -7,8 +8,10 @@ import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./FormCard";
 import { useResetPasswordToken } from "../User/hooks/use-reset-password-token";
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const ForgotPasswordForm = () => {
+  const isMutating = useIsMutating();
   const [checkEmailMessageIsShown, setCheckEmailMessageIsShown] =
     useState(false);
   const navigate = useNavigate();
@@ -49,6 +52,8 @@ const ForgotPasswordForm = () => {
 
   const formIsValid = emailIsValid;
 
+  const submitButtonText = isMutating ? <LoadingSpinnerButton /> : "Submit";
+
   return (
     <Fragment>
       {checkEmailMessageIsShown && <ResetPasswordMessage />}
@@ -77,8 +82,8 @@ const ForgotPasswordForm = () => {
               <Button color="blue" size="small">
                 Cancel
               </Button>
-              <Button size="small" type="submit" disabled={!formIsValid}>
-                Submit
+              <Button size="small" type="submit" disabled={!formIsValid || isMutating}>
+                {submitButtonText}
               </Button>
             </div>
           </div>
