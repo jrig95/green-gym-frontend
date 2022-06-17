@@ -6,8 +6,11 @@ import Button from "../UI/Button";
 import FormCard from "./FormCard";
 import { useResetPassword } from "../User/hooks/use-reset-password";
 import SuccessfullyResetPasswordMessage from "../User/SuccessfullyResetPasswordMessage";
+import { useIsMutating } from 'react-query';
+import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
 
 const ResetPasswordForm = () => {
+  const isMutating = useIsMutating();
   const { mutate: resetPassword, isSuccess: resetPasswordIsSuccess } =
     useResetPassword();
 
@@ -67,10 +70,10 @@ const ResetPasswordForm = () => {
   useEffect(() => {
     setPasswordsDoNotMatch(false);
 
-    if (resetPasswordIsSuccess) {
+    if (resetPasswordIsSuccess && !isMutating) {
       setSuccessfullyResetPasswordMessageIsShown(true);
     }
-  }, [newPasswordValue, confirmPasswordValue, resetPasswordIsSuccess]);
+  }, [newPasswordValue, confirmPasswordValue, resetPasswordIsSuccess, isMutating]);
 
   const newPasswordClasses = newPasswordHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -86,6 +89,8 @@ const ResetPasswordForm = () => {
 
   const formIsValid =
     newPasswordIsValid && confirmPasswordIsValid && passwordTokenIsValid;
+
+  const submitButtonTest = isMutating ? <LoadingSpinnerButton /> : "Submit"
 
   return (
     <Fragment>
@@ -149,7 +154,7 @@ const ResetPasswordForm = () => {
               <Button color="blue" size="small">
                 Cancel
               </Button>
-              <Button size="small" type="submit" disabled={!formIsValid}>
+              <Button size="small" type="submit" disabled={!formIsValid || isMutating}>
                 Submit
               </Button>
             </div>
