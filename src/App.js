@@ -6,7 +6,7 @@ import Layout from "./components/Layout/Layout";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 import Login from "./Pages/UserFormPages/Login";
-// import ResetPassword from "./Pages/UserFormPages/ResetPassword";
+import ResetPassword from "./Pages/UserFormPages/ResetPassword";
 import SignUp from "./Pages/UserFormPages/SignUp";
 // import UpdateProfile from "./Pages/UserFormPages/UpdateProfile";
 import ProfilePage from "./Pages/ProfilePages/ProfilePage";
@@ -40,11 +40,12 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="forgot-password" element={<ForgotPassword />}/>
+        <Route path="forgot-password" element={<ForgotPassword />} />
         <Route
           path="profile/change-password"
           element={<ProfileResetPasswordPage />}
         />
+        <Route path="reset_password" element={<ResetPassword />} />
         {!authCtx.isLoggedIn && !authCtx.isAdmin && (
           <Fragment>
             <Route path="programs" element={<LandingPage />} />
@@ -70,7 +71,10 @@ function App() {
               element={<PurchasePage />}
             />
             <Route path="activities" element={<ActivitiesPage />} />
-            <Route path="activities/:workoutId" element={<DailyWorkoutPage />} />
+            <Route
+              path="activities/:workoutId"
+              element={<DailyWorkoutPage />}
+            />
             <Route path="rewards" element={<RewardsPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/update" element={<UpdateProfilePage />} />
