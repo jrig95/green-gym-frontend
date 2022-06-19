@@ -58,7 +58,6 @@ const ResetPasswordForm = () => {
         new_password_confirmation: confirmPasswordValue,
       };
 
-      console.log(user)
       resetPassword(user);
     } else {
       setPasswordsDoNotMatch(true);
