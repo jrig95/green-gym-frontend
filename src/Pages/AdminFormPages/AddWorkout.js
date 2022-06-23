@@ -7,6 +7,7 @@ import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import AddWorkoutForm from "../../components/Forms/AddWorkoutForm";
 import AdminFormTemplate from "./AdminFormTemplate";
 
+
 const AddWorkoutPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();

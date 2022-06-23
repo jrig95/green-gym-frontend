@@ -9,8 +9,11 @@ import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import FormCard from "./FormCard";
 import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
+import { useTranslation } from "react-i18next";
+
 
 const ProfileResetPasswordForm = () => {
+  const { t } = useTranslation();
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
   const navigate = useNavigate();
@@ -83,15 +86,17 @@ const ProfileResetPasswordForm = () => {
     : classes.formControl;
 
   const formIsValid = newPasswordIsValid && confirmPasswordIsValid && !fetchingOrMutating;
-
-  const buttonText = fetchingOrMutating ? <LoadingSpinnerButton /> : "Submit";
+  const Translatesubmit = t("profile_reset_password_sumbit")
+  const buttonText = fetchingOrMutating ? <LoadingSpinnerButton /> : Translatesubmit;
 
   return (
-    <FormCard title="Reset Password">
+    <FormCard title= {t("profile_reset_password_reset_password")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={newPasswordClasses}>
-            <label htmlFor="password">New Password</label>
+            <label htmlFor="password">
+              {t("profile_reset_password_form_new_password")}
+            </label>
             <input
               type="password"
               id="password"
@@ -101,12 +106,14 @@ const ProfileResetPasswordForm = () => {
             />
             {newPasswordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                {t("profile_reset_password_form_longer_than_8")}
               </p>
             )}
           </div>
           <div className={retpyedPasswordClasses}>
-            <label htmlFor="password">Confirm Password</label>
+            <label htmlFor="password">
+              {t("profile_reset_password_form_confirm_password")}
+            </label>
             <input
               type="password"
               id="password"
@@ -116,16 +123,18 @@ const ProfileResetPasswordForm = () => {
             />
             {confirmPasswordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                {t("profile_reset_password_form_new_longer_than_8")}
               </p>
             )}
           </div>
           {passwordsDoNotMatch && (
-            <p className={classes.errorText}>passwords do not match</p>
+            <p className={classes.errorText}>
+              {t("profile_reset_password_not_match")}
+            </p>
           )}
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={navigateToProfileHandler}>
-              Cancel
+              {t("profile_reset_password_cancel")}
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
               {buttonText}

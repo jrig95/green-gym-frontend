@@ -8,10 +8,13 @@ import { useProgram } from "../../components/Program/hooks/use-program";
 import Button from "../../components/UI/Button";
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
+import { useTranslation } from "react-i18next";
+
 // import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import UpdateProgram from "../../components/Program/UpdateProgram";
 
 const ProgramPage = () => {
+  const { t } = useTranslation();
   const [updateProgramIsShown, setUpdateProgramIsShown] = useState(false);
   const params = useParams();
 
@@ -69,7 +72,7 @@ const ProgramPage = () => {
         {admin && (
           <div className={classes.updateButtonContainer}>
             <Button color="blue" onClick={showUpdateProgramHandler}>
-              Update Program
+              {t("program_page_update_page")}
             </Button>
           </div>
         )}
@@ -83,9 +86,13 @@ const ProgramPage = () => {
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
         <div className={classes.purchaseContainer}>
-          <h3>Price: ¥{programData.price}</h3>
+          <h3>
+            {t("program_page_price")}
+            {programData.price}</h3>
           <Link to="purchase">
-            <Button>Purchase</Button>
+            <Button>
+              {t("program_page_purchase")}
+            </Button>
           </Link>
         </div>
       </div>

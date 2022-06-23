@@ -46,11 +46,13 @@ const ClaimReward = ({
   const notEnoughPointsMessage = (
     <Fragment>
       <div className={classes.textContainer}>
-        <h2>I'm sorry. You don't have enough points for this prize</h2>
+        <h2>
+          {t("claim_reward_not_enough_points")}
+        </h2>
       </div>
       <div className={classes.buttonContainer}>
         <Button size="small" onClick={onClose} disabled={isMutating}>
-          Confirm
+          {t("claim_reward_confirm")}
         </Button>
       </div>
     </Fragment>

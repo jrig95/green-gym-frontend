@@ -104,5 +104,32 @@
   "claimed_reward_you_will_have": "You will have ",
   "claimed_reward_points_remaining": "points remaining",
   "claimed_reward_cancel": "Cancel",
-  "claimed_reward_claim": "Claim"
+  "claimed_reward_claim": "Claim",
+
+  "program_page_update_page": "Update Program",
+  "program_page_price": "Price: ¥",
+  "program_page_purchase": "Purchase",
+  "delete_reward_are_you_sure": "Are you sure you wish to delete the program ",
+  "delete_reward_cancel": "Cancel",
+  "delete_reward_delete": "Delete",
+  "claim_reward_not_enough_points": "I'm sorry. You don't have enough points for this prize",
+  "claim_reward_confirm": "Confirm",
+  "profile_reset_password_form_new_password": "New Password",
+  "profile_reset_password_form_longer_than_8": "Password must be longer than 8 characters",
+  "profile_reset_password_form_confirm_password": "Confirm Password",
+  "profile_reset_password_not_match": "passwords do not match",
+  "profile_reset_password_cancel": "Cancel",
+  "profile_reset_password_sumbit": "Submit",
+  "exercise_overview_card_exercise": "Exercise",
+  "exercise_overview_card_sets": "Sets",
+  "program_workout_details_day": "Day",
+  "forgot_password_form_email": "E-mail",
+  "forgot_password_form_valid_email": "please enter a valid e-mail address",
+  "forgot_password_form_valid_cancel": "Cancel",
+  "forgot_password_form_valid_submit": "Submit",
+  "forgot_password_form_forgot_password": "Forgot Password?",
+  "forgot_password_form_enter_email": "Enter the email you used to sign up",
+  "profile_reset_password_page_my_profile": "My Profile",
+  "profile_reset_password_reset_password": "Reset Password"
+
 }

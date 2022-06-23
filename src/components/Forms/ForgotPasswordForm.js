@@ -2,8 +2,11 @@ import classes from "./ForgotPasswordForm.module.css";
 import useInput from "./Hooks/use-input";
 import Button from '../UI/Button';
 import FormCard from "./FormCard";
+import { useTranslation } from "react-i18next";
+
 
 const ForgotPasswordForm = () => {
+  const { t } = useTranslation();
   const textNotEmpty = (value) => value.trim() !== "";
 
   const {
@@ -28,11 +31,11 @@ const ForgotPasswordForm = () => {
   const formIsValid = emailIsValid;
 
   return (
-    <FormCard title="Forgot Password?" body="Enter the email you used to sign up">
+    <FormCard title={t("forgot_password_form_forgot_password")} body={t("forgot_password_form_enter_email")}>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.controlGroup}>
           <div className={emailClasses}>
-            <label htmlFor="email">E-Mail</label>
+            <label htmlFor="email">{t("forgot_password_form_email")}</label>
             <input
               type="email"
               id="email"
@@ -42,16 +45,16 @@ const ForgotPasswordForm = () => {
             />
             {emailHasError && (
               <p className={classes.errorText}>
-                please enter a valid e-mail address
+                {t("forgot_password_form_valid_email")}
               </p>
             )}
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small">
-              Cancel
+              {t("forgot_password_form_valid_cancel")}
             </Button>
             <Button size="small" type="submit" disabled={!formIsValid}>
-              Submit
+              {t("forgot_password_form_valid_submit")}
             </Button>
           </div>
         </div>
