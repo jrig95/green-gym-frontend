@@ -1,61 +1,38 @@
 import { Routes, Route } from "react-router-dom";
-import React, { Suspence, Fragment, useContext } from "react";
+import React, { Suspense, Fragment, useContext } from "react";
 
 import AuthContext from "./context/AuthContext";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import Layout from "./components/Layout/Layout";
 
-// const Layout = React.lazy(() => import("./components/Layout/Layout"));
-
 const LandingPage = React.lazy(() => import("./Pages/LandingPage/LandingPage"));
-// import LandingPage from "./Pages/LandingPage/LandingPage";
 const ForgotPassword = React.lazy(() => import("./Pages/UserFormPages/ForgotPassword"));
-// import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
 const Login = React.lazy(() => import("./Pages/UserFormPages/Login"));
-// import Login from "./Pages/UserFormPages/Login";
 const ResetPassword = React.lazy(() => import("./Pages/UserFormPages/ResetPassword"));
-// import ResetPassword from "./Pages/UserFormPages/ResetPassword";
 const SignUp = React.lazy(() => import("./Pages/UserFormPages/SignUp"));
-// import SignUp from "./Pages/UserFormPages/SignUp";
 const ProfilePage = React.lazy(() => import("./Pages/ProfilePages/ProfilePage"));
-// import ProfilePage from "./Pages/ProfilePages/ProfilePage";
 const ProfileResetPasswordPage = React.lazy(() => import("./Pages/ProfilePages/ProfileResetPasswordPage"));
-// import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
 const ProgramsPage = React.lazy(() => import("./Pages/ProgramPages/ProgramsPage"));
-// import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
 const ProgramPage = React.lazy(() => import("./Pages/ProgramPages/ProgramPage"));
-// import ProgramPage from "./Pages/ProgramPages/ProgramPage";
 const ActivitiesPage = React.lazy(() => import("./Pages/WorkoutPages/ActivitesPage"));
-// import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
 const DailyWorkoutPage = React.lazy(() => import("./Pages/WorkoutPages/DailyWorkoutPage"));
-// import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
 const RewardsPage = React.lazy(() => import("./Pages/RewardPages/RewardsPage"));
-// import RewardsPage from "./Pages/RewardPages/RewardsPage";
 const MembersPage = React.lazy(() => import("./Pages/MemberPages/MembersPage"));
-// import MembersPage from "./Pages/MemberPages/MembersPage";
 const MemberPage = React.lazy(() => import("./Pages/MemberPages/MemberPage"));
-// import MemberPage from "./Pages/MemberPages/MemberPage";
 const UpdateProfilePage = React.lazy(() => import("./Pages/ProfilePages/UpdateProfilePage"));
-// import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
 const AddProgramPage = React.lazy(() => import("./Pages/AdminFormPages/AddProgramPage"));
-// import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
 const LibraryItemsPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemsPage"));
-// import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
 const LibraryItemPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemPage"));
-// import LibraryItemPage from "./Pages/LibraryPages/LibraryItemPage";
 const NotFoundPage = React.lazy(() => import("./Pages/ErrorPages/NotFoundPage"));
-// import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
 const PurchasePage = React.lazy(() => import("./Pages/ProgramPages/PurchasePage"));
-// import PurchasePage from "./Pages/ProgramPages/PurchasePage";
 const AddWorkoutPage = React.lazy(() => import("./Pages/AdminFormPages/AddWorkout"));
-// import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
 
 function App() {
   const authCtx = useContext(AuthContext);
 
   return (
     <Layout>
-      <Suspence fallback={<LoadingSpinner/>}>
+      <Suspense fallback={<LoadingSpinner/>}>
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<LandingPage />} />
@@ -123,7 +100,7 @@ function App() {
             </Fragment>
           )}
         </Routes>
-      </Suspence>
+      </Suspense>
     </Layout>
   );
 }
