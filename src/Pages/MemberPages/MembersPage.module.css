@@ -2,6 +2,11 @@
   margin: 1rem 10rem 10rem 10rem;
 }
 
+.errorMessage {
+  margin: 10rem 0 0 0;
+  text-align: center;
+}
+
 @media only screen and (min-width: 617px) and (max-width: 1200px) {
   .container{
     margin: 2rem 4rem 10rem 4rem;

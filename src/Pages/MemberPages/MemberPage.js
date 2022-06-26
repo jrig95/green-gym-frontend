@@ -14,34 +14,43 @@ const MemberPage = () => {
 
   const memberId = getIdFromSlug(params.memberId);
 
-  const { data: userData, isLoading: userIsLoading } = useUser(memberId);
+  const {
+    data: userData,
+    isLoading: userIsLoading,
+    isError: userIsError,
+    error: userError,
+  } = useUser(memberId);
 
-  if (userIsLoading) return <LoadingSpinnerLarge />
-  
-  const noProgram = <p>User has not yet started a program.</p>
+  if (userIsLoading) return <LoadingSpinnerLarge />;
+  if (userIsError)
+    return (
+      <h2 className={classes.errorMessage}>{userError.response.data.error}</h2>
+    );
 
-  if (userData.programs.length === 0) return (
-    <Fragment>
-      <AdminBanner />
-      <div className={classes.container}>
-        <MemberCard user={userData}/>
-        {noProgram}
-      </div>
-    </Fragment>
-  );
-  
+  const noProgram = <p>User has not yet started a program.</p>;
+
+  if (userData.programs.length === 0)
+    return (
+      <Fragment>
+        <AdminBanner />
+        <div className={classes.container}>
+          <MemberCard user={userData} />
+          {noProgram}
+        </div>
+      </Fragment>
+    );
+
   const programTitle = userData.programs[0].program_title;
-  const porgramId = userData.programs[0].id
+  const porgramId = userData.programs[0].id;
   const trackerId = userData.program_trackers[0].id;
 
-  
   return (
     <Fragment>
       <AdminBanner />
       <div className={classes.container}>
-        <MemberCard user={userData}/>
+        <MemberCard user={userData} />
         <h1>{programTitle}</h1>
-        <MemberTracker trackerId={trackerId} programId={porgramId}/>
+        <MemberTracker trackerId={trackerId} programId={porgramId} />
       </div>
     </Fragment>
   );
