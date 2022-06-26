@@ -21,7 +21,7 @@ const getMembers = async (searchParams) => {
 
 export const useGetMembers = (searchParams) => {
   const { addError } = useAPIError();
-  const { data, isLoading, refetch } = useQuery(
+  const { data, isLoading, refetch, isError, error } = useQuery(
     queryKeys.members,
     () => getMembers(searchParams),
     {
@@ -33,5 +33,5 @@ export const useGetMembers = (searchParams) => {
     }
   );
 
-  return { data, isLoading, refetch };
+  return { data, isLoading, refetch, isError, error };
 };
