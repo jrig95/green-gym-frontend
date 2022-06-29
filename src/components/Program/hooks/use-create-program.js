@@ -8,7 +8,7 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createProgram = async (program, bearerToken) => {
-  await axios.post(`${baseUrl}/programs`, {program: program}, {
+  await axios.post(`${baseUrl}/programs`, program, {
     headers: {
       Authorization: bearerToken
     }

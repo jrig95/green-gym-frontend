@@ -30,7 +30,7 @@ export const useLastProgram = () => {
     error,
     isLoading,
     refetch,
-  } = useQuery(queryKeys.last_program, getLastProgram(bearerToken), {
+  } = useQuery(queryKeys.last_program, () => getLastProgram(bearerToken), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";
