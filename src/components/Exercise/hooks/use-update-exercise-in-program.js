@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
+import { useContext } from "react";
 
+import AuthContext from "../../../context/AuthContext";
 import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const updateExerciseInProgram = async (exerciseData) => {
+const updateExerciseInProgram = async (exerciseData, bearerToken) => {
   const exercise = {
     exercise_title: exerciseData.exercise_title,
     exercise_work_time: exerciseData.exercise_work_time,
@@ -17,14 +19,21 @@ const updateExerciseInProgram = async (exerciseData) => {
 
   await axios.patch(
     `${baseUrl}/programs/${exerciseData.programId}/daily_workouts/${exerciseData.workoutId}/exercises/${exerciseData.id}`,
-    exercise
+    {exercise: exercise}, {
+      headers: {
+        Authorization: bearerToken
+      }
+    }
   );
 };
 
 export const useUpdateExerciseInProgram = () => {
+  const authCtx = useContext(AuthContext);
+  const bearerToken = authCtx.token;
+
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutate, isSuccess } = useMutation((exerciseData) => updateExerciseInProgram(exerciseData), {
+  const { mutate, isSuccess } = useMutation((exerciseData) => updateExerciseInProgram(exerciseData, bearerToken), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.workout]);
     },
