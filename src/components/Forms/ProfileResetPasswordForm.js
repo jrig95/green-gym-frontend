@@ -16,6 +16,14 @@ const ProfileResetPasswordForm = () => {
   const navigate = useNavigate();
 
   const textNotEmpty = (value) => value.trim() !== "";
+
+  const passwordValid = (value) => {
+    const hasValue = value.trim() !== "";
+    const passwordLength = value.length >= 6;
+
+    return hasValue && passwordLength;
+  }
+
   const authCtx = useContext(AuthContext);
   const userId = authCtx.userId;
 
@@ -32,7 +40,7 @@ const ProfileResetPasswordForm = () => {
     hasError: newPasswordHasError,
     valueChangeHandler: newPasswordChangeHandler,
     inputBlurHandler: newPasswordBlurHandler,
-  } = useInput(textNotEmpty);
+  } = useInput(passwordValid);
 
   const {
     value: confirmPasswordValue,
@@ -40,7 +48,7 @@ const ProfileResetPasswordForm = () => {
     hasError: confirmPasswordHasError,
     valueChangeHandler: confirmPasswordChangeHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
-  } = useInput(textNotEmpty);
+  } = useInput(passwordValid);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
