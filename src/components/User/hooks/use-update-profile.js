@@ -7,10 +7,15 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateProfile = async (user, bearerToken) => {
-  await axios.patch(`${baseUrl}/users/${user.id}`, {
-    user: user,
-    headers: { Authorization: bearerToken },
-  });
+  await axios.patch(
+    `${baseUrl}/users/${user.id}`,
+    {
+      user: user,
+    },
+    {
+      headers: { Authorization: bearerToken },
+    }
+  );
 };
 
 export const useUpdateProfile = () => {
