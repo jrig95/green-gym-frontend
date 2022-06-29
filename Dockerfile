@@ -11,4 +11,3 @@ RUN npm install
 RUN npm install dateformat
 
 CMD ["npm", "run", "build"]
-CMD ["npm", "start"]
