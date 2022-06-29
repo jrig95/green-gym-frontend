@@ -106,7 +106,7 @@ const ProfileResetPasswordForm = () => {
             />
             {newPasswordHasError && (
               <p className={classes.errorText}>
-                password must be longer than 8 characters
+                password must be 6 or more characters
               </p>
             )}
           </div>

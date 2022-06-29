@@ -16,8 +16,6 @@ const MemberTracker = ({ trackerId, programId }) => {
   if (trackerIsLoading || programIsLoading) return <LoadingSpinnerLarge />;
   if (isFetching) return <LoadingSpinnerLarge />
 
-
-
   const clientTrackingInformation = programData.daily_workouts.map(
     (dailyWorkout, index) => {
       const exerciseTrackers = trackerData.daily_workout_trackers[index]
