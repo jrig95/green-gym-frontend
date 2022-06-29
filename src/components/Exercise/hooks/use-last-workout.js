@@ -23,7 +23,7 @@ export const useLastWorkout = () => {
 
   const { addError } = useAPIError();
   const fallback = [];
-  const { data = fallback, isError, error, isLoading } = useQuery(queryKeys.last_workout, getLastWorkout(bearerToken), {
+  const { data = fallback, isError, error, isLoading } = useQuery(queryKeys.last_workout, () => getLastWorkout(bearerToken), {
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
