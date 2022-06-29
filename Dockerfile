@@ -10,4 +10,4 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 RUN npm install
 RUN npm install dateformat
 
-CMD ["npm", "start"]
+CMD ["npm", "build"]
