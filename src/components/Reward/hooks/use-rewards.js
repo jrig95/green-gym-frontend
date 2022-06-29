@@ -13,6 +13,7 @@ const getRewards = async (bearerToken) => {
       Authorization: bearerToken
     }
   });
+
   return data;
 };
 
@@ -28,7 +29,7 @@ export const useRewards = () => {
     isError,
     error,
     isLoading,
-  } = useQuery(queryKeys.rewards, getRewards(bearerToken), {
+  } = useQuery(queryKeys.rewards, () => getRewards(bearerToken), {
     onError: (error) => {
       const title =
         error instanceof Error ? error.message : "error connecting to server";

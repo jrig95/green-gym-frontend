@@ -13,6 +13,7 @@ const getReward = async (id, bearerToken) => {
       Authorization: bearerToken
     }
   });
+  
   return data;
 };
 
