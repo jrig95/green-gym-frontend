@@ -56,11 +56,11 @@ const MembersPage = () => {
 
           const program_tracker = {
             user_id: member.id,
-            program_id: programId
-          }
+            program_id: programId,
+          };
 
-          addMemberToProgram(program_tracker)
-        })
+          addMemberToProgram(program_tracker);
+        });
 
         setAddMemberToProgramMessageIsShown(true);
         setProgramId(null);
@@ -81,8 +81,10 @@ const MembersPage = () => {
   // create hook to get all members
   const {
     data: membersData,
-    isLoading,
+    isLoading: membersIsLoading,
     refetch: refetchMembers,
+    isError: membersIsError,
+    error: membersError,
   } = useGetMembers(searchParam);
 
   useEffect(() => {
@@ -90,7 +92,11 @@ const MembersPage = () => {
   }, [searchParam, refetchMembers]);
 
   // render loading
-  if (isLoading) return <LoadingSpinnerLarge />;
+  if (membersIsLoading) return <LoadingSpinnerLarge />;
+  if (membersIsError)
+    return (
+      <h2 className={classes.errorMessage}>{membersError.response.data.error}</h2>
+    );
 
   return (
     <Fragment>

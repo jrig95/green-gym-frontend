@@ -1,107 +1,106 @@
 import { Routes, Route } from "react-router-dom";
-import { Fragment, useContext } from "react";
+import React, { Suspense, Fragment, useContext } from "react";
 
 import AuthContext from "./context/AuthContext";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 import Layout from "./components/Layout/Layout";
-import LandingPage from "./Pages/LandingPage/LandingPage";
-import ForgotPassword from "./Pages/UserFormPages/ForgotPassword";
-import Login from "./Pages/UserFormPages/Login";
-import ResetPassword from "./Pages/UserFormPages/ResetPassword";
-import SignUp from "./Pages/UserFormPages/SignUp";
-// import UpdateProfile from "./Pages/UserFormPages/UpdateProfile";
-import ProfilePage from "./Pages/ProfilePages/ProfilePage";
-import ProfileResetPasswordPage from "./Pages/ProfilePages/ProfileResetPasswordPage";
-import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
-import ProgramPage from "./Pages/ProgramPages/ProgramPage";
-import ActivitiesPage from "./Pages/WorkoutPages/ActivitesPage";
-import DailyWorkoutPage from "./Pages/WorkoutPages/DailyWorkoutPage";
-import RewardsPage from "./Pages/RewardPages/RewardsPage";
-import MembersPage from "./Pages/MemberPages/MembersPage";
-import MemberPage from "./Pages/MemberPages/MemberPage";
-// import DailyWorkout from "./components/Exercise/DailyWorkout";
-import UpdateProfilePage from "./Pages/ProfilePages/UpdateProfilePage";
-// import ProgramPage from "./Pages/ProgramPages/ProgramPage";
-import AddProgramPage from "./Pages/AdminFormPages/AddProgramPage";
-// import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
-// import ProgramsPage from "./Pages/ProgramPages/ProgramsPage";
-import LibraryItemsPage from "./Pages/LibraryPages/LibraryItemsPage";
-import LibraryItemPage from "./Pages/LibraryPages/LibraryItemPage";
-import NotFoundPage from "./Pages/ErrorPages/NotFoundPage";
-import PurchasePage from "./Pages/ProgramPages/PurchasePage";
-import AddWorkoutPage from "./Pages/AdminFormPages/AddWorkout";
+
+const LandingPage = React.lazy(() => import("./Pages/LandingPage/LandingPage"));
+const ForgotPassword = React.lazy(() => import("./Pages/UserFormPages/ForgotPassword"));
+const Login = React.lazy(() => import("./Pages/UserFormPages/Login"));
+const ResetPassword = React.lazy(() => import("./Pages/UserFormPages/ResetPassword"));
+const SignUp = React.lazy(() => import("./Pages/UserFormPages/SignUp"));
+const ProfilePage = React.lazy(() => import("./Pages/ProfilePages/ProfilePage"));
+const ProfileResetPasswordPage = React.lazy(() => import("./Pages/ProfilePages/ProfileResetPasswordPage"));
+const ProgramsPage = React.lazy(() => import("./Pages/ProgramPages/ProgramsPage"));
+const ProgramPage = React.lazy(() => import("./Pages/ProgramPages/ProgramPage"));
+const ActivitiesPage = React.lazy(() => import("./Pages/WorkoutPages/ActivitesPage"));
+const DailyWorkoutPage = React.lazy(() => import("./Pages/WorkoutPages/DailyWorkoutPage"));
+const RewardsPage = React.lazy(() => import("./Pages/RewardPages/RewardsPage"));
+const MembersPage = React.lazy(() => import("./Pages/MemberPages/MembersPage"));
+const MemberPage = React.lazy(() => import("./Pages/MemberPages/MemberPage"));
+const UpdateProfilePage = React.lazy(() => import("./Pages/ProfilePages/UpdateProfilePage"));
+const AddProgramPage = React.lazy(() => import("./Pages/AdminFormPages/AddProgramPage"));
+const LibraryItemsPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemsPage"));
+const LibraryItemPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemPage"));
+const NotFoundPage = React.lazy(() => import("./Pages/ErrorPages/NotFoundPage"));
+const PurchasePage = React.lazy(() => import("./Pages/ProgramPages/PurchasePage"));
+const AddWorkoutPage = React.lazy(() => import("./Pages/AdminFormPages/AddWorkout"));
 
 function App() {
   const authCtx = useContext(AuthContext);
 
   return (
     <Layout>
-      <Routes>
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path="/" element={<LandingPage />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="profile/change-password"
-          element={<ProfileResetPasswordPage />}
-        />
-        <Route path="reset_password" element={<ResetPassword />} />
-        {!authCtx.isLoggedIn && !authCtx.isAdmin && (
-          <Fragment>
-            <Route path="programs" element={<LandingPage />} />
-            <Route path="programs/:programId" element={<LandingPage />} />
-            <Route
-              path="programs/:programId/purchase"
-              element={<LandingPage />}
-            />
-            <Route path="activities" element={<LandingPage />} />
-            <Route path="activities/workout" element={<LandingPage />} />
-            <Route path="rewards" element={<LandingPage />} />
-            <Route path="profile" element={<LandingPage />} />
-            <Route path="profile/update" element={<LandingPage />} />
-          </Fragment>
-        )}
+      <Suspense fallback={<LoadingSpinner/>}>
+        <Routes>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="profile/change-password"
+            element={<ProfileResetPasswordPage />}
+          />
+          <Route path="reset_password" element={<ResetPassword />} />
+          {!authCtx.isLoggedIn && !authCtx.isAdmin && (
+            <Fragment>
+              <Route path="programs" element={<LandingPage />} />
+              <Route path="programs/:programId" element={<LandingPage />} />
+              <Route
+                path="programs/:programId/purchase"
+                element={<LandingPage />}
+              />
+              <Route path="activities" element={<LandingPage />} />
+              <Route path="activities/workout" element={<LandingPage />} />
+              <Route path="rewards" element={<LandingPage />} />
+              <Route path="profile" element={<LandingPage />} />
+              <Route path="profile/update" element={<LandingPage />} />
+            </Fragment>
+          )}
 
-        {authCtx.isLoggedIn && (
-          <Fragment>
-            <Route path="programs" element={<ProgramsPage />} />
-            <Route path="programs/:programId" element={<ProgramPage />} />
-            <Route
-              path="programs/:programId/purchase"
-              element={<PurchasePage />}
-            />
-            <Route path="activities" element={<ActivitiesPage />} />
-            <Route
-              path="activities/:workoutId"
-              element={<DailyWorkoutPage />}
-            />
-            <Route path="rewards" element={<RewardsPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="profile/update" element={<UpdateProfilePage />} />
-          </Fragment>
-        )}
-        {authCtx.isAdmin && (
-          <Fragment>
-            <Route path="programs" element={<ProgramsPage />} />
-            <Route path="programs/:programId" element={<ProgramPage />} />
-            <Route
-              path="programs/:programId/purchase"
-              element={<PurchasePage />}
-            />
-            <Route path="programs/add-program" element={<AddProgramPage />} />
-            <Route
-              path="programs/add-program/add-workout"
-              element={<AddWorkoutPage />}
-            />
-            <Route path="add-workout" element={<AddWorkoutPage />} />
-            <Route path="members" element={<MembersPage />} />
-            <Route path="members/:memberId" element={<MemberPage />} />
-            <Route path="rewards" element={<RewardsPage />} />
-            <Route path="library" element={<LibraryItemsPage />} />
-            <Route path="library/:libraryId" element={<LibraryItemPage />} />
-          </Fragment>
-        )}
-      </Routes>
+          {authCtx.isLoggedIn && (
+            <Fragment>
+              <Route path="programs" element={<ProgramsPage />} />
+              <Route path="programs/:programId" element={<ProgramPage />} />
+              <Route
+                path="programs/:programId/purchase"
+                element={<PurchasePage />}
+              />
+              <Route path="activities" element={<ActivitiesPage />} />
+              <Route
+                path="activities/:workoutId"
+                element={<DailyWorkoutPage />}
+              />
+              <Route path="rewards" element={<RewardsPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="profile/update" element={<UpdateProfilePage />} />
+            </Fragment>
+          )}
+          {authCtx.isAdmin && (
+            <Fragment>
+              <Route path="programs" element={<ProgramsPage />} />
+              <Route path="programs/:programId" element={<ProgramPage />} />
+              <Route
+                path="programs/:programId/purchase"
+                element={<PurchasePage />}
+              />
+              <Route path="programs/add-program" element={<AddProgramPage />} />
+              <Route
+                path="programs/add-program/add-workout"
+                element={<AddWorkoutPage />}
+              />
+              <Route path="add-workout" element={<AddWorkoutPage />} />
+              <Route path="members" element={<MembersPage />} />
+              <Route path="members/:memberId" element={<MemberPage />} />
+              <Route path="rewards" element={<RewardsPage />} />
+              <Route path="library" element={<LibraryItemsPage />} />
+              <Route path="library/:libraryId" element={<LibraryItemPage />} />
+            </Fragment>
+          )}
+        </Routes>
+      </Suspense>
     </Layout>
   );
 }
