@@ -9,6 +9,7 @@ const Layout = ({ children }) => {
     <Fragment>
       <Navbar />
       <main className={classes.container}>{children}</main>
+
       <Footer />
     </Fragment>
   );

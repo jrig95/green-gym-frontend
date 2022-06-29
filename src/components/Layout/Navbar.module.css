@@ -17,8 +17,8 @@
 }
 
 .admin {
-  margin: 0 0 0 1rem;
   color: var(--green);
+  font-size: 1.5rem;
 }
 
 .container a {
@@ -160,7 +160,7 @@
     font-size: 1.8rem;
     cursor: pointer;
     color: black;
-    margin-right: 2rem;
+    margin-right: 1rem;
     display: flex;
   }
 
@@ -213,4 +213,14 @@
       color: var(--white);
       background-color: var(--green-hover);
     }
+
+     .admin {
+      color: var(--green);
+      margin: 0;
+      font-size: 1rem;
+     }
+
+     .logoContainer h1{
+       font-size: 1.5rem;
+     }
 }
