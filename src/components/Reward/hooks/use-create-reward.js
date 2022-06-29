@@ -8,7 +8,7 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createRewards = async (reward, bearerToken) => {
-  await axios.post(`${baseUrl}/rewards`, { reward: reward }, {
+  await axios.post(`${baseUrl}/rewards`, reward, {
     headers: {
       Authorization: bearerToken
     }
