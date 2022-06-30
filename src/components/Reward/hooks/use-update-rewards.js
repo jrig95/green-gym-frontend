@@ -8,9 +8,10 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateReward = async (updatedReward, bearerToken) => {
+  const reward = updatedReward.rewardData
   await axios.patch(
     `${baseUrl}/rewards/${updatedReward.id}`,
-    { reward: updatedReward.rewardData },
+    reward,
     {
       headers: {
         Authorization: bearerToken,
