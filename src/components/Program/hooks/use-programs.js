@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+// import { useContext } from "react";
 
+// import AuthContext from "../../../context/AuthContext";
 // import { axiosInstance } from "../../../axiosInstance";
 import useAPIError from "../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../react-query/constants";
@@ -13,6 +15,9 @@ const getPrograms = async () => {
 };
 
 export const usePrograms = () => {
+  // const authCtx = useContext(AuthContext);
+  // const bearerToken = authCtx.token;
+
   const { addError } = useAPIError();
   const fallback = [];
   const {
