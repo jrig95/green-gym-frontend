@@ -12,7 +12,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   const [updateWorkoutIsShown, setUpdateWorkingIsShown] = useState(false);
 
   // TODO: use programId to find dailyworkouts
-  const { data: workoutData, isLoading: workoutIsLoading } = useWorkout(
+  const { data: workoutData, isLoading: workoutIsLoading, isError: workoutIsError } = useWorkout(
     programId,
     dailyWorkoutId
   );
@@ -34,6 +34,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   };
 
   if (workoutIsLoading) return <LoadingSpinner />;
+  if (workoutIsError) return <p>error retrieving exercise data</p>
 
   return (
     <div className={classes.workoutCard}>
