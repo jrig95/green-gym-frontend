@@ -1,7 +1,7 @@
 import Card from "../../UI/Card";
 import classes from "./MemberCard.module.css";
 
-const MemberCard = ({ user }) => {  
+const MemberCard = ({ user }) => {
   return (
     <Card className={classes.card}>
       <div className={classes.profilePictureContainer}>
