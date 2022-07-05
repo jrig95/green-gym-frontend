@@ -25,7 +25,8 @@ export const useUserSignup = () => {
     (user) => createUserSignup(user),
     {
       onSuccess: (data) => {
-        const expirationTime = new Date(new Date().getTime() + 10800000);
+        console.log(data);
+        const expirationTime = new Date(new Date().getTime() + 86400000);
 
         const userData = {
           token: data.headers.authorization,
@@ -37,6 +38,7 @@ export const useUserSignup = () => {
         authCtx.login(userData);
       },
       onError: (error) => {
+        console.log(error)
         const title =
           error instanceof Error
             ? error.response.data.status.message
