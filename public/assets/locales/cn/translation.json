@@ -9,8 +9,8 @@
   "last_name": "姓",
   "please_enter_your_second_name": "请输入你的姓氏",
   "age": "年龄",
-  "gender_select": "性别",
-  "select": "选择",
+  "gender": "性别",
+  "gender_select": "选择",
   "male": "男性",
   "female": "女性",
   "company": "公司",
@@ -20,6 +20,7 @@
   "e_mail": "邮箱",
   "enter_a_valid_email": "请输入一个有效的邮箱",
   "fitness_level": "健身等级",
+  "fitness_select": "选择...",
   "beginner": "初级",
   "intermediate": "中级",
   "advanced": "高级",
@@ -103,5 +104,27 @@
   "claimed_reward_you_will_have": "你还剩下 ",
   "claimed_reward_points_remaining": "积分",
   "claimed_reward_cancel": "取消",
-  "claimed_reward_claim": "确定"
+  "claimed_reward_claim": "确定",
+
+  "reset_password_form_title": "翻译 Reset Password",
+  "reset_password_form_provide_6_character_token": "翻译 please provide 6 character token",
+  "reset_password_form_reset_password_token": "翻译 Reset Password Token",
+  "reset_password_form_new_password": "翻译 New Password",
+  "reset_password_form_password_must_be_longer_than": "翻译 password must be longer than 8 characters",
+  "reset_password_form_confirm_password": "翻译 Confirm Password",
+  "reset_password_form_pw_longer_than_8": "翻译 password must be longer than 8 characters",
+  "reset_password_form_pw_no_match": "翻译 Passwords do not match. Please try again.",
+  "reset_password_form_cancel": "取消",
+  "reset_password_form_submit": "提交",
+  "profile_reset_password_form_reset_password": "翻译 Reset Password",
+  "profile_reset_password_form_new_password": "翻译 New Password",
+  "profile_reset_password_form_longer_than_6": "翻译 password must be 6 or more characters",
+  "profile_reset_password_form_confirm_password": "翻译 Confirm Password",
+  "profile_reset_password_form_no_match": "翻译 passwords do not match",
+    "profile_reset_password_page_my_profile": "翻译 My Profile"
+
+
+
+
+
 }
