@@ -2,6 +2,7 @@
   width: 40rem;
   padding: 1rem;
   background-color: var(--haze-white);
+  margin-bottom: 10rem;
 }
 
 .title {
@@ -20,6 +21,7 @@
     width: 15rem;
     padding: 1rem;
     background-color: var(--haze-white);
+    margin-bottom: 10rem;
   }
 
   .title {
