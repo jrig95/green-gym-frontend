@@ -26,7 +26,7 @@ const LibraryItemPage = React.lazy(() => import("./Pages/LibraryPages/LibraryIte
 const NotFoundPage = React.lazy(() => import("./Pages/ErrorPages/NotFoundPage"));
 const PurchasePage = React.lazy(() => import("./Pages/ProgramPages/PurchasePage"));
 const AddWorkoutPage = React.lazy(() => import("./Pages/AdminFormPages/AddWorkout"));
-const WorkoutFinishedPage = React.lazy(() => import("./Pages/WorkoutPages/WorkoutFinishedPage"))
+const FinishedPage = React.lazy(() => import("./Pages/WorkoutPages/FinishedPage"))
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -70,7 +70,8 @@ function App() {
                 element={<PurchasePage />}
               />
               <Route path="activities" element={<ActivitiesPage />} />
-              <Route path="activites/workout-finished" element={<WorkoutFinishedPage />}/>
+              <Route path="activites/workout-finished" element={<FinishedPage workout={true} />}/>
+              <Route path="activites/day-finished" element={<FinishedPage workout={false} />}/>
               <Route
                 path="activities/:workoutId"
                 element={<DailyWorkoutPage />}
