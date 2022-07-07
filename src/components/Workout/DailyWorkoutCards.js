@@ -123,7 +123,7 @@ const DailyWorkoutCards = ({
       navigate("/activites");
     }
 
-    navigate("/activites/workout-finished")
+    navigate("/activites/day-finished");
   };
 
   const dailyChallenge = {
