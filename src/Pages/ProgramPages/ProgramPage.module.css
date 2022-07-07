@@ -51,6 +51,10 @@
   margin: 1rem 1rem 0 0;
 }
 
+.purchaseContainer a{
+  margin-bottom: 10rem;
+}
+
 .updateButtonContainer {
   margin: 1rem 0 1rem 0;
   display: flex;
@@ -141,5 +145,9 @@
     border: none;
     font-size: 1rem;
     font-weight: bold;
+}
+
+.purchaseContainer a {
+  margin-bottom: 10rem;
 }
 }

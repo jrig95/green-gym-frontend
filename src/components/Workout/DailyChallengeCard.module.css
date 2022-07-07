@@ -15,7 +15,7 @@
   min-height: 2.5rem;
 }
 
-.description p {
+.description p{
   margin: 0;
 }
 
@@ -54,7 +54,7 @@
     .description p {
       margin: 0 auto;
       font-size: 1.5rem;
-      padding-left: 2rem;
+      padding-left: 1rem;
     }
 
 
@@ -129,5 +129,9 @@
   .icon svg{
     padding-bottom: .5rem;
     font-size: 6rem;
+  }
+
+  .description p{
+    padding-left: 1rem;
   }
 }
