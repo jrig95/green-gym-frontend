@@ -103,6 +103,7 @@
   border: none;
   font-size: 1.25rem;
   font-weight: bold;
+  margin-bottom: 10rem;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 766px) {
@@ -175,5 +176,6 @@
   border: none;
   font-size: 1rem;
   font-weight: bold;
+  margin-bottom: 10rem;
 }
 }
