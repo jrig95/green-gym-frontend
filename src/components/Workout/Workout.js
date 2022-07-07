@@ -8,8 +8,11 @@ import { useProgram } from "../Program/hooks/use-program";
 import { useGetProgramTracker } from "../Trackers/hooks/use-program-tracker";
 
 import WorkoutDayTracker from "./WorkoutDayTracker";
+import { useTranslation } from "react-i18next";
+
 
 const Workout = ({ userData }) => {
+  const { t } = useTranslation();
   const programId = userData.programs[0].id;
   const programTrackerNewId = userData.program_trackers[0].id;
 
@@ -39,7 +42,7 @@ const Workout = ({ userData }) => {
   const programLength = programData.daily_workouts.length;
   // const programTrackerId = programTrackerData.id;
   const currentDay = programTrackerData.current_day;
-  
+
   if (programLength === currentDay)
     return (
       <div className={classes.workoutFinishedContainer}>
@@ -52,8 +55,8 @@ const Workout = ({ userData }) => {
           />
         </div>
         <div className={classes.workoutFinishedMessages}>
-          <h1>Workout Complete. Congratulations!!</h1>
-          <h2>Claim some rewards.</h2>
+          <h1>{t("workout_workout_complete")}</h1>
+          <h2>{t("workout_workout_claim_rewards")}</h2>
         </div>
       </div>
     );
