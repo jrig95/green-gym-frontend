@@ -121,7 +121,29 @@
   "profile_reset_password_form_longer_than_6": "翻译 password must be 6 or more characters",
   "profile_reset_password_form_confirm_password": "翻译 Confirm Password",
   "profile_reset_password_form_no_match": "翻译 passwords do not match",
-    "profile_reset_password_page_my_profile": "翻译 My Profile"
+  "profile_reset_password_page_my_profile": "翻译 My Profile",
+  "daily_workout_page_daily_workout": "翻译 Daily Workout",
+  "start_workout_card_start_workout": "翻译 Start Workout",
+  "start_workout_card_get_ready": "翻译 Get Ready!",
+  "exercise_tracker_card_exercise": "翻译 Exercise",
+  "exercise_tracker_card_work": "翻译 Work",
+  "exercise_tracker_card_rest": "翻译 Rest",
+  "exercise_tracker_card_how_many": "翻译 How Many?",
+  "exercise_tracker_card_keep_going": "翻译 Keep going!",
+  "exercise_tracker_card_finish_workout": "翻译 Finish Workout",
+  "exercise_tracker_card_row_add": "翻译 Add",
+  "exercise_tracker_card_row_sec": "翻译 secs",
+  "workout_finished_card_workout_finished": "翻译 Workout Finished!!",
+  "workout_workout_complete": "翻译 Workout Complete. Congratulations!!",
+  "workout_workout_claim_rewards": "翻译 Claim some rewards",
+  "exercise_overview_card_exercise": "翻译 Exercise",
+  "exercise_overview_card_sets": "翻译 Sets",
+  "program_workout_details_day": "天 "
+
+
+
+
+
 
 
 

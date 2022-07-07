@@ -74,7 +74,7 @@
   "profile_card_update_profile": "Update Profile",
   "profile_card_change_password": "Change Password",
   "trees_planted_trees_planted": " trees planted",
-  "trees_planted_tree_planted": "tree planted",
+  "trees_planted_tree_planted": " tree planted",
   "sign_up_form_please_enter_your_first_name": "please enter your first name",
   "sign_up_form_please_enter_your_second_name": "please enter your second name",
   "sign_up_form_please_enter_your_company_name": "please enter your company name",
@@ -121,7 +121,32 @@
   "profile_reset_password_form_longer_than_6": "password must be 6 or more characters",
   "profile_reset_password_form_confirm_password": "Confirm Password",
   "profile_reset_password_form_no_match": "passwords do not match",
-  "profile_reset_password_page_my_profile": "My Profile"
+  "profile_reset_password_page_my_profile": "My Profile",
+  "daily_workout_page_daily_workout": "Daily Workout",
+  "start_workout_card_start_workout": "Start Workout",
+  "start_workout_card_get_ready": "Get Ready!",
+  "exercise_tracker_card_exercise": "Exercise",
+  "exercise_tracker_card_work": "Work",
+  "exercise_tracker_card_rest": "Rest",
+  "exercise_tracker_card_how_many": "How Many?",
+  "exercise_tracker_card_keep_going": "Keep going!",
+  "exercise_tracker_card_finish_workout": "Finish Workout",
+  "exercise_tracker_card_row_add": "Add",
+  "exercise_tracker_card_row_sec": "secs",
+  "workout_finished_card_workout_finished": "Workout Finished!!",
+  "workout_workout_complete": "Workout Complete. Congratulations!!",
+  "workout_workout_claim_rewards": "Claim some rewards",
+  "exercise_overview_card_exercise": "Exercise",
+  "exercise_overview_card_sets": "Sets",
+  "program_workout_details_day": "Day "
+
+
+
+
+
+
+
+
 
 
 
