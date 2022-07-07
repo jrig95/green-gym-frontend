@@ -115,13 +115,15 @@ const DailyWorkoutCards = ({
     refetchProgramData();
   
     // TODO: Add codition to check if it is the final day.
-    
+  
 
     // If program length - 1 is the same as current day.
     // Redirect user to another page.
     if (currentDay === programData.daily_workouts.length + 1) {
-      navigate("/");
+      navigate("/activites");
     }
+
+    navigate("/activites/workout-finished")
   };
 
   const dailyChallenge = {

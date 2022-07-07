@@ -70,11 +70,11 @@ function App() {
                 element={<PurchasePage />}
               />
               <Route path="activities" element={<ActivitiesPage />} />
+              <Route path="activites/workout-finished" element={<WorkoutFinishedPage />}/>
               <Route
                 path="activities/:workoutId"
                 element={<DailyWorkoutPage />}
               />
-              <Route path="activites/workout-finished" element={<WorkoutFinishedPage />}/>
               <Route path="rewards" element={<RewardsPage />} />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="profile/update" element={<UpdateProfilePage />} />
