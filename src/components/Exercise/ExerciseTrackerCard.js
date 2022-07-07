@@ -58,7 +58,7 @@ const ExerciseTrackerCard = ({
     updateDailyWorkoutTracker(daily_workout_tracker)
 
     // navigate back to activites page
-    navigate("/activities");
+    navigate("/activites/workout-finished");
   };
 
   useEffect(() => {
