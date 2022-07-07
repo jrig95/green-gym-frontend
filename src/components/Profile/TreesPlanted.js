@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 const TreesPlanted = ({calories}) => {
   const { t } = useTranslation();
-  const treesPlanted = Math.round(calories / 10000);
+  const treesPlanted = Math.floor(calories / 10000);
   const translationtTreesPlanted = t("trees_planted_trees_planted")
   const translationtTreePlanted = t("trees_planted_tree_planted")
 
