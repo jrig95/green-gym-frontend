@@ -51,15 +51,6 @@ const DailyWorkoutCards = ({
   const dwtChallengeCompleted = dailyWorkoutTrackerData.dwt_daily_challenge;
   const dwtExercisesCompleted = dailyWorkoutTrackerData.exercises_completed;
 
-  // console.log(dwtChallengeCompleted);
-
-  // const [checkInIsComplete, setCheckInIsComplete] = useState(
-  //   dwtDailyCheckInCompleted
-  // );
-  // const [challengeIsComplete, setChallengeIsComplete] = useState(
-  //   dwtChallengeCompleted
-  // );
-
   // Have a use effect that automatically refetched data.
   // what changes that would anable the useEffect to fire.
 
@@ -109,19 +100,12 @@ const DailyWorkoutCards = ({
   };
 
   const finishDayHandler = () => {
-    // const program_tracker = {
-    //   id: programTrackerId,
-    //   current_day: currentDay + 1,
-    //   // completed: true,
-    // };
-
+    // When day is finished. Creates an object that sets the day to compelted.
     const daily_workout_tracker = {
       id: dailyWorkoutTrackerId,
       program_tracker_id: programTrackerId,
       completed: true,
     };
-
-    // updateProgramTracker(program_tracker);
 
     updateDailyWorkoutTracker(daily_workout_tracker);
 
@@ -129,17 +113,17 @@ const DailyWorkoutCards = ({
     refetchDailyWorkoutTracker();
     refetchProgramTrackerData();
     refetchProgramData();
-    // setDayIsFinished(true);
-
+  
     // TODO: Add codition to check if it is the final day.
-    console.log(currentDay);
-    console.log(programData.daily_workouts.length);
+  
 
-    // Fi program length - 1 is the same as current day.
+    // If program length - 1 is the same as current day.
     // Redirect user to another page.
     if (currentDay === programData.daily_workouts.length + 1) {
-      navigate("/");
+      navigate("/activites");
     }
+
+    navigate("/activites/workout-finished")
   };
 
   const dailyChallenge = {

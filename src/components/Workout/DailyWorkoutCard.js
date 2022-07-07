@@ -39,7 +39,7 @@ const DailyWorkoutCard = ({
       </div>
       <div className={classes.buttonContainer}>
         <Link to={`/activities/${slug}`}>
-          <Button color={blueButton}>{buttonMessage}</Button>
+          <Button color={blueButton} disabled={dwtExercisesCompleted}>{buttonMessage}</Button>
         </Link>
       </div>
     </Card>

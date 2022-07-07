@@ -42,6 +42,7 @@ const ExerciseTrackerCard = ({
         program_tracker_id: programTrackerId,
         daily_workout_tracker_id: workoutTrackerId,
         number_of_reps: rep.number_of_reps,
+        submitted: true
       };
 
       // call mutate here
@@ -58,7 +59,7 @@ const ExerciseTrackerCard = ({
     updateDailyWorkoutTracker(daily_workout_tracker)
 
     // navigate back to activites page
-    navigate("/activities");
+    navigate("/activites/workout-finished");
   };
 
   useEffect(() => {
