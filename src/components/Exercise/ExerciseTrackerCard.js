@@ -7,6 +7,8 @@ import Button from "../UI/Button";
 import classes from "./ExerciseTrackerCard.module.css";
 import Card from "../UI/Card";
 import ExerciseTrackerCardRow from "./ExerciseTrackerCardRow";
+import { useTranslation } from "react-i18next";
+
 
 // import data from "../../program.json";
 
@@ -18,6 +20,7 @@ const ExerciseTrackerCard = ({
   programTrackerId,
   workoutTrackerId,
 }) => {
+  const { t } = useTranslation();
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
   const [repsArray, setRepsArray] = useState([]);
   const [numberOfExercisesComplete, setNumberOfExercisesComplete] = useState(0);
@@ -39,6 +42,7 @@ const ExerciseTrackerCard = ({
         program_tracker_id: programTrackerId,
         daily_workout_tracker_id: workoutTrackerId,
         number_of_reps: rep.number_of_reps,
+        submitted: true
       };
 
       // call mutate here
@@ -51,11 +55,11 @@ const ExerciseTrackerCard = ({
       program_tracker_id: programTrackerId,
       exercises_completed: true,
     };
-    
+
     updateDailyWorkoutTracker(daily_workout_tracker)
 
     // navigate back to activites page
-    navigate("/activities");
+    navigate("/activites/workout-finished");
   };
 
   useEffect(() => {
@@ -97,22 +101,22 @@ const ExerciseTrackerCard = ({
       <Card className={classes.card}>
         <div className={classes.header}>
           <div className={classes.exerciseHeader}>
-            <p>Exercise</p>
+            <p>{t("exercise_tracker_card_exercise")}</p>
           </div>
           <div className={classes.workHeader}>
-            <p>Work</p>
+            <p>{t("exercise_tracker_card_work")}</p>
           </div>
           <div className={classes.restHeader}>
-            <p>Rest</p>
+            <p>{t("exercise_tracker_card_rest")}</p>
           </div>
           <div className={classes.questionHeader}>
-            <p>How Many?</p>
+            <p>{t("exercise_tracker_card_how_many")}</p>
           </div>
         </div>
         {exerciseTrackerCardRows}
       </Card>
       <div className={classes.buttonContainer}>
-        <Button disabled={formIsComplete} onClick={onFinishWorkoutHandler}>{formIsComplete ? "Keep going!" : "Finish Workout"}</Button>
+        <Button disabled={formIsComplete} onClick={onFinishWorkoutHandler}>{formIsComplete  ?t("exercise_tracker_card_keep_going"): t("exercise_tracker_card_finish_workout")}</Button>
       </div>
     </Fragment>
   );

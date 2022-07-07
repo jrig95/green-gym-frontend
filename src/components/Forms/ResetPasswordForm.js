@@ -8,8 +8,11 @@ import { useResetPassword } from "../User/hooks/use-reset-password";
 import SuccessfullyResetPasswordMessage from "../User/SuccessfullyResetPasswordMessage";
 import { useIsMutating } from 'react-query';
 import LoadingSpinnerButton from '../UI/LoadingSpinnerButton';
+import { useTranslation } from "react-i18next";
+
 
 const ResetPasswordForm = () => {
+  const { t } = useTranslation();
   const isMutating = useIsMutating();
   const { mutate: resetPassword, isSuccess: resetPasswordIsSuccess } =
     useResetPassword();
@@ -96,11 +99,11 @@ const ResetPasswordForm = () => {
       {successfullyResetPasswordMessageIsShown && (
         <SuccessfullyResetPasswordMessage />
       )}
-      <FormCard title="Reset Password">
+      <FormCard title= {t("reset_password_form_title")}>
         <form onSubmit={formSubmitHandler}>
           <div className={classes.controlGroup}>
             <div className={passwordTokenClasses}>
-              <label htmlFor="password-token">Reset Password Token</label>
+              <label htmlFor="password-token">{t("reset_password_form_reset_password_token")}</label>
               <input
                 type="text"
                 id="password-token"
@@ -110,12 +113,12 @@ const ResetPasswordForm = () => {
               />
               {passwordTokenHasError && (
                 <p className={classes.errorText}>
-                  please provide 6 character token
+                  {t("reset_password_form_provide_6_character_token")}
                 </p>
               )}
             </div>
             <div className={newPasswordClasses}>
-              <label htmlFor="password">New Password</label>
+              <label htmlFor="password">{t("reset_password_form_new_password")}</label>
               <input
                 type="password"
                 id="password"
@@ -125,12 +128,12 @@ const ResetPasswordForm = () => {
               />
               {newPasswordHasError && (
                 <p className={classes.errorText}>
-                  password must be longer than 8 characters
+                  {t("reset_password_form_must_be_longer_than")}
                 </p>
               )}
             </div>
             <div className={confirmPasswordClasses}>
-              <label htmlFor="new-password">Confirm Password</label>
+              <label htmlFor="new-password">{t("reset_password_form_confirm_password")}</label>
               <input
                 type="password"
                 id="new-password"
@@ -140,21 +143,21 @@ const ResetPasswordForm = () => {
               />
               {confirmPasswordHasError && (
                 <p className={classes.errorText}>
-                  password must be longer than 8 characters
+                  {t("reset_password_form_pw_longer_than_8")}
                 </p>
               )}
             </div>
             {passwordsDoNotMatch && (
               <p className={classes.errorText}>
-                Passwords do not match. Please try again.
+                {t("reset_password_form_pw_no_match")}
               </p>
             )}
             <div className={classes.formActions}>
               <Button color="blue" size="small">
-                Cancel
+                {t("reset_password_form_cancel")}
               </Button>
               <Button size="small" type="submit" disabled={!formIsValid || isMutating}>
-                Submit
+                {t("reset_password_form_submit")}
               </Button>
             </div>
           </div>

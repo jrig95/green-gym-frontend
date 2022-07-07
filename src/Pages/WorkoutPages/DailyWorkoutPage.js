@@ -8,8 +8,11 @@ import AuthContext from "../../context/AuthContext";
 import Banner from "../../components/Layout/Banner";
 import classes from './DailyWorkoutPage.module.css';
 import DailyWorkout from "../../components/Exercise/DailyWorkout";
+import { useTranslation } from "react-i18next";
+
 
 const DailyWorkoutPage = () => {
+  const { t } = useTranslation();
   const authCtx = useContext(AuthContext);
   const params = useParams();
 
@@ -21,7 +24,7 @@ const DailyWorkoutPage = () => {
 
   return (
     <Fragment>
-      <Banner title="Daily Workout" />
+      <Banner title={t("daily_workout_page_daily_workout")} />
       <div className={classes.container}>
         <DailyWorkout userData={userData} ids={ids} />
       </div>

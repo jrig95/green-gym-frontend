@@ -7,8 +7,11 @@ import classes from "./ProgramWorkoutDetails.module.css";
 import ExerciseOverviewCard from "../Exercise/ExerciseOverviewCard";
 import ExerciseCard from "../Exercise/ExerciseCard";
 import Button from "../UI/Button";
+import { useTranslation } from "react-i18next";
+
 
 const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
+  const { t } = useTranslation();
   const [updateWorkoutIsShown, setUpdateWorkingIsShown] = useState(false);
 
   // TODO: use programId to find dailyworkouts
@@ -53,7 +56,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
           onClose={hideUpdateWorkoutHandler}
         />
       )}
-      <h2>Day {workoutData.day_number}</h2>
+      <h2>{t("program_workout_details_day")} {workoutData.day_number}</h2>
       <p>{workoutData.description}</p>
       {!admin && (
         <ExerciseOverviewCard

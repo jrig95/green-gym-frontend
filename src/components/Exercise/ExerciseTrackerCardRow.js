@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useInput from "../Forms/Hooks/use-input";
 import classes from "./ExerciseTrackerCard.module.css";
+import { useTranslation } from "react-i18next";
 
 const ExerciseTrackerCardRow = ({
   exercise,
@@ -12,6 +13,7 @@ const ExerciseTrackerCardRow = ({
   exerciseTrackerId,
   increaseNumberOfExercisesComplete,
 }) => {
+  const { t } = useTranslation();
   const [exerciseIsAdded, setExerciseIsAdded] = useState(false);
   const rowClasses = rowActive
     ? `${classes.row} ${classes.rowActive}`
@@ -53,8 +55,8 @@ const ExerciseTrackerCardRow = ({
   return (
     <div className={rowClasses}>
       <p className={classes.exerciseRow}>{exercise}</p>
-      <p className={classes.workRow}>{work} secs</p>
-      <p className={classes.restRow}>{rest} secs</p>
+      <p className={classes.workRow}>{work} {t("exercise_tracker_card_row_sec")}</p>
+      <p className={classes.restRow}>{rest} {t("exercise_tracker_card_row_sec")}</p>
       {exerciseQuestion && (
         <>
           <div className={classes.questionContainer}>
@@ -73,7 +75,7 @@ const ExerciseTrackerCardRow = ({
               onClick={addExerciseRepsValueHandler}
               disabled={exerciseIsAdded || !repsIsValid}
             >
-              Add
+              {t("exercise_tracker_card_row_add")}
             </button>
           </div>
         </>

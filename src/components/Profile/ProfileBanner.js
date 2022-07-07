@@ -6,8 +6,6 @@ import classes from "./ProfileBanner.module.css";
 import TreesPlanted from "./TreesPlanted";
 import { useTranslation } from "react-i18next";
 
-
-
 const ProfileBanner = ({
   title,
   calories,
