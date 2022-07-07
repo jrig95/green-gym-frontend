@@ -1,0 +1,16 @@
+.container {
+  margin: 4rem 0 10rem 0;
+}
+
+.textContainer {
+  margin: 10rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonContainer {
+  margin: 5rem 0 0 0;
+  display: flex;
+  justify-content: center;
+}
