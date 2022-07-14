@@ -5,10 +5,8 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-
 RUN npm install
-RUN npm install dateformat
+RUN npm run build
 
-
-CMD ["npm", "run", "serve"]
+EXPOSE 5000
+CMD "npm" "run" "start"
