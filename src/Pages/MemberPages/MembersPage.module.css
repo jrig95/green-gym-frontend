@@ -1,6 +1,8 @@
 .container {
   margin: 1rem 10rem 10rem 10rem;
+  padding-bottom: 10rem;
 }
+/* comment */
 
 .errorMessage {
   margin: 10rem 0 0 0;
@@ -10,6 +12,7 @@
 @media only screen and (min-width: 617px) and (max-width: 1200px) {
   .container{
     margin: 2rem 4rem 10rem 4rem;
+    padding-bottom: 7rem;
   }
 }
 
