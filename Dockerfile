@@ -5,8 +5,9 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install
-RUN npm run build
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-EXPOSE 5000
-CMD "npm" "run" "start"
+RUN npm install
+
+
+CMD ["npm", "run", "serve"]
