@@ -7,19 +7,11 @@ import AuthContext from "../../../../context/AuthContext";
 import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
-<<<<<<< HEAD
-const createLibraryItem = async (libraryItem, bearerToken) => {
-  await axios.post(`${baseUrl}/library_items`, libraryItem, {
-    headers: {
-      Authorization: bearerToken
-    }
-=======
 const createLibraryItem = async (libraryItem, barerToken) => {
   await axios.post(`${baseUrl}/library_items`, libraryItem, {
     headers: {
       Authorization: barerToken,
     },
->>>>>>> a000a6df42057a844641502369ad91926fe42e66
   });
 };
 
