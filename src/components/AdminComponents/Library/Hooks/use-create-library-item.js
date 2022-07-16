@@ -7,22 +7,22 @@ import AuthContext from "../../../../context/AuthContext";
 import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
-const createLibraryItem = async (libraryItem, barerToken) => {
+const createLibraryItem = async (libraryItem, bearerToken) => {
   await axios.post(`${baseUrl}/library_items`, libraryItem, {
     headers: {
-      Authorization: barerToken,
+      Authorization: bearerToken,
     },
   });
 };
 
 export const useCreateLibraryItem = () => {
   const authCtx = useContext(AuthContext);
-  const barerToken = authCtx.token;
+  const bearerToken = authCtx.token;
   const { addError } = useAPIError();
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
-    (libraryItem) => createLibraryItem(libraryItem, barerToken),
+    (libraryItem) => createLibraryItem(libraryItem, bearerToken),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.libraryItems]);
