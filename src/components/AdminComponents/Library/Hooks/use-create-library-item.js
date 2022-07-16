@@ -4,8 +4,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
-const createLibraryItem = async (libraryItem) => {
-  await axios.post(`${baseUrl}/library_items`, libraryItem);
+const createLibraryItem = async (libraryItem, bearerToken) => {
+  await axios.post(`${baseUrl}/library_items`, libraryItem, {
+    headers: {
+      Authorization: bearerToken
+    }
+  });
 };
 
 export const useCreateLibraryItem = () => {
