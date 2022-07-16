@@ -18,7 +18,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
   const { data: workoutData, isLoading: workoutIsLoading, isError: workoutIsError } = useWorkout(
     programId,
     dailyWorkoutId
-  );
+  )
 
   // TODO: get the daily workout id
   // TODO: Add mutatios for program / daily workout / exercise / exercise overview

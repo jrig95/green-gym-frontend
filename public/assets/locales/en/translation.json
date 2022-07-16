@@ -49,8 +49,8 @@
   "not_found_page_not_found": "page not found",
   "activities_page_my_activites": "My Activites",
   "daily_check_in_card_daily_check_in": "Daily Check In",
-  "daily_challenge_card_done_it": "Done it!",
-  "daily_challenge_card_do_it": "Do it!",
+  "daily_challenge_card_done_it": "Finished!",
+  "daily_challenge_card_do_it": "Let's Do it!",
   "daily_checked_in_card_checked_in": "Checked In!",
   "daily_checked_in_card_check_in": "Check in",
   "daily_workout_card_daily_workout": "Daily Workout: Day ",
@@ -138,7 +138,23 @@
   "workout_workout_claim_rewards": "Claim some rewards",
   "exercise_overview_card_exercise": "Exercise",
   "exercise_overview_card_sets": "Sets",
-  "program_workout_details_day": "Day "
+  "program_workout_details_day": "Day ",
+  "purchase_page_purchase": "Purchase",
+  "purchase_page_phone_number": "Phone Number:",
+  "program_page_price": "Price: ¥",
+  "program_purchase_page_purchase_program": "Purchase Program",
+  "workout_out_message_one": "Go hit the showers",
+  "workout_out_message_two": "Remember to cool down",
+  "workout_out_message_three": "Don't forget to stretch",
+  "finished_page_workout_finished": "Workout Finished!",
+  "finished_page_day_finished": "Day Finished!",
+  "finished_page_continue": "Continue",
+  "day_message_one": "Go and relax. See you tomorrow.",
+  "day_message_two": "Well done! See you tomorrow",
+  "day_message_three": "You did it!"
+
+
+
 
 
 
