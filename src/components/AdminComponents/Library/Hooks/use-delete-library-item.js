@@ -7,8 +7,12 @@ import useAPIError from "../../../../common/hooks/use-API-error";
 import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
-const deleteLibraryItem = async (id) => {
-  await axios.delete(`${baseUrl}/library_items/${id}`);
+const deleteLibraryItem = async (id, bearerToken) => {
+  await axios.delete(`${baseUrl}/library_items/${id}`, {
+    headers: {
+      Authorization: bearerToken
+    }
+  });
 };
 
 export const useDeleteLibraryItem = () => {
@@ -17,7 +21,7 @@ export const useDeleteLibraryItem = () => {
   const bearerToken = authCtx.token;
 
   const queryClient = useQueryClient();
-  const { mutate } = useMutation((id) => deleteLibraryItem(id), {
+  const { mutate } = useMutation((id) => deleteLibraryItem(id, bearerToken), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.libraryItems]);
     },
