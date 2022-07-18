@@ -10,8 +10,10 @@ import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
 // import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import UpdateProgram from "../../components/Program/UpdateProgram";
+import { useTranslation } from "react-i18next";
 
 const ProgramPage = () => {
+  const { t } = useTranslation();
   const [updateProgramIsShown, setUpdateProgramIsShown] = useState(false);
   const params = useParams();
 
@@ -83,9 +85,9 @@ const ProgramPage = () => {
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
         <div className={classes.purchaseContainer}>
-          <h3>Price: ¥{programData.price}</h3>
+          <h3>{t("program_page_price")}{programData.price}</h3>
           <Link to="purchase">
-            <Button>Purchase</Button>
+            <Button>{t("purchase_page_purchase")}</Button>
           </Link>
         </div>
       </div>
