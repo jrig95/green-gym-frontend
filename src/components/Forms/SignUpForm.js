@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { useUserSignup } from "../User/hooks/use-user-signup";
@@ -60,6 +60,15 @@ const SignUpForm = () => {
     reset: resetPassword,
   } = useInput(textNotEmpty);
 
+  const {
+    value: phoneNumberValue,
+    isValid: phoneNumberIsValid,
+    hasError: phoneNumberHasError,
+    valueChangeHandler: phoneNumberChangeHandler,
+    inputBlurHandler: phoneNumberBlurHandler,
+    reset: resetPhoneNumber,
+  } = useInput(textNotEmpty);
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -69,6 +78,7 @@ const SignUpForm = () => {
       user_company: companyValue,
       email: emailValue,
       password: passwordValue,
+      phone_number: phoneNumberValue
     };
 
     userSignup(user);
@@ -80,6 +90,7 @@ const SignUpForm = () => {
     resetCompany();
     resetEmail();
     resetPassword();
+    resetPhoneNumber();
   };
 
   useEffect(() => {
@@ -108,12 +119,17 @@ const SignUpForm = () => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
+  const phoneNumberClasses = phoneNumberHasError
+    ? `${classes.formControl} ${classes.invalid}`
+    : classes.formControl;
+
   const formIsValid =
     firtNameIsValid &
     lastNameIsValid &
     companyIsValid &
     emailIsValid &
-    passwordIsValid;
+    passwordIsValid &
+    phoneNumberIsValid
 
   return (
     <SignUpFormCard title={t("sign_up")}>
@@ -187,6 +203,21 @@ const SignUpForm = () => {
             {passwordHasError && (
               <p className={classes.errorText}>
                 {t("sign_up_form_longer_than_8")}
+              </p>
+            )}
+          </div>
+          <div className={phoneNumberClasses}>
+            <label htmlFor="phone number">{t("phone_number")}</label>
+            <input
+              type="phone number"
+              id="phone_number"
+              value={phoneNumberValue}
+              onChange={phoneNumberChangeHandler}
+              onBlur={phoneNumberBlurHandler}
+            />
+            {phoneNumberHasError && (
+              <p className={classes.errorText}>
+                {t("please_enter_a_valid_number")}
               </p>
             )}
           </div>
