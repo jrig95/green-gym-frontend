@@ -15,9 +15,17 @@
   color: var(--blue);
 }
 
+@media only screen and (min-width: 618px) and (max-width: 1000px) {
+  .card {
+    width: 41.5rem;
+    padding: 1rem;
+    background-color: var(--haze-white);
+  }
+}
+
 @media only screen and (min-width: 320px) and (max-width: 617px) {
 .card {
-    width: 20rem;
+    width: 21rem;
     padding: 1rem;
     background-color: var(--haze-white);
   }
