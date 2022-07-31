@@ -215,6 +215,7 @@ const SignUpForm = () => {
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
+            <button>Get OTP</button>
             {phoneNumberHasError && (
               <p className={classes.errorText}>
                 {t("please_enter_a_valid_number")}
