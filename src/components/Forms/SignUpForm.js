@@ -207,15 +207,15 @@ const SignUpForm = () => {
             )}
           </div>
           <div className={phoneNumberClasses}>
-            <label htmlFor="phone number">{t("phone_number")}</label>
+            <label htmlFor="phone_number">{t("phone_number")}</label>
             <input
-              type="phone number"
+              type="tel"
               id="phone_number"
               value={phoneNumberValue}
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
-            <button>Get OTP</button>
+            <Button size="small">Get OTP</Button>
             {phoneNumberHasError && (
               <p className={classes.errorText}>
                 {t("please_enter_a_valid_number")}
