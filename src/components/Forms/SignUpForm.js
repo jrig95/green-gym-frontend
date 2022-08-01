@@ -107,7 +107,6 @@ const SignUpForm = () => {
   };
 
   useEffect(() => {
-    // let message = ""
     if (verifyOtpCodeIsSuccess) {
       if (verifyOtpCodeData.msg === "Wrong OTP code") {
         // Display message to user telling them it is the Wrong OTP code
@@ -140,8 +139,6 @@ const SignUpForm = () => {
     };
 
     userSignup(user);
-
-    // console.log(userData);
 
     resetFirstName();
     resetLastName();
@@ -280,7 +277,7 @@ const SignUpForm = () => {
               onBlur={phoneNumberBlurHandler}
             />
             <Button onClick={sendOtpCodeHandler} size="small">
-              Get OTP
+              Get Code
             </Button>
             {phoneNumberHasError && (
               <p className={classes.errorText}>
