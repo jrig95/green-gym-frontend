@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -11,8 +12,9 @@ import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
 import { useVerifyOtpCode } from "../User/hooks/use-verify-otp-code";
 
 const SignUpForm = () => {
+  const [otpCodeIsVerified, setOtpCodeIsVerified] = useState();
   const sendOtpCode = useSendOtpCode();
-  const verifyOtpCode = useVerifyOtpCode();
+  const { mutate: verifyOtpCode, data: verifyOtpCodeData, isSuccess: verifyOtpCodeIsSuccess } = useVerifyOtpCode();
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -92,9 +94,30 @@ const SignUpForm = () => {
       phone_number: phoneNumberValue,
       code: otpCodeValue
     }
-    
+
     verifyOtpCode(code);
   };
+
+  useEffect(() => {
+    // let message = ""
+    if (verifyOtpCodeIsSuccess) {
+      console.log(verifyOtpCodeData.msg);
+      if (verifyOtpCodeData.msg === "Wrong OTP code") {
+        // Display message to user telling them it is the Wrong OTP code
+        console.log("works")
+      }
+
+      if (verifyOtpCodeData.msg === "OTP expired") {
+        // Display message to user telling them the OTP has expired
+        console.log("OTP expired")
+      }
+
+      if (verifyOtpCodeData.msg === "OTP code matches. Success") {
+        // Make it so form can be submitted
+        setOtpCodeIsVerified(true);
+      }
+    }
+  }, [verifyOtpCodeIsSuccess, verifyOtpCodeData])
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -156,7 +179,8 @@ const SignUpForm = () => {
     companyIsValid &
     emailIsValid &
     passwordIsValid &
-    phoneNumberIsValid;
+    phoneNumberIsValid &
+    otpCodeIsVerified;
 
   return (
     <SignUpFormCard title={t("sign_up")}>
