@@ -78,7 +78,7 @@ const SignUpForm = () => {
       user_company: companyValue,
       email: emailValue,
       password: passwordValue,
-      phone_number: phoneNumberValue
+      phone_number: phoneNumberValue,
     };
 
     userSignup(user);
@@ -95,9 +95,9 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (signUpIsSuccess) {
-      navigate("/activities")
+      navigate("/activities");
     }
-  }, [signUpIsSuccess, navigate])
+  }, [signUpIsSuccess, navigate]);
 
   const firstNameClasses = firstNameHasError
     ? `${classes.formControl} ${classes.invalid}`
@@ -129,7 +129,7 @@ const SignUpForm = () => {
     companyIsValid &
     emailIsValid &
     passwordIsValid &
-    phoneNumberIsValid
+    phoneNumberIsValid;
 
   return (
     <SignUpFormCard title={t("sign_up")}>
@@ -145,7 +145,10 @@ const SignUpForm = () => {
               onBlur={firstNameBlurHandler}
             />
             {firstNameHasError && (
-              <p className={classes.errorText}> {t("sign_up_form_please_enter_your_first_name")}</p>
+              <p className={classes.errorText}>
+                {" "}
+                {t("sign_up_form_please_enter_your_first_name")}
+              </p>
             )}
           </div>
           <div className={secondNameClasses}>
@@ -158,7 +161,9 @@ const SignUpForm = () => {
               onBlur={lastNameBlurHandler}
             />
             {lastNameHasError && (
-              <p className={classes.errorText}>{t("sign_up_form_please_enter_your_second_name")}</p>
+              <p className={classes.errorText}>
+                {t("sign_up_form_please_enter_your_second_name")}
+              </p>
             )}
           </div>
           <div className={companyClasses}>
@@ -221,6 +226,11 @@ const SignUpForm = () => {
                 {t("please_enter_a_valid_number")}
               </p>
             )}
+          </div>
+          <div className={classes.formControl}>
+            <label htmlFor="otp_code">Code</label>
+            <input type="number" id="otp_code" />
+            <Button size="small">Verify</Button>
           </div>
           <div className={classes.formActions}>
             <Link to="/">
