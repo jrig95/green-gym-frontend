@@ -12,9 +12,17 @@ import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
 import { useVerifyOtpCode } from "../User/hooks/use-verify-otp-code";
 
 const SignUpForm = () => {
+  const [optErrorMessage, setOptErrorMessage] = useState({
+    message: "",
+    isShown: false,
+  });
   const [otpCodeIsVerified, setOtpCodeIsVerified] = useState();
   const sendOtpCode = useSendOtpCode();
-  const { mutate: verifyOtpCode, data: verifyOtpCodeData, isSuccess: verifyOtpCodeIsSuccess } = useVerifyOtpCode();
+  const {
+    mutate: verifyOtpCode,
+    data: verifyOtpCodeData,
+    isSuccess: verifyOtpCodeIsSuccess,
+  } = useVerifyOtpCode();
 
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -92,8 +100,8 @@ const SignUpForm = () => {
     // create
     const code = {
       phone_number: phoneNumberValue,
-      code: otpCodeValue
-    }
+      code: otpCodeValue,
+    };
 
     verifyOtpCode(code);
   };
@@ -101,23 +109,23 @@ const SignUpForm = () => {
   useEffect(() => {
     // let message = ""
     if (verifyOtpCodeIsSuccess) {
-      console.log(verifyOtpCodeData.msg);
       if (verifyOtpCodeData.msg === "Wrong OTP code") {
         // Display message to user telling them it is the Wrong OTP code
-        console.log("works")
+        setOptErrorMessage({ message: "Wrong OTP code", isShown: true})
       }
 
       if (verifyOtpCodeData.msg === "OTP expired") {
         // Display message to user telling them the OTP has expired
-        console.log("OTP expired")
+        setOptErrorMessage({ message: "OTP expired", isShown: true})
       }
 
       if (verifyOtpCodeData.msg === "OTP code matches. Success") {
         // Make it so form can be submitted
+        setOptErrorMessage({ isShown: false })
         setOtpCodeIsVerified(true);
       }
     }
-  }, [verifyOtpCodeIsSuccess, verifyOtpCodeData])
+  }, [verifyOtpCodeIsSuccess, verifyOtpCodeData]);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -292,6 +300,9 @@ const SignUpForm = () => {
             <Button onClick={varifyOtpHandler} size="small">
               Verify
             </Button>
+            {optErrorMessage.isShown && (
+              <p className={classes.errorText}>{optErrorMessage.message}</p>
+            )}
           </div>
           <div className={classes.formActions}>
             <Link to="/">
