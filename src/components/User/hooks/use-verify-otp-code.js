@@ -4,14 +4,15 @@ import { useMutation } from "react-query";
 import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
-const sendOtpCode = async (phoneNumber) => {
-  await axios.post(`${baseUrl}/send_otp_code`, phoneNumber)
-}
+const verifyOtpCode = async (code) => {
+  await axios.post(`${baseUrl}/verify_otp`, code)
+};
 
-export const useSendOtpCode = () => {
+
+export const useVerifyOtpCode = () => {
   const { addError } = useAPIError();
 
-  const { mutate } = useMutation((phoneNumber) => sendOtpCode(phoneNumber), {
+  const { mutate } = useMutation((code) => verifyOtpCode(code), {
     onError: (error) => {
       const title = error instanceof Error ? error.message : "error connecting to server";
       addError(title, error.status);
@@ -19,4 +20,4 @@ export const useSendOtpCode = () => {
   });
 
   return mutate;
-}
+};

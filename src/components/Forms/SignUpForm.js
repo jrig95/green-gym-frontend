@@ -8,9 +8,12 @@ import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import { useEffect } from "react";
 import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
+import { useVerifyOtpCode } from "../User/hooks/use-verify-otp-code";
 
 const SignUpForm = () => {
   const sendOtpCode = useSendOtpCode();
+  const verifyOtpCode = useVerifyOtpCode();
+
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -71,9 +74,26 @@ const SignUpForm = () => {
     reset: resetPhoneNumber,
   } = useInput(textNotEmpty);
 
+  const {
+    value: otpCodeValue,
+    isValid: otpCodeIsValid,
+    hasError: otpCodeHasError,
+    valueChangeHandler: otpCodeChangeHandler,
+    inputBlurHandler: otpCodeBlurHandler,
+  } = useInput(textNotEmpty);
+
   const sendOtpCodeHandler = () => {
-    sendOtpCode(phoneNumberValue);
-    console.log(phoneNumberValue);
+    sendOtpCode({ phone_number: phoneNumberValue });
+  };
+
+  const varifyOtpHandler = () => {
+    // create
+    const code = {
+      phone_number: phoneNumberValue,
+      code: otpCodeValue
+    }
+    
+    verifyOtpCode(code);
   };
 
   const formSubmitHandler = (event) => {
@@ -227,7 +247,9 @@ const SignUpForm = () => {
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
-            <Button onClick={sendOtpCodeHandler} size="small">Get OTP</Button>
+            <Button onClick={sendOtpCodeHandler} size="small">
+              Get OTP
+            </Button>
             {phoneNumberHasError && (
               <p className={classes.errorText}>
                 {t("please_enter_a_valid_number")}
@@ -236,8 +258,16 @@ const SignUpForm = () => {
           </div>
           <div className={classes.formControl}>
             <label htmlFor="otp_code">Code</label>
-            <input type="number" id="otp_code" />
-            <Button size="small">Verify</Button>
+            <input
+              type="number"
+              id="otp_code"
+              value={otpCodeValue}
+              onChange={otpCodeChangeHandler}
+              onBlur={otpCodeBlurHandler}
+            />
+            <Button onClick={varifyOtpHandler} size="small">
+              Verify
+            </Button>
           </div>
           <div className={classes.formActions}>
             <Link to="/">
