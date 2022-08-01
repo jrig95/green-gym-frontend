@@ -1,5 +1,5 @@
 // Use for development
-// export const  = "http://localhost:3000"
+export const userBaseUrl = "http://localhost:3000"
 
 // Use for production
-export const userBaseUrl = "https://api.greengym.com.cn"
+// export const userBaseUrl = "https://api.greengym.com.cn"

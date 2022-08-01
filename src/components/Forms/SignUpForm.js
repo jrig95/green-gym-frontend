@@ -7,8 +7,10 @@ import SignUpFormCard from "./SignUpFormCard";
 import Button from "../UI/Button";
 import useInput from "./Hooks/use-input";
 import { useEffect } from "react";
+import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
 
 const SignUpForm = () => {
+  const sendOtpCode = useSendOtpCode();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -68,6 +70,11 @@ const SignUpForm = () => {
     inputBlurHandler: phoneNumberBlurHandler,
     reset: resetPhoneNumber,
   } = useInput(textNotEmpty);
+
+  const sendOtpCodeHandler = () => {
+    sendOtpCode(phoneNumberValue);
+    console.log(phoneNumberValue);
+  };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -220,7 +227,7 @@ const SignUpForm = () => {
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
-            <Button size="small">Get OTP</Button>
+            <Button onClick={sendOtpCodeHandler} size="small">Get OTP</Button>
             {phoneNumberHasError && (
               <p className={classes.errorText}>
                 {t("please_enter_a_valid_number")}
