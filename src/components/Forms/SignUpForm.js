@@ -110,17 +110,17 @@ const SignUpForm = () => {
     if (verifyOtpCodeIsSuccess) {
       if (verifyOtpCodeData.msg === "Wrong OTP code") {
         // Display message to user telling them it is the Wrong OTP code
-        setOptErrorMessage({ message: "Wrong OTP code", isShown: true})
+        setOptErrorMessage({ message: "Wrong OTP code", isShown: true });
       }
 
       if (verifyOtpCodeData.msg === "OTP expired") {
         // Display message to user telling them the OTP has expired
-        setOptErrorMessage({ message: "OTP expired", isShown: true})
+        setOptErrorMessage({ message: "OTP expired", isShown: true });
       }
 
       if (verifyOtpCodeData.msg === "OTP code matches. Success") {
         // Make it so form can be submitted
-        setOptErrorMessage({ isShown: false })
+        setOptErrorMessage({ isShown: false });
         setOtpCodeIsVerified(true);
       }
     }
@@ -175,8 +175,8 @@ const SignUpForm = () => {
     : classes.formControl;
 
   const phoneNumberClasses = phoneNumberHasError
-    ? `${classes.formControl} ${classes.invalid}`
-    : classes.formControl;
+    ? `${classes.formControl} ${classes.formButtonGroup} ${classes.invalid}`
+    : `${classes.formControl} ${classes.formButtonGroup}`;
 
   const formIsValid =
     firtNameIsValid &
@@ -276,15 +276,15 @@ const SignUpForm = () => {
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
-            <Button onClick={sendOtpCodeHandler} size="small">
+            <button className={classes.codeButton} onClick={sendOtpCodeHandler}>
               Get Code
-            </Button>
-            {phoneNumberHasError && (
-              <p className={classes.errorText}>
-                {t("please_enter_a_valid_number")}
-              </p>
-            )}
+            </button>
           </div>
+          {phoneNumberHasError && (
+            <p className={classes.errorText}>
+              {t("please_enter_a_valid_number")}
+            </p>
+          )}
           <div className={classes.formControl}>
             <label htmlFor="otp_code">Code</label>
             <input
