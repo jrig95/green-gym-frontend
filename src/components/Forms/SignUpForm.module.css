@@ -80,6 +80,7 @@
   position: relative;
 }
 
+.codeButtonCountdown,
 .codeButton {
   position: absolute;
   top: 2.9rem;
