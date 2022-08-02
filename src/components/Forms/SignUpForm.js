@@ -12,6 +12,7 @@ import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
 import { useVerifyOtpCode } from "../User/hooks/use-verify-otp-code";
 
 const SignUpForm = () => {
+  const [countdownIsActive, setCountdownIsActive] = useState(false);
   const [numberIsVerified, setNumberIsVerified] = useState(false);
   const [verifyCodeIsShown, setVerifyCodeIsShown] = useState(false);
   const [optErrorMessage, setOptErrorMessage] = useState({
@@ -94,10 +95,26 @@ const SignUpForm = () => {
     inputBlurHandler: otpCodeBlurHandler,
   } = useInput(textNotEmpty);
 
+  const [remainingTime, setRemainingTime] = useState(60);
+
+  useEffect(() => {
+    if (countdownIsActive) {
+      const intervalId = setInterval(() => {
+        setRemainingTime((prevTime) => prevTime - 1);
+        if (remainingTime <= 0) {
+          setRemainingTime(60);
+          setCountdownIsActive(false);
+        }
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
+  }, [countdownIsActive, remainingTime]);
+
   const sendOtpCodeHandler = (event) => {
     event.preventDefault();
     sendOtpCode({ phone_number: phoneNumberValue });
     setVerifyCodeIsShown(true);
+    setCountdownIsActive(true);
   };
 
   const varifyOtpHandler = (event) => {
@@ -286,9 +303,10 @@ const SignUpForm = () => {
               onChange={phoneNumberChangeHandler}
               onBlur={phoneNumberBlurHandler}
             />
-            <button className={classes.codeButton} onClick={sendOtpCodeHandler}>
+            {!countdownIsActive && <button className={classes.codeButton} onClick={sendOtpCodeHandler}>
               Get Code
-            </button>
+            </button>}
+            {countdownIsActive && <button disabled={true} className={classes.codeButton}>{remainingTime}</button>}
           </div>
           {phoneNumberHasError && !numberIsVerified && (
             <p className={classes.errorText}>
@@ -322,7 +340,6 @@ const SignUpForm = () => {
               <h1>Number Verified</h1>
             </div>
           )}
-
           <div className={classes.formActions}>
             <Link to="/">
               <Button color="blue" size="small">
