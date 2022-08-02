@@ -91,21 +91,10 @@
   cursor: pointer;
 }
 
-
-/* .formButtonGroup {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-} */
-
-/* .formButtonGroup input {
-  flex-grow: 2;
-  width: 100%;
-} */
-
-/* .formButtonGroup button {
-
-} */
+.numberVerified {
+  text-align: center;
+  color: var(--green);
+}
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
 

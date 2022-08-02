@@ -12,6 +12,8 @@ import { useSendOtpCode } from "../User/hooks/use-send-otp-code";
 import { useVerifyOtpCode } from "../User/hooks/use-verify-otp-code";
 
 const SignUpForm = () => {
+  const [numberIsVerified, setNumberIsVerified] = useState(false);
+  const [verifyCodeIsShown, setVerifyCodeIsShown] = useState(false);
   const [optErrorMessage, setOptErrorMessage] = useState({
     message: "",
     isShown: false,
@@ -92,11 +94,14 @@ const SignUpForm = () => {
     inputBlurHandler: otpCodeBlurHandler,
   } = useInput(textNotEmpty);
 
-  const sendOtpCodeHandler = () => {
+  const sendOtpCodeHandler = (event) => {
+    event.preventDefault();
     sendOtpCode({ phone_number: phoneNumberValue });
+    setVerifyCodeIsShown(true);
   };
 
-  const varifyOtpHandler = () => {
+  const varifyOtpHandler = (event) => {
+    event.preventDefault();
     // create
     const code = {
       phone_number: phoneNumberValue,
@@ -122,6 +127,7 @@ const SignUpForm = () => {
         // Make it so form can be submitted
         setOptErrorMessage({ isShown: false });
         setOtpCodeIsVerified(true);
+        setNumberIsVerified(true);
       }
     }
   }, [verifyOtpCodeIsSuccess, verifyOtpCodeData]);
@@ -175,6 +181,10 @@ const SignUpForm = () => {
     : classes.formControl;
 
   const phoneNumberClasses = phoneNumberHasError
+    ? `${classes.formControl} ${classes.formButtonGroup} ${classes.invalid}`
+    : `${classes.formControl} ${classes.formButtonGroup}`;
+
+  const otpCodeClasses = otpCodeHasError
     ? `${classes.formControl} ${classes.formButtonGroup} ${classes.invalid}`
     : `${classes.formControl} ${classes.formButtonGroup}`;
 
@@ -280,27 +290,39 @@ const SignUpForm = () => {
               Get Code
             </button>
           </div>
-          {phoneNumberHasError && (
+          {phoneNumberHasError && !numberIsVerified && (
             <p className={classes.errorText}>
               {t("please_enter_a_valid_number")}
             </p>
           )}
-          <div className={classes.formControl}>
-            <label htmlFor="otp_code">Code</label>
-            <input
-              type="number"
-              id="otp_code"
-              value={otpCodeValue}
-              onChange={otpCodeChangeHandler}
-              onBlur={otpCodeBlurHandler}
-            />
-            <Button onClick={varifyOtpHandler} size="small">
-              Verify
-            </Button>
-            {optErrorMessage.isShown && (
-              <p className={classes.errorText}>{optErrorMessage.message}</p>
-            )}
-          </div>
+          {verifyCodeIsShown && !numberIsVerified && (
+            <div className={otpCodeClasses}>
+              <label htmlFor="otp_code">Verification Code</label>
+              <input
+                type="text"
+                id="otp_code"
+                value={otpCodeValue}
+                onChange={otpCodeChangeHandler}
+                onBlur={otpCodeBlurHandler}
+              />
+              <button
+                className={classes.codeButton}
+                onClick={varifyOtpHandler}
+                size="small"
+              >
+                Verify
+              </button>
+              {optErrorMessage.isShown && (
+                <p className={classes.errorText}>{optErrorMessage.message}</p>
+              )}
+            </div>
+          )}
+          {numberIsVerified && (
+            <div className={classes.numberVerified}>
+              <h1>Number Verified</h1>
+            </div>
+          )}
+
           <div className={classes.formActions}>
             <Link to="/">
               <Button color="blue" size="small">
