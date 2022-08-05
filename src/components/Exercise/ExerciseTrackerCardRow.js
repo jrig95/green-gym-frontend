@@ -52,6 +52,10 @@ const ExerciseTrackerCardRow = ({
     increaseNumberOfExercisesComplete();
   };
 
+  if (!exerciseQuestion) {
+    increaseNumberOfExercisesComplete();
+  }
+
   return (
     <div className={rowClasses}>
       <p className={classes.exerciseRow}>{exercise}</p>
