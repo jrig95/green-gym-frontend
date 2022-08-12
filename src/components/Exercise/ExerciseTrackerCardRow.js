@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useInput from "../Forms/Hooks/use-input";
 import classes from "./ExerciseTrackerCard.module.css";
 import { useTranslation } from "react-i18next";
@@ -52,6 +52,12 @@ const ExerciseTrackerCardRow = ({
     increaseNumberOfExercisesComplete();
   };
 
+  useEffect(() => {
+    if (!exerciseQuestion) {
+      increaseNumberOfExercisesComplete();
+    }
+  }, [])
+  
   return (
     <div className={rowClasses}>
       <p className={classes.exerciseRow}>{exercise}</p>

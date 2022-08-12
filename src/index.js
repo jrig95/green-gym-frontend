@@ -37,17 +37,15 @@ i18n
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <APIErrorProvider>
-      <AuthContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-      </AuthContextProvider>
-      <APIErrorNotification />
-    </APIErrorProvider>
-  </React.StrictMode>
+  <APIErrorProvider>
+    <AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </AuthContextProvider>
+    <APIErrorNotification />
+  </APIErrorProvider>
 );
