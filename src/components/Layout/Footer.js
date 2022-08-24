@@ -10,6 +10,26 @@ const Footer = () => {
     <div className={classes.container}>
       <div className={classes.footer}>
         <div className={classes.logoContainer}>
+          <div className={classes.content}>
+
+          <div className={classes.companyName}>
+          <p>上海瑞绿商务咨询有限公司</p>
+          </div>
+
+        <div className={classes.credentials}>
+        <a
+              href="https://beian.miit.gov.cn/#/home"
+              target="_blank"
+              rel="noreferrer"
+            >沪ICP备2022015857号</a>
+        <a
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002956"
+              target="_blank"
+              rel="noreferrer"
+            >公安联网备案号: 31011002005949</a>
+        </div>
+
+        <div className={classes.icons}>
           <a
               href={GreenGym}
               target="_blank"
@@ -34,8 +54,11 @@ const Footer = () => {
 
 
         </div>
-        <div>沪ICP备2022015857号</div>
+        </div>
+
+
       </div>
+    </div>
     </div>
   );
 };
