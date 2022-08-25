@@ -23,7 +23,7 @@ const Footer = () => {
               rel="noreferrer"
             >沪ICP备2022015857号</a>
         <a
-              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002956"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011002005949"
               target="_blank"
               rel="noreferrer"
             >公安联网备案号: 31011002005949</a>
