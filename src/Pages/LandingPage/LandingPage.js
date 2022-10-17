@@ -6,6 +6,7 @@ import Background from "../../components/Layout/Background";
 import CarouselMain from "../../components/UI/CarouselMain";
 import Button from "../../components/UI/Button";
 import { useTranslation } from "react-i18next";
+// import BackgroundImage from '../../assets/landing_page_background.JPG'
 
 const LandingPage = () => {
   const { t } = useTranslation();

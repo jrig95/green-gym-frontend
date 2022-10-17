@@ -61,7 +61,7 @@ body {
 
 .swiper-pagination {
 	position: absolute;
-	top: 12rem;
+	top: 17rem;
 	right: 4.5rem;
 	width: auto !important;
 	left: auto !important;
@@ -86,7 +86,7 @@ body {
 @media only screen and (min-width: 320px) and (max-width: 615px) {
   .swiper-pagination {
     position: absolute;
-    top: 12rem;
+    top: 17rem;
     right: 4.25rem;
     width: auto !important;
     left: auto !important;
