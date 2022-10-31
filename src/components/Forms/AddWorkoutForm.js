@@ -164,7 +164,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
     // console.log(workoutId, "workout id inHandler");
     // console.log(programId, "program id inHandler");
 
-    sortedExerciseOverviewArray.map((exerciseOverview) => {
+    sortedExerciseOverviewArray.forEach((exerciseOverview) => {
       // console.log(workoutId, "workout id in exercise overviews");
       // console.log(programId, "workout id in exercise overviews");
       const exercise_overview = {
@@ -177,7 +177,7 @@ const AddWorkoutForm = ({ dayNumber, onAddWorkout }) => {
       createExerciseOverview(exercise_overview);
     });
 
-    sortedExerciseArray.map((exerciseItem) => {
+    sortedExerciseArray.forEach((exerciseItem) => {
       // console.log(workoutId, "workout id in exercises");
       // console.log(programId, "workout id in exercises");
       const exercise = {
