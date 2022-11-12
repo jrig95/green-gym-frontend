@@ -101,7 +101,7 @@ const MembersPage = () => {
   return (
     <Fragment>
       <AdminBanner
-        members={true}
+        members={membersData}
         searchBar={true}
         searchParam={getSearchParamHandler}
         addUserProgramId={getAddUserProgramId}

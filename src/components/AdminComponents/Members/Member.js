@@ -49,6 +49,12 @@ const Member = ({ member, getMemberId }) => {
           <p><b>{member.user_company}</b></p>
           </div>
           <div className={classes.column}>
+          <p className={classes.number}>
+            Phone Number:
+          </p>
+          <p className={classes.number}><b>{member.phone_number}</b></p>
+          </div>
+          <div className={classes.column}>
           <p className={classes.email}>
             E-Mail:
           </p>

@@ -23,7 +23,9 @@ const LandingPage = () => {
         <div className={classes.buttonsContainer}>
           {!authCtx.isLoggedIn && (
             <Fragment>
-              <Button color="white">{t("landing_page_find_out_more")}</Button>
+              <Link to=''>
+                <Button color="white">{t("landing_page_find_out_more")}</Button>
+              </Link>
               <Link to="signup">
                 <Button>{t("landing_page_join_green_gym")}</Button>
               </Link>
