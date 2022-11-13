@@ -18,7 +18,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
   const searchSubmitHandler = (event) => {
     event.preventDefault();
     searchParam(searchValue);
-    resetSearch();
+    // resetSearch();   keep search value in input
   };
 
   const showAddUserToProgramHandler = () => {
@@ -83,7 +83,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
       {addUserToProgramIsShown && (
         <AddUserToProgram onClose={hideAddUserToProgramHandler} getProgramId={(programId) => addUserProgramId(programId)}/>
       )}
-        {members && members.length !== 0 && (
+        {members && (
         <>
           <Button color="blue" size='small' onClick={showAddUserToProgramHandler}>
             Add new user

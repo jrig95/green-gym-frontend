@@ -121,3 +121,9 @@ input {
   margin: 0 0 0 1rem;
 }
 }
+:-webkit-any-link {
+  text-decoration: inherit;
+  color: inherit;
+  appearance: none;
+}
+
