@@ -9,7 +9,7 @@ import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getLibraryItems = async (searchParams, bearerToken) => {
   if (searchParams !== "") {
-    const { data } = await axios(
+    const { data } = await fetch(
       `${baseUrl}/library_items?query=${searchParams}`,
       {
         headers: {
@@ -22,7 +22,7 @@ const getLibraryItems = async (searchParams, bearerToken) => {
   }
 
   if (searchParams === "") {
-    const { data } = await axios(`${baseUrl}/library_items`, {
+    const { data } = await fetch(`${baseUrl}/library_items`, {
       headers: {
         Authorization: bearerToken,
       },
@@ -41,14 +41,7 @@ export const useLibraryItems = (searchParams) => {
   }
   const { addError } = useAPIError();
 
-  const fallback = [];
-  const {
-    data = fallback,
-    isError,
-    error,
-    isLoading,
-    refetch,
-  } = useQuery(
+  const { data, isError, error, isLoading, refetch } = useQuery(
     queryKeys.libraryItems,
     () => getLibraryItems(searchParams, bearerToken),
     {
@@ -58,6 +51,7 @@ export const useLibraryItems = (searchParams) => {
           error instanceof Error ? error.message : "error connecting to server";
         addError(title, error.status);
       },
+      retry: 3,
     }
   );
 
