@@ -4,7 +4,7 @@ import ExerciseOverviewRow from "./ExerciseOverviewRow";
 import { useTranslation } from "react-i18next";
 
 
-const ExerciseOverviewCard = ({ exercises, admin, programId }) => {
+const ExerciseOverviewCard = ({ exercises = [], admin, programId }) => {
   const { t } = useTranslation();
 
   const exerciseRows = exercises.map((exercise) => {

@@ -24,7 +24,7 @@ const WorkoutDayTracker = ({
   //   refetchFiveDayArray();
   // };
 
-  const fiveDayArray = fiveDayArrayData.five_day_array.map((day) => {
+  const fiveDayArray = fiveDayArrayData?.five_day_array?.map((day) => {
     const percentComplete = parseInt(
       (day.percentage_complete * 100).toFixed(2)
     );

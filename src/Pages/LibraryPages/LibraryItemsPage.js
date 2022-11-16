@@ -59,7 +59,8 @@ const LibraryItemsPage = () => {
     refetchLibraryItems();
   }, [searchParams, refetchLibraryItems]);
 
-  const libraryItems = data.map((libraryItem) => {
+  const libraryItems = data?.map((libraryItem) => {
+    //console.log(libraryItem);
     return (
       <LibraryItemCard
         key={libraryItem.id}

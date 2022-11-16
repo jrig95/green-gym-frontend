@@ -3,7 +3,7 @@ import Card from "../UI/Card";
 import ExerciseRow from "./ExerciseRow";
 
 const ExerciseCard = ({ exercises, admin, programId, dailyWorkoutId }) => {
-  const exerciseRows = exercises.map((exercise) => {
+  const exerciseRows = exercises?.map((exercise) => {
     return (
       <ExerciseRow
         key={exercise.id}

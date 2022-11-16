@@ -45,7 +45,7 @@ const ProgramPage = () => {
   let programWorkouts = [];
 
   if (!programIsLoading) {
-    programWorkouts = programData.daily_workouts.map((workout) => {
+    programWorkouts = programData.daily_workouts?.map((workout) => {
       return (
         <ProgramWorkoutDetails
           key={workout.id}

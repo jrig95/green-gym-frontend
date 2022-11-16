@@ -18,7 +18,7 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
   const searchSubmitHandler = (event) => {
     event.preventDefault();
     searchParam(searchValue);
-    resetSearch();
+    // resetSearch();   keep search value in input
   };
 
   const showAddUserToProgramHandler = () => {
@@ -51,6 +51,30 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
     reset: resetSearch,
   } = useInput(textNotEmpty);
 
+  // array to csv function 
+  const arrayToCSV = (array) => {
+    const fileds = Object.keys(array[0]);
+    const replacer = (key, value) => (value === null ? "" : value);
+    const dataPart = array.map((row) =>
+      fileds.map((fieldName) => JSON.stringify(row[fieldName], replacer)).join(",")
+    );
+    const csv = [fileds.join(","), ...dataPart].join("\n");
+    return csv;
+  }
+  const generateDownloadLink = (csvData) => {
+    const fileType = "text/csv;charset=utf-8;";
+    const data = new Blob([csvData], { type: fileType });
+    const url = window.URL.createObjectURL(data);
+    return url;
+  }
+  const handleExport = (e) => {
+    const button = e.target;
+    const csvData = arrayToCSV(members);
+    const url = generateDownloadLink(csvData);
+    button.setAttribute("href", url);
+    button.setAttribute("download", "members.csv");
+  }
+
   return (
     <div className={classes.banner}>
       {addLibraryItemIsShown && (
@@ -59,18 +83,22 @@ const AdminBanner = ({ programs, members, rewards, searchBar, library, searchPar
       {addUserToProgramIsShown && (
         <AddUserToProgram onClose={hideAddUserToProgramHandler} getProgramId={(programId) => addUserProgramId(programId)}/>
       )}
-      {members && (
-        <Button color="blue" onClick={showAddUserToProgramHandler}>
-          Add User(s) to Program
-        </Button>
-      )}
+        {members && (
+        <>
+          <Button color="blue" size='small' onClick={showAddUserToProgramHandler}>
+            Add new user
+          </Button>
+          <Button color='blue' size='small'>
+            <a href="#" onClick={handleExport}>Export users</a>
+          </Button>
+        </>)}
       {programs && (
         <Link to="add-program">
-          <Button color="blue">Add Program</Button>
+          <Button color="blue" size='small'>Add Program</Button>
         </Link>
       )}
       {library && (
-        <Button color="blue" onClick={showAddLibraryItemHandler}>
+        <Button color="blue" onClick={showAddLibraryItemHandler} size='small'>
           Add Library Item
         </Button>
       )}

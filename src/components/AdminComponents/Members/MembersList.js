@@ -11,7 +11,7 @@ const MembersList = ({ members, programId, fetchAddMembersList }) => {
 
   const addMemberIdToArrayHandler = (newMember) => {
     // Check to see if members id already exsists in the array
-    const memberInArray = memberArray.find(
+    const memberInArray = memberArray?.find(
       (existingMemeber) => existingMemeber.id === newMember.id
     );
 
@@ -31,7 +31,7 @@ const MembersList = ({ members, programId, fetchAddMembersList }) => {
     fetchAddMembersList(memberArray);
   }, [memberArray, fetchAddMembersList]);
 
-  const membersList = members.map((member) => {
+  const membersList = members?.map((member) => {
     return (
       <Member
         key={member.id}
