@@ -1,4 +1,4 @@
-import EventEmitter from "events";
+import { EventEmitter } from "events";
 
 class RelabsEmitter extends EventEmitter {}
 

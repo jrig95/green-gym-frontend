@@ -8,32 +8,37 @@ import { useEffect, useState } from "react";
 
 const LibraryItemCard = ({ id, title, onDelete, onUpdate }) => {
   const url = `/library/${id}`;
+
   const [libVideo, setLibVideo] = useState(null);
-  const canvas = document.getElementById(`libPic-${id}`);
-  const ctx = canvas?.getContext("2d");
+  const canvasRef = document.getElementById("libVideo");
+  const ctx = canvasRef?.getContext("2d");
   useEffect(() => {
     relabsEmitter.on("libVideo", (video) => {
+      console.log(video, canvasRef);
       setLibVideo(video);
     });
-  }, [id]);
+    return () => {
+      relabsEmitter.off("libVideo");
+    };
+  }, []);
   useEffect(() => {
     if (!libVideo) return;
     libVideo.load();
     libVideo.addEventListener("loadeddata", () => {
-      canvas.width = libVideo.videoWidth;
-      canvas.height = libVideo.videoHeight;
+      canvasRef.width = libVideo.videoWidth;
+      canvasRef.height = libVideo.videoHeight;
     });
     libVideo.addEventListener("canplay", () => {
       libVideo.play();
       libVideo.currentTime = 1;
-      ctx.drawImage(libVideo, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(libVideo, 0, 0, canvasRef.width, canvasRef.height);
     });
   }, [libVideo]);
   return (
     <Card className={classes.card}>
       <Link to={url}>
         <div style={{ display: "grid", placeContent: "center" }}>
-          <canvas id={`libPic-${id}`}></canvas>
+          <canvas key={canvasRef}></canvas>
         </div>
         <h3 className={classes.title}>{title}</h3>
       </Link>
