@@ -14,18 +14,17 @@ const LibraryItemPage = () => {
   const id = params.libraryId;
 
   const { data } = useLibraryItem(id);
-  const { title, description, video_url } = data;
+  const { title, video_url } = data;
   useEffect(() => {
-    relabsEmitter.emit("libVideo", document.getElementById(`libVideo-${id}`));
-    console.log(document.getElementById(`libVideo-${id}`));
-  }, [id]);
+    relabsEmitter.emit("libVideo", document.getElementById("libVideo"));
+  }, []);
 
   return (
     <Fragment>
       <Banner title={title} />
       <div className={classes.container}>
         <ReactPlayer
-          id={`libVideo-${id}`}
+          id="libVideo"
           playing={true}
           width={600}
           style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.26)" }}

@@ -9,7 +9,7 @@ import { baseUrl } from "../../../../axiosInstance/constants";
 
 const getLibraryItems = async (searchParams, bearerToken) => {
   if (searchParams !== "") {
-    const { data } = await fetch(
+    const { data } = await axios(
       `${baseUrl}/library_items?query=${searchParams}`,
       {
         headers: {
@@ -22,7 +22,7 @@ const getLibraryItems = async (searchParams, bearerToken) => {
   }
 
   if (searchParams === "") {
-    const { data } = await fetch(`${baseUrl}/library_items`, {
+    const { data } = await axios(`${baseUrl}/library_items`, {
       headers: {
         Authorization: bearerToken,
       },
