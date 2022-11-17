@@ -3,42 +3,16 @@ import { BsFillGearFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 import Card from "../../UI/Card";
 import classes from "./LibraryItemCard.module.css";
-import { relabsEmitter } from "../../../context/RelabsEmitter";
-import { useEffect, useState } from "react";
 
-const LibraryItemCard = ({ id, title, onDelete, onUpdate }) => {
+const LibraryItemCard = ({ id, title, onDelete, onUpdate, videoUrl }) => {
   const url = `/library/${id}`;
+  const startURL = videoUrl + "#t=1";
 
-  const [libVideo, setLibVideo] = useState(null);
-  const canvasRef = document.getElementById("libVideo");
-  const ctx = canvasRef?.getContext("2d");
-  useEffect(() => {
-    relabsEmitter.on("libVideo", (video) => {
-      console.log(video, canvasRef);
-      setLibVideo(video);
-    });
-    return () => {
-      relabsEmitter.off("libVideo");
-    };
-  }, []);
-  useEffect(() => {
-    if (!libVideo) return;
-    libVideo.load();
-    libVideo.addEventListener("loadeddata", () => {
-      canvasRef.width = libVideo.videoWidth;
-      canvasRef.height = libVideo.videoHeight;
-    });
-    libVideo.addEventListener("canplay", () => {
-      libVideo.play();
-      libVideo.currentTime = 1;
-      ctx.drawImage(libVideo, 0, 0, canvasRef.width, canvasRef.height);
-    });
-  }, [libVideo]);
   return (
     <Card className={classes.card}>
       <Link to={url}>
         <div style={{ display: "grid", placeContent: "center" }}>
-          <canvas key={canvasRef}></canvas>
+          <video src={startURL} width="100%" height="100%"></video>
         </div>
         <h3 className={classes.title}>{title}</h3>
       </Link>

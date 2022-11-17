@@ -1,11 +1,10 @@
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 
 import { useLibraryItem } from "../../components/AdminComponents/Library/Hooks/use-library-item";
 import Banner from "../../components/Layout/Banner";
 import classes from "./LibraryItemPage.module.css";
-import { relabsEmitter } from "../../context/RelabsEmitter";
 
 const LibraryItemPage = () => {
   // Get id from params
@@ -15,9 +14,6 @@ const LibraryItemPage = () => {
 
   const { data } = useLibraryItem(id);
   const { title, video_url } = data;
-  useEffect(() => {
-    relabsEmitter.emit("libVideo", document.getElementById("libVideo"));
-  }, []);
 
   return (
     <Fragment>
