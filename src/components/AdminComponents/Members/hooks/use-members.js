@@ -35,7 +35,7 @@ export const useGetMembers = (searchParams) => {
 
   const { addError } = useAPIError();
   const { data, isLoading, refetch, isError, error } = useQuery(
-    queryKeys.members,
+    [queryKeys.members],
     () => getMembers(searchParams, bearerToken),
     {
       onError: (error) => {
