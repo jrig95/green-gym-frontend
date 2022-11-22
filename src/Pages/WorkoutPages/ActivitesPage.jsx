@@ -17,7 +17,7 @@ const ActivitiesPage = () => {
 
   if (userIsLoading) return <LoadingSpinnerLarge />
 
-  const noProgram = userData.programs.length === 0;
+  const noProgram = userData.programs?.length === 0;
 
   return (
     <Fragment>

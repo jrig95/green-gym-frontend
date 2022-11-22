@@ -42,20 +42,16 @@ const ProgramPage = () => {
     setUpdateProgramIsShown(false);
   };
 
-  let programWorkouts = [];
-
-  if (!programIsLoading) {
-    programWorkouts = programData.daily_workouts?.map((workout) => {
-      return (
-        <ProgramWorkoutDetails
-          key={workout.id}
-          programId={programId}
-          dailyWorkoutId={workout.id}
-          admin={admin}
-        />
-      );
-    });
-  }
+  const programWorkouts = programData?.daily_workouts?.map((workout) => {
+    return (
+      <ProgramWorkoutDetails
+        key={workout.id}
+        programId={programId}
+        dailyWorkoutId={workout.id}
+        admin={admin}
+      />
+    );
+  });
 
   return (
     <Fragment>
@@ -85,7 +81,10 @@ const ProgramPage = () => {
           <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
         </div>
         <div className={classes.purchaseContainer}>
-          <h3>{t("program_page_price")}{programData.price}</h3>
+          <h3>
+            {t("program_page_price")}
+            {programData.price}
+          </h3>
           <Link to="purchase">
             <Button>{t("purchase_page_purchase")}</Button>
           </Link>
