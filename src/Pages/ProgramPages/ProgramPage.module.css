@@ -3,32 +3,42 @@
 }
 
 .descriptionContainer {
-  margin: 1rem 0 0 0;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 0.5fr;
+  gap: 1rem;
+  grid-template-areas: "info pic pic";
 }
 
 .description {
   width: 24rem;
   margin: 0 1rem 0 0;
+  place-content: flex-start;
+  align-items: flex-start;
+  grid-area: info;
 }
-
 .description h3 {
   margin: 0;
+  padding: 1rem 1rem 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
 }
+
+.description p {
+  margin: 0;
+  padding: 0 1rem 1rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000;
+}
+
 
 .descriptionContainer img {
-  width: 24rem;
-  max-height: 20rem;
-  object-fit: cover;
-  object-position: center;
+  max-width: 48rem;
+  grid-area: pic;
 }
 
-.exerciseCardContainer {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0 0 0;
-}
 
 /* this isn't doing anything */
 .programWorkoutsGrid {
@@ -58,7 +68,7 @@
 .updateButtonContainer {
   margin: 1rem 0 1rem 0;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
