@@ -74,6 +74,9 @@ const ProgramPage = () => {
         <div className={classes.descriptionContainer}>
           <div className={classes.description}>
             <h3>{programData.program_description}</h3>
+            <p>
+              {programData.program_info || 'This program blabalba'}
+            </p>
           </div>
           <img src={programData.photo_url} alt={programData.program_title} />
         </div>

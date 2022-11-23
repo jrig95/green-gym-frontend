@@ -21,6 +21,7 @@ const Workout = ({ userData = {programs: []} }) => {
     data: programTrackerData,
     isLoading: programTrackerIsLoading,
     refetch: refetchProgramTrackerData,
+    isError: programTrackerIsError,
   } = useGetProgramTracker(programTrackerNewId);
 
   // TODO: Get the Program
@@ -28,16 +29,19 @@ const Workout = ({ userData = {programs: []} }) => {
     data: programData,
     isLoading: programIsLoading,
     refetch: refetchProgramData,
+    isError: programIsError,
   } = useProgram(programId);
 
   const {
     data: fiveDayArrayData,
     isLoading: fiveDayArrayIsLoading,
     refetch: refetchFiveDayArray,
+    isError: fiveDayArrayIsError,
   } = useFiveDayArray(programTrackerNewId);
 
   if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading)
     return <LoadingSpinnerLarge />;
+  if (programIsError || fiveDayArrayIsError || programTrackerIsError) return <p>Something went wrong, no data at this moment. Please try again later</p>;
 
   const programLength = programData?.daily_workouts?.length;
   // const programTrackerId = programTrackerData.id;
