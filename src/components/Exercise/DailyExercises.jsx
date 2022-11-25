@@ -53,6 +53,7 @@ const DailyExercises = ({
     }, timeRemaining);
   };
 
+
   // let videoUls = [];
 
  
@@ -94,6 +95,7 @@ const DailyExercises = ({
             parseInt(exerciseData[videoIndex].exercise_rest_time)
           )
         }
+        workoutDuration={exerciseData[videoIndex].exercise_work_time}
       />
     );
   }

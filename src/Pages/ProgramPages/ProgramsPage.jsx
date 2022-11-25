@@ -56,7 +56,7 @@ const ProgramsPage = () => {
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>
-          <AddProgramCard/>
+          {admin && <AddProgramCard/>}
           {data.map((program) => {
             return (
               <ProgramCard
