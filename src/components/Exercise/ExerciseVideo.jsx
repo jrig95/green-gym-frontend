@@ -1,10 +1,14 @@
 import ReactPlayer from "react-player";
+import { useState } from "react";
 
 import classes from "./ExerciseVideo.module.css";
 
-const ExerciseVideo = ({ videoUrl, onEnded }) => {
+const ExerciseVideo = ({ videoUrl, onEnded, workoutDuration }) => {
   // const videoWidth = 640;
-
+  const [videoIsPlaying, setVideoIsPlaying] = useState(true);
+  setTimeout(() => {
+    setVideoIsPlaying(false);
+  }, 1000 * workoutDuration - 1000 * 10);
   return (
     <div className={classes.container}>
       <ReactPlayer
@@ -14,7 +18,7 @@ const ExerciseVideo = ({ videoUrl, onEnded }) => {
         style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.26)" }}
         className={classes.video}
         url={videoUrl}
-        controls={true}
+        loop={videoIsPlaying}
         onEnded={onEnded}
       />
     </div>
