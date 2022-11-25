@@ -112,13 +112,6 @@ const AdminBanner = ({
           </Button>
         </>
       )}
-      {programs && (
-        <Link to="add-program">
-          <Button color="blue" size="small">
-            Add Program
-          </Button>
-        </Link>
-      )}
       {library && (
         <Button color="blue" onClick={showAddLibraryItemHandler} size="small">
           Add Library Item
