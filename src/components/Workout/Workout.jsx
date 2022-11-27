@@ -11,44 +11,48 @@ import WorkoutDayTracker from "./WorkoutDayTracker";
 import { useTranslation } from "react-i18next";
 
 
-const Workout = ({ userData }) => {
+const Workout = ({ userData = {programs: []} }) => {
   const { t } = useTranslation();
-  const programId = userData.programs[0].id;
-  const programTrackerNewId = userData.program_trackers[0].id;
+  const programId = userData?.programs && userData?.programs[0]?.id;
+  const programTrackerNewId = userData?.program_trackers && userData.program_trackers[0].id;
 
   // TODO: Add use Program tracker to find the tracker for this program
   const {
     data: programTrackerData,
     isLoading: programTrackerIsLoading,
     refetch: refetchProgramTrackerData,
-  } = useGetProgramTracker(userData.program_trackers[0].id);
+    isError: programTrackerIsError,
+  } = useGetProgramTracker(programTrackerNewId);
 
   // TODO: Get the Program
   const {
     data: programData,
     isLoading: programIsLoading,
     refetch: refetchProgramData,
+    isError: programIsError,
   } = useProgram(programId);
 
   const {
     data: fiveDayArrayData,
     isLoading: fiveDayArrayIsLoading,
     refetch: refetchFiveDayArray,
+    isError: fiveDayArrayIsError,
   } = useFiveDayArray(programTrackerNewId);
 
   if (programIsLoading || programTrackerIsLoading || fiveDayArrayIsLoading)
     return <LoadingSpinnerLarge />;
+  if (programIsError || fiveDayArrayIsError || programTrackerIsError) return <p>Something went wrong, no data at this moment. Please try again later</p>;
 
-  const programLength = programData.daily_workouts.length;
+  const programLength = programData?.daily_workouts?.length;
   // const programTrackerId = programTrackerData.id;
-  const currentDay = programTrackerData.current_day;
+  const currentDay = programTrackerData?.current_day;
 
   if (programLength === currentDay)
     return (
       <div className={classes.workoutFinishedContainer}>
         <div className={classes.workoutDayTrackerContainer}>
           <WorkoutDayTracker
-            programTitle={userData.programs[0].program_title}
+            programTitle={userData?.programs[0]?.program_title}
             fiveDayArrayData={fiveDayArrayData}
             programLength={programLength}
             currentDay={currentDay}
@@ -65,7 +69,7 @@ const Workout = ({ userData }) => {
     <Fragment>
       <div className={classes.workoutDayTrackerContainer}>
         <WorkoutDayTracker
-          programTitle={userData.programs[0].program_title}
+          programTitle={userData?.programs[0]?.program_title}
           fiveDayArrayData={fiveDayArrayData}
           programLength={programLength}
           currentDay={currentDay}

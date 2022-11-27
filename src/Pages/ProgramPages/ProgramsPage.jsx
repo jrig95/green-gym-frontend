@@ -10,6 +10,7 @@ import Banner from "../../components/Layout/Banner";
 import AdminBanner from "../../components/AdminComponents/Layout/AdminBanner";
 import DeleteProgram from "../../components/AdminComponents/Program/DeleteProgram";
 import { useTranslation } from "react-i18next";
+import { AddProgramCard } from "../../components/Program/AddProgramCard";
 
 const ProgramsPage = () => {
   const { t } = useTranslation();
@@ -55,6 +56,7 @@ const ProgramsPage = () => {
       {admin && <AdminBanner programs={true} />}
       <div className={classes.gridContainer}>
         <div className={classes.programCardGrid}>
+          {admin && <AddProgramCard/>}
           {data.map((program) => {
             return (
               <ProgramCard

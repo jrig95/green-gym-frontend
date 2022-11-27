@@ -85,17 +85,19 @@ const MembersPage = () => {
     refetch: refetchMembers,
     isError: membersIsError,
     error: membersError,
-  } = useGetMembers(searchParam);
+  } = useGetMembers("");
 
   useEffect(() => {
     refetchMembers();
-  }, [searchParam, refetchMembers]);
+  }, [refetchMembers]);
 
   // render loading
   if (membersIsLoading) return <LoadingSpinnerLarge />;
   if (membersIsError)
     return (
-      <h2 className={classes.errorMessage}>{membersError.response.data.error}</h2>
+      <h2 className={classes.errorMessage}>
+        {membersError.response.data.error}
+      </h2>
     );
 
   return (
@@ -122,6 +124,7 @@ const MembersPage = () => {
           members={membersData}
           programId={programId}
           fetchAddMembersList={fetchAddMembersListHandler}
+          searchParam={searchParam}
         />
       </div>
     </Fragment>
