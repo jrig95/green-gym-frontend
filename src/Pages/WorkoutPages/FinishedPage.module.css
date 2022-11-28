@@ -1,6 +1,6 @@
 .container {
-  margin: 4rem 0 10rem 0;
-  padding-top: 8rem;
+  margin: 4rem 0 4rem 0;
+  padding-top: 4rem;
 }
 
 .textContainer {
@@ -11,7 +11,13 @@
 }
 
 .buttonContainer {
-  margin: 5rem 0 0 0;
+  margin: 5rem;
   display: flex;
   justify-content: center;
 }
+
+.btnContent {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
