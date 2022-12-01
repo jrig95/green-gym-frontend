@@ -23,6 +23,7 @@ const DailyWorkoutCards = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const isFetching = useIsFetching();
+  if(!programData) return;
 
   const updateDailyWorkoutTracker = useUpdateDailyWorkoutTracker();
 
@@ -31,12 +32,12 @@ const DailyWorkoutCards = ({
   // On the last day of a program. This line breaks everything.
   const currentDay = programTrackerData.current_day;
 
-  const dailyWorkout = programData.daily_workouts[currentDay];
-  const dailyWorkoutId = programData.daily_workouts[currentDay].id;
+  const dailyWorkout = programData?.daily_workouts[currentDay];
+  const dailyWorkoutId = programData?.daily_workouts[currentDay]?.id;
   const dailyWorkoutTracker =
     programTrackerData.daily_workout_trackers[currentDay];
   const dailyWorkoutTrackerId =
-    programTrackerData.daily_workout_trackers[currentDay].id;
+    programTrackerData?.daily_workout_trackers[currentDay]?.id;
   const programTrackerId = programTrackerData.id;
   const programImage = programData.photo_url;
   const programTitle = programData.program_title;
