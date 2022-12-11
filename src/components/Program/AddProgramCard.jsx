@@ -2,6 +2,7 @@ import classes from "./ProgramCard.module.css";
 import Card from "../UI/Card";
 import { Link } from "react-router-dom";
 import { RiAddCircleLine } from "react-icons/ri";
+import { FiArrowRightCircle } from "react-icons/fi";
 import { useState } from "react";
 
 export const AddProgramCard = () => {
@@ -10,21 +11,38 @@ export const AddProgramCard = () => {
     program_description: "",
     photo_url: "",
   });
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Card className={classes.card}>
-      <input
-        style={{
-          fontSize: "1.4rem",
-        }}
-        placeholder="PROGRAM TITLE"
-        maxLength="18"
-        onChange={(e) => {
-          setState({ ...state, program_title: e.target.value });
-        }}
-      ></input>
+      <div className={classes.icons}>
+        <Link to="add-program" state={state}>
+          <div className={classes.iconBin}>
+            <span fontSize="0.2rem">NEXT</span>
+            <FiArrowRightCircle color="darkgreen"/>
+          </div>
+        </Link>
+      </div>
+      <div className={classes.title}>
+        <input
+          style={{
+            fontSize: "1.4rem",
+          }}
+          placeholder="PROGRAM TITLE"
+          maxLength="18"
+          onChange={(e) => {
+            e.preventDefault();
+            setState({ ...state, program_title: e.target.value });
+          }}
+        ></input>
+      </div>
+
       <div className={classes.image}>
         <label htmlFor="upload_image">
-          <RiAddCircleLine size="6rem" color="darkgreen" />
+          {!imageLoaded ? (
+            <RiAddCircleLine size="6rem" color="darkgreen" />
+          ) : (
+            <img src={URL.createObjectURL(state.photo_url)} />
+          )}
         </label>
         <input
           id="upload_image"
@@ -32,21 +50,22 @@ export const AddProgramCard = () => {
           type="file"
           accept="image/png, image/jpeg, image/jpg"
           onChange={(e) => {
-            setState({ ...state, photo_url: e.target.value });
+            e.preventDefault();
+            setState({ ...state, photo_url: e.target.files[0] });
+            setImageLoaded(true);
           }}
         />
       </div>
-
-      <textarea
-        placeholder="use one sentence to describe your program"
-        cols={30}
-        onChange={(e) => {
-          setState({ ...state, program_description: e.target.value });
-        }}
-      ></textarea>
-      <Link to="add-program" state={state}>
-        <button className={classes.createButton}>CREATE</button>
-      </Link>
+      <div className={classes.description}>
+        <textarea
+          placeholder="use one sentence to describe your program"
+          cols={30}
+          onChange={(e) => {
+            e.preventDefault();
+            setState({ ...state, program_description: e.target.value });
+          }}
+        ></textarea>
+      </div>
     </Card>
   );
 };
