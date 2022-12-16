@@ -77,8 +77,8 @@ input::placeholder {
 .icons {
   display: flex;
   position: absolute;
-  right: 0.5rem;
-  top: 0.8rem;
+  right: 0.25rem;
+  top: 0.45rem;
   color: var(--grey);
   cursor: pointer;
 }
@@ -86,6 +86,10 @@ input::placeholder {
 .iconBin:hover,
 .iconGear:hover {
   color: black;
+}
+
+.icons span {
+  font-size: small;
 }
 
 .iconGear,

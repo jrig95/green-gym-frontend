@@ -6,35 +6,67 @@ import LoadingSpinner from "./components/UI/LoadingSpinner";
 import Layout from "./components/Layout/Layout";
 
 const LandingPage = React.lazy(() => import("./Pages/LandingPage/LandingPage"));
-const ForgotPassword = React.lazy(() => import("./Pages/UserFormPages/ForgotPassword"));
+const ForgotPassword = React.lazy(() =>
+  import("./Pages/UserFormPages/ForgotPassword")
+);
 const Login = React.lazy(() => import("./Pages/UserFormPages/Login"));
-const ResetPassword = React.lazy(() => import("./Pages/UserFormPages/ResetPassword"));
+const ResetPassword = React.lazy(() =>
+  import("./Pages/UserFormPages/ResetPassword")
+);
 const SignUp = React.lazy(() => import("./Pages/UserFormPages/SignUp"));
-const ProfilePage = React.lazy(() => import("./Pages/ProfilePages/ProfilePage"));
-const ProfileResetPasswordPage = React.lazy(() => import("./Pages/ProfilePages/ProfileResetPasswordPage"));
-const ProgramsPage = React.lazy(() => import("./Pages/ProgramPages/ProgramsPage"));
-const ProgramPage = React.lazy(() => import("./Pages/ProgramPages/ProgramPage"));
-const ActivitiesPage = React.lazy(() => import("./Pages/WorkoutPages/ActivitesPage"));
-const DailyWorkoutPage = React.lazy(() => import("./Pages/WorkoutPages/DailyWorkoutPage"));
+const ProfilePage = React.lazy(() =>
+  import("./Pages/ProfilePages/ProfilePage")
+);
+const ProfileResetPasswordPage = React.lazy(() =>
+  import("./Pages/ProfilePages/ProfileResetPasswordPage")
+);
+const ProgramsPage = React.lazy(() =>
+  import("./Pages/ProgramPages/ProgramsPage")
+);
+const ProgramPage = React.lazy(() =>
+  import("./Pages/ProgramPages/ProgramPage")
+);
+const ActivitiesPage = React.lazy(() =>
+  import("./Pages/WorkoutPages/ActivitesPage")
+);
+const DailyWorkoutPage = React.lazy(() =>
+  import("./Pages/WorkoutPages/DailyWorkoutPage")
+);
 const RewardsPage = React.lazy(() => import("./Pages/RewardPages/RewardsPage"));
 const MembersPage = React.lazy(() => import("./Pages/MemberPages/MembersPage"));
 const MemberPage = React.lazy(() => import("./Pages/MemberPages/MemberPage"));
-const UpdateProfilePage = React.lazy(() => import("./Pages/ProfilePages/UpdateProfilePage"));
+const UpdateProfilePage = React.lazy(() =>
+  import("./Pages/ProfilePages/UpdateProfilePage")
+);
 // const AddProgramPage = React.lazy(() => import("./Pages/AdminFormPages/AddProgramPage"));
-const LibraryItemsPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemsPage"));
-const LibraryItemPage = React.lazy(() => import("./Pages/LibraryPages/LibraryItemPage"));
-const NotFoundPage = React.lazy(() => import("./Pages/ErrorPages/NotFoundPage"));
-const PurchasePage = React.lazy(() => import("./Pages/ProgramPages/PurchasePage"));
-const AddWorkoutPage = React.lazy(() => import("./Pages/AdminFormPages/AddWorkout"));
-const FinishedPage = React.lazy(() => import("./Pages/WorkoutPages/FinishedPage"));
-const ProgramCreate = React.lazy(() => import("./Pages/ProgramPages/ProgramCreate"));
+const LibraryItemsPage = React.lazy(() =>
+  import("./Pages/LibraryPages/LibraryItemsPage")
+);
+const LibraryItemPage = React.lazy(() =>
+  import("./Pages/LibraryPages/LibraryItemPage")
+);
+const NotFoundPage = React.lazy(() =>
+  import("./Pages/ErrorPages/NotFoundPage")
+);
+const PurchasePage = React.lazy(() =>
+  import("./Pages/ProgramPages/PurchasePage")
+);
+const AddWorkoutPage = React.lazy(() =>
+  import("./Pages/AdminFormPages/AddWorkout")
+);
+const FinishedPage = React.lazy(() =>
+  import("./Pages/WorkoutPages/FinishedPage")
+);
+const ProgramCreate = React.lazy(() =>
+  import("./Pages/ProgramPages/ProgramCreate")
+);
 
 function App() {
   const authCtx = useContext(AuthContext);
 
   return (
     <Layout>
-      <Suspense fallback={<LoadingSpinner/>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<LandingPage />} />
@@ -71,8 +103,14 @@ function App() {
                 element={<PurchasePage />}
               />
               <Route path="activities" element={<ActivitiesPage />} />
-              <Route path="activites/workout-finished" element={<FinishedPage workout={true} />}/>
-              <Route path="activites/day-finished" element={<FinishedPage workout={false} />}/>
+              <Route
+                path="activites/workout-finished"
+                element={<FinishedPage workout={true} />}
+              />
+              <Route
+                path="activites/day-finished"
+                element={<FinishedPage workout={false} />}
+              />
               <Route
                 path="activities/:workoutId"
                 element={<DailyWorkoutPage />}
@@ -89,6 +127,10 @@ function App() {
               <Route
                 path="programs/:programId/purchase"
                 element={<PurchasePage />}
+              />
+              <Route
+                path="programs/:programId/buildProgram"
+                element={<AddWorkoutPage />}
               />
               <Route path="programs/add-program" element={<ProgramCreate />} />
               <Route

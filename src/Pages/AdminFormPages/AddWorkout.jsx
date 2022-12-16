@@ -9,8 +9,8 @@ import AdminFormTemplate from "./AdminFormTemplate";
 
 const AddWorkoutPage = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const { pageNumber } = state;
+ // const { state } = useLocation();
+  const pageNumber = 5;
 
   const dayNumberToInt = parseInt(pageNumber);
 

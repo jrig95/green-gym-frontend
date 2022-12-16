@@ -5,13 +5,13 @@ import Banner from "../../components/Layout/Banner";
 import Button from "../../components/UI/Button";
 import { useCreateProgram } from "../../components/Program/hooks/use-create-program";
 import { FaSpinner } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // create a creation page with same layout as ProgramPage
 const ProgramCreate = () => {
-  const { mutate, isError, isLoading } = useCreateProgram();
+  const { mutateAsync, isError, isLoading } = useCreateProgram();
   const { state } = useLocation();
-  debugger;
+  const navigate = useNavigate();
   const [programObj, setProgramObj] = useState({
     program_title: "",
     number_of_days: 0,
@@ -126,7 +126,11 @@ const ProgramCreate = () => {
                 "program[number_of_days]",
                 programObj.number_of_days
               );
-              mutate(formData);
+              return mutateAsync(formData, {
+                onSuccess: ({ data }) => {
+                  navigate(`/programs/${data.id}`);
+                },
+              });
             }}
           >
             CREATE
