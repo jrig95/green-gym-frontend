@@ -8,7 +8,7 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createProgram = async (program, bearerToken) => {
-  await axios.post(`${baseUrl}/programs`, program, {
+  return await axios.post(`${baseUrl}/programs`, program, {
     headers: {
       Authorization: bearerToken,
     },
@@ -22,7 +22,7 @@ export const useCreateProgram = () => {
   const { addError } = useAPIError();
   // const fallback = [];
   const queryClient = useQueryClient();
-  const { mutate, isError, isLoading } = useMutation(
+  const { mutateAsync, isError, isLoading, isSuccess } = useMutation(
     (program) => createProgram(program, bearerToken),
     {
       onSuccess: () => {
@@ -36,5 +36,5 @@ export const useCreateProgram = () => {
     }
   );
 
-  return { mutate, isError, isLoading };
+  return { mutateAsync, isError, isLoading, isSuccess };
 };

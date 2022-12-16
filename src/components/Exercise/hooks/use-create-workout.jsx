@@ -7,7 +7,7 @@ import useAPIError from "../../../common/hooks/use-API-error";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const createWorkout = async (daily_workout, bearerToken) => {
-  await axios.post(
+  return await axios.post(
     `${baseUrl}/programs/${daily_workout.program_id}/daily_workouts`,
     { daily_workout: daily_workout },
     {

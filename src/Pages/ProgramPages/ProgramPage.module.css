@@ -77,13 +77,13 @@
 }
 
 .purchaseContainer {
-  margin: 9rem;
+  margin-bottom: 5rem;
   display: flex;
   justify-content: center;
 }
 
-.purchaseContainer h3 {
-  margin: 1rem 1rem 0 0;
+.purchaseContainer span {
+  font-size: large;
 }
 
 .purchaseContainer> button{
@@ -102,6 +102,11 @@
   font-weight: 400;
   color: #000;
   width: 100%;
+}
+.buildProgram {
+  display: grid;
+  place-content: center;
+  padding-bottom: 20%;
 }
 
 

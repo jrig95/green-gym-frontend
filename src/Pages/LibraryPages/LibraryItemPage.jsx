@@ -28,7 +28,7 @@ const LibraryItemPage = () => {
           controls={true}
         />
         <div className={classes.tags}>
-          {tags.map((tag, i) => {
+          {tags?.map((tag, i) => {
             return <Card key={i} className={classes.tag}>{tag}</Card>;
           })}
         </div>
