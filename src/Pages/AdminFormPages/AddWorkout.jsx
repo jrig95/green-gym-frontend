@@ -9,8 +9,8 @@ import AdminFormTemplate from "./AdminFormTemplate";
 
 const AddWorkoutPage = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const { pageNumber } = state;
+ // const { state } = useLocation();
+  const pageNumber = 5;
 
   const dayNumberToInt = parseInt(pageNumber);
 
@@ -30,7 +30,7 @@ const AddWorkoutPage = () => {
     }
   }, [renderForms, navigate])
 
-  const addWorkoutForms = numberOfWorkoutsArray.map((num) => {
+  const addWorkoutForms = numberOfWorkoutsArray?.map((num) => {
     if (currentArrayIndex === num) {
       return (
         <div key={num} className={classes.singleFormContainer}>

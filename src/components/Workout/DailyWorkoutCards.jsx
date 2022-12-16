@@ -68,21 +68,24 @@ const DailyWorkoutCards = ({
     refetchDailyWorkoutTracker();
   };
 
-  useEffect(() => {
+  useEffect(()=> {
     refetchProgramData();
-    refetchProgramTrackerData();
-    refetchDailyWorkoutTracker();
-    refetchFiveDayArray();
-  }, [
-    dailyWorkoutTrackerData,
-    programData,
-    programTrackerData,
-    fiveDayArrayData,
-    refetchProgramData,
-    refetchProgramTrackerData,
-    refetchDailyWorkoutTracker,
-    refetchFiveDayArray,
-  ]);
+  }, []);
+  // useEffect(() => {
+  //   refetchProgramData();
+  //   refetchProgramTrackerData();
+  //   refetchDailyWorkoutTracker();
+  //   refetchFiveDayArray();
+  // }, [
+  //   dailyWorkoutTrackerData,
+  //   programData,
+  //   programTrackerData,
+  //   fiveDayArrayData,
+  //   refetchProgramData,
+  //   refetchProgramTrackerData,
+  //   refetchDailyWorkoutTracker,
+  //   refetchFiveDayArray,
+  // ]);
 
   const challengeCompleteHandler = () => {
     // setChallengeIsComplete(true);

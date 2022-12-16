@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 import UpdateWorkout from "../Workout/UpdateWorkout";
-import LoadingSpinner from "../UI/LoadingSpinner";
-import { useWorkout } from "../Exercise/hooks/use-workout";
 import classes from "./ProgramWorkoutDetails.module.css";
 import ExerciseOverviewCard from "../Exercise/ExerciseOverviewCard";
 import ExerciseCard from "../Exercise/ExerciseCard";
@@ -10,15 +8,11 @@ import Button from "../UI/Button";
 import { useTranslation } from "react-i18next";
 
 
-const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
+const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin, workout: workoutData }) => {
   const { t } = useTranslation();
   const [updateWorkoutIsShown, setUpdateWorkingIsShown] = useState(false);
 
-  // TODO: use programId to find dailyworkouts
-  const { data: workoutData, isLoading: workoutIsLoading, isError: workoutIsError } = useWorkout(
-    programId,
-    dailyWorkoutId
-  )
+
 
   // TODO: get the daily workout id
   // TODO: Add mutatios for program / daily workout / exercise / exercise overview
@@ -36,8 +30,6 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin }) => {
     setUpdateWorkingIsShown(false);
   };
 
-  if (workoutIsLoading) return <LoadingSpinner />;
-  if (workoutIsError) return <p>error retrieving exercise data</p>
 
   return (
     <div className={classes.workoutCard}>

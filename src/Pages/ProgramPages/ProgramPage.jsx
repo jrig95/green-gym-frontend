@@ -30,11 +30,17 @@ const ProgramPage = () => {
   // Get the Id from the slug using routes
   const programId = getIdFromSlug(params.programId);
 
-  const textPlaceHolder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi nullam vehicula ipsum a arcu cursus. Lacus laoreet non curabitur gravida arcu. Quis vel eros donec ac odio tempor orci dapibus ultrices. Netus et malesuada fames ac turpis egestas maecenas. Et leo duis ut diam quam nulla. Vitae congue mauris rhoncus aenean. Sed vulputate odio ut enim blandit. Nunc sed blandit libero volutpat. Libero id faucibus nisl tincidunt eget. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. A lacus vestibulum sed arcu. Facilisi morbi tempus iaculis urna id."
+  const textPlaceHolder =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi nullam vehicula ipsum a arcu cursus. Lacus laoreet non curabitur gravida arcu. Quis vel eros donec ac odio tempor orci dapibus ultrices. Netus et malesuada fames ac turpis egestas maecenas. Et leo duis ut diam quam nulla. Vitae congue mauris rhoncus aenean. Sed vulputate odio ut enim blandit. Nunc sed blandit libero volutpat. Libero id faucibus nisl tincidunt eget. Cursus vitae congue mauris rhoncus aenean vel elit scelerisque. A lacus vestibulum sed arcu. Facilisi morbi tempus iaculis urna id.";
 
   // Get program data
-  const { data: programData, isLoading: programIsLoading } =
-    useProgram(programId);
+  const {
+    data: programData,
+    isLoading: programIsLoading,
+    isError,
+  } = useProgram(programId);
+
+  const pageNumber = programData?.daily_workouts?.length || 0;
 
   const showUpdateProgramHandler = () => {
     setUpdateProgramIsShown(true);
@@ -51,52 +57,77 @@ const ProgramPage = () => {
         programId={programId}
         dailyWorkoutId={workout.id}
         admin={admin}
+        workout={workout}
       />
     );
   });
+  if (isError) {
+    return <div>Something went wrong</div>;
+  }
 
-  return (
-    <Fragment>
-      <Banner title={programData.program_title} />
-      <div className={classes.container}>
-        {updateProgramIsShown && (
-          <UpdateProgram
-            programData={programData}
-            programIsLoading={programIsLoading}
-            onClose={hideUpdateProgramHandler}
-          />
-        )}
-        {admin && (
-          <div className={classes.updateButtonContainer}>
-            <Button color="blue" onClick={showUpdateProgramHandler}>
-              Update Program
-            </Button>
-          </div>
-        )}
-        <div className={classes.descriptionContainer}>
-          <div className={classes.description}>
-            <h3>{programData.program_description}</h3>
-            <p>
-              {programData.program_info || textPlaceHolder}
-            </p>
-          </div>
-          <img src={programData.photo_url} alt={programData.program_title} />
+  const ProgramDisplay = () => {
+    return (
+      <Fragment>
+        <Banner title={programData.program_title} />
+        <div className={classes.container}>
+          <div></div>
+          <main>
+            {updateProgramIsShown && (
+              <UpdateProgram
+                programData={programData}
+                programIsLoading={programIsLoading}
+                onClose={hideUpdateProgramHandler}
+              />
+            )}
+            {admin && (
+              <div className={classes.updateButtonContainer}>
+                <Button color="blue" onClick={showUpdateProgramHandler}>
+                  Update Program
+                </Button>
+              </div>
+            )}
+            <div className={classes.descriptionContainer}>
+              <div className={classes.description}>
+                <h3>{programData.program_description}</h3>
+                <p>{programData.program_info || textPlaceHolder}</p>
+              </div>
+              <img
+                src={programData.photo_url}
+                alt={programData.program_title}
+              />
+            </div>
+            <div className={classes.exerciseCardContainer}>
+              <div className={classes.programWorkoutsGrid}>
+                {programWorkouts}
+              </div>
+            </div>
+            <div className={classes.purchaseContainer}>
+              <span>
+                {t("program_page_price")}
+                {programData.price}
+              </span>
+              <div>
+                {!admin && (
+                  <Link to="purchase">
+                    <Button>{t("purchase_page_purchase")}</Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+            <div className={classes.buildProgram}>
+              {admin && !programData.daily_workouts && (
+                <Link to="buildProgram" state={{pageNumber}}>
+                  <Button>Continue Building Program</Button>
+                </Link>
+              )}
+            </div>
+          </main>
+          <div></div>
         </div>
-        <div className={classes.exerciseCardContainer}>
-          <div className={classes.programWorkoutsGrid}>{programWorkouts}</div>
-        </div>
-        <div className={classes.purchaseContainer}>
-          <h3>
-            {t("program_page_price")}
-            {programData.price}
-          </h3>
-          <Link to="purchase">
-            <Button>{t("purchase_page_purchase")}</Button>
-          </Link>
-        </div>
-      </div>
-    </Fragment>
-  );
+      </Fragment>
+    );
+  };
+  return <ProgramDisplay />;
 };
 
 export default ProgramPage;
