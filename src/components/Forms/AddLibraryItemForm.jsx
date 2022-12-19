@@ -20,6 +20,10 @@ const AddLibraryItemForm = ({ onClose }) => {
     inputBlurHandler: titleBlurHander,
   } = useInput(textNotEmpty);
 
+  const [tagValue, setTagValue] = useState("");
+  const handleTagChange = (event) => {
+    setTagValue(event.target.value);
+  }
   const titleClasses = titleHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
@@ -28,9 +32,10 @@ const AddLibraryItemForm = ({ onClose }) => {
     event.preventDefault();
 
     const formData = new FormData();
-
+    const tags = tagValue.split(",");
     formData.append("library_item[title]", titleValue);
     formData.append("library_item[video]", selectedVideoFile);
+    formData.append("library_item[tag_list]", tags);
 
     // const library_item = {
     //   title: titleValue,
@@ -63,6 +68,15 @@ const AddLibraryItemForm = ({ onClose }) => {
             {titleHasError && (
               <p className={classes.errorText}>Must have a title</p>
             )}
+          </div>
+          <div className={titleClasses}>
+            <label htmlFor="exercise_title">Exercise Tags</label>
+            <input
+              type="text"
+              id="exercise_title"
+              value={tagValue}
+              onChange={handleTagChange}
+            />
           </div>
           <div className={classes.formControl}>
             <label htmlFor="video">Video</label>

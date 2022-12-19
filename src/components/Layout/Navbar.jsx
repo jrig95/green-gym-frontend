@@ -70,7 +70,7 @@ const Navbar = () => {
               {t("nav_bar_programs")}
             </NavLink>
             <NavLink style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
             <Button
               className={classes.logout}
@@ -90,7 +90,7 @@ const Navbar = () => {
               {t("nav_bar_my_activites")}
             </NavLink>
             <NavLink style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
             <NavLink style={isActive} to="profile">
               {t("nav_bar_profile")}

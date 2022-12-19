@@ -206,7 +206,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
       )}
       {!admin && !noProgram && (
         <ProfileBanner
-          title={t("my_rewards")}
+          title={t("my_impact")}
           image={userData.photo_url}
           rewards={true}
           points={userPoints}
