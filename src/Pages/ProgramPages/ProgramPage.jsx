@@ -5,7 +5,8 @@ import AuthContext from "../../context/AuthContext";
 import ProgramWorkoutDetails from "../../components/Program/ProgramWorkoutDetails";
 import { getIdFromSlug } from "../../utils/get-id-from-slug";
 import { useProgram } from "../../components/Program/hooks/use-program";
-import Button from "../../components/UI/Button";
+import { Button } from "@mantine/core";
+//import Button from "../../components/UI/Button";
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
 // import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
@@ -81,7 +82,7 @@ const ProgramPage = () => {
             )}
             {admin && (
               <div className={classes.updateButtonContainer}>
-                <Button color="blue" onClick={showUpdateProgramHandler}>
+                <Button color="cyan" onClick={showUpdateProgramHandler}>
                   Update Program
                 </Button>
               </div>
@@ -117,7 +118,7 @@ const ProgramPage = () => {
             <div className={classes.buildProgram}>
               {admin && !programData.daily_workouts && (
                 <Link to="buildProgram" state={{pageNumber}}>
-                  <Button>Continue Building Program</Button>
+                  <Button color="cyan">Continue Building Program</Button>
                 </Link>
               )}
             </div>
