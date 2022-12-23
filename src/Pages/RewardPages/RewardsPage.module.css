@@ -15,17 +15,53 @@
   font-size: 2rem;
 }
 
-.container {
-  margin: 1rem 10rem 10rem 20rem;
-  display: flex;
-  justify-content: center;
-}
-
 .programRewardsGrid,
 .rewardsGrid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
+}
+/* 
+  set the last element to the far right
+*/
+.container {
+  display: grid;
+  place-items: left;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding-bottom: 20%;
+  padding-left: 10%;
+  margin: 2rem;
+}
+
+#bambooBg{
+  position: absolute;
+  z-index: 1;
+}
+
+#bambooTree {
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  left: 20%;
+}
+/* 
+  table styles by media query for mobile 
+*/
+@keyframes shaking-tree {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#bambooTree:hover {
+  animation: shaking-tree 1s cubic-bezier(0.165, 0.24, 0.44, 1) infinite;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
@@ -36,27 +72,47 @@
     align-items: center;
   }
 
-  .Rewards .programRewardsTitle{
-  margin-top: 0;
-  font-size: 1.25rem;
-}
+  .Rewards .programRewardsTitle {
+    margin-top: 0;
+    font-size: 1.25rem;
+  }
 
-.rewardsTitle{
-  margin-bottom: 0;
-  font-size: 1.25rem;
-}
-
-  .container {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12rem;
-}
+  .rewardsTitle {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+  }
 
   .programRewardsGrid,
   .rewardsGrid {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(1, 1fr);
+  }
+  /* 
+    use grid to stack .bamboo and .leaderboard inside .container
+  */
+  .container {
+    display: grid;
+    place-content: center;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "leaderboard leaderboard"
+      "bamboo bamboo";
+  }
+  .leaderboard {
+    grid-area: leaderboard;
+  }
+  .bamboo {
+    grid-area: bamboo;
+  }
+  /* 
+    create a bit shaking animation for bambooTree
+  */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: rgb(223, 255, 176);
+    border-radius: 5%;
   }
 }
