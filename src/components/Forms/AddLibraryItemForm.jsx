@@ -3,10 +3,10 @@ import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
 import { useRef, useState } from "react";
+import { Box, FileButton } from "@mantine/core";
 
 const AddLibraryItemForm = ({ onClose }) => {
-  const [selectedVideoFile, setSelectedVideoFile] = useState();
-  const videoRef = useRef();
+  const fileInputRef = useRef(null);
 
   // React query custom hook
   const createLibraryItem = useCreateLibraryItem();
@@ -23,7 +23,7 @@ const AddLibraryItemForm = ({ onClose }) => {
   const [tagValue, setTagValue] = useState("");
   const handleTagChange = (event) => {
     setTagValue(event.target.value);
-  }
+  };
   const titleClasses = titleHasError
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
@@ -34,8 +34,8 @@ const AddLibraryItemForm = ({ onClose }) => {
     const formData = new FormData();
     const tags = tagValue.split(",");
     formData.append("library_item[title]", titleValue);
-    formData.append("library_item[video]", selectedVideoFile);
-    formData.append("library_item[tag_list]", tags);
+    formData.append("library_item[video]", fileInputRef.current().files[0]);
+    formData.append("library_item[tag_list]", JSON.stringify(tags));
 
     // const library_item = {
     //   title: titleValue,
@@ -45,11 +45,7 @@ const AddLibraryItemForm = ({ onClose }) => {
     onClose();
   };
 
-  const fileSelectHandler = (event) => {
-    setSelectedVideoFile(event.target.files[0]);
-  };
-
-  const formIsValid = titleIsValid
+  const formIsValid = titleIsValid;
 
   return (
     <div>
@@ -70,25 +66,19 @@ const AddLibraryItemForm = ({ onClose }) => {
             )}
           </div>
           <div className={titleClasses}>
-            <label htmlFor="exercise_title">Exercise Tags</label>
+            <label htmlFor="exercise_tags">Exercise Tags</label>
             <input
               type="text"
-              id="exercise_title"
+              id="exercise_tags"
               value={tagValue}
               onChange={handleTagChange}
+              placeholder="e.g. A, B, C"
             />
           </div>
           <div className={classes.formControl}>
-            <label htmlFor="video">Video</label>
-            <input
-              style={{display: 'none'}}
-              type="file"
-              id="video"
-              accept="video/*"
-              onChange={fileSelectHandler}
-              ref={videoRef}
-            />
-            <Button size="small" onClick={() => videoRef.current.click()}>Add Video</Button>
+            <FileButton accept="video/*" ref={fileInputRef}>
+              {(props) => <Button {...props}>Upload Video</Button>}
+            </FileButton>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>

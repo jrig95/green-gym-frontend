@@ -1,5 +1,6 @@
 import styles from "./QuestionPage.module.css";
 import { useState } from "react";
+import { Button } from "@mantine/core";
 
 const QuestionCompletedPage = ({ text }) => {
   return (
@@ -26,7 +27,9 @@ export const QuestionPage = () => {
             {options.map(({ value, label, emoji }) => {
               return (
                 <div className={styles.answer} key={value}>
-                  <button
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: "teal", to: "lime", deg: 105 }}
                     id={value}
                     onClick={(e) => {
                       const answer = e.currentTarget.id;
@@ -37,7 +40,7 @@ export const QuestionPage = () => {
                           );
                       setCompleted(true);
                     }}
-                  >{`${label} ${emoji}`}</button>
+                  >{`${label} ${emoji}`}</Button>
                 </div>
               );
             })}

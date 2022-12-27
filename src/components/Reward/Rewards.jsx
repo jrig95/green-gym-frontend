@@ -14,6 +14,8 @@ import Banner from "../Layout/Banner";
 import { useTranslation } from "react-i18next";
 
 
+
+
 const Rewards = ({ userData, admin, noProgram }) => {
   const { t } = useTranslation();
 
@@ -215,6 +217,7 @@ const Rewards = ({ userData, admin, noProgram }) => {
       )}
       {noProgram && !admin && <Banner title={t("no_program_user_rewards")}/>}
       {admin && <AdminBanner rewards />}
+      <br/>
       {programRewards.length > 0 && (
         <Fragment>
           <div className={classes.programRewardsContainer}>
