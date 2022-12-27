@@ -23,7 +23,7 @@ const RewardsPage = () => {
   return (
     <>
       <Rewards userData={userData} admin={admin} noProgram={noProgram} />
-      <LeaderboardPage id={authCtx.userId}/>
+      <LeaderboardPage userData={userData}/>
     </>
   );
 };

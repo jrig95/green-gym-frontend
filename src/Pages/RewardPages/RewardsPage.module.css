@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: azure;
 }
 
 .programRewardsTitle {
@@ -28,15 +29,20 @@
   display: grid;
   place-items: left;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
   padding-bottom: 20%;
   padding-left: 10%;
   margin: 2rem;
+  grid-template-areas:
+      "leaderboard leaderboard"
+      "bamboo bamboo";
 }
 
 #bambooBg{
   position: absolute;
   z-index: 1;
+  border-radius: 8%;
 }
 
 #bambooTree {
@@ -44,6 +50,16 @@
   z-index: 2;
   top: 20%;
   left: 20%;
+}
+
+.leaderboard {
+  grid-area: leaderboard;
+  max-width: 80%;
+}
+.bamboo {
+  grid-area: bamboo;
+  min-width: 80%;
+  background-blend-mode: normal;
 }
 /* 
   table styles by media query for mobile 
