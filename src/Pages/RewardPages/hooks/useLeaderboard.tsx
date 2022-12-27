@@ -12,7 +12,7 @@ type LeaderboardUser = {
 };
 export const useLeaderboard = async (id) => {
   const { token } = useContext(AuthContext);
-  const { data, isLoading, isError } = useQuery<LeaderboardUser[]>(
+  const { data, isLoading, isError, isSuccess } = useQuery<LeaderboardUser[]>(
     ["leaderboard"],
     async () =>
       axios
@@ -23,5 +23,5 @@ export const useLeaderboard = async (id) => {
         })
         .then((res) => res.data)
   );
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, isSuccess };
 };
