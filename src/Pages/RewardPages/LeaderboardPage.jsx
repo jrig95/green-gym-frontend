@@ -15,6 +15,7 @@ import BambooBg from "../../assets/bamboos/bamboo-bg2.jpeg";
 
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useState } from "react";
+import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 
 // mock data for leaderboard with the structure of {id: "id", name: "name", points: 87, iconUrl: "iconUrl"}
 const leaderboard = [
@@ -80,41 +81,53 @@ const leaderboard = [
   },
 ];
 
-export const LeaderboardPage = ({ userData }) => {
-  const { data, isSuccess } = useLeaderboard(userData.id);
+export const LeaderboardPage = ({ userData, token }) => {
+  const { data, isSuccess, isLoading, isError } = useLeaderboard(userData.id, token);
   const [cardSection, setCardSection] = useState("leaderboard");
-  const rows = isSuccess && data?.map((item, i) => {
-    return (
-      <tr key={item.name}>
-        <td>
-          <Group>
-            <Avatar size={40} src={item.iconUrl} radius={40} />
-            <div>
-              <Text size="sm" weight={500}>
-                {item.name}
-              </Text>
-              <Text size="xs" color="dimmed">
-                {item.points}
-              </Text>
-            </div>
-          </Group>
-        </td>
-        <td>
-          <Text size="sm" weight={500}>
-            {i + 1}
-          </Text>
-        </td>
+  const [bambooHolder, setBambooHolder] = useState(Bamboo1);
+  const bamboo_style =
+    bambooHolder === Bamboo1
+      ? styles.bamboo1
+      : bambooHolder === Bamboo2
+      ? styles.bamboo2
+      : bambooHolder === Bamboo3
+      ? styles.bamboo3
+      : styles.bamboo4;
 
-        <td>
-          <Text size="xs" color="dimmed">
-            {item.points}
-          </Text>
-        </td>
-      </tr>
-    );
-  });
+  if(isLoading) return <LoadingSpinnerLarge/>;
+  const rows =
+    data?.map((item, i) => {
+      return (
+        <tr key={item.first_name}>
+          <td>
+            <Group>
+              <Avatar size={40} src={item.photo_url} radius={40} />
+              <div>
+                <Text size="sm" weight={500}>
+                  {item.first_name}
+                </Text>
+                <Text size="xs" color="dimmed">
+                  {item.user_total_calories} points
+                </Text>
+              </div>
+            </Group>
+          </td>
+          <td>
+            <Text size="sm" weight={500}>
+              {i + 1}
+            </Text>
+          </td>
+
+          <td>
+            <Text size="xs" color="dimmed">
+              {item.user_total_calories}
+            </Text>
+          </td>
+        </tr>
+      );
+    });
   return (
-    <>
+    <section>
       <SegmentedControl
         data={[
           { label: "Leaderboard", value: "leaderboard" },
@@ -125,21 +138,22 @@ export const LeaderboardPage = ({ userData }) => {
         color="teal"
         radius="xl"
       />
-      <section className={styles.container}>
+      <div className={styles.container}>
         {cardSection === "bamboo" ? (
-          <Card className={styles.bamboo}>
+          <Card>
             <Card.Section>
               <p size="xl" weight={700}>
                 Bamboo Tree Rewards
               </p>
               <img src={BambooBg} id={styles.bambooBg} width="80%" />
               <img
-                id={styles.bambooTree}
+              id = {styles.bambooTree}
                 src={Bamboo1}
                 alt="bamboo"
                 width="80%"
-              />
+              />  
             </Card.Section>
+            
           </Card>
         ) : (
           <Card className={styles.leaderboard}>
@@ -161,7 +175,7 @@ export const LeaderboardPage = ({ userData }) => {
             </Card.Section>
           </Card>
         )}
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
