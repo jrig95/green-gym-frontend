@@ -28,38 +28,30 @@
 .container {
   display: grid;
   place-items: left;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
-  padding-bottom: 20%;
+  padding-bottom: 10%;
   padding-left: 10%;
   margin: 2rem;
-  grid-template-areas:
-      "leaderboard leaderboard"
-      "bamboo bamboo";
+  margin-bottom: auto;
 }
 
-#bambooBg{
-  position: absolute;
+#bambooBg {
   z-index: 1;
   border-radius: 8%;
 }
 
 #bambooTree {
-  position: absolute;
   z-index: 2;
   top: 20%;
   left: 20%;
-}
+  position: absolute;
+} 
 
 .leaderboard {
-  grid-area: leaderboard;
   max-width: 80%;
 }
 .bamboo {
-  grid-area: bamboo;
   min-width: 80%;
-  background-blend-mode: normal;
 }
 /* 
   table styles by media query for mobile 
@@ -78,6 +70,19 @@
 
 #bambooTree:hover {
   animation: shaking-tree 1s cubic-bezier(0.165, 0.24, 0.44, 1) infinite;
+}
+/* 
+  trasit from bamboo1 to bamboo2 to bamboo3 to bamboo4 with transition animation
+*/
+#bamboo1,
+#bamboo2,
+#bamboo3,
+#bamboo4 {
+  transition: all 2s ease-in-out;
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  left: 20%;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
@@ -110,10 +115,6 @@
   .container {
     display: grid;
     place-content: center;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "leaderboard leaderboard"
-      "bamboo bamboo";
   }
   .leaderboard {
     grid-area: leaderboard;
