@@ -29,6 +29,11 @@ export const LeaderboardPage = ({ userData, token }) => {
       return (
         <tr key={item.id}>
           <td>
+            <Text size="sm" weight={500}>
+              {i + 1}
+            </Text>
+          </td>
+          <td>
             <Group>
               <Avatar size={40} src={item.photo_url} radius={40} />
               <div>
@@ -41,11 +46,7 @@ export const LeaderboardPage = ({ userData, token }) => {
               </div>
             </Group>
           </td>
-          <td>
-            <Text size="sm" weight={500}>
-              {i + 1}
-            </Text>
-          </td>
+          
 
           <td>
             <Text size="xs" color="dimmed">
@@ -66,6 +67,7 @@ export const LeaderboardPage = ({ userData, token }) => {
         onChange={(value) => setCardSection(value)}
         color="teal"
         radius="xl"
+        size="lg"
       />
       <div className={styles.container}>
         {(cardSection === "bamboo" && !isAdmin) ? (
@@ -88,14 +90,15 @@ export const LeaderboardPage = ({ userData, token }) => {
           <Card className={styles.leaderboard}>
             <Card.Section>
               <p size="xl" weight={700}>
-                Leaderboard
+                Keep it up and you'll be on top!
               </p>
 
               <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
                 <thead>
                   <tr>
-                    <th>User</th>
+                    
                     <th>Rank</th>
+                    <th>User</th>
                     <th>Points</th>
                   </tr>
                 </thead>
@@ -106,5 +109,6 @@ export const LeaderboardPage = ({ userData, token }) => {
         )}
       </div>
     </section>
+    
   );
 };
