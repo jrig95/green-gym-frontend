@@ -17,88 +17,17 @@ import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useState } from "react";
 import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 
-// mock data for leaderboard with the structure of {id: "id", name: "name", points: 87, iconUrl: "iconUrl"}
-const leaderboard = [
-  {
-    id: "1",
-    name: "Jim",
-    points: 87,
-    iconUrl: "https://i.pravatar.cc/150?img=1",
-  },
-  {
-    id: "2",
-    name: "Jane",
-    points: 56,
-    iconUrl: "https://i.pravatar.cc/150?img=2",
-  },
-  {
-    id: "3",
-    name: "Jack",
-    points: 44,
-    iconUrl: "https://i.pravatar.cc/150?img=3",
-  },
-  {
-    id: "4",
-    name: "Jill",
-    points: 43,
-    iconUrl: "https://i.pravatar.cc/150?img=4",
-  },
-  {
-    id: "5",
-    name: "Jenny",
-    points: 37,
-    iconUrl: "https://i.pravatar.cc/150?img=5",
-  },
-  {
-    id: "6",
-    name: "Pam",
-    points: 33,
-    iconUrl: "https://i.pravatar.cc/150?img=6",
-  },
-  {
-    id: "7",
-    name: "Mike",
-    points: 0,
-    iconUrl: "https://i.pravatar.cc/150?img=7",
-  },
-  {
-    id: "8",
-    name: "Sean",
-    points: 0,
-    iconUrl: "https://i.pravatar.cc/150?img=8",
-  },
-  {
-    id: "9",
-    name: "James",
-    points: 0,
-    iconUrl: "https://i.pravatar.cc/150?img=9",
-  },
-  {
-    id: "10",
-    name: "You",
-    points: 0,
-    iconUrl: "https://i.pravatar.cc/150?img=10",
-  },
-];
 
 export const LeaderboardPage = ({ userData, token }) => {
   const { data, isSuccess, isLoading, isError } = useLeaderboard(userData.id, token);
   const [cardSection, setCardSection] = useState("leaderboard");
-  const [bambooHolder, setBambooHolder] = useState(Bamboo1);
-  const bamboo_style =
-    bambooHolder === Bamboo1
-      ? styles.bamboo1
-      : bambooHolder === Bamboo2
-      ? styles.bamboo2
-      : bambooHolder === Bamboo3
-      ? styles.bamboo3
-      : styles.bamboo4;
-
+  const bambooHolder = userData.user_total_calories < 20? Bamboo1: userData.user_total_calories < 40? Bamboo2: userData.user_total_calories < 99? Bamboo3: Bamboo4; 
+  const isAdmin = userData.admin;
   if(isLoading) return <LoadingSpinnerLarge/>;
   const rows =
-    data?.map((item, i) => {
+    data?.slice(0, 10).map((item, i) => {
       return (
-        <tr key={item.first_name}>
+        <tr key={item.id}>
           <td>
             <Group>
               <Avatar size={40} src={item.photo_url} radius={40} />
@@ -131,7 +60,7 @@ export const LeaderboardPage = ({ userData, token }) => {
       <SegmentedControl
         data={[
           { label: "Leaderboard", value: "leaderboard" },
-          { label: "Bamboo", value: "bamboo" },
+          { label: "Bamboo", value: "bamboo", disabled: isAdmin },
         ]}
         value={cardSection}
         onChange={(value) => setCardSection(value)}
@@ -139,16 +68,16 @@ export const LeaderboardPage = ({ userData, token }) => {
         radius="xl"
       />
       <div className={styles.container}>
-        {cardSection === "bamboo" ? (
+        {(cardSection === "bamboo" && !isAdmin) ? (
           <Card>
             <Card.Section>
               <p size="xl" weight={700}>
-                Bamboo Tree Rewards
+                Work out more and join more programs, your tree will grow!
               </p>
               <img src={BambooBg} id={styles.bambooBg} width="80%" />
               <img
               id = {styles.bambooTree}
-                src={Bamboo1}
+                src={bambooHolder}
                 alt="bamboo"
                 width="80%"
               />  
