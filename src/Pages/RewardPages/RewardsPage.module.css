@@ -35,6 +35,11 @@
   margin-bottom: auto;
 }
 
+section {
+  display: grid;
+  place-items: center;
+}
+
 #bambooBg {
   z-index: 1;
   border-radius: 8%;
