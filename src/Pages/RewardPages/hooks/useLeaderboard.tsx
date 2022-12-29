@@ -10,15 +10,14 @@ type LeaderboardUser = {
   user_total_calories: Number;
   photo_url: String;
 };
-export const useLeaderboard = async (id) => {
-  const { token } = useContext(AuthContext);
+export const useLeaderboard = (id, token) => {
   const { data, isLoading, isError, isSuccess } = useQuery<LeaderboardUser[]>(
     ["leaderboard"],
     async () =>
       axios
         .get(`${baseUrl}/users/${id}/overall_impact`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         })
         .then((res) => res.data)

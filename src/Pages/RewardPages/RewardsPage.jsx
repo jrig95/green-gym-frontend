@@ -7,6 +7,7 @@ import { LeaderboardPage } from "./LeaderboardPage";
 
 const RewardsPage = () => {
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
   const {
     data: userData,
     isLoading: userIsLoading,
@@ -23,7 +24,7 @@ const RewardsPage = () => {
   return (
     <>
       <Rewards userData={userData} admin={admin} noProgram={noProgram} />
-      <LeaderboardPage userData={userData}/>
+      <LeaderboardPage userData={userData} token={token}/>
     </>
   );
 };
