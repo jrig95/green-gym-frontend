@@ -1,6 +1,6 @@
 import classes from './TreesPlanted.module.css';
-import { BsFillTreeFill } from 'react-icons/bs';
 import { useTranslation } from "react-i18next";
+import { GiBamboo } from "react-icons/gi";
 
 
 const TreesPlanted = ({calories}) => {
@@ -11,7 +11,7 @@ const TreesPlanted = ({calories}) => {
 
   const treeMessage = treesPlanted !== 1 ? translationtTreesPlanted : translationtTreePlanted
 
-  return <div className={classes.treeButton}><BsFillTreeFill/>{treesPlanted}{treeMessage}</div>
+  return <div className={classes.treeButton}><GiBamboo/>{treesPlanted}{treeMessage}</div>
 };
 
 export default TreesPlanted;

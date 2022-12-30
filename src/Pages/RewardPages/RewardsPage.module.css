@@ -30,9 +30,13 @@
   place-items: left;
   gap: 1rem;
   padding-bottom: 10%;
-  padding-left: 10%;
   margin: 2rem;
   margin-bottom: auto;
+}
+
+section {
+  display: grid;
+  place-items: center;
 }
 
 #bambooBg {
@@ -48,42 +52,18 @@
 } 
 
 .leaderboard {
-  max-width: 80%;
+  max-width: 90%;
 }
 .bamboo {
-  min-width: 80%;
-}
-/* 
-  table styles by media query for mobile 
-*/
-@keyframes shaking-tree {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(1.5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+  min-width: 90%;
 }
 
 #bambooTree:hover {
-  animation: shaking-tree 1s cubic-bezier(0.165, 0.24, 0.44, 1) infinite;
+  transform: scale3d(1.05, 1.03, 1.05);
+  transition: all 0.3s ease-in-out;
+  perspective: 4cm;
 }
-/* 
-  trasit from bamboo1 to bamboo2 to bamboo3 to bamboo4 with transition animation
-*/
-#bamboo1,
-#bamboo2,
-#bamboo3,
-#bamboo4 {
-  transition: all 2s ease-in-out;
-  position: absolute;
-  z-index: 2;
-  top: 20%;
-  left: 20%;
-}
+
 
 @media only screen and (min-width: 320px) and (max-width: 617px) {
   .programRewardsContainer {
@@ -116,20 +96,5 @@
     display: grid;
     place-content: center;
   }
-  .leaderboard {
-    grid-area: leaderboard;
-  }
-  .bamboo {
-    grid-area: bamboo;
-  }
-  /* 
-    create a bit shaking animation for bambooTree
-  */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    background-color: rgb(223, 255, 176);
-    border-radius: 5%;
-  }
+
 }
