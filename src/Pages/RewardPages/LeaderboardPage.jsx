@@ -17,45 +17,54 @@ import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useState } from "react";
 import LoadingSpinnerLarge from "../../components/UI/LoadingSpinnerLarge";
 
-
 export const LeaderboardPage = ({ userData, token }) => {
-  const { data, isSuccess, isLoading, isError } = useLeaderboard(userData.id, token);
+  const { data, isSuccess, isLoading, isError } = useLeaderboard(
+    userData.id,
+    token
+  );
   const [cardSection, setCardSection] = useState("leaderboard");
-  const bambooHolder = userData.user_total_calories < 20? Bamboo1: userData.user_total_calories < 40? Bamboo2: userData.user_total_calories < 99? Bamboo3: Bamboo4; 
+  const bambooHolder =
+    userData.user_total_calories < 200
+      ? Bamboo1
+      : userData.user_total_calories < 400
+      ? Bamboo2
+      : userData.user_total_calories < 990
+      ? Bamboo3
+      : userData.user_total_calories > 1000
+      ? Bamboo4
+      : null;
   const isAdmin = userData.admin;
-  if(isLoading) return <LoadingSpinnerLarge/>;
-  const rows =
-    data?.slice(0, 10).map((item, i) => {
-      return (
-        <tr key={item.id}>
-          <td>
-            <Text size="sm" weight={500}>
-              {i + 1}
-            </Text>
-          </td>
-          <td>
-            <Group>
-              <Avatar size={40} src={item.photo_url} radius={40} />
-              <div>
-                <Text size="sm" weight={500}>
-                  {item.first_name}
-                </Text>
-                <Text size="xs" color="dimmed">
-                  {item.user_total_calories} points
-                </Text>
-              </div>
-            </Group>
-          </td>
-          
+  if (isLoading) return <LoadingSpinnerLarge />;
+  const rows = data?.slice(0, 10).map((item, i) => {
+    return (
+      <tr key={item.id}>
+        <td>
+          <Text size="sm" weight={500}>
+            {i + 1}
+          </Text>
+        </td>
+        <td>
+          <Group>
+            <Avatar size={40} src={item.photo_url} radius={40} />
+            <div>
+              <Text size="sm" weight={500}>
+                {item.first_name}
+              </Text>
+              <Text size="xs" color="dimmed">
+                {item.user_total_calories} points
+              </Text>
+            </div>
+          </Group>
+        </td>
 
-          <td>
-            <Text size="xs" color="dimmed">
-              {item.user_total_calories}
-            </Text>
-          </td>
-        </tr>
-      );
-    });
+        <td>
+          <Text size="xs" color="dimmed">
+            {item.user_total_calories}
+          </Text>
+        </td>
+      </tr>
+    );
+  });
   return (
     <section>
       <SegmentedControl
@@ -70,21 +79,20 @@ export const LeaderboardPage = ({ userData, token }) => {
         size="lg"
       />
       <div className={styles.container}>
-        {(cardSection === "bamboo" && !isAdmin) ? (
+        {cardSection === "bamboo" && !isAdmin ? (
           <Card>
             <Card.Section>
               <p size="xl" weight={700}>
                 Work out more and join more programs, your tree will grow!
               </p>
-              <img src={BambooBg} id={styles.bambooBg} width="80%" />
+              <img src={BambooBg} id={styles.bambooBg} width="100%" />
               <img
-              id = {styles.bambooTree}
+                id={styles.bambooTree}
                 src={bambooHolder}
                 alt="bamboo"
                 width="80%"
-              />  
+              />
             </Card.Section>
-            
           </Card>
         ) : (
           <Card className={styles.leaderboard}>
@@ -96,7 +104,6 @@ export const LeaderboardPage = ({ userData, token }) => {
               <Table sx={{ minWidth: 800 }} verticalSpacing="sm">
                 <thead>
                   <tr>
-                    
                     <th>Rank</th>
                     <th>User</th>
                     <th>Points</th>
@@ -109,6 +116,5 @@ export const LeaderboardPage = ({ userData, token }) => {
         )}
       </div>
     </section>
-    
   );
 };
