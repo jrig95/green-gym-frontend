@@ -8,7 +8,7 @@ import { queryKeys } from "../../../../react-query/constants";
 import { baseUrl } from "../../../../axiosInstance/constants";
 
 const createLibraryItem = async (libraryItem, bearerToken) => {
-  await axios.post(`${baseUrl}/library_items`, libraryItem, {
+  return await axios.post(`${baseUrl}/library_items`, libraryItem, {
     headers: {
       Authorization: bearerToken,
     },
@@ -25,7 +25,7 @@ export const useCreateLibraryItem = () => {
     (libraryItem) => createLibraryItem(libraryItem, bearerToken),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.libraryItems]);
+        return queryClient.invalidateQueries([queryKeys.libraryItems]);
       },
       onError: (error) => {
         const title =

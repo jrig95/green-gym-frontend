@@ -92,6 +92,7 @@ const ProgramCreate = () => {
               onInput={(e) => {
                 setProgramObj({
                   ...programObj,
+                  daily_workouts: Array.from({ length: e.target.value }),
                   number_of_days: e.target.value,
                 });
               }}
