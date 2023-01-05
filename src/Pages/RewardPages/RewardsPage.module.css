@@ -46,8 +46,8 @@ section {
 
 #bambooTree {
   z-index: 2;
-  top: 10%;
-  left: 20%;
+  top: 0%;
+  left: 10%;
   position: absolute;
 } 
 

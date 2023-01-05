@@ -11,7 +11,7 @@ import classes from "./LibraryItemsPage.module.css";
 const LibraryItemsPage = () => {
   const [searchParams, setSearchParams] = useState("");
   const deleteLibraryItem = useDeleteLibraryItem();
-  const { data, refetch: refetchLibraryItems } = useLibraryItems(searchParams);
+  const { data } = useLibraryItems(searchParams);
 
   const [deleteLibraryItemIsShown, setDeleteLibraryItemIsShown] =
     useState(false);
@@ -54,10 +54,6 @@ const LibraryItemsPage = () => {
   const hideUpdateLibraryItemHandler = () => {
     setUpdateLibraryItemIsShown(false);
   };
-
-  useEffect(() => {
-    refetchLibraryItems();
-  }, [searchParams, refetchLibraryItems]);
 
   const libraryItems = data?.map((libraryItem) => {
     //console.log(libraryItem);

@@ -2,11 +2,11 @@ import { useCreateLibraryItem } from "../AdminComponents/Library/Hooks/use-creat
 import useInput from "./Hooks/use-input";
 import Button from "../UI/Button";
 import classes from "./Form.module.css";
-import { useRef, useState } from "react";
-import { Box, FileButton } from "@mantine/core";
+import { useState } from "react";
+import { FileInput } from "@mantine/core";
 
 const AddLibraryItemForm = ({ onClose }) => {
-  const fileInputRef = useRef(null);
+  const [fileInputValue, setFileInputValue] = useState(null); 
 
   // React query custom hook
   const createLibraryItem = useCreateLibraryItem();
@@ -21,6 +21,7 @@ const AddLibraryItemForm = ({ onClose }) => {
   } = useInput(textNotEmpty);
 
   const [tagValue, setTagValue] = useState("");
+  const tags = tagValue.split(",");
   const handleTagChange = (event) => {
     setTagValue(event.target.value);
   };
@@ -30,17 +31,10 @@ const AddLibraryItemForm = ({ onClose }) => {
 
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
-    const tags = tagValue.split(",");
     formData.append("library_item[title]", titleValue);
-    formData.append("library_item[video]", fileInputRef.current().files[0]);
-    formData.append("library_item[tag_list]", JSON.stringify(tags));
-
-    // const library_item = {
-    //   title: titleValue,
-    // };
-
+    formData.append("library_item[tags]", JSON.stringify(tags));
+    formData.append("library_item[video]", fileInputValue);
     createLibraryItem(formData);
     onClose();
   };
@@ -71,14 +65,12 @@ const AddLibraryItemForm = ({ onClose }) => {
               type="text"
               id="exercise_tags"
               value={tagValue}
-              onChange={handleTagChange}
+              onInput={handleTagChange}
               placeholder="e.g. A, B, C"
             />
           </div>
           <div className={classes.formControl}>
-            <FileButton accept="video/*" ref={fileInputRef}>
-              {(props) => <Button {...props}>Upload Video</Button>}
-            </FileButton>
+            <FileInput value={fileInputValue} label="Video upload" accept="video/*" onChange={setFileInputValue}/>
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
