@@ -32,11 +32,15 @@ const AddLibraryItemForm = ({ onClose }) => {
   const addLibraryItemHandler = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("library_item[title]", titleValue);
-    formData.append("library_item[tags]", JSON.stringify(tags));
-    formData.append("library_item[video]", fileInputValue);
+    formData.append("[library_item]title", titleValue);
+    formData.append("[library_item]video", fileInputValue);
+    formData.append("[library_item]tag_list", tags);
     createLibraryItem(formData);
     onClose();
+    // this needs reloading the page to show the new library item
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000)
   };
 
   const formIsValid = titleIsValid;
