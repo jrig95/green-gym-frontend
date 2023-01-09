@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started
 
 This project was bootstrapped with [Vite](vitejs.dev).
 
