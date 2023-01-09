@@ -14,6 +14,6 @@ Open the port you specified to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## `npm run build`
+### `npm run build`
 
 Build a production ready codebase
