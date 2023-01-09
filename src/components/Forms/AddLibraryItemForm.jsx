@@ -21,7 +21,7 @@ const AddLibraryItemForm = ({ onClose }) => {
   } = useInput(textNotEmpty);
 
   const [tagValue, setTagValue] = useState("");
-  const tags = tagValue.split(",");
+  // const tags = tagValue.split(",");
   const handleTagChange = (event) => {
     setTagValue(event.target.value);
   };
@@ -29,13 +29,13 @@ const AddLibraryItemForm = ({ onClose }) => {
     ? `${classes.formControl} ${classes.invalid}`
     : classes.formControl;
 
-  const addLibraryItemHandler = (event) => {
+  const addLibraryItemHandler = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("library_item[title]", titleValue);
-    formData.append("library_item[tags]", JSON.stringify(tags));
     formData.append("library_item[video]", fileInputValue);
-    createLibraryItem(formData);
+    formData.append("library_item[tag_list][]", tagValue);
+    await createLibraryItem(formData);
     onClose();
   };
 

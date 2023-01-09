@@ -21,11 +21,13 @@ export const useCreateLibraryItem = () => {
   const { addError } = useAPIError();
 
   const queryClient = useQueryClient();
-  const { mutate } = useMutation(
+  const { mutateAsync } = useMutation(
     (libraryItem) => createLibraryItem(libraryItem, bearerToken),
     {
-      onSuccess: () => {
-        return queryClient.invalidateQueries([queryKeys.libraryItems]);
+      onSuccess: (newItem) => {
+        queryClient.setQueryData(queryKeys.libraryItems, (oldItems) => {
+          return [...oldItems, newItem];
+        });
       },
       onError: (error) => {
         const title =
@@ -35,5 +37,5 @@ export const useCreateLibraryItem = () => {
     }
   );
 
-  return mutate;
+  return mutateAsync;
 };
