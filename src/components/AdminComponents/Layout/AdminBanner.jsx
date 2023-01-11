@@ -9,6 +9,7 @@ import classes from "./AdminBanner.module.css";
 import { useState } from "react";
 import AddLibraryItem from "../Library/AddLibraryItem";
 import AddReward from "../../Reward/AddReward";
+import { useSelectedStore } from "../../../context/useSelectedStore";
 
 const AdminBanner = ({
   programs,
@@ -58,7 +59,8 @@ const AdminBanner = ({
     valueChangeHandler: searchChangeHandler,
     reset: resetSearch,
   } = useInput(textNotEmpty);
-
+  const selectedMembers = useSelectedStore((state) => [...state.selectedMembers]);
+  debugger
   // array to csv function
   const arrayToCSV = (array) => {
     const fileds = Object.keys(array[0]);
@@ -79,7 +81,7 @@ const AdminBanner = ({
   };
   const handleExport = (e) => {
     const button = e.target;
-    const csvData = arrayToCSV(members);
+    const csvData = arrayToCSV(selectedMembers);
     const url = generateDownloadLink(csvData);
     button.setAttribute("href", url);
     button.setAttribute("download", "members.csv");
