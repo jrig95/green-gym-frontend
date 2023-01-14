@@ -60,7 +60,6 @@ const AdminBanner = ({
     reset: resetSearch,
   } = useInput(textNotEmpty);
   const selectedMembers = useSelectedStore((state) => [...state.selectedMembers]);
-  debugger
   // array to csv function
   const arrayToCSV = (array) => {
     const fileds = Object.keys(array[0]);
