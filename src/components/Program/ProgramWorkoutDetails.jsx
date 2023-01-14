@@ -44,7 +44,7 @@ const ProgramWorkoutDetails = ({ programId, dailyWorkoutId, admin, workout: work
         <UpdateWorkout
           programId={programId}
           workoutData={workoutData}
-          workoutIsLoading={workoutIsLoading}
+          workoutIsLoading={false}
           onClose={hideUpdateWorkoutHandler}
         />
       )}
