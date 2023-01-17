@@ -24,9 +24,11 @@
   bottom: 20%;
 }
 
-.card > textarea {
+.card textarea, .card input {
   width: fit-content;
   height: fit-content;
+  border-radius: 5px;
+  border: 1px solid darkgreen;
 }
 
 .image {
@@ -40,8 +42,9 @@
   display: none;
 }
 
-input::placeholder {
-  text-align: center;
+.card input::placeholder, .card textarea::placeholder {
+  text-align: left;
+  font-family: var(--font-roboto);
 }
 
 .card a {

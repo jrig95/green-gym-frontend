@@ -48,7 +48,16 @@ body {
 .p {
   font-size: 1.25rem;
 }
-
+input, textarea {
+  font-family: var(--font-roboto);
+  resize: none;
+}
+input::placeholder, textarea::placeholder {
+  font-family: var(--font-roboto);
+  font-weight: bold;
+  opacity: 0.5;
+  color: darkgreen;
+}
 
 
 
