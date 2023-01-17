@@ -50,6 +50,7 @@ body {
 }
 input, textarea {
   font-family: var(--font-roboto);
+  resize: none;
 }
 input::placeholder, textarea::placeholder {
   font-family: var(--font-roboto);
