@@ -27,7 +27,7 @@ export const AddProgramCard = () => {
           style={{
             fontSize: "1.4rem",
           }}
-          placeholder="PROGRAM TITLE"
+          placeholder="Insert title here"
           maxLength="18"
           onChange={(e) => {
             e.preventDefault();
@@ -58,7 +58,7 @@ export const AddProgramCard = () => {
       </div>
       <div className={classes.description}>
         <textarea
-          placeholder="use one sentence to describe your program"
+          placeholder="write a brief description"
           cols={30}
           onChange={(e) => {
             e.preventDefault();
