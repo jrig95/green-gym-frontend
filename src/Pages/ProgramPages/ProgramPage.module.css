@@ -4,18 +4,71 @@
   padding-bottom: 15%;
 }
 
-.container {
+
+.container {  
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-rows: 20rem 10rem 10rem 20rem 50px 50px;
+  gap: 10px 10px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "des des upload upload"
+    "days workouts workouts burnt"
+    "trees credits credits ."
+    "more_des more_des more_des more_des"
+    ". price price ."
+    ". purchase purchase .";
 }
 
-.descriptionContainer {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 0.5fr;
-  gap: 1rem;
-  grid-template-areas: "info pic pic";
+.des { 
+  grid-area: des;
+  margin: 1rem;
+  padding: 1rem;
+  place-content: flex-start;
+  align-items: flex-start;
+  height: 16rem;
+  border-radius: 1rem;
+  border: var(--blue) 3px solid;
+ }
+
+.upload { 
+  grid-area: upload; 
+  margin: 1rem;
+  padding: 1rem;
+  height: 16rem;
+  border-radius: 1rem;
+  border: var(--blue) 3px solid;
 }
+
+.upload > input {
+  display: none;
+}
+
+
+.days { grid-area: days; }
+
+.workouts { grid-area: workouts; }
+
+.burnt { grid-area: burnt; }
+
+.trees { grid-area: trees; }
+
+.credits { grid-area: credits; }
+
+.more_des { 
+  grid-area: more_des;
+  margin: 1rem;
+  padding: 1rem;
+  place-content: flex-start;
+  align-items: flex-start;
+  height: 16rem;
+  border-radius: 1rem;
+  border: var(--blue) 3px solid;
+}
+
+.price { grid-area: price; }
+
+.purchase { grid-area: purchase; }
 
 .description {
   width: 24rem;

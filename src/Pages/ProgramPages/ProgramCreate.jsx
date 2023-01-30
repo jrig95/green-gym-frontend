@@ -6,6 +6,8 @@ import Button from "../../components/UI/Button";
 import { useCreateProgram } from "../../components/Program/hooks/use-create-program";
 import { FaSpinner } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ProgramField } from "../../components/Program/ProgramField";
+
 
 // create a creation page with same layout as ProgramPage
 const ProgramCreate = () => {
@@ -13,26 +15,83 @@ const ProgramCreate = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [programObj, setProgramObj] = useState({
-    program_title: "",
+    program_title: "Click to Enter Header",
     number_of_days: 0,
     program_description: "",
     price: 0,
     photo_url: null,
+    daily_workouts: 0,
+    trees: 0,
+    burnt: 0,
+    rewards: 0,
     ...state,
   });
   const [imageLoaded, setImageLoaded] = useState(!!programObj.photo_url);
   if (isLoading) return <FaSpinner />;
   if (isError) return <div>Something went wrong</div>;
+  const fieldProps = {
+    "number_of_days": {
+        icon: "📅",
+        classname: classes.days,
+        onChange(e) {
+            setProgramObj({
+                ...programObj,
+                number_of_days: e.target.value,
+            });
+        }
+    },
+    "daily_workouts": {
+        icon:"🏋️‍♀️",
+        classname: classes.workouts,
+        onChange(e) {
+            setProgramObj({
+                ...programObj,
+                daily_workouts: e.target.value,
+            });
+        }
+    },
+    "trees": {
+        icon: "🌳",
+        classname: classes.trees,
+        onChange(e) {
+            setProgramObj({
+                ...programObj,
+                trees: e.target.value,
+            });
+        }
+    },
+    "burnt": {
+        icon:"🔥",
+        classname: classes.calories,
+        onChange(e) {
+            setProgramObj({
+                ...programObj,
+                burnt: e.target.value,
+            });
+        }
+    },
+    "rewards": {
+        icon: "🏆",
+        classname: classes.rewards,
+        onChange(e) {
+            setProgramObj({
+                ...programObj,
+                rewards: e.target.value,
+            });
+        }
+    },
+  }
   return (
     <Fragment>
-      <Banner title="Create a new program" />
-      <div className={classes.container}>
-        <div></div>
-        <main className={classes.main_container}>
-          <div className={classes.descriptionContainer}>
-            <div className={classes.description}>
-              <input
-                id={classes.program_title}
+      <Banner title={programObj.program_title} isEditable={true} onChange={(e)=> {
+        setProgramObj({
+          ...programObj,
+          program_title: e.currentTarget.innerText,
+        });
+      }}/>
+        <main className={classes.container}>
+              <textarea
+                className={classes.des}
                 placeholder={"program title"}
                 onInput={(e) => {
                   setProgramObj({
@@ -41,26 +100,11 @@ const ProgramCreate = () => {
                   });
                 }}
                 value={programObj.program_title || ""}
-              ></input>
-              <br />
-              <textarea
-                id={classes.program_info}
-                placeholder={"program description"}
-                cols={30}
-                rows={20}
-                onInput={(e) => {
-                  setProgramObj({
-                    ...programObj,
-                    program_description: e.target.value,
-                  });
-                }}
-                value={programObj.program_description || ""}
               ></textarea>
-            </div>
-            <div className={classes.program_img}>
+            <div className={classes.upload}>
               <label htmlFor="upload_image">
                 {!imageLoaded ? (
-                  <RiAddCircleLine size="28rem" color="darkgreen" />
+                  <RiAddCircleLine size="6rem" color="darkgreen" />
                 ) : (
                   <img
                     src={URL.createObjectURL(programObj.photo_url)}
@@ -81,35 +125,30 @@ const ProgramCreate = () => {
                   setImageLoaded(true);
                 }}
               />
-            </div>
           </div>
-
-          <div className={classes.purchaseContainer}>
-            <input
-              id={classes.number_input}
-              type="number"
-              placeholder="number of days"
-              onInput={(e) => {
-                setProgramObj({
-                  ...programObj,
-                  daily_workouts: Array.from({ length: e.target.value }),
-                  number_of_days: e.target.value,
-                });
-              }}
-            />
-
-            {`Price: RMB `}
-            <input
-              id={classes.number_input}
-              placeholder="How much should it cost?"
-              type="number"
-              onInput={(e) => {
-                setProgramObj({ ...programObj, price: e.target.value });
-              }}
-            ></input>
-          </div>
+          {Object.entries(fieldProps).map(([key, value]) => {
+              return (
+                <div className={value.classname}>
+                  <ProgramField field={key} icon={value.icon}/>
+                </div>
+              );
+            }
+          )}
+          <textarea 
+                className={classes.more_des}
+                placeholder={"program description"}
+                cols={30}
+                rows={20}
+                onInput={(e) => {
+                  setProgramObj({
+                    ...programObj,
+                    program_description: e.target.value,
+                  });
+                }}
+                value={programObj.program_description || ""}
+              ></textarea>
           <Button
-            className={classes.create_button}
+            className={classes.purchase}
             onClick={(e) => {
               e.preventDefault();
               const formData = new FormData();
@@ -137,8 +176,6 @@ const ProgramCreate = () => {
             CREATE
           </Button>
         </main>
-        <div></div>
-      </div>
     </Fragment>
   );
 };

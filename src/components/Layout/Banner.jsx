@@ -1,9 +1,9 @@
 import classes from "./Banner.module.css";
 
-const Banner = ({ title }) => {
+const Banner = ({ title, isEditable = false, onChange }) => {
   return (
     <div className={classes.banner}>
-      <h1>{title || "Banner"}</h1>
+      <h1 contentEditable={isEditable} onChange={onChange}>{title}</h1>
     </div>
   );
 };
