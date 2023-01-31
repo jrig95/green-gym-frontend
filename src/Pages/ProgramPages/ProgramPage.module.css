@@ -8,7 +8,7 @@
 .container {  
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 2fr;
-  grid-template-rows: 20rem 10rem 10rem 20rem 50px 50px;
+  grid-template-rows: 20rem 10rem 10rem 20rem 50px 50px 80px;
   gap: 10px 10px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -17,7 +17,8 @@
     "trees credits credits ."
     "more_des more_des more_des more_des"
     ". price price ."
-    ". purchase purchase .";
+    ". purchase purchase ."
+    ". . . .";
 }
 
 .des { 
@@ -29,6 +30,9 @@
   height: 16rem;
   border-radius: 1rem;
   border: var(--blue) 3px solid;
+  display: grid;
+  place-items: center;
+  align-items: baseline;
  }
 
 .upload { 
@@ -38,6 +42,9 @@
   height: 16rem;
   border-radius: 1rem;
   border: var(--blue) 3px solid;
+  display: grid;
+  place-items: center;
+  align-items: flex-end;
 }
 
 .upload > input {
