@@ -51,6 +51,10 @@
   display: none;
 }
 
+.upload > label {
+  cursor: pointer;
+}
+
 
 .days { grid-area: days; }
 

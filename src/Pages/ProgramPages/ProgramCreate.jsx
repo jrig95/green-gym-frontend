@@ -33,6 +33,7 @@ const ProgramCreate = () => {
     number_of_days: {
       icon: "📅",
       classname: classes.days,
+      type: "number",
       onChange(e) {
         setProgramObj({
           ...programObj,
@@ -41,8 +42,10 @@ const ProgramCreate = () => {
       },
     },
     daily_workouts: {
+      text: "workouts",
       icon: "🏋️‍♀️",
       classname: classes.workouts,
+      type: "number",
       onChange(e) {
         setProgramObj({
           ...programObj,
@@ -53,6 +56,7 @@ const ProgramCreate = () => {
     trees: {
       icon: "🌳",
       classname: classes.trees,
+      type: "number",
       onChange(e) {
         setProgramObj({
           ...programObj,
@@ -63,6 +67,7 @@ const ProgramCreate = () => {
     burnt: {
       icon: "🔥",
       classname: classes.calories,
+      type: "number",
       onChange(e) {
         setProgramObj({
           ...programObj,
@@ -71,8 +76,10 @@ const ProgramCreate = () => {
       },
     },
     rewards: {
+      text: "calorie reward",
       icon: "🏆",
       classname: classes.credits,
+      type: "number",
       onChange(e) {
         setProgramObj({
           ...programObj,
@@ -84,7 +91,7 @@ const ProgramCreate = () => {
   return (
     <Fragment>
       <Banner
-        title={programObj.program_title}
+        title={programObj.program_title || "Click to Enter Program Title"}
         isEditable={true}
         onChange={(e) => {
           setProgramObj({
@@ -130,7 +137,7 @@ const ProgramCreate = () => {
         {Object.entries(fieldProps).map(([key, value]) => {
           return (
             <div className={value.classname}>
-              <ProgramField field={key} icon={value.icon} />
+              <ProgramField field={key} icon={value.icon} type={value.type} />
             </div>
           );
         })}

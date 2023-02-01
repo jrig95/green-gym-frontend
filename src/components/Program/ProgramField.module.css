@@ -9,3 +9,12 @@
     border-radius: 1rem;
     border: var(--blue) 3px solid;
   }
+
+  .innerField {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .innerField > input {
+    all: unset;
+  }
