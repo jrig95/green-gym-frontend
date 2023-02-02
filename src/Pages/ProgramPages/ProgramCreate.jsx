@@ -14,7 +14,7 @@ const ProgramCreate = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [programObj, setProgramObj] = useState({
-    program_title: "Click to Enter Header",
+    program_title: "",
     number_of_days: 0,
     program_description: "",
     program_info: "",
@@ -58,6 +58,7 @@ const ProgramCreate = () => {
       classname: classes.trees,
       type: "number",
       onChange(e) {
+        debugger;
         setProgramObj({
           ...programObj,
           trees: e.target.value,
@@ -104,7 +105,7 @@ const ProgramCreate = () => {
         <textarea
           className={classes.des}
           placeholder={"Click to write brief program infomation."}
-          onInput={(e) => {
+          onChange={(e) => {
             setProgramObj({
               ...programObj,
               program_info: e.target.value,
@@ -117,7 +118,10 @@ const ProgramCreate = () => {
             {!imageLoaded ? (
               <RiAddCircleLine size="6rem" color="darkgreen" />
             ) : (
-              <img src={URL.createObjectURL(programObj.photo_url)} width={30} />
+              <img
+                src={URL.createObjectURL(programObj.photo_url)}
+                width="100%"
+              />
             )}
           </label>
           <input
@@ -137,7 +141,12 @@ const ProgramCreate = () => {
         {Object.entries(fieldProps).map(([key, value]) => {
           return (
             <div className={value.classname}>
-              <ProgramField field={key} icon={value.icon} type={value.type} />
+              <ProgramField
+                field={key}
+                icon={value.icon}
+                type={value.type}
+                onChange={value.onChange}
+              />
             </div>
           );
         })}
@@ -157,7 +166,7 @@ For Example:
                 `}
           cols={30}
           rows={20}
-          onInput={(e) => {
+          onChange={(e) => {
             setProgramObj({
               ...programObj,
               program_description: e.target.value,
@@ -181,9 +190,20 @@ For Example:
               "program[number_of_days]",
               programObj.number_of_days
             );
+            formData.append("program[calorie_credits]", programObj.rewards);
+            formData.append(
+              "program[daily_workouts]",
+              programObj.daily_workouts
+            );
+            formData.append("program[trees_planted]", programObj.trees);
+            formData.append("program[calories_burned]", programObj.burnt);
             return mutateAsync(formData, {
               onSuccess: ({ data }) => {
                 navigate(`/programs/${data.id}`);
+              },
+              onError: (error) => {
+                window.reload();
+                console.error(error);
               },
             });
           }}

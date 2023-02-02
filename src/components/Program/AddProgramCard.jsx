@@ -17,8 +17,8 @@ export const AddProgramCard = () => {
       <div className={classes.icons}>
         <Link to="add-program" state={state}>
           <div className={classes.iconBin}>
-            <span fontSize="0.2rem">NEXT</span>
-            <FiArrowRightCircle color="darkgreen"/>
+            <span fontSize="0.3rem">NEXT</span>
+            <FiArrowRightCircle color="darkgreen" />
           </div>
         </Link>
       </div>
