@@ -18,12 +18,12 @@ const ProgramCreate = () => {
     number_of_days: 0,
     program_description: "",
     program_info: "",
-    price: 0,
+    price: null,
     photo_url: null,
-    daily_workouts: 0,
-    trees: 0,
-    burnt: 0,
-    rewards: 0,
+    daily_workouts: null,
+    trees: null,
+    burnt: null,
+    rewards: null,
     ...state,
   });
   const [imageLoaded, setImageLoaded] = useState(!!programObj.photo_url);

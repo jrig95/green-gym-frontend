@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FileInput } from "@mantine/core";
 
 const AddLibraryItemForm = ({ onClose }) => {
-  const [fileInputValue, setFileInputValue] = useState(null); 
+  const [fileInputValue, setFileInputValue] = useState(null);
 
   // React query custom hook
   const createLibraryItem = useCreateLibraryItem();
@@ -66,11 +66,16 @@ const AddLibraryItemForm = ({ onClose }) => {
               id="exercise_tags"
               value={tagValue}
               onInput={handleTagChange}
-              placeholder="e.g. A, B, C"
+              placeholder="e.g. outdoor, strength, cardio"
             />
           </div>
           <div className={classes.formControl}>
-            <FileInput value={fileInputValue} label="Video upload" accept="video/*" onChange={setFileInputValue}/>
+            <FileInput
+              value={fileInputValue}
+              label="Video upload"
+              accept="video/*"
+              onChange={setFileInputValue}
+            />
           </div>
           <div className={classes.formActions}>
             <Button color="blue" size="small" onClick={onClose}>
