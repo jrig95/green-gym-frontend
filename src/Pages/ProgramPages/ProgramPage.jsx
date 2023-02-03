@@ -82,9 +82,9 @@ const ProgramPage = () => {
             )}
             {admin && (
               <div className={classes.updateButtonContainer}>
-                <Button color="cyan" onClick={showUpdateProgramHandler}>
-                  Update Program
-                </Button>
+                <Link to="edit">
+                  <Button color="cyan">Update Program</Button>
+                </Link>
               </div>
             )}
             <div className={classes.descriptionContainer}>
@@ -117,7 +117,7 @@ const ProgramPage = () => {
             </div>
             <div className={classes.buildProgram}>
               {admin && !programData.daily_workouts && (
-                <Link to="buildProgram" state={{pageNumber}}>
+                <Link to="buildProgram" state={{ pageNumber }}>
                   <Button color="cyan">Continue Building Program</Button>
                 </Link>
               )}

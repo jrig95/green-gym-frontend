@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ProgramField } from "../../components/Program/ProgramField";
 
 // create a creation page with same layout as ProgramPage
-const ProgramCreate = () => {
+const ProgramUpdate = () => {
   const { mutateAsync, isError, isLoading } = useCreateProgram();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -215,4 +215,4 @@ For Example:
   );
 };
 
-export default ProgramCreate;
+export default ProgramUpdate;

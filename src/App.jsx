@@ -60,6 +60,9 @@ const FinishedPage = React.lazy(() =>
 const ProgramCreate = React.lazy(() =>
   import("./Pages/ProgramPages/ProgramCreate")
 );
+const ProgramEdit = React.lazy(() =>
+  import("./Pages/ProgramPages/ProgramUpdate")
+);
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -131,6 +134,10 @@ function App() {
               <Route
                 path="programs/:programId/buildProgram"
                 element={<AddWorkoutPage />}
+              />
+              <Route
+                path="programs/:programId/edit"
+                element={<ProgramEdit />}
               />
               <Route path="programs/add-program" element={<ProgramCreate />} />
               <Route
