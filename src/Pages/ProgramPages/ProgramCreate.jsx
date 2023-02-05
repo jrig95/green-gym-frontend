@@ -29,6 +29,13 @@ const ProgramCreate = () => {
   const [imageLoaded, setImageLoaded] = useState(!!programObj.photo_url);
   if (isLoading) return <FaSpinner />;
   if (isError) return <div>Something went wrong</div>;
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    setProgramObj((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
   const fieldProps = {
     number_of_days: {
       icon: "📅",
@@ -143,9 +150,8 @@ const ProgramCreate = () => {
             <div className={value.classname}>
               <ProgramField
                 field={key}
-                icon={value.icon}
-                type={value.type}
-                onChange={value.onChange}
+                fieldObj={value}
+                onChange={handleInputChange}
               />
             </div>
           );
@@ -202,8 +208,7 @@ For Example:
                 navigate(`/programs/${data.id}`);
               },
               onError: (error) => {
-                window.reload();
-                console.error(error);
+                navigate("/programs");
               },
             });
           }}

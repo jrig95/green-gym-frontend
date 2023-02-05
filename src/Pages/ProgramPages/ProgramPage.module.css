@@ -77,7 +77,10 @@
   border: var(--blue) 3px solid;
 }
 
-.price { grid-area: price; }
+.price { 
+  grid-area: price;
+  
+}
 
 .purchase { grid-area: purchase; }
 
