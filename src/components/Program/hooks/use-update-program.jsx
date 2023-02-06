@@ -25,7 +25,7 @@ export const useUpdateProgram = () => {
 
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutateAsync, isError, isLoading } = useMutation(
+  const { mutateAsync, isError, isLoading, isSuccess } = useMutation(
     (program) => updateProgram(program, bearerToken),
     {
       onSuccess: () => {
@@ -43,5 +43,6 @@ export const useUpdateProgram = () => {
     mutateAsync,
     isError,
     isLoading,
+    isSuccess,
   };
 };

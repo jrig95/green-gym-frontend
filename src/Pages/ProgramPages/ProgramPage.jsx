@@ -10,7 +10,6 @@ import { Button } from "@mantine/core";
 import classes from "./ProgramPage.module.css";
 import Banner from "../../components/Layout/Banner";
 // import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
-import UpdateProgram from "../../components/Program/UpdateProgram";
 import { useTranslation } from "react-i18next";
 
 const ProgramPage = () => {
@@ -73,13 +72,6 @@ const ProgramPage = () => {
         <div className={classes.container}>
           <div></div>
           <main>
-            {updateProgramIsShown && (
-              <UpdateProgram
-                programData={programData}
-                programIsLoading={programIsLoading}
-                onClose={hideUpdateProgramHandler}
-              />
-            )}
             {admin && (
               <div className={classes.updateButtonContainer}>
                 <Link to="edit" state={programData}>

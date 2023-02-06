@@ -16,7 +16,7 @@ export const ProgramField = ({
           placeholder={`# of ${fieldObj.text || field}`}
           onChange={onChange}
           defaultValue={fieldValue}
-          //   value={fieldValue}
+          value={fieldValue}
         />
       </span>
     </div>

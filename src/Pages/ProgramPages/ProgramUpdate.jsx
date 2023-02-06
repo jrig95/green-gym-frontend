@@ -17,13 +17,12 @@ const ProgramUpdate = () => {
   const navigate = useNavigate();
   const [programObj, setProgramObj] = useState({});
   const [imageLoaded, setImageLoaded] = useState(!!programObj.photo_url);
-  if (isError) return <div>Something went wrong</div>;
-  if (isLoading) return <FaSpinner />;
+
   const handleInputChange = (e) => {
     e.preventDefault();
     setProgramObj((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: Number(e.target.value),
     }));
   };
   const fieldProps = {
@@ -90,12 +89,19 @@ const ProgramUpdate = () => {
       ...omittedProgramData,
     });
   }, [state.id]);
+  if (isError) return <div>Something went wrong</div>;
+  if (isLoading) return <FaSpinner />;
   return (
     <Fragment>
       <Banner
         title={programObj.program_title}
         isEditable={true}
-        onChange={handleInputChange}
+        onChange={(e) => {
+          setProgramObj({
+            ...programObj,
+            program_title: e.target.value,
+          });
+        }}
       />
       <main className={classes.container}>
         <textarea
@@ -175,16 +181,16 @@ For Example:
         />
         <Button
           className={classes.purchase}
+          type="submit"
           onClick={(e) => {
             e.preventDefault();
-            return mutateAsync(programObj, {
-              onSuccess: () => {
-                navigate(`/programs/${programObj.id}`);
-              },
+            mutateAsync(programObj, {
               onError: (error) => {
                 navigate("/programs");
                 console.error(error);
               },
+            }).then(() => {
+              navigate(`/programs/${programObj.id}`);
             });
           }}
         >
