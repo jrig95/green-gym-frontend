@@ -41,65 +41,34 @@ const ProgramCreate = () => {
       icon: "📅",
       classname: classes.days,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          number_of_days: e.target.value,
-        });
-      },
     },
     daily_workouts: {
       text: "workouts",
       icon: "🏋️‍♀️",
       classname: classes.workouts,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          daily_workouts: e.target.value,
-        });
-      },
     },
     trees: {
       icon: "🌳",
       classname: classes.trees,
       type: "number",
-      onChange(e) {
-        debugger;
-        setProgramObj({
-          ...programObj,
-          trees: e.target.value,
-        });
-      },
     },
     burnt: {
       icon: "🔥",
       classname: classes.calories,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          burnt: e.target.value,
-        });
-      },
     },
     rewards: {
       text: "calorie reward",
       icon: "🏆",
       classname: classes.credits,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          rewards: e.target.value,
-        });
-      },
     },
   };
   return (
     <Fragment>
       <Banner
-        title={programObj.program_title || "Click to Enter Program Title"}
+        title={programObj.program_title || "Click to Enter Title"}
         isEditable={true}
         onChange={(e) => {
           setProgramObj({
@@ -152,6 +121,7 @@ const ProgramCreate = () => {
                 field={key}
                 fieldObj={value}
                 onChange={handleInputChange}
+                isEditable={true}
               />
             </div>
           );

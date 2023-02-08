@@ -17,4 +17,5 @@
 
   .innerField > input {
     all: unset;
+    width: 8rem;
   }
