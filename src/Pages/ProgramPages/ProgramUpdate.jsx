@@ -41,47 +41,23 @@ const ProgramUpdate = () => {
       icon: "🌳",
       classname: classes.trees,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          trees_planted: e.target.value,
-        });
-      },
     },
     calories_burned: {
       icon: "🔥",
       classname: classes.calories,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          calories_burned: e.target.value,
-        });
-      },
     },
     calorie_credits: {
       text: "calorie reward",
       icon: "🏆",
       classname: classes.credits,
       type: "number",
-      onChange(e) {
-        setProgramObj({
-          ...programObj,
-          calorie_credits: e.target.value,
-        });
-      },
     },
   };
   const priceField = {
     field: "price",
     icon: "💰",
     type: "number",
-    onChange(e) {
-      setProgramObj({
-        ...programObj,
-        price: e.target.value,
-      });
-    },
   };
   useEffect(() => {
     setProgramObj({
@@ -145,6 +121,7 @@ const ProgramUpdate = () => {
                 fieldObj={value}
                 onChange={handleInputChange}
                 fieldValue={programObj[key]}
+                isEditable={true}
               />
             </div>
           );

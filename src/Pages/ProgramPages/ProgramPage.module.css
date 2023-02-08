@@ -45,6 +45,14 @@
   display: grid;
   place-items: center;
   align-items: flex-end;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.upload > img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
 }
 
 .upload > input {
@@ -82,7 +90,11 @@
   
 }
 
-.purchase { grid-area: purchase; }
+.purchase { 
+  grid-area: purchase;
+  display: grid;
+  place-items: center;
+ }
 
 .description {
   width: 24rem;
@@ -115,10 +127,6 @@
 }
 
 
-/* this isn't doing anything */
-.program_img {
-  cursor: wait;
-}
 .program_img > input {
   display: none;
 }
@@ -160,7 +168,7 @@
 .updateButtonContainer {
   margin: 1rem 0 1rem 0;
   display: flex;
-  justify-content: left;
+  justify-content: center;
 }
 #number_input {
   margin: 0;
