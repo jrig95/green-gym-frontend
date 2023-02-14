@@ -11,11 +11,13 @@
   }
 
   .innerField {
-    display: flex;
-    flex-direction: row-reverse;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    place-items: center;
   }
 
-  .innerField > input {
+  .innerField > input, .innerField > span {
     all: unset;
-    width: 8rem;
+    text-align: center;
   }

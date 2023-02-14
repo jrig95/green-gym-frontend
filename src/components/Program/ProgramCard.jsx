@@ -9,7 +9,7 @@ const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
   const slug = slugify(`${title}-${id}`);
 
   const titleLength = title.length;
-
+  const firstSentence = description.split(".")[0];
   let responsiveFontSize;
 
   if (titleLength <= 20) {
@@ -44,7 +44,7 @@ const ProgramCard = ({ id, title, image, description, onDelete, admin }) => {
           </h1>
         </div>
         <img src={image} alt={title} />
-        <h3 className={classes.description}>{description}</h3>
+        <h3 className={classes.description}>{firstSentence}</h3>
       </Link>
     </Card>
   );

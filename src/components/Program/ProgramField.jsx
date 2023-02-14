@@ -8,8 +8,8 @@ export const ProgramField = ({
   isEditable = false,
 }) => {
   return (
-    <div className={styles.field}>
-      <span className={styles.innerField}>
+    <section className={styles.field}>
+      <div className={styles.innerField}>
         <span>{fieldObj.icon}</span>
         {isEditable ? (
           <input
@@ -17,15 +17,15 @@ export const ProgramField = ({
             type={fieldObj.type}
             placeholder={`# of ${fieldObj.text || field}`}
             onChange={onChange}
-            defaultValue={fieldValue}
-            value={fieldValue}
+            defaultValue={fieldValue || 0}
+            value={fieldValue || 0}
             min={0}
             max={20000}
           />
         ) : (
           <span>{`${fieldValue} of ${fieldObj.text || field}`}</span>
         )}
-      </span>
-    </div>
+      </div>
+    </section>
   );
 };

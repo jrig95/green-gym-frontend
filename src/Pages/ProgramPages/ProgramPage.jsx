@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useMemo } from "react";
 
 import AuthContext from "../../context/AuthContext";
 import ProgramWorkoutDetails from "../../components/Program/ProgramWorkoutDetails";
@@ -12,6 +12,7 @@ import Banner from "../../components/Layout/Banner";
 // import ExerciseOverviewCard from "../../components/Exercise/ExerciseOverviewCard";
 import { useTranslation } from "react-i18next";
 import { ProgramField } from "../../components/Program/ProgramField";
+import { programInfoGenerate } from "../../utils/program_info_generate";
 
 const ProgramPage = () => {
   const { t } = useTranslation();
@@ -38,18 +39,10 @@ const ProgramPage = () => {
 
   const pageNumber = programData?.daily_workouts?.length || 0;
 
-  const programWorkouts = programData?.daily_workouts?.map((workout) => {
-    return (
-      <ProgramWorkoutDetails
-        key={workout.id}
-        programId={programId}
-        dailyWorkoutId={workout.id}
-        admin={admin}
-        workout={workout}
-      />
-    );
-  });
-
+  const memoizedProgramInfo = useMemo(
+    () => programInfoGenerate(programData),
+    [programId]
+  );
   const fieldProps = {
     number_of_days: {
       text: "program days",
@@ -105,7 +98,6 @@ const ProgramPage = () => {
         <main className={classes.container}>
           <div className={classes.des}>
             <h3>{programData.program_description}</h3>
-            {/* <p>{programData.program_info || textPlaceHolder}</p> */}
           </div>
           <div className={classes.upload}>
             <img src={programData.photo_url} alt={programData.program_title} />
@@ -121,7 +113,7 @@ const ProgramPage = () => {
               </div>
             );
           })}
-          <div className={classes.more_des}></div>
+          <div className={classes.more_des}>{memoizedProgramInfo}</div>
 
           <div className={classes.purchase}>
             {!admin && (

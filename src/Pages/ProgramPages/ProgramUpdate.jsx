@@ -85,7 +85,7 @@ const ProgramUpdate = () => {
           onChange={(e) => {
             setProgramObj({
               ...programObj,
-              program_info: e.target.value,
+              program_description: e.target.value,
             });
           }}
           value={programObj.program_info || ""}

@@ -12,7 +12,7 @@ import Bamboo2 from "../../assets/bamboos/b2.png";
 import Bamboo3 from "../../assets/bamboos/b3.png";
 import Bamboo4 from "../../assets/bamboos/b4.png";
 import Bamboo5 from "../../assets/bamboos/b5.png";
-import BambooBg from "../../assets/bamboos/bamboo-bg2.jpeg";
+import BambooBg from "../../assets/bamboos/bamboo_bg.png";
 
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useState } from "react";
