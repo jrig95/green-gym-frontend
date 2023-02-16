@@ -7,7 +7,8 @@ import { FaSpinner } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ProgramField } from "../../components/Program/ProgramField";
 import { useUpdateProgram } from "../../components/Program/hooks/use-update-program";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { programInfoGenerate } from "../../utils/program_info_generate";
 
 // create a creation page with same layout as ProgramPage
 const ProgramUpdate = () => {
@@ -65,6 +66,9 @@ const ProgramUpdate = () => {
       ...omittedProgramData,
     });
   }, [state.id]);
+  const memoizedProgramInfo = useMemo(() => {
+    return programInfoGenerate(programObj);
+  }, [programObj.id]);
   if (isError) return <div>Something went wrong</div>;
   if (isLoading) return <FaSpinner />;
   return (
@@ -88,7 +92,7 @@ const ProgramUpdate = () => {
               program_description: e.target.value,
             });
           }}
-          value={programObj.program_info || ""}
+          value={programObj.program_description || ""}
         ></textarea>
         <div className={classes.upload}>
           <label htmlFor="upload_image">
@@ -145,10 +149,10 @@ For Example:
           onChange={(e) => {
             setProgramObj({
               ...programObj,
-              program_description: e.target.value,
+              program_info: e.target.value,
             });
           }}
-          value={programObj.program_description || ""}
+          value={memoizedProgramInfo}
         ></textarea>
         <ProgramField
           field="price"
