@@ -21,3 +21,11 @@
     all: unset;
     text-align: center;
   }
+
+  @media screen and (max-width: 617px) {
+    .field {
+      display: grid;
+      flex-direction: row;
+      height: 3rem;
+    }
+  }

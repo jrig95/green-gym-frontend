@@ -150,41 +150,45 @@ For Example:
           }}
           value={programObj.program_description || ""}
         ></textarea>
-        <Button
-          className={classes.purchase}
-          onClick={(e) => {
-            e.preventDefault();
-            const formData = new FormData();
-            formData.append("program[program_title]", programObj.program_title);
-            formData.append(
-              "program[program_description]",
-              programObj.program_description
-            );
-            formData.append("program[price]", programObj.price);
-            formData.append("program[photo]", programObj.photo_url);
-            formData.append(
-              "program[number_of_days]",
-              programObj.number_of_days
-            );
-            formData.append("program[calorie_credits]", programObj.rewards);
-            formData.append(
-              "program[daily_workouts]",
-              programObj.daily_workouts
-            );
-            formData.append("program[trees_planted]", programObj.trees);
-            formData.append("program[calories_burned]", programObj.burnt);
-            return mutateAsync(formData, {
-              onSuccess: ({ data }) => {
-                navigate(`/programs/${data.id}`);
-              },
-              onError: (error) => {
-                navigate("/programs");
-              },
-            });
-          }}
-        >
-          CREATE
-        </Button>
+        <div className={classes.purchase}>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              const formData = new FormData();
+              formData.append(
+                "program[program_title]",
+                programObj.program_title
+              );
+              formData.append(
+                "program[program_description]",
+                programObj.program_description
+              );
+              formData.append("program[price]", programObj.price);
+              formData.append("program[photo]", programObj.photo_url);
+              formData.append(
+                "program[number_of_days]",
+                programObj.number_of_days
+              );
+              formData.append("program[calorie_credits]", programObj.rewards);
+              formData.append(
+                "program[daily_workouts]",
+                programObj.daily_workouts
+              );
+              formData.append("program[trees_planted]", programObj.trees);
+              formData.append("program[calories_burned]", programObj.burnt);
+              return mutateAsync(formData, {
+                onSuccess: ({ data }) => {
+                  navigate(`/programs/${data.id}`);
+                },
+                onError: (error) => {
+                  navigate("/programs");
+                },
+              });
+            }}
+          >
+            CREATE
+          </Button>
+        </div>
       </main>
     </Fragment>
   );

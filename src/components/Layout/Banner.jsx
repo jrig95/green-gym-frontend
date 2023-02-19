@@ -8,12 +8,6 @@ const Banner = ({ title, isEditable = false, onChange }) => {
           <input
             id="program_title"
             name="program_title"
-            style={{
-              all: "unset",
-              fontSize: "3rem",
-              color: "white",
-              fontWeight: "bold",
-            }}
             onChange={onChange}
             placeholder="Click to Enter Title"
             defaultValue={title}

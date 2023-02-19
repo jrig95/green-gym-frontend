@@ -14,6 +14,13 @@
   color: var(--white);
 }
 
+.banner input {
+  all: unset;
+  font-size: 3rem;
+  color: white;
+  font-weight: 600;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 617px) {
   .banner {
     display: flex;
@@ -30,5 +37,14 @@
     font-size: 1.5rem;
     color: var(--white);
     padding: 2rem;
+  }
+
+  .banner input {
+    all: unset;
+    font-size: 2rem;
+    color: white;
+    font-weight: 600;
+    justify-content: center;
+    display: inline-flex;
   }
 }

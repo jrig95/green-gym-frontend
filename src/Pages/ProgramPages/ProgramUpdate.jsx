@@ -160,23 +160,24 @@ For Example:
           fieldValue={programObj.price}
           onChange={handleInputChange}
         />
-        <Button
-          className={classes.purchase}
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            mutateAsync(programObj, {
-              onError: (error) => {
-                navigate("/programs");
-                console.error(error);
-              },
-            }).then(() => {
-              navigate(`/programs/${programObj.id}`);
-            });
-          }}
-        >
-          UPDATE
-        </Button>
+        <div className={classes.purchase}>
+          <Button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              mutateAsync(programObj, {
+                onError: (error) => {
+                  navigate("/programs");
+                  console.error(error);
+                },
+              }).then(() => {
+                navigate(`/programs/${programObj.id}`);
+              });
+            }}
+          >
+            UPDATE
+          </Button>
+        </div>
       </main>
     </Fragment>
   );
