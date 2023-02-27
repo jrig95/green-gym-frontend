@@ -133,7 +133,7 @@ const Navbar = () => {
               {t("nav_bar_programs")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
             <Button onClick={logoutHandler} size="small">
               {t("nav_bar_logout")}
@@ -149,7 +149,7 @@ const Navbar = () => {
               {t("nav_bar_my_activites")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="profile">
               {t("nav_bar_profile")}
