@@ -135,6 +135,9 @@ const Navbar = () => {
             <NavLink onClick={handleClick} style={isActive} to="rewards">
               {t("nav_bar_rewards")}
             </NavLink>
+            <Button onClick={logoutHandler} size="small">
+              {t("nav_bar_logout")}
+            </Button>
           </div>
         )}
         {userLoggedIn && (
