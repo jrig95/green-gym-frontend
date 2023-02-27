@@ -8,7 +8,7 @@ import { useState } from "react";
 export const AddProgramCard = () => {
   const [state, setState] = useState({
     program_title: "",
-    program_description: "",
+    program_info: "",
     photo_url: "",
   });
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -59,7 +59,7 @@ export const AddProgramCard = () => {
           cols={30}
           onChange={(e) => {
             e.preventDefault();
-            setState({ ...state, program_description: e.target.value });
+            setState({ ...state, program_info: e.target.value });
           }}
         ></textarea>
       </div>

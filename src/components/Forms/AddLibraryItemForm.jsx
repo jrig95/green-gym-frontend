@@ -35,7 +35,7 @@ const AddLibraryItemForm = ({ onClose }) => {
     formData.append("library_item[title]", titleValue);
     formData.append("library_item[video]", fileInputValue);
     formData.append("library_item[tag_list][]", tagValue);
-    await createLibraryItem(formData);
+    createLibraryItem(formData);
     onClose();
   };
 
