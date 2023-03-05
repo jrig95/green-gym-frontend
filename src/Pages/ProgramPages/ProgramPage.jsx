@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import { Fragment, useContext, useMemo } from "react";
 
 import AuthContext from "../../context/AuthContext";
-import ProgramWorkoutDetails from "../../components/Program/ProgramWorkoutDetails";
 import { getIdFromSlug } from "../../utils/get-id-from-slug";
 import { useProgram } from "../../components/Program/hooks/use-program";
 import { Button } from "@mantine/core";
@@ -41,7 +40,14 @@ const ProgramPage = () => {
 
   const memoizedProgramInfo = useMemo(
     () => programInfoGenerate(programData),
-    [programId]
+    [programData.id]
+  );
+  const number_of_workouts = useMemo(
+    () =>
+      programData?.daily_workouts?.reduce((acc, daily) => {
+        return acc + daily.exercises.length;
+      }, 0),
+    [pageNumber]
   );
   const fieldProps = {
     number_of_days: {
@@ -107,7 +113,11 @@ const ProgramPage = () => {
               <div className={value.classname}>
                 <ProgramField
                   field={key}
-                  fieldValue={programData[key]}
+                  fieldValue={
+                    key !== "daily_workouts"
+                      ? programData[key]
+                      : number_of_workouts || 0
+                  }
                   fieldObj={value}
                 />
               </div>
