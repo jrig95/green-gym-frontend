@@ -7,7 +7,6 @@ import ProfileBanner from "../../components/Profile/ProfileBanner";
 import ProfileCard from "../../components/Profile/ProfileCard";
 import classes from "./ProfilePage.module.css";
 import { useTranslation } from "react-i18next";
-import UseActiveTime from "../../components/User/hooks/use-active-time";
 
 const ProfilePage = () => {
   const { t } = useTranslation();
@@ -21,7 +20,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <UseActiveTime ctx={authCtx} />
       <ProfileBanner
         title={t("profile_page_my_profile")}
         calories={userData.user_total_calories}
