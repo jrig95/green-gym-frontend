@@ -4,6 +4,7 @@ import React, { Suspense, Fragment, useContext } from "react";
 import AuthContext from "./context/AuthContext";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import Layout from "./components/Layout/Layout";
+import { UseActiveTime } from "./components/User/hooks/use-active-time";
 
 const LandingPage = React.lazy(() => import("./Pages/LandingPage/LandingPage"));
 const ForgotPassword = React.lazy(() =>
@@ -63,6 +64,9 @@ const ProgramCreate = React.lazy(() =>
 
 function App() {
   const authCtx = useContext(AuthContext);
+    if (authCtx.isLoggedIn) {
+      UseActiveTime(authCtx)
+    }
 
   return (
     <Layout>
