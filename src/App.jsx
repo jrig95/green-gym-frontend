@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useActionData } from "react-router-dom";
 import React, { Suspense, Fragment, useContext } from "react";
 
 import AuthContext from "./context/AuthContext";
@@ -64,9 +64,8 @@ const ProgramCreate = React.lazy(() =>
 
 function App() {
   const authCtx = useContext(AuthContext);
-    if (authCtx.isLoggedIn) {
-      UseActiveTime(authCtx)
-    }
+
+  UseActiveTime(authCtx)
 
   return (
     <Layout>
