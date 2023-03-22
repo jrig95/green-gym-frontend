@@ -19,12 +19,8 @@ const ProfilePage = () => {
   const fullName = createFullName(userData.first_name, userData.last_name);
 
   return (
-<<<<<<< HEAD
-    <>      <ProfileBanner
-=======
     <>
       <ProfileBanner
->>>>>>> master
         title={t("profile_page_my_profile")}
         calories={userData.user_total_calories}
         points={userData.user_points}
