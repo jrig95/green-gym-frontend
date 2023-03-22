@@ -17,6 +17,7 @@ const MemberCard = ({ user }) => {
     return(`${month}  ${day}, ${year}, ${time} (CST)`)
   };
 
+
   const checkDateExists = (date) => {
     if (date === null) {
       return (date);
@@ -24,6 +25,23 @@ const MemberCard = ({ user }) => {
       return (convertFromStringToDate(date));
     };
   };
+
+  const formatActiveTime = (activeTime) => {
+    const minutes = Math.floor(activeTime)
+    const seconds = Math.ceil(((activeTime - minutes) * 60).toFixed(2));
+
+    let minutesString = `${minutes} minutes`;
+    if (minutes <= 1) {
+      minutesString = `${minutes} minute`;
+    }
+
+    let secondsString = `${seconds} seconds`;
+    if (seconds <= 1) {
+      secondsString = `${seconds} second`;
+    }
+
+    return ` ${minutesString} ${secondsString}`
+  }
 
   const createdAt = checkDateExists(user.created_at)
   const lastLogIn = checkDateExists(user.last_sign_in_at)
@@ -63,6 +81,9 @@ const MemberCard = ({ user }) => {
         </h2>
         <h2>
           <b>Last Logged In: </b>{lastLogIn}
+        </h2>
+        <h2>
+          <b>Active Time:</b> {formatActiveTime(user.active_time)}
         </h2>
       </div>
     </Card>

@@ -1,9 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useActionData } from "react-router-dom";
 import React, { Suspense, Fragment, useContext } from "react";
 
 import AuthContext from "./context/AuthContext";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import Layout from "./components/Layout/Layout";
+import { UseActiveTime } from "./components/User/hooks/use-active-time";
 
 const LandingPage = React.lazy(() => import("./Pages/LandingPage/LandingPage"));
 const ForgotPassword = React.lazy(() =>
@@ -66,6 +67,8 @@ const ProgramEdit = React.lazy(() =>
 
 function App() {
   const authCtx = useContext(AuthContext);
+
+  UseActiveTime(authCtx)
 
   return (
     <Layout>
