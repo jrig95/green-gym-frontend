@@ -9,7 +9,7 @@ import Button from "../UI/Button";
 import classes from "./Navbar.module.css";
 import LanguageToggle from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
-import Logo from "../../assets/logo.jpg"
+import Logo from "../../assets/logo.jpg";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -39,7 +39,9 @@ const Navbar = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.logo}><img src={Logo} alt="Green Gym Logo" /></div>
+      <div className={classes.logo}>
+        <img src={Logo} alt="Green Gym Logo" />
+      </div>
       <Link to="/">
         <div className={classes.logoContainer}>
           <h1>Green Gym</h1>
@@ -131,8 +133,11 @@ const Navbar = () => {
               {t("nav_bar_programs")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
+            <Button onClick={logoutHandler} size="small">
+              {t("nav_bar_logout")}
+            </Button>
           </div>
         )}
         {userLoggedIn && (
@@ -144,7 +149,7 @@ const Navbar = () => {
               {t("nav_bar_my_activites")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="rewards">
-              {t("nav_bar_rewards")}
+              {t("nav_bar_leaderboard")}
             </NavLink>
             <NavLink onClick={handleClick} style={isActive} to="profile">
               {t("nav_bar_profile")}

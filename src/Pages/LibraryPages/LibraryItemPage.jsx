@@ -20,16 +20,19 @@ const LibraryItemPage = () => {
       <Banner title={title} />
       <div className={classes.container}>
         <ReactPlayer
-          id="libVideo"
           playing={true}
-          width={600}
-          style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.26)" }}
           url={video_url}
           controls={true}
+          style={{ maxWidth: "24rem" }}
+          className={classes.video_player}
         />
         <div className={classes.tags}>
           {tags?.map((tag, i) => {
-            return <Card key={i} className={classes.tag}>{tag}</Card>;
+            return (
+              <Card key={i} className={classes.tag}>
+                {tag}
+              </Card>
+            );
           })}
         </div>
       </div>

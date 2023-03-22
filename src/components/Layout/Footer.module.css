@@ -20,11 +20,14 @@
 
 .companyName{
 padding-left: 1rem;
+font-size: small;
 }
 
 .credentials{
-display: flex;
-flex-direction: column;
+display: grid;
+grid-template-columns: 1fr 1fr;
+place-items: center;
+font-size: small;
 }
 
 .credentials a{

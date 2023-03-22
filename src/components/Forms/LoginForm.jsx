@@ -52,10 +52,10 @@ const LoginForm = () => {
       }
 
       if (!authCtx.isAdmin) {
-        navigate("/activities");
+        navigate("/programs");
       }
     }
-  }, [loginIsSuccess, authCtx, navigate]);
+  }, [loginIsSuccess, authCtx.isAdmin]);
 
   const emailClasses = emailHasError
     ? `${classes.formControl} ${classes.invalid}`

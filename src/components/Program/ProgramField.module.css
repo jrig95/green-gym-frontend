@@ -1,0 +1,31 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    height: 6rem;
+    border-radius: 1rem;
+    border: var(--blue) 3px solid;
+  }
+
+  .innerField {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    place-items: center;
+  }
+
+  .innerField > input, .innerField > span {
+    all: unset;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 617px) {
+    .field {
+      display: grid;
+      flex-direction: row;
+      height: 3rem;
+    }
+  }

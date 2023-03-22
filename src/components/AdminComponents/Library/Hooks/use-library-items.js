@@ -32,13 +32,9 @@ const getLibraryItems = async (searchParams, bearerToken) => {
   }
 };
 
-export const useLibraryItems = (searchParams) => {
+export const useLibraryItems = (searchParams = "") => {
   const authCtx = useContext(AuthContext);
   const bearerToken = authCtx.token;
-
-  if (searchParams === undefined) {
-    searchParams = "";
-  }
   const { addError } = useAPIError();
 
   const { data, isError, error, isLoading, refetch } = useQuery(
@@ -46,7 +42,6 @@ export const useLibraryItems = (searchParams) => {
     () => getLibraryItems(searchParams, bearerToken),
     {
       onError: (error) => {
-        console.log(error);
         const title =
           error instanceof Error ? error.message : "error connecting to server";
         addError(title, error.status);

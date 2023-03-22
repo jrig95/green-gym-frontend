@@ -8,7 +8,7 @@ import { useState } from "react";
 export const AddProgramCard = () => {
   const [state, setState] = useState({
     program_title: "",
-    program_description: "",
+    program_info: "",
     photo_url: "",
   });
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -17,17 +17,14 @@ export const AddProgramCard = () => {
       <div className={classes.icons}>
         <Link to="add-program" state={state}>
           <div className={classes.iconBin}>
-            <span fontSize="0.2rem">NEXT</span>
-            <FiArrowRightCircle color="darkgreen"/>
+            <span fontSize="0.3rem">NEXT</span>
+            <FiArrowRightCircle color="darkgreen" />
           </div>
         </Link>
       </div>
       <div className={classes.title}>
         <input
-          style={{
-            fontSize: "1.4rem",
-          }}
-          placeholder="PROGRAM TITLE"
+          placeholder="     Insert title here"
           maxLength="18"
           onChange={(e) => {
             e.preventDefault();
@@ -58,11 +55,11 @@ export const AddProgramCard = () => {
       </div>
       <div className={classes.description}>
         <textarea
-          placeholder="use one sentence to describe your program"
+          placeholder="     write a brief description"
           cols={30}
           onChange={(e) => {
             e.preventDefault();
-            setState({ ...state, program_description: e.target.value });
+            setState({ ...state, program_info: e.target.value });
           }}
         ></textarea>
       </div>

@@ -7,11 +7,12 @@ import {
   SegmentedControl,
 } from "@mantine/core";
 import styles from "./RewardsPage.module.css";
-import Bamboo1 from "../../assets/bamboos/bamboo-1.png";
-import Bamboo2 from "../../assets/bamboos/bamboo-2.png";
-import Bamboo3 from "../../assets/bamboos/bamboo-3.png";
-import Bamboo4 from "../../assets/bamboos/bamboo-4.png";
-import BambooBg from "../../assets/bamboos/bamboo-bg2.jpeg";
+import Bamboo1 from "../../assets/bamboos/b1.png";
+import Bamboo2 from "../../assets/bamboos/b2.png";
+import Bamboo3 from "../../assets/bamboos/b3.png";
+import Bamboo4 from "../../assets/bamboos/b4.png";
+import Bamboo5 from "../../assets/bamboos/b5.png";
+import BambooBg from "../../assets/bamboos/bamboo_bg.png";
 
 import { useLeaderboard } from "./hooks/useLeaderboard";
 import { useState } from "react";
@@ -30,8 +31,10 @@ export const LeaderboardPage = ({ userData, token }) => {
       ? Bamboo2
       : userData.user_total_calories < 990
       ? Bamboo3
-      : userData.user_total_calories > 1000
+      : userData.user_total_calories < 2000
       ? Bamboo4
+      : userData.user_total_calories > 2000
+      ? Bamboo5
       : null;
   const isAdmin = userData.admin;
   if (isLoading) return <LoadingSpinnerLarge />;
@@ -90,7 +93,7 @@ export const LeaderboardPage = ({ userData, token }) => {
                 id={styles.bambooTree}
                 src={bambooHolder}
                 alt="bamboo"
-                width="80%"
+                width="18%"
               />
             </Card.Section>
           </Card>

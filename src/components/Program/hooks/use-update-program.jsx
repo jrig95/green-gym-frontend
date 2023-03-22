@@ -8,16 +8,15 @@ import { queryKeys } from "../../../react-query/constants";
 import { baseUrl } from "../../../axiosInstance/constants";
 
 const updateProgram = async (programData, bearerToken) => {
-  const program = {
-    program_title: programData.program_title,
-    program_description: programData.program_description,
-    price: programData.price,
-  };
-  await axios.patch(`${baseUrl}/programs/${programData.id}`, { program: program }, {
-    headers: {
-      Authorization: bearerToken
+  return await axios.patch(
+    `${baseUrl}/programs/${programData.id}`,
+    programData,
+    {
+      headers: {
+        Authorization: bearerToken,
+      },
     }
-  });
+  );
 };
 
 export const useUpdateProgram = () => {
@@ -26,16 +25,24 @@ export const useUpdateProgram = () => {
 
   const { addError } = useAPIError();
   const queryClient = useQueryClient();
-  const { mutate } = useMutation((programData) => updateProgram(programData, bearerToken), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.program]);
-    },
-    onError: (error) => {
-      const title =
-        error instanceof Error ? error.message : "error connecting to server";
-      addError(title, error.status);
-    },
-  });
+  const { mutateAsync, isError, isLoading, isSuccess } = useMutation(
+    (program) => updateProgram(program, bearerToken),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([queryKeys.program]);
+      },
+      onError: (error) => {
+        const title =
+          error instanceof Error ? error.message : "error connecting to server";
+        addError(title, error.status);
+      },
+    }
+  );
 
-  return mutate;
+  return {
+    mutateAsync,
+    isError,
+    isLoading,
+    isSuccess,
+  };
 };
