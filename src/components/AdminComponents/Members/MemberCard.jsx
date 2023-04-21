@@ -64,9 +64,6 @@ const MemberCard = ({ user }) => {
         <h2>
           <b>Last Logged In: </b>{lastLogIn}
         </h2>
-        <h2>
-          <b>Active Time: </b> {user.active_time} minutes
-        </h2>
       </div>
     </Card>
   );
