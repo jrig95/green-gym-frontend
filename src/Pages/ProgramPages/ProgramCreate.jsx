@@ -15,15 +15,15 @@ const ProgramCreate = () => {
   const navigate = useNavigate();
   const [programObj, setProgramObj] = useState({
     program_title: "",
-    number_of_days: null,
+    number_of_days: 2,
     program_description: "",
     program_info: "",
-    price: null,
-    photo_url: null,
-    daily_workouts: null,
-    trees: null,
-    burnt: null,
-    rewards: null,
+    price: 50,
+    photo_url: "",
+    daily_workouts: undefined,
+    trees: 5,
+    burnt: 100,
+    rewards: 20,
     ...state,
   });
   const [imageLoaded, setImageLoaded] = useState(!!programObj.photo_url);
